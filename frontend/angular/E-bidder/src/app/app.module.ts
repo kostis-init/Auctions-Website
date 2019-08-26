@@ -7,6 +7,7 @@ import { LogoComponent } from './header/logo/logo.component';
 import { NavBarComponent } from './header/nav-bar/nav-bar.component';
 import { SearchBarComponent } from './header/search-bar/search-bar.component';
 import { HomeCategoriesComponent } from './home-categories/home-categories.component';
+import { HomeCategoryItemComponent } from './home-categories/home-category-item/home-category-item.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HomeCategoriesComponent } from './home-categories/home-categories.compo
     LogoComponent,
     NavBarComponent,
     SearchBarComponent,
-    HomeCategoriesComponent
+    HomeCategoriesComponent,
+    HomeCategoryItemComponent,
   ],
   imports: [
     BrowserModule

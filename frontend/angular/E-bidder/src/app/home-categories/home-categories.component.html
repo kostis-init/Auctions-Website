@@ -1,33 +1,7 @@
-<div class="card-group">
-
-  <div class="card">
-    <img class="card-img-top" src="../../assets/category_images/tech.jpg" alt="">
-    <div class="card-body">
-      <h5 class="card-title">Tech</h5>
-      <p class="card-text">Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum
-        classis
-      </p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="card-img-top" src="../../assets/category_images/clothing.jpg" alt="">
-    <div class="card-body">
-      <h5 class="card-title">Clothing</h5>
-      <p class="card-text">Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum
-        classis
-      </p>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <img class="card-img-top" src="../../assets/category_images/house.jpg" alt="">
-    <div class="card-body">
-      <h5 class="card-title">House</h5>
-      <p class="card-text">Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum
-        classis
-      </p>
-    </div>
+<div class="container-fluid">
+  <div class="row card-columns">
+    <app-home-category-item class="col-md-4" [Item]="item"  *ngFor="let item of Items"></app-home-category-item>
   </div>
 </div>
+
+
