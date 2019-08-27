@@ -24,6 +24,24 @@ export class HomeCategoriesComponent implements OnInit {
       '../../assets/category_images/house.jpg',
       'House',
       'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
+    ),
+
+    new CategoryItemModel(
+      '../../assets/category_images/sports.jpg',
+      'Sports',
+      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
+    ),
+
+    new CategoryItemModel(
+      '../../assets/category_images/music.jpg',
+      'Music',
+      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
+    ),
+
+    new CategoryItemModel(
+      '../../assets/category_images/car.jpg',
+      'Auto-Moto',
+      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
     )
   ];
 

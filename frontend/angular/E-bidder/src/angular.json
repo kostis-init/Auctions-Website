@@ -25,6 +25,7 @@
             ],
             "styles": [
               "src/assets/css/bootstrap.css",
+              "src/assets/css/custom.css",
 //              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],

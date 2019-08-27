@@ -8,6 +8,7 @@ import { NavBarComponent } from './header/nav-bar/nav-bar.component';
 import { SearchBarComponent } from './header/search-bar/search-bar.component';
 import { HomeCategoriesComponent } from './home-categories/home-categories.component';
 import { HomeCategoryItemComponent } from './home-categories/home-category-item/home-category-item.component';
+import { HomeSubcategoriesComponent } from './home-categories/home-subcategories/home-subcategories.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeCategoryItemComponent } from './home-categories/home-category-item/
     SearchBarComponent,
     HomeCategoriesComponent,
     HomeCategoryItemComponent,
+    HomeSubcategoriesComponent,
   ],
   imports: [
     BrowserModule
