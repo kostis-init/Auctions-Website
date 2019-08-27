@@ -1,0 +1,25 @@
+.navbar-nav {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login_buttons {
+
+}
+
+.card-img-top {
+  height: 300px;
+  box-sizing: border-box;
+}
+
+.card-link {
+  color: #387f93;
+}
+
+.card-link:hover {
+  color: #0a1059;
+}
+
+.list-group-item:hover {
+  background-color: #ededed;
+}
