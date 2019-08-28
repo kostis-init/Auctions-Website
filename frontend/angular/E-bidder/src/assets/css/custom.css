@@ -25,3 +25,15 @@
 .list-group-item:hover {
   background-color: #ededed;
 }
+
+
+.login-overlay{
+  background-color: rgba(152, 167, 188, 0.8);
+  border: 2px solid white;
+  -webkit-box-shadow: 0px 26px 25px -10px rgba(0,0,0,0.48);
+  -moz-box-shadow: 0px 26px 25px -10px rgba(0,0,0,0.48);
+  box-shadow: 0px 26px 25px -10px rgba(0,0,0,0.48);
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,89 @@
+<div class="col-md-6 offset-md-3" style="float: left">
+
+  <form (ngSubmit)="onSingup(form)" class="text-white login-overlay p-4 mt-5" #form='ngForm'>
+
+    <h4 class="text-center">Please Complete the following form</h4>
+
+    <div class="form-group">
+      <label for="Username">Username</label>
+      <input type="text" id="Username" name="username" placeholder="Enter Username" ngModel required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" ngModel required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group">
+      <label for="password-verification">Password Verification</label>
+      <input type="password" id="password-verification" name="passwordVerification" ngModel required placeholder="Verify password" class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="first-name">First Name</label>
+      <input type="text" id="first-name" placeholder="Enter your First Name" name="firstName" ngModel required  class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="last-name">Last Name</label>
+      <input type="text" id="last-name" placeholder="Enter your Last Name" name="lastName" ngModel required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" name="email" ngModel  required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="phone-number">Phone Number</label>
+      <input type="tel" id="phone-number" placeholder="Enter your Phone Number" ngModel name="phoneNumber" required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input type="text" id="country" placeholder="Enter your country" ngModel name="country" required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" id="city" placeholder="Enter your City" ngModel  name="city" required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" id="address" placeholder="Enter your Address" ngModel name="address" required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+      <!-- TODO: Place map to get the coordinates    -->
+
+    <div class="form-group">
+      <label for="AFM">AFM</label>
+      <input type="text" id="AFM" placeholder="Enter your AFM" ngModel name="afm" required class="form-control">
+      <small class="form-text text-muted"></small>
+    </div>
+
+
+
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid">Sing Up</button>
+
+  </form>
+</div>
