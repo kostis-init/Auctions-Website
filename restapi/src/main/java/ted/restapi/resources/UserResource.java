@@ -1,7 +1,7 @@
 package ted.restapi.resources;
 
-import ted.restapi.dao.UserDAO;
-import ted.restapi.models.User;
+import ted.restapi.persistence.dao.UserDAO;
+import ted.restapi.persistence.entities.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -25,7 +25,7 @@ public class UserResource {
 
     @GET
     @Path("{id}")
-    public Response getTodo(@PathParam("id") String id) {
+    public Response getTodo(@PathParam("id") int id) {
         User user = userDAO.findById(id);
 
         return Response.ok(user).build();
@@ -33,11 +33,11 @@ public class UserResource {
 
     @PUT
     @Path("{id}")
-    public Response update(@PathParam("id") String id, User user) {
+    public Response update(@PathParam("id") int id, User user) {
         User updateUser = userDAO.findById(id);
 
-        updateUser.setEmail(user.getEmail());
-        updateUser.setPassword(user.getPassword());
+        //TODO: set fields for updateUser
+
         userDAO.update(updateUser);
 
         return Response.ok().build();
@@ -51,7 +51,7 @@ public class UserResource {
 
     @DELETE
     @Path("{id}")
-    public Response delete(@PathParam("id") String id) {
+    public Response delete(@PathParam("id") int id) {
         User getUser = userDAO.findById(id);
 
         userDAO.delete(getUser);
