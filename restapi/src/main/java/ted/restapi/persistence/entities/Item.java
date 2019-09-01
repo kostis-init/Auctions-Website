@@ -3,6 +3,7 @@ package ted.restapi.persistence.entities;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -22,8 +23,11 @@ public class Item {
     private Date startedAt;
     private Date endsAt;
     private String description;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
+    private String city;
+    private String country;
     private List<Bid> bids;
-    private Location location;
     private User seller;
     private List<Category> categories;
 
@@ -74,15 +78,46 @@ public class Item {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
+    @Basic
+    @Column(name = "latitude", nullable = true, precision = 8)
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    @Basic
+    @Column(name = "longitude", nullable = true, precision = 8)
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    @Basic
+    @Column(name = "city", nullable = true, length = 45)
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Basic
+    @Column(name = "country", nullable = true, length = 45)
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @OneToMany(mappedBy = "item")
     @CascadeOnDelete
     public List<Bid> getBids() { return bids; }
     public void setBids(List<Bid> bids) { this.bids = bids; }
-
-    @ManyToOne
-    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
-    public Location getLocation() { return location; }
-    public void setLocation(Location location) { this.location = location; }
 
     @ManyToOne
     @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
@@ -106,10 +141,15 @@ public class Item {
                 Objects.equals(firstBid, item.firstBid) &&
                 Objects.equals(startedAt, item.startedAt) &&
                 Objects.equals(endsAt, item.endsAt) &&
+                Objects.equals(latitude, item.latitude) &&
+                Objects.equals(longitude, item.longitude) &&
+                Objects.equals(city, item.city) &&
+                Objects.equals(country, item.country) &&
                 Objects.equals(description, item.description);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt, endsAt, description);
+        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt,
+                            endsAt, description, latitude, longitude, city, country);
     }
 }

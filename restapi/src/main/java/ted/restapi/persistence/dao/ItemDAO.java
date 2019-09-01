@@ -11,7 +11,7 @@ import java.util.List;
 public class ItemDAO {
 
     @PersistenceContext(unitName = "restapi_PU")
-    EntityManager em;
+    private EntityManager em;
 
     public List<Item> getAll() { return em.createNamedQuery("Item.findAll", Item.class).getResultList(); }
 

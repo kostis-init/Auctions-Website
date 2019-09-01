@@ -23,7 +23,9 @@ public class User {
     private Double bidderRating;
     private Double sellerRating;
     private String isAdmin;
-    private Location location;
+    private String address;
+    private String city;
+    private String country;
     private List<Bid> bids;
     private List<Item> items;
 
@@ -91,7 +93,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "afm", nullable = false, length = 45)
+    @Column(name = "afm", nullable = true, length = 45)
     public String getAfm() {
         return afm;
     }
@@ -126,14 +128,20 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
-    public Location getLocation() {
-        return location;
-    }
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+    @Basic
+    @Column(name = "address")
+    public String getAddress(){ return address;}
+    public void setAddress(String address){this.address = address;}
+
+    @Basic
+    @Column(name = "city")
+    public String getCity() { return city; }
+    public void setCity(String city) { this.city = city; }
+
+    @Basic
+    @Column(name = "country")
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
 
     @OneToMany(mappedBy = "bidder")
     @CascadeOnDelete
@@ -160,10 +168,14 @@ public class User {
                 Objects.equals(afm, user.afm) &&
                 Objects.equals(bidderRating, user.bidderRating) &&
                 Objects.equals(sellerRating, user.sellerRating) &&
+                Objects.equals(address, user.address) &&
+                Objects.equals(city, user.city) &&
+                Objects.equals(country, user.country) &&
                 Objects.equals(isAdmin, user.isAdmin);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, firstName, lastName, email, telephoneNum, afm, bidderRating, sellerRating, isAdmin);
+        return Objects.hash(id, username, password, firstName, lastName, email, telephoneNum,
+                            afm, address, city, country, bidderRating, sellerRating, isAdmin);
     }
 }

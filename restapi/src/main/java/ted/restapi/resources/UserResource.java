@@ -1,5 +1,6 @@
 package ted.restapi.resources;
 
+import ted.restapi.beans.UserBean;
 import ted.restapi.persistence.dao.UserDAO;
 import ted.restapi.persistence.entities.User;
 
@@ -15,18 +16,17 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
-    @Inject
-    UserDAO userDAO;
+    @Inject private UserBean userBean;
 
     @GET
     public Response getAll() {
-        return Response.ok(userDAO.getAll()).build();
+        return Response.ok(userBean.getUsers()).build();
     }
 
     @GET
     @Path("{id}")
-    public Response getTodo(@PathParam("id") int id) {
-        User user = userDAO.findById(id);
+    public Response getUser(@PathParam("id") int id) {
+        User user = userBean.findById(id);
 
         return Response.ok(user).build();
     }
@@ -34,27 +34,27 @@ public class UserResource {
     @PUT
     @Path("{id}")
     public Response update(@PathParam("id") int id, User user) {
-        User updateUser = userDAO.findById(id);
+        User updateUser = userBean.findById(id);
 
         //TODO: set fields for updateUser
 
-        userDAO.update(updateUser);
+        userBean.update(updateUser);
 
         return Response.ok().build();
     }
 
     @POST
     public Response create(User user) {
-        userDAO.create(user);
+        userBean.create(user);
         return Response.ok().build();
     }
 
     @DELETE
     @Path("{id}")
     public Response delete(@PathParam("id") int id) {
-        User getUser = userDAO.findById(id);
+        User getUser = userBean.findById(id);
 
-        userDAO.delete(getUser);
+        userBean.delete(getUser);
 
         return Response.ok().build();
     }

@@ -6,17 +6,9 @@
     <persistence-unit name="restapi_PU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/mydb</jta-data-source>
-        <class>ted.restapi.persistence.entities.Bid</class>
-        <class>ted.restapi.persistence.entities.Category</class>
-        <class>ted.restapi.persistence.entities.Item</class>
-        <class>ted.restapi.persistence.entities.Location</class>
-        <class>ted.restapi.persistence.entities.User</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
-            <property name="eclipselink.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/mydb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
-            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>

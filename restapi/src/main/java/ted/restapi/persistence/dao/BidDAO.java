@@ -11,7 +11,7 @@ import java.util.List;
 public class BidDAO {
 
     @PersistenceContext(unitName = "restapi_PU")
-    EntityManager em;
+    private EntityManager em;
 
     public List<Bid> getAll() { return em.createNamedQuery("Bid.findAll", Bid.class).getResultList(); }
 
