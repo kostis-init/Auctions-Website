@@ -1,6 +1,6 @@
-package ted.restapi.dao;
+package ted.restapi.persistence.dao;
 
-import ted.restapi.models.User;
+import ted.restapi.persistence.entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,13 +11,13 @@ import java.util.List;
 public class UserDAO{
 
     @PersistenceContext(unitName = "restapi_PU")
-    EntityManager em;
+    private EntityManager em;
 
-    public List getAll() {
+    public List<User> getAll() {
         return em.createNamedQuery("User.findAll", User.class).getResultList();
     }
 
-    public User findById(String id) {
+    public User findById(int id) {
         return em.find(User.class, id);
     }
 
@@ -33,9 +33,7 @@ public class UserDAO{
         if (!em.contains(user)) {
             user = em.merge(user);
         }
-
         em.remove(user);
     }
-
 
 }
