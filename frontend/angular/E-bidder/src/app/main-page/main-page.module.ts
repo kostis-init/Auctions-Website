@@ -25,8 +25,7 @@ import {HomeSubcategoriesComponent} from "./home-categories/home-subcategories/h
   ],
   imports: [
     CommonModule,
-    MainPageRoutingModule,
-
+    MainPageRoutingModule
   ]
 })
 export class MainPageModule { }

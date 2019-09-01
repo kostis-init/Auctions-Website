@@ -1,0 +1,11 @@
+{
+  "/api/signin": {
+    "target": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword",
+    "secure" : false
+  },
+
+  "/api/signup": {
+    "target" : "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAPqAyuIVmQlrILoFaWcu6MJ-fmBA6QLso",
+    "secure": false
+  }
+}
