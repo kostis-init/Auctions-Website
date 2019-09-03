@@ -22,14 +22,13 @@ export function authReducers(state = initialAuthState, action: AuthActions): Aut
 
     case AuthActionTypes.GUEST_LOGIN:
       return {
-        ...state,
+        token: null,
         loggedIn:true,
         userStatus: 'guest',
       };
 
     case (AuthActionTypes.USER_LOGIN):
       return {
-        ...state,
         token: action.payload.token,
         userStatus: action.payload.userStatus,
         loggedIn: true
@@ -38,14 +37,13 @@ export function authReducers(state = initialAuthState, action: AuthActions): Aut
 
     case AuthActionTypes.USER_SIGNUP:
       return {
-        ...state,
-        loggedIn:true,
-        userStatus: 'user'
+        userStatus: 'user',
+        token: action.payload.token,
+        loggedIn: true
       };
 
     case AuthActionTypes.USER_LOGOUT:
       return {
-        ...state,
         token:null,
         userStatus:null,
         loggedIn:false

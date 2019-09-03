@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/app.reducer";
-import {UserTryLoginAction} from "../../auth/store/auth.actions";
-import {AuthResponseData, AuthService} from "../../auth/auth.service";
+import {AuthService} from "../../auth/auth.service";
 import {Router} from "@angular/router";
-import {noop, Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {AuthState} from "../../auth/store/auth.reducers";
-import {map, take, tap} from "rxjs/operators";
-import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-sing-in',
@@ -17,44 +14,30 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class SingInComponent implements OnInit {
 
-  loginFailed = false;
-  ErrorCode:number;
-  ErrorMessage:string;
 
+
+  error:string = null;
   AuthState: Observable<AuthState>;
   constructor(private store: Store<AppState>,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {}
 
   ngOnInit() {
-    this.AuthState= this.store.select('auth');
+    this.AuthState = this.store.select('auth');
   }
+
 
   onSignin(form: NgForm) {
 
     const Username = form.value.username;
     const Password = form.value.password;
+    this.authService.Login(Username,Password).subscribe( () => {
+      this.Navigate();
+    },
+      (error:string) => {
+        this.error = error
+      });
 
-
-
-
-    this.authService.login(Username,Password)
-      .pipe(
-        take(1),
-        tap( (Response: AuthResponseData) => {
-          this.store.dispatch(new UserTryLoginAction({Data: Response}));
-          this.Navigate();
-          }
-        )
-      )
-      .subscribe(
-        noop,
-        ((error: HttpErrorResponse)=> {
-          this.loginFailed = true;
-          this.ErrorCode = error.status;
-          this.ErrorMessage = error.error.error.message
-        })
-      );
   }
 
 
@@ -66,7 +49,7 @@ export class SingInComponent implements OnInit {
     AuthState$.subscribe(
       ((data:AuthState) => {
         if (data.userStatus === 'user') {
-          this.router.navigateByUrl('/main/home')
+          this.router.navigateByUrl('main/home')
         } else {
           // go to admin
         }

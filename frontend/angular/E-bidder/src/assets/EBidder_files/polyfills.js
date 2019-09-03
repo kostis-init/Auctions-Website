@@ -3821,7 +3821,7 @@ Zone.__load_patch('ZoneAwarePromise', (global, Zone, api) => {
     const REJECTION_HANDLED_HANDLER = __symbol__('rejectionHandledHandler');
     function clearRejectedNoCatch(promise) {
         if (promise[symbolState] === REJECTED_NO_CATCH) {
-            // if the promise is rejected no catch status
+            // if the promise is rejected no catch statusUi
             // and queue.length > 0, means there is a error handler
             // here to handle the rejected promise, we should trigger
             // windows.rejectionhandled eventHandler or nodejs rejectionHandled

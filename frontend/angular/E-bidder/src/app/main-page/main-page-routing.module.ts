@@ -6,7 +6,7 @@ import {AuthGuardServise} from "../auth/auth-guard.servise";
 
 
 const mainPageRoutes: Routes = [
-  {path: 'main',canActivate: [AuthGuardServise], component:MainPageComponent,children: [
+  {path: 'main',canActivate: [AuthGuardServise],pathMatch: 'prefix', component:MainPageComponent,children: [
       {path: 'home', component:HomeCategoriesComponent}
     ]}
 

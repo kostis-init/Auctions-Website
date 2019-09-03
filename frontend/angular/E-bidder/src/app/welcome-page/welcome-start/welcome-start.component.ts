@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {AppState} from "../../store/app.reducer";
+import {Store} from "@ngrx/store";
+import {GuestLoginAction} from "../../auth/store/auth.actions";
 
 @Component({
   selector: 'app-welcome-start',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeStartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private store: Store<AppState>) { }
 
   ngOnInit() {
+  }
+
+  GuestLogin(){
+    this.store.dispatch(new GuestLoginAction());
+    this.router.navigateByUrl('main/home');
   }
 
 }

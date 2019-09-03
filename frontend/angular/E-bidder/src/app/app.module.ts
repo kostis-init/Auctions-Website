@@ -16,7 +16,6 @@ import {AuthEffects} from "./auth/store/auth.effects";
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -31,6 +30,7 @@ import {AuthEffects} from "./auth/store/auth.effects";
     })
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
