@@ -5,7 +5,6 @@
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
 
-
       <ul class="navbar-nav" >
         <li class="nav-item dropdown m-1 mr-4">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown">Categories</a>
@@ -25,13 +24,11 @@
           <a class="nav-link btn" href="#" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }">New Auction</a>
         </li>
       </ul>
-
-
       <div class="login_buttons mr-3">
 
         <div *ngIf="(AuthState$ |async).userStatus === 'guest'">
-          <button class="btn btn-outline-dark  m-1" type="button">Login<i class="fa fa-user m-1"></i></button>
-          <button class="btn btn-outline-dark m-1" type="button">Singup<i class="fa fa-user-plus m-1"></i></button>
+          <button class="btn btn-outline-dark  m-1" type="button" (click)="OpenModal(SingIn)">Login<i class="fa fa-user m-1"></i></button>
+          <button class="btn btn-outline-dark m-1" type="button" (click)="OpenModal(SignUp)">Singup<i class="fa fa-user-plus m-1"></i></button>
         </div>
 
 
@@ -47,4 +44,29 @@
 
 
 
+<ng-template #SingIn>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Sing In</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
+  <div class="modal-body">
+    <app-sing-in-form></app-sing-in-form>
+  </div>
+</ng-template>
+
+
+<ng-template #SignUp>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Sing Up</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <app-sign-up-form></app-sign-up-form>
+  </div>
+</ng-template>

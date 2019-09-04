@@ -11,6 +11,8 @@ import {HomeCategoryItemComponent} from "./home-categories/home-category-item/ho
 import {HomeSubcategoriesComponent} from "./home-categories/home-subcategories/home-subcategories.component";
 import {AppModule} from "../app.module";
 import {SharedModule} from "../shared/shared.module";
+import {ModalModule, TooltipModule} from "ngx-bootstrap";
+import {AuthModule} from "../auth/auth.module";
 
 
 
@@ -28,7 +30,10 @@ import {SharedModule} from "../shared/shared.module";
   imports: [
     CommonModule,
     MainPageRoutingModule,
-    SharedModule
+    SharedModule,
+    ModalModule.forRoot(),
+    TooltipModule.forRoot(),
+    AuthModule
   ]
 })
 export class MainPageModule { }

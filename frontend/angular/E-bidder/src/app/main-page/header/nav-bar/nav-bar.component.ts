@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {AppState} from "../../../store/app.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {AuthState} from "../../../auth/store/auth.reducers";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,11 +12,16 @@ import {AuthState} from "../../../auth/store/auth.reducers";
 })
 export class NavBarComponent implements OnInit {
 
+  modalRef: BsModalRef;
   AuthState$: Observable<AuthState>;
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private modalServise: BsModalService) { }
 
   ngOnInit() {
     this.AuthState$ = this.store.select('auth');
+  }
+
+  OpenModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalServise.show(template);
   }
 
 }

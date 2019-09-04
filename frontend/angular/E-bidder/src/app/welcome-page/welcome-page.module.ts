@@ -7,6 +7,7 @@ import {WelcomePageComponent} from "./welcome-page.component";
 import {WelcomePageRoutingModule} from "./welcome-page-routing.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
+import {AuthModule} from "../auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -14,9 +15,13 @@ import {FormsModule} from "@angular/forms";
     SingInComponent,
     SingUpComponent,
     WelcomeStartComponent],
+  exports: [
+    SingInComponent
+  ],
 
   imports: [
     CommonModule,
+    AuthModule,
     WelcomePageRoutingModule,
     BrowserAnimationsModule,
     FormsModule

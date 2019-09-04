@@ -22,9 +22,7 @@ export interface AuthResponseData {
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   constructor(private http:HttpClient, private store: Store<AppState>, private errorHandler: ErrorHandlerService) { }

@@ -1,34 +1,5 @@
 <div class="col-md-6 offset-md-3">
-
-
-
-    <div *ngIf="error" class="mt-3">
-
-      <div class="alert alert-warning">
-        <strong>Error:</strong>
-        <p>{{error}}</p>
-      </div>
-    </div>
-
-
-    <form (ngSubmit)="onSignin(form)" class="text-white login-overlay p-4 mt-5" #form="ngForm">
-
-      <h4 class="text-center">Enter your Username and Password</h4>
-
-
-      <div class="form-group">
-        <label for="Username">Username</label>
-        <input type="text" id="Username" name="username" placeholder="Enter your Username" required ngModel class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter pasword" required ngModel class="form-control">
-      </div>
-
-      <button class="btn btn-primary btn-block" type="submit" [disabled]="!form.valid">Log-In</button>
-
-    </form>
+<app-sing-in-form [CustomClass]="MyCustomClass"></app-sing-in-form>
 </div>
 
 

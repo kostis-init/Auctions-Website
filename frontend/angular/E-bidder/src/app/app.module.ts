@@ -27,7 +27,10 @@ import {AuthEffects} from "./auth/store/auth.effects";
     EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 20
-    })
+    }),
+
+
+
   ],
   providers: [],
   exports: [],
