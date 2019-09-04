@@ -5,7 +5,7 @@ import {AppState} from "../../store/app.reducer";
 import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {AuthState} from "../store/auth.reducers";
+import {AuthState} from "../store/auth.reducer";
 
 
 
@@ -55,8 +55,8 @@ export class SingInFormComponent implements OnInit {
       ((data:AuthState) => {
         if (data.userStatus === 'user') {
           this.router.navigateByUrl('main/home')
-        } else {
-          // go to admin
+        } else if (data.userStatus === 'guest') {
+          //navigate to admin page
         }
       })
     )

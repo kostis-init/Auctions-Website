@@ -16,7 +16,7 @@ export const initialAuthState: AuthState ={
   loggedIn: false
 };
 
-export function authReducers(state = initialAuthState, action: AuthActions): AuthState {
+export function authReducer(state = initialAuthState, action: AuthActions): AuthState {
 
   switch (action.type) {
 

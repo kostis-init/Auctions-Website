@@ -11,7 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {StoreModule} from "@ngrx/store";
 import {reducers} from "./store/app.reducer";
 import {EffectsModule} from "@ngrx/effects";
-import {AuthEffects} from "./auth/store/auth.effects";
+import {AuthEffect} from "./auth/store/auth.effect";
 import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
@@ -25,7 +25,7 @@ import {AuthModule} from "./auth/auth.module";
     MainPageModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 20
     }),

@@ -4,7 +4,7 @@ import {signup, singin} from "../shared/server-endpoints";
 import {AppState} from "../store/app.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
-import {AuthState} from "./store/auth.reducers";
+import {AuthState} from "./store/auth.reducer";
 import {UserModel} from "../shared/user.model";
 import {catchError, take, tap} from "rxjs/operators";
 import {UserSignUpAction, UserTryLoginAction} from "./store/auth.actions";
@@ -51,7 +51,6 @@ export class AuthService {
   }
 
 
-
   SignUp(userData: UserModel):Observable<AuthResponseData> {
 
     return this.DispatchSignUpAction(userData).pipe(
@@ -75,15 +74,6 @@ export class AuthService {
     return this.http.post<AuthResponseData>(signup,
       {email:userData.Email,password: userData.Password, returnSecureToken: true});
   }
-
-
-
-
-
-
-
-
-
 
   isAuthenticated(): boolean {
     let State: AuthState;
