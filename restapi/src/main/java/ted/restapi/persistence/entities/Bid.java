@@ -1,5 +1,7 @@
 package ted.restapi.persistence.entities;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -15,6 +17,13 @@ public class Bid {
     private Double amount;
     private User bidder;
     private Item item;
+
+    public JsonObject toJson(){
+        return Json.createObjectBuilder()
+                .add("id", id)
+                .add("bidder", bidder.toJson())
+                .build();
+    }
 
     @Id
     @Column(name = "bid_id", nullable = false)

@@ -2,6 +2,8 @@ package ted.restapi.persistence.entities;
 
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,14 @@ public class User {
     private String country;
     private List<Bid> bids;
     private List<Item> items;
+
+    public JsonObject toJson(){
+        return Json.createObjectBuilder()
+                .add("id", id)
+                .add("username", username)
+                .add("password", password)
+                .build();
+    }
 
     @Id
     @Column(name = "user_id", nullable = false)

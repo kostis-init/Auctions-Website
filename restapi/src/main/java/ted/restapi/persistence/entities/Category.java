@@ -1,5 +1,7 @@
 package ted.restapi.persistence.entities;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +15,13 @@ public class Category {
     private int id;
     private String name;
     private List<Item> items;
+
+    public JsonObject toJson(){
+        return Json.createObjectBuilder()
+                .add("id", id)
+                .add("name", name)
+                .build();
+    }
 
     @Id
     @Column(name = "category_id", nullable = false)

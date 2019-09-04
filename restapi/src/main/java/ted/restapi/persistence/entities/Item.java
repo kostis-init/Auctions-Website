@@ -2,7 +2,13 @@ package ted.restapi.persistence.entities;
 
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +36,14 @@ public class Item {
     private List<Bid> bids;
     private User seller;
     private List<Category> categories;
+
+    public JsonObject toJson(){
+        return Json.createObjectBuilder()
+                .add("id", id)
+                .add("name", name)
+                .add("description", description)
+                .build();
+    }
 
     @Id
     @Column(name = "item_id", nullable = false)

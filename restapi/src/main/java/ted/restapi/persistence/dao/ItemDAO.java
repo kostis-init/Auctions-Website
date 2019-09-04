@@ -21,9 +21,7 @@ public class ItemDAO {
         em.merge(item);
     }
 
-    public void create(Item item) {
-        em.persist(item);
-    }
+    public void create(Item item) { em.persist(item); }
 
     public void delete(Item item) {
         if (!em.contains(item)) {
