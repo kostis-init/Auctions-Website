@@ -33,7 +33,7 @@
 
 
         <div *ngIf="(AuthState$ | async).userStatus === 'user'">
-          <button class="btn btn-outline-dark  m-1" type="button">Logout<i class="fa fa-sign-out-alt m-1"></i></button>
+          <button class="btn btn-outline-dark  m-1" type="button" (click)="Logout()">Logout<i class="fa fa-sign-out-alt m-1"></i></button>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
   </div>
 
   <div class="modal-body">
-    <app-sing-in-form></app-sing-in-form>
+    <app-sing-in-form (LoginCompleted)="CloseModal()"></app-sing-in-form>
   </div>
 </ng-template>
 
@@ -67,6 +67,6 @@
   </div>
 
   <div class="modal-body">
-    <app-sign-up-form></app-sign-up-form>
+    <app-sign-up-form (SignUpComplete)="CloseModal()"></app-sign-up-form>
   </div>
 </ng-template>

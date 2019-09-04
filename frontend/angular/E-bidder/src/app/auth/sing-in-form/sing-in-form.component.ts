@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/app.reducer";
@@ -18,6 +18,7 @@ import {AuthState} from "../store/auth.reducers";
 export class SingInFormComponent implements OnInit {
 
   @Input('CustomClass') CustomClass:string;
+  @Output() LoginCompleted: EventEmitter<any> = new EventEmitter<any>();
 
   error:string = null;
   AuthState: Observable<AuthState>;
@@ -35,6 +36,7 @@ export class SingInFormComponent implements OnInit {
     const Username = form.value.username;
     const Password = form.value.password;
     this.authService.Login(Username,Password).subscribe( () => {
+        this.LoginCompleted.emit(null);
         this.Navigate();
       },
       (error:string) => {

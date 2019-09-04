@@ -12,6 +12,7 @@ import {StoreModule} from "@ngrx/store";
 import {reducers} from "./store/app.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./auth/store/auth.effects";
+import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {AuthEffects} from "./auth/store/auth.effects";
     StoreDevtoolsModule.instrument({
       maxAge: 20
     }),
-
+    AuthModule,
 
 
   ],

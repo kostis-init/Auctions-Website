@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
@@ -13,9 +13,12 @@ import {UserModel} from "../../shared/user.model";
 })
 export class SignUpFormComponent{
   @Input('CustomClass') FromClass:string;
+  @Output() SignUpComplete: EventEmitter<any> = new EventEmitter<any>();
+
 
   error:string = null;
   constructor(private auth: AuthService,private route:ActivatedRoute,private router: Router, private store: Store<AppState>) { }
+
 
   ngOnInit() {
   }
@@ -25,8 +28,7 @@ export class SignUpFormComponent{
     const User:UserModel = this.setUpUser(form);
     this.auth.SignUp(User).
     subscribe(() => {
-
-
+        this.SignUpComplete.emit(null);
         this.router.navigate(["/main/home"],{relativeTo:this.route})
       },
       (error:string) => {
