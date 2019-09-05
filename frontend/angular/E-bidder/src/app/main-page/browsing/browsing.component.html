@@ -1,0 +1,64 @@
+<div class="container-fluid pr-5 pl-5">
+  <div class="row">
+    <div class="col-md-2 mt-3 mb-3" style="background-color: #f1f5f6;">
+      <div class="filters mt-3">
+        <h4 style="text-align: center; margin-bottom: 20px;">Filters</h4>
+        <hr>
+        <!-- filters -->
+
+        <h5 class="col p-3">Constructor</h5>
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1">Apple</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck2">
+            <label class="custom-control-label" for="customCheck2">Samsung</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck3">
+            <label class="custom-control-label" for="customCheck3">Sony</label>
+          </div>
+        </div>
+
+        <h5 class="col p-3">Location</h5>
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck4">
+            <label class="custom-control-label" for="customCheck4">America</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck5">
+            <label class="custom-control-label" for="customCheck5">Europe</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck6">
+            <label class="custom-control-label" for="customCheck6">Asia</label>
+          </div>
+        </div>
+
+        <h5 class="col p-3">Price</h5>
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <input type="text" class="form-control" placeholder="From" id="minprice">
+          </div>
+          <div class="col-md-4 form-group">
+            <input type="text" class="form-control" placeholder="To" id="maxprice">
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary"> > </button>
+          </div>
+        </div>
+        <!-- end of filters -->
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="list-group">
+        <app-item class="col p-3" style="padding-left: 0px !important" [Item]="item"  *ngFor="let item of Items"></app-item>
+      </div>
+    </div>
+
+  </div>
+</div>

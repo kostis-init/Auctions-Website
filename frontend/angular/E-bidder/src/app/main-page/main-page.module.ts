@@ -9,6 +9,8 @@ import {SearchBarComponent} from "./header/search-bar/search-bar.component";
 import {HomeCategoriesComponent} from "./home-categories/home-categories.component";
 import {HomeCategoryItemComponent} from "./home-categories/home-category-item/home-category-item.component";
 import {HomeSubcategoriesComponent} from "./home-categories/home-subcategories/home-subcategories.component";
+import {BrowsingComponent} from "./browsing/browsing.component";
+import {ItemComponent} from "./browsing/item/item.component";
 import {ModalModule, TooltipModule} from "ngx-bootstrap";
 import {AuthModule} from "../auth/auth.module";
 
@@ -24,6 +26,8 @@ import {AuthModule} from "../auth/auth.module";
     SearchBarComponent,
     HomeCategoryItemComponent,
     HomeSubcategoriesComponent,
+    BrowsingComponent,
+    ItemComponent,
   ],
   imports: [
     CommonModule,

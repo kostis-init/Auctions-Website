@@ -91,7 +91,7 @@ module.exports = "<div class=\"container-fluid pr-5 pl-5\">\n  <div class=\"row 
 
 /***/ "./node_modules/raw-loader/index.js!./src/app/home/home-categories/home-category-item/home-category-item.component.html":
 /*!*********************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/main-page/main-page-categories/main-page-category-item/main-page-category-item.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/main-page/main-page-categories/main-page-category-item/main-page-category-filters.component.html ***!
   \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -113,7 +113,7 @@ module.exports = "<a class=\"card-link\" href=\"#\">\n  <li class=\"list-group-i
 
 /***/ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html":
 /*!********************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/main-page/main-page.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/main-page/browsing.component.html ***!
   \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -521,7 +521,7 @@ module.exports = "\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJz
 /*!*******************************************************************!*\
   !*** ./src/app/main-page/main-page-categories/main-page-categories.component.ts ***!
   \*******************************************************************/
-/*! exports provided: HomeCategoriesComponent */
+/*! exports provided: BrowsingComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -561,7 +561,7 @@ HomeCategoriesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ "./src/app/home/home-categories/home-category-item/home-category-item.component.css":
 /*!******************************************************************************************!*\
-  !*** ./src/app/main-page/main-page-categories/main-page-category-item/main-page-category-item.component.css ***!
+  !*** ./src/app/main-page/main-page-categories/main-page-category-item/main-page-category-filters.component.css ***!
   \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -572,9 +572,9 @@ module.exports = ".card-text{\n  font-weight: lighter;\n}\n\n/*# sourceMappingUR
 
 /***/ "./src/app/home/home-categories/home-category-item/home-category-item.component.ts":
 /*!*****************************************************************************************!*\
-  !*** ./src/app/main-page/main-page-categories/main-page-category-item/main-page-category-item.component.ts ***!
+  !*** ./src/app/main-page/main-page-categories/main-page-category-item/main-page-category-filters.component.ts ***!
   \*****************************************************************************************/
-/*! exports provided: HomeCategoryItemComponent */
+/*! exports provided: FiltersComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -603,8 +603,8 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 HomeCategoryItemComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-main-page-category-item',
-        template: __webpack_require__(/*! raw-loader!./main-page-category-item.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home-categories/home-category-item/home-category-item.component.html"),
-        styles: [__webpack_require__(/*! ./main-page-category-item.component.css */ "./src/app/home/home-categories/home-category-item/home-category-item.component.css")]
+        template: __webpack_require__(/*! raw-loader!./main-page-category-filters.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home-categories/home-category-item/home-category-item.component.html"),
+        styles: [__webpack_require__(/*! ./main-page-category-filters.component.css */ "./src/app/home/home-categories/home-category-item/home-category-item.component.css")]
     })
 ], HomeCategoryItemComponent);
 
@@ -681,7 +681,7 @@ HomeSubcategoriesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ "./src/app/home/home.component.css":
 /*!*****************************************!*\
-  !*** ./src/app/main-page/main-page.component.css ***!
+  !*** ./src/app/main-page/browsing.component.css ***!
   \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -692,9 +692,9 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/home/home.component.ts":
 /*!****************************************!*\
-  !*** ./src/app/main-page/main-page.component.ts ***!
+  !*** ./src/app/main-page/browsing.component.ts ***!
   \****************************************/
-/*! exports provided: MainPageComponent */
+/*! exports provided: BrowsingComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -712,8 +712,8 @@ let HomeComponent = class HomeComponent {
 HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-main-page',
-        template: __webpack_require__(/*! raw-loader!./main-page.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html"),
-        styles: [__webpack_require__(/*! ./main-page.component.css */ "./src/app/home/home.component.css")]
+        template: __webpack_require__(/*! raw-loader!./browsing.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html"),
+        styles: [__webpack_require__(/*! ./browsing.component.css */ "./src/app/home/home.component.css")]
     })
 ], HomeComponent);
 
