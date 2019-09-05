@@ -5,6 +5,7 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import {AuthService} from "./auth.service";
 import {AuthGuardServise} from "./auth-guard.servise";
 import {FormsModule} from "@angular/forms";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -16,7 +17,8 @@ import {FormsModule} from "@angular/forms";
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers:[AuthService, AuthGuardServise]
 })

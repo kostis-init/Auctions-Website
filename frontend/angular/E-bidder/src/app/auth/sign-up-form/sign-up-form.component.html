@@ -74,7 +74,13 @@
     <input type="text" id="address" placeholder="Enter your Address" ngModel name="address" required class="form-control">
   </div>
 
-  <!-- TODO: Place map to get the coordinates    -->
+
+  <div class="form-group">
+    <label>Location</label>
+    <input type="number" id="longitude" [(ngModel)]="lot" name="longitude" required class="form-control mb-1">
+    <input type="number" id="latitude" [(ngModel)]="lat" name="latitude" required class="form-control mb-1">
+    <app-open-map (GetLat)="Setlat($event)" (GetLot)="Setlot($event)"></app-open-map>
+  </div>
 
   <div class="form-group">
     <label for="AFM">AFM</label>

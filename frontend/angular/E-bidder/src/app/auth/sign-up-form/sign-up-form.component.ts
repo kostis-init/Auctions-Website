@@ -15,16 +15,28 @@ export class SignUpFormComponent{
   @Input('CustomClass') FromClass:string;
   @Output() SignUpComplete: EventEmitter<any> = new EventEmitter<any>();
 
-
   error:string = null;
+  lot:number;
+  lat:number;
   constructor(private auth: AuthService,private route:ActivatedRoute,private router: Router, private store: Store<AppState>) { }
 
+
+  Setlot(value: number) {
+    console.log(value);
+    this.lot = value;
+  }
+
+  Setlat(value:number){
+    console.log(value);
+    this.lat =value;
+  }
 
   ngOnInit() {
   }
 
   onSignup(form: NgForm){
 
+    console.log(form);
     const User:UserModel = this.setUpUser(form);
     this.auth.SignUp(User).
     subscribe(() => {
@@ -39,19 +51,25 @@ export class SignUpFormComponent{
 
 
   setUpUser(form: NgForm) {
-    return new UserModel(
+    console.log(form);
+    let User:UserModel = new UserModel(
       form.form.value.username,
       form.form.value.password,
-      form.form.value.passwordVerfication,
-      form.form.value.fistName,
+      form.form.value.passwordVerification,
+      form.form.value.firstName,
       form.form.value.lastName,
       form.form.value.email,
       form.form.value.phoneNumber,
       form.form.value.country,
       form.form.value.city,
       form.form.value.adderss,
-      form.form.value.agf
+      form.form.value.afm,
+      form.form.value.latitude,
+      form.form.value.longitude
     );
+
+    console.log(User);
+    return User;
   }
 
 }

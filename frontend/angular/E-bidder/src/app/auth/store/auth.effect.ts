@@ -6,7 +6,7 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 
-export class AuthEffects {
+export class AuthEffect {
 
   constructor(private actions$: Actions){}
 
@@ -15,7 +15,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.USER_TRY_LOGIN),
     map((action:UserTryLoginAction) => {
       const ResponseData = action.payload;
-      //determine tha user statusUi via token docode;
+      //get user status in response body
       return new UserLoginAction({userStatus: 'user',token:ResponseData.Data.idToken})
     })
   )

@@ -2,7 +2,7 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {AppState} from "../../../store/app.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
-import {AuthState} from "../../../auth/store/auth.reducers";
+import {AuthState} from "../../../auth/store/auth.reducer";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {UserLogoutAction} from "../../../auth/store/auth.actions";
 import {ActivatedRoute, Router} from "@angular/router";

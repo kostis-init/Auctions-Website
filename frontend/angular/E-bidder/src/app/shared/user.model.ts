@@ -14,7 +14,9 @@ export class UserModel {
     public Country: string,
     public City: string,
     public Address: string,
-    public Afm: string,) {}
+    public Afm: string,
+    public Latitude: number,
+    public Longitude: number) {}
 }
 
 
