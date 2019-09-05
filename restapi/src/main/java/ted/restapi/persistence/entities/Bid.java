@@ -3,6 +3,7 @@ package ted.restapi.persistence.entities;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "Bid.findAll", query = "SELECT b FROM Bid b")
 })
-public class Bid {
+public class Bid{
     private int id;
     private Date time;
     private Double amount;

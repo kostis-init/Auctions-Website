@@ -1,19 +1,23 @@
 package ted.restapi.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "user")
 @NamedQueries({
-        @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+        @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+        @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = ?1"),
+        @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = ?1")
 })
-public class User {
+public class User{
     private int id;
     private String username;
     private String password;
@@ -28,6 +32,8 @@ public class User {
     private String address;
     private String city;
     private String country;
+
+    private String isApproved;
     private List<Bid> bids;
     private List<Item> items;
 
@@ -37,6 +43,19 @@ public class User {
                 .add("username", username)
                 .add("password", password)
                 .build();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isAdmin='" + isAdmin + '\'' +
+                ", isApproved='" + isApproved + '\'' +
+                '}';
     }
 
     @Id
@@ -153,6 +172,11 @@ public class User {
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
 
+    @Basic
+    @Column(name = "is_approved")
+    public String getIsApproved() { return isApproved; }
+    public void setIsApproved(String isApproved) { this.isApproved = isApproved; }
+
     @OneToMany(mappedBy = "bidder")
     @CascadeOnDelete
     public List<Bid> getBids() { return bids; }
@@ -181,11 +205,12 @@ public class User {
                 Objects.equals(address, user.address) &&
                 Objects.equals(city, user.city) &&
                 Objects.equals(country, user.country) &&
-                Objects.equals(isAdmin, user.isAdmin);
+                Objects.equals(isAdmin, user.isAdmin) &&
+                Objects.equals(isApproved, user.isApproved);
     }
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, firstName, lastName, email, telephoneNum,
-                            afm, address, city, country, bidderRating, sellerRating, isAdmin);
+                            afm, address, city, country, bidderRating, sellerRating, isAdmin, isApproved);
     }
 }

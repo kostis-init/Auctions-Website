@@ -1,29 +1,34 @@
 package ted.restapi.resources;
 
-import ted.restapi.beans.ItemBean;
+import ted.restapi.beans.CategoryBean;
+import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
-import ted.restapi.persistence.entities.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @RequestScoped
-@Path("items")
+@Path("categories")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ItemResource {
+public class CategoryResource {
 
-    @Inject private ItemBean itemBean;
+    @Inject private CategoryBean categoryBean;
 
     @GET
-    public Response getAll() {
+    public Response getAll(){
         JsonArrayBuilder list = Json.createArrayBuilder();
-        itemBean.getAll().stream().map(Item::toJson).forEach(list::add);
+        categoryBean.getAll().stream().map(Category::toJson).forEach(list::add);
         return Response.ok(list).build();
     }
+
+
 }

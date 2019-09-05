@@ -36,4 +36,42 @@ public class UserDAO{
         em.remove(user);
     }
 
+    public User findByUsername(String username){
+        List<User> users = em.createNamedQuery("User.findByUsername", User.class)
+                            .setParameter(1, username).getResultList();
+        if(users.size() != 1){
+            return null;
+        }else{
+            return users.get(0);
+        }
+    }
+
+    public User findByEmail(String email) {
+        List<User> users = em.createNamedQuery("User.findByEmail", User.class)
+                .setParameter(1, email).getResultList();
+        if(users.size() != 1){
+            return null;
+        }else{
+            return users.get(0);
+        }
+    }
+
+    public void register(String username, String password, String firstName, String lastName, String email,
+                         String telephoneNum, String country, String city, String address, String afm) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setTelephoneNum(telephoneNum);
+        user.setCountry(country);
+        user.setCity(city);
+        user.setAddress(address);
+        user.setAfm(afm);
+        user.setIsAdmin("N");
+        user.setIsApproved("N");
+
+        em.persist(user);
+    }
 }
