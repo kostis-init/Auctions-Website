@@ -23,6 +23,8 @@ public class ItemDTO implements Serializable {
     @XmlElement private String country;
     @XmlElement private UserDTO seller;
 
+    public ItemDTO() { }
+
     public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller) {
         this.id = id;
         this.name = name;

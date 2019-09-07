@@ -9,6 +9,8 @@ public class LoginResponseDTO implements Serializable {
     @XmlElement private String jwt;
     @XmlElement private String isAdmin;
 
+    public LoginResponseDTO() { }
+
     public String getJwt() {
         return jwt;
     }

@@ -25,6 +25,7 @@ public class UserResource {
     public Response login(UserDTO userDTO) {
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
+
         if(userBean.validLogin(username, password)){
             String jwt = JWT.createJWT(userDTO.getUsername());
             String isAdmin = userBean.isAdmin(username);

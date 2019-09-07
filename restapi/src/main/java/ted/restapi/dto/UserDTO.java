@@ -22,6 +22,8 @@ public class UserDTO implements Serializable {
     @XmlElement private String city;
     @XmlElement private String country;
 
+    public UserDTO() { }
+
     public UserDTO(int id, String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, Double bidderRating, Double sellerRating, String isAdmin, String isApproved, String address, String city, String country) {
         this.id = id;
         this.username = username;

@@ -11,6 +11,8 @@ public class CategoryDTO implements Serializable {
     @XmlElement private String name;
     @XmlElement private Blob image;
 
+    public CategoryDTO() { }
+
     public CategoryDTO(int id, String name, Blob image) {
         this.id = id;
         this.name = name;
