@@ -23,4 +23,7 @@ public class ItemBean {
     }
 
 
+    public Item getItemById(int id) {
+        return itemDAO.findById(id);
+    }
 }

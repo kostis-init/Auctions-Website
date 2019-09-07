@@ -19,7 +19,6 @@ public class AuthFilter implements Filter {
         //if jwt not valid
 //        HttpServletResponse http = (HttpServletResponse) response;
 //        http.sendError(HttpServletResponse.SC_FORBIDDEN);
-
         chain.doFilter(request, response);
 
     }

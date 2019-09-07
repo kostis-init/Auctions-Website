@@ -19,13 +19,6 @@ public class Bid{
     private User bidder;
     private Item item;
 
-    public JsonObject toJson(){
-        return Json.createObjectBuilder()
-                .add("id", id)
-                .add("bidder", bidder.toJson())
-                .build();
-    }
-
     @Id
     @Column(name = "bid_id", nullable = false)
     public int getId() {

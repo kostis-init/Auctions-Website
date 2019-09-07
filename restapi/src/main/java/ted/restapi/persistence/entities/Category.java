@@ -19,13 +19,6 @@ public class Category {
     private Blob image;
     private List<Item> items;
 
-    public JsonObject toJson(){
-        return Json.createObjectBuilder()
-                .add("id", id)
-                .add("name", name)
-                .build();
-    }
-
     @Id
     @Column(name = "category_id", nullable = false)
     public int getId() {

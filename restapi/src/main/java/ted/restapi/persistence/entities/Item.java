@@ -37,14 +37,6 @@ public class Item {
     private User seller;
     private List<Category> categories;
 
-    public JsonObject toJson(){
-        return Json.createObjectBuilder()
-                .add("id", id)
-                .add("name", name)
-                .add("description", description)
-                .build();
-    }
-
     @Id
     @Column(name = "item_id", nullable = false)
     public int getId() { return id; }

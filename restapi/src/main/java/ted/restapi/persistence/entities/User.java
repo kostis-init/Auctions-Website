@@ -32,17 +32,27 @@ public class User{
     private String address;
     private String city;
     private String country;
-
     private String isApproved;
     private List<Bid> bids;
     private List<Item> items;
 
-    public JsonObject toJson(){
-        return Json.createObjectBuilder()
-                .add("id", id)
-                .add("username", username)
-                .add("password", password)
-                .build();
+    public User() { }
+
+    public User(String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, Double bidderRating, Double sellerRating, String isAdmin, String address, String city, String country, String isApproved) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.telephoneNum = telephoneNum;
+        this.afm = afm;
+        this.bidderRating = bidderRating;
+        this.sellerRating = sellerRating;
+        this.isAdmin = isAdmin;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.isApproved = isApproved;
     }
 
     @Override

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @XmlRootElement
 public class ItemDTO implements Serializable {
@@ -22,10 +23,12 @@ public class ItemDTO implements Serializable {
     @XmlElement private String city;
     @XmlElement private String country;
     @XmlElement private UserDTO seller;
+    @XmlElement private List<CategoryDTO> categories;
+    @XmlElement private List<BidDTO> bids;
 
     public ItemDTO() { }
 
-    public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller) {
+    public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller, List<CategoryDTO> categories, List<BidDTO> bids) {
         this.id = id;
         this.name = name;
         this.currentBid = currentBid;
@@ -40,7 +43,11 @@ public class ItemDTO implements Serializable {
         this.city = city;
         this.country = country;
         this.seller = seller;
+        this.categories = categories;
+        this.bids = bids;
     }
+
+
 
     public int getId() {
         return id;
@@ -152,5 +159,22 @@ public class ItemDTO implements Serializable {
 
     public void setSeller(UserDTO seller) {
         this.seller = seller;
+    }
+
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryDTO> categories) {
+        this.categories = categories;
+    }
+
+    public List<BidDTO> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<BidDTO> bids) {
+        this.bids = bids;
     }
 }

@@ -33,18 +33,16 @@ public class UserBean {
         return user.getIsAdmin();
     }
 
-    public String register(String username, String password, String firstName, String lastName, String email,
-                           String telephoneNum, String country, String city, String address, String afm) {
-        User user = userDAO.findByUsername(username);
-        if(user != null){
+    public String register(User user) {
+        User checkUser = userDAO.findByUsername(user.getUsername());
+        if(checkUser != null){
             return "Username exists";
         }
-        user = userDAO.findByEmail(email);
-        if(user != null){
+        checkUser = userDAO.findByEmail(user.getEmail());
+        if(checkUser != null){
             return "Email exists";
         }
-        userDAO.register(username, password, firstName, lastName, email,
-                telephoneNum, country, city, address, afm);
+        userDAO.register(user);
         return null;
     }
 }

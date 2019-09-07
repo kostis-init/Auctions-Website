@@ -3,6 +3,7 @@ package ted.restapi.resources;
 import ted.restapi.beans.UserBean;
 import ted.restapi.dto.LoginResponseDTO;
 import ted.restapi.dto.UserDTO;
+import ted.restapi.persistence.entities.User;
 import ted.restapi.util.JWT;
 
 import javax.enterprise.context.RequestScoped;
@@ -54,8 +55,10 @@ public class UserResource {
         String address = userDTO.getAddress();
         String afm = userDTO.getAfm();
 
-        String result = userBean.register(username, password, firstName, lastName, email,
-                                            telephoneNum, country, city, address, afm);
+        User user = new User(username, password, firstName, lastName, email, telephoneNum, afm,
+                0.0, 0.0, "N", address, city, country, "N");
+
+        String result = userBean.register(user);
         if(result != null){
             return Response.status(400)
                     .entity(Json.createObjectBuilder().add("message", result).build())

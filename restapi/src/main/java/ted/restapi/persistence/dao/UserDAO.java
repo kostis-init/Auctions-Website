@@ -56,22 +56,7 @@ public class UserDAO{
         }
     }
 
-    public void register(String username, String password, String firstName, String lastName, String email,
-                         String telephoneNum, String country, String city, String address, String afm) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setTelephoneNum(telephoneNum);
-        user.setCountry(country);
-        user.setCity(city);
-        user.setAddress(address);
-        user.setAfm(afm);
-        user.setIsAdmin("N");
-        user.setIsApproved("N");
-
+    public void register(User user) {
         em.persist(user);
     }
 }
