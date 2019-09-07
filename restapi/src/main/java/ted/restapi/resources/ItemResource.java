@@ -26,4 +26,6 @@ public class ItemResource {
         itemBean.getAll().stream().map(Item::toJson).forEach(list::add);
         return Response.ok(list).build();
     }
+
+
 }

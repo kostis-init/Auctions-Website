@@ -21,4 +21,6 @@ public class ItemBean {
     public List<Item> getAll() {
         return itemDAO.getAll();
     }
+
+
 }

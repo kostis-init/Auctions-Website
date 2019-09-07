@@ -3,17 +3,20 @@ package ted.restapi.persistence.entities;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "category")
 @NamedQueries({
-        @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+        @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
+        @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.id = ?1")
 })
 public class Category {
     private int id;
     private String name;
+    private Blob image;
     private List<Item> items;
 
     public JsonObject toJson(){
@@ -41,6 +44,11 @@ public class Category {
         this.name = name;
     }
 
+    @Lob
+    @Column(name = "image")
+    public Blob getImage() { return image; }
+    public void setImage(Blob image) { this.image = image; }
+
     @ManyToMany
     @JoinTable(name = "item_category",
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false),
@@ -54,10 +62,11 @@ public class Category {
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
         return id == category.id &&
-                Objects.equals(name, category.name);
+                Objects.equals(name, category.name) &&
+                Objects.equals(image, category.image);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, image);
     }
 }

@@ -2,6 +2,7 @@ package ted.restapi.beans;
 
 import ted.restapi.persistence.dao.CategoryDAO;
 import ted.restapi.persistence.entities.Category;
+import ted.restapi.persistence.entities.Item;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -17,4 +18,7 @@ public class CategoryBean {
 
     public Category findById(int id) { return categoryDAO.findById(id); }
 
+    public List<Item> getItemsByCategoryId(int categoryId){
+        return categoryDAO.findByCategoryId(categoryId).getItems();
+    }
 }
