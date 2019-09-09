@@ -1,0 +1,8 @@
+<div class="row m-5">
+  <ul class="col-12 list-group">
+    <h4 class="text-center"> User List</h4>
+    <app-user-item *ngFor="let userEl of (usersState | async).users; let i = index"
+    [user]="userEl"
+    [index]="i"></app-user-item>
+  </ul>
+</div>

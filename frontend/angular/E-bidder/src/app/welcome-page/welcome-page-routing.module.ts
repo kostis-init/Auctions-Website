@@ -6,7 +6,7 @@ import {WelcomeStartComponent} from "./welcome-start/welcome-start.component";
 import {WelcomePageComponent} from "./welcome-page.component";
 
 const WelcomeRoutes: Routes = [
-  {path: 'welcome', component: WelcomePageComponent, pathMatch: 'prefix' , children:[
+  {path: 'welcome', component: WelcomePageComponent, children:[
       {path: '',component:WelcomeStartComponent, data: {animation: 'start'}},
       {path: 'login', component: SingInComponent, data: {animation: 'login'}},
       {path: 'singup', component: SingUpComponent, data: {animation: 'singup'}}

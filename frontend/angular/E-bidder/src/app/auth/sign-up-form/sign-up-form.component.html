@@ -5,9 +5,16 @@
   </div>
 </div>
 
+<div *ngIf="SignUpSucces" class="mt-3">
+  <div class="alert alert-warning">
+    <p>Thanks for joining E-bidder!!!</p>
+    <p>Your registration is waiting to be approved by the admin</p>
+  </div>
+</div>
 
 
-<form (ngSubmit)="onSignup(form)" [ngClass]="FromClass" #form='ngForm'>
+
+<form *ngIf="!SignUpSucces" (ngSubmit)="onSignup(form)" [ngClass]="FromClass" #form='ngForm'>
 
   <h4 class="text-center">Please Complete the following form</h4>
 

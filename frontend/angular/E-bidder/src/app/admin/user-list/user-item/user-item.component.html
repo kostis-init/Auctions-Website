@@ -1,0 +1,15 @@
+
+  <a
+    style="cursor: pointer"
+    [routerLink]="[index]"
+    routerLinkActive="active"
+    class=" list-group-item list-group-item-primary list-group-item-action clearfix m-1 p-2 align-items-center"
+  >
+    <h5 class="fa-pull-left">{{user.Username}}</h5>
+    <span
+      class="badge badge-pill fa-pull-right"
+      [ngClass]="user.IsApproved === true ? 'badge-success' : 'badge-danger' ">
+    {{user.IsApproved === true ? 'Aproved' : 'Pending'}}
+    </span>
+  </a>
+

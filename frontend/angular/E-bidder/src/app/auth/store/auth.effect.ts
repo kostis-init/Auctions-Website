@@ -15,8 +15,16 @@ export class AuthEffect {
     ofType(AuthActionTypes.USER_TRY_LOGIN),
     map((action:UserTryLoginAction) => {
       const ResponseData = action.payload;
-      //get user status in response body
-      return new UserLoginAction({userStatus: 'user',token:ResponseData.Data.idToken})
+      let UserStatus:string;
+
+      if(ResponseData.Data.isAdmin =='Y')
+        UserStatus = 'admin';
+      else
+        UserStatus = 'user';
+
+      localStorage.setItem('token', ResponseData.Data.jwt);
+
+      return new UserLoginAction({userStatus: UserStatus, token: ResponseData.Data.jwt})
     })
   )
 
