@@ -19,13 +19,6 @@ public class ItemResource {
 
     @Inject private ItemBean itemBean;
 
-//    @GET
-//    public Response getAll() {
-//        JsonArrayBuilder list = Json.createArrayBuilder();
-//        itemBean.getAll().stream().map(Item::toJson).forEach(list::add);
-//        return Response.ok(list).build();
-//    }
-
     @GET
     @Path("{id}")
     public Response getItemById(@PathParam("id") int id){

@@ -1,7 +1,5 @@
 package ted.restapi.persistence.entities;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.List;

@@ -14,9 +14,13 @@ public class UserBean {
 
     @Inject private UserDAO userDAO;
 
-    public List<User> getAll(){ return userDAO.getAll(); }
+    public List<User> getAll(){
+        return userDAO.getAll();
+    }
 
-    public User findById(int id) { return userDAO.findById(id); }
+    public User findById(int id) {
+        return userDAO.findById(id);
+    }
 
     public String login(String username, String password){
         User user = userDAO.findByUsername(username);
@@ -46,6 +50,25 @@ public class UserBean {
             return "Email exists";
         }
         userDAO.register(user);
+        return null;
+    }
+
+    public String updateIsApproved(int id, String isApproved){
+        User user = findById(id);
+        if(user == null){
+            return "Wrong user id: " + id;
+        }
+        user.setIsApproved(isApproved);
+        userDAO.update(user);
+        return null;
+    }
+
+    public String deleteUser(int id) {
+        User user = findById(id);
+        if(user == null){
+            return "Wrong user id: " + id;
+        }
+        userDAO.delete(user);
         return null;
     }
 }

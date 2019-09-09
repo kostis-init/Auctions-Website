@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/api/categories/*", "/api/items/*"})
+@WebFilter(urlPatterns = {
+        "/api/categories/*",
+        "/api/items/*",
+        "/api/admin/*"
+})
 public class AuthFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,7 +28,6 @@ public class AuthFilter implements Filter {
             HttpServletResponse respHttp = (HttpServletResponse) response;
             respHttp.setStatus(HttpServletResponse.SC_FORBIDDEN);
             respHttp.getWriter().print("Invalid jwt");
-            //respHttp.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else{
             chain.doFilter(request, response);
         }
