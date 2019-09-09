@@ -18,14 +18,17 @@ public class UserBean {
 
     public User findById(int id) { return userDAO.findById(id); }
 
-    public boolean validLogin(String username, String password){
+    public String login(String username, String password){
         User user = userDAO.findByUsername(username);
-        if(user == null){
-            return false;
-        }
         //TODO: hashing
+        if(user == null || !user.getPassword().equals(password)) {
+            return "Wrong Credentials";
+        }
         System.out.println("USER: " + user.toString());
-        return user.getPassword().equals(password) && !user.getIsApproved().equals("N");
+        if(user.getIsApproved().equals("N")){
+            return "User with username: " + user.getUsername() + ", is not approved";
+        }
+        return null;
     }
 
     public String isAdmin(String username) {
