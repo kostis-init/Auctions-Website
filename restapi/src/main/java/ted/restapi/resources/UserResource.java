@@ -26,8 +26,8 @@ public class UserResource {
     public Response login(UserDTO userDTO) {
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
-
-        if(userBean.validLogin(username, password)){
+        String result = userBean.login(username, password);
+        if(result == null){
             String jwt = JWT.createJWT(userDTO.getUsername());
             String isAdmin = userBean.isAdmin(username);
             LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
@@ -35,9 +35,7 @@ public class UserResource {
             loginResponseDTO.setIsAdmin(isAdmin);
             return Response.ok(loginResponseDTO).build();
         }else{
-            return Response.status(400)
-                    .entity(Json.createObjectBuilder().add("message", "Wrong Credentials").build())
-                    .build();
+            return Response.status(400).entity(result).build();
         }
     }
 
