@@ -71,4 +71,8 @@ public class UserBean {
         userDAO.delete(user);
         return null;
     }
+
+    public User getUserByUsername(String username) {
+        return userDAO.findByUsername(username);
+    }
 }

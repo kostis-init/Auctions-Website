@@ -21,6 +21,20 @@ public class UserResource {
 
     @Inject private UserBean userBean;
 
+    @GET
+    @Path("autologin")
+    public Response autoLogin(@HeaderParam(value = "Authorization") String jwt){
+        String username = JWT.getUsername(jwt);
+        User user = userBean.getUserByUsername(username);
+        if(user == null){
+            return Response.status(500).entity("Username not found").build();
+        }
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setJwt(jwt);
+        loginResponseDTO.setIsAdmin(user.getIsAdmin());
+        return Response.ok(loginResponseDTO).build();
+    }
+
     @POST
     @Path("login")
     public Response login(UserDTO userDTO) {

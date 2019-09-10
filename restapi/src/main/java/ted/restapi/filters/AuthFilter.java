@@ -20,6 +20,7 @@ public class AuthFilter implements Filter {
             response.getWriter().print("Invalid jwt");
             return;
         }
+
         chain.doFilter(request, response);
     }
 

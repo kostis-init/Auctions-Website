@@ -22,5 +22,6 @@
         <url-pattern>/api/categories/*</url-pattern>
         <url-pattern>/api/items/*</url-pattern>
         <url-pattern>/api/admin/*</url-pattern>
+        <url-pattern>/api/users/autologin</url-pattern>
     </filter-mapping>
 </web-app>
