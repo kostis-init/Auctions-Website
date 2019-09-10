@@ -24,7 +24,6 @@ export class AdminEffect {
   userFetch = this.actions$.pipe(
     ofType(FETCH_USERS),
     switchMap((action : FetchUsers) => {
-      console.log('sending req');
       return this.http.get<UserDataModel[]>(admin);
     }),
     map((users: UserDataModel[]) =>{
