@@ -3,10 +3,11 @@ import { CommonModule} from '@angular/common';
 import { SingInFormComponent } from './sing-in-form/sing-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import {AuthService} from "./auth.service";
-import {AuthGuardService} from "./auth-guard.service";
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
-import {AdminPageGuardService} from "./admin-page-guard.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptorService} from "./token-interceptor.service";
+
 
 
 
@@ -21,6 +22,11 @@ import {AdminPageGuardService} from "./admin-page-guard.service";
     FormsModule,
     SharedModule
   ],
-  providers:[AuthService]
+  providers:[AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    }]
 })
 export class AuthModule { }
