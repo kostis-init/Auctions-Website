@@ -7,8 +7,9 @@ import {Observable} from "rxjs";
 import {AuthState} from "./store/auth.reducer";
 import {UserSignupModel} from "../shared/user-signup.model";
 import {catchError, take, tap} from "rxjs/operators";
-import {UserSignUpAction, UserTryLoginAction} from "./store/auth.actions";
+import {UserLogoutAction, UserSignUpAction, UserTryLoginAction} from "./store/auth.actions";
 import {ErrorHandlerService} from "../shared/error-handler.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 export interface AuthResponseData {
   jwt:string,
@@ -21,7 +22,11 @@ export interface AuthResponseData {
 @Injectable()
 export class AuthService {
 
-  constructor(private http:HttpClient, private store: Store<AppState>, private errorHandler: ErrorHandlerService) { }
+  constructor(private http:HttpClient,
+              private store: Store<AppState>,
+              private errorHandler: ErrorHandlerService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   Login(username: string, password: string):Observable<AuthResponseData> {
     return this.DispatchLoginAction(username,password).pipe(
@@ -78,6 +83,13 @@ export class AuthService {
               address:userData.Address,
               city:userData.City,
               country:userData.Country});
+  }
+
+
+  Logout(){
+    this.store.dispatch(new UserLogoutAction());
+    localStorage.removeItem('token');
+    this.router.navigate(['/'],{relativeTo: this.route})
   }
 
   isAuthenticated(): boolean {

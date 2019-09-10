@@ -1,6 +1,6 @@
 import {AppState} from "../../store/app.reducer";
 import {UserDataModel} from "../../shared/user-data.model";
-import {APPROVE_SIGNUP, DELETE_USER, SET_USERS} from "./admin.actions";
+import {ADMIN_LOGOUT, APPROVE_SIGNUP, DELETE_USER, SET_USERS} from "./admin.actions";
 
 export interface FeatureState extends AppState {
   users: State;
@@ -119,8 +119,11 @@ export function AdminReducer(state = initialState, action) {
         ...state,
         users: action.payload.Users
       };
-
-
+    case ADMIN_LOGOUT:
+      return {
+        ...state,
+        users: []
+      };
     default:
       return state;
 

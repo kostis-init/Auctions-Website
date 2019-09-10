@@ -5,6 +5,13 @@ export const FETCH_USERS = 'FETCH_USERS';
 export const APPROVE_SIGNUP = 'APPROVE_SIGNUP';
 export const SET_USERS = 'SET_USERS';
 export const DELETE_USER = 'DELETE_USER';
+export const ADMIN_LOGOUT = 'ADMIN_LOGOUT'
+
+
+
+export class AdminLogout implements Action {
+  readonly type = ADMIN_LOGOUT;
+}
 
 export class FetchUsers implements Action{
   readonly type = FETCH_USERS;

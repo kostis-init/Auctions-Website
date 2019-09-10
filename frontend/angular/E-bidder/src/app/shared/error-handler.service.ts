@@ -12,6 +12,7 @@ export class ErrorHandlerService {
   HttpErrorHandle(errorRes:HttpErrorResponse) {
 
     let errorMessage = 'An unknown Error Occured';
+    console.log(errorRes);
     if( !errorRes.error || !errorRes.error.message){
       return throwError(errorMessage);
     }

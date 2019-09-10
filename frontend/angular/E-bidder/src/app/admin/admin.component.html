@@ -1,4 +1,11 @@
 <div class="container">
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <button class="btn btn-block btn-primary" (click)="AdminLogout()">Logout</button>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-5">
       <app-user-list></app-user-list>
@@ -6,6 +13,10 @@
     <div class="col-md-7">
       <router-outlet></router-outlet>
     </div>
+
+
   </div>
+
+
 
 </div>

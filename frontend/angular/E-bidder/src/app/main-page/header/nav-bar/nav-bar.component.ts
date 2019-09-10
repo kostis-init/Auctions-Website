@@ -6,6 +6,7 @@ import {AuthState} from "../../../auth/store/auth.reducer";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {UserLogoutAction} from "../../../auth/store/auth.actions";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,8 +19,7 @@ export class NavBarComponent implements OnInit {
   AuthState$: Observable<AuthState>;
   constructor(private store: Store<AppState>,
               private modalServise: BsModalService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.AuthState$ = this.store.select('auth');
@@ -34,9 +34,7 @@ export class NavBarComponent implements OnInit {
   }
 
   Logout() {
-    this.store.dispatch(new UserLogoutAction());
-    localStorage.removeItem('token');
-    this.router.navigate(['/'],{relativeTo: this.route})
+    this.auth.Logout();
   }
 
 }
