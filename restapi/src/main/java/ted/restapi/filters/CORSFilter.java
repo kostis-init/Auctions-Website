@@ -13,6 +13,8 @@ public class CORSFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // Authorize (allow) all domains to consume the content
         ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
+        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers",
+                "authorization,content-type");
         ((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST, DELETE");
 
         // For HTTP OPTIONS method reply with ACCEPTED status code -- per CORS handshake
