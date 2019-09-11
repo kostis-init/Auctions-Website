@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
+import {AppState} from "./store/app.reducer";
+import {Store} from "@ngrx/store";
+import {UserAutoLogin} from "./auth/store/auth.actions";
+import {AuthService} from "./auth/auth.service";
 
 
 @Component({
@@ -10,14 +14,6 @@ import {RouterOutlet} from "@angular/router";
 
 export class AppComponent{
   title = 'E-bidder';
-
-
-  //TODO:implement auto login
-
-
-
-
-
 
   constructor(){}
   prepareRoute(outlet: RouterOutlet) {

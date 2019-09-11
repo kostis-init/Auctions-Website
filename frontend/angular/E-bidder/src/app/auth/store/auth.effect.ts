@@ -12,7 +12,7 @@ export class AuthEffect {
 
   @Effect()
   authLoginIn = this.actions$.pipe(
-    ofType(AuthActionTypes.USER_TRY_LOGIN),
+    ofType(AuthActionTypes.USER_TRY_LOGIN, AuthActionTypes.USER_AUTOLOGIN),
     map((action:UserTryLoginAction) => {
       const ResponseData = action.payload;
       let UserStatus:string;

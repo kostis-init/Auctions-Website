@@ -7,11 +7,15 @@ export enum AuthActionTypes {
   USER_LOGOUT = 'USER_LOGOUT',
   USER_SIGNUP = 'USER_SIGNUP',
   GUEST_LOGIN = 'GUEST_LOGIN',
+  USER_AUTOLOGIN = 'USER_AUTOLOGIN'
 }
 
 
 
-
+export class UserAutoLogin {
+  readonly type = AuthActionTypes.USER_AUTOLOGIN;
+  constructor (public payload: {Data: AuthResponseData}) {}
+}
 
 export class UserTryLoginAction implements Action {
 
