@@ -38,4 +38,9 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/'],{relativeTo: this.route})
   }
 
+  shop_byCat(category: number){
+    //this.router.navigate(['categories', category]);
+    this.router.navigateByUrl('main/categories')
+  }
+
 }

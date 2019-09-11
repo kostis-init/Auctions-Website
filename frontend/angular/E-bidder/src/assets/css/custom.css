@@ -7,10 +7,10 @@
   background-color: #f1f5f6;
 }
 
-/*.card-img-top {*/
-/*  height: 300px;*/
-/*  box-sizing: border-box;*/
-/*}*/
+.card-img-top {
+  max-height: 250px;
+  box-sizing: border-box;
+}
 
 .card-link {
   color: #387f93;
@@ -34,4 +34,25 @@
   border-radius: 5px;
   height: 100%;
   width: 100%;
+}
+
+.make_pointer {
+  cursor: pointer;
+}
+
+.category_dropdown {
+  cursor: pointer;
+}
+
+.category_dropdown:hover {
+  color: white !important;
+}
+
+.item_box {
+  cursor: pointer;
+  color: #747474 !important;
+}
+
+.shopbycard:hover {
+  background-color: #dadada;
 }

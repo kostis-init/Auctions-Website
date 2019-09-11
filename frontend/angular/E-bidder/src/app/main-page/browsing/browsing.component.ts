@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {ItemModel} from "./item.model";
 
 @Component({
@@ -7,6 +7,9 @@ import {ItemModel} from "./item.model";
   styleUrls: ['./browsing.component.css']
 })
 export class BrowsingComponent implements OnInit {
+
+  @Input('searchQuery') searchQuery:string;
+  @Input('category') category:string;
 
   Items: ItemModel[] = [
     new ItemModel(
@@ -39,7 +42,7 @@ export class BrowsingComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor() { console.log(this.searchQuery);}
 
   ngOnInit() {
   }

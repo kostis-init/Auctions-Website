@@ -7,15 +7,15 @@
 
       <ul class="navbar-nav" >
         <li class="nav-item dropdown m-1 mr-4">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown">Categories</a>
+          <a class="nav-link dropdown-toggle make_pointer" data-toggle="dropdown" data-hover="dropdown">Categories</a>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">Tech</a>
-            <a href="#" class="dropdown-item">Home</a>
-            <a href="#" class="dropdown-item">Clothing</a>
+            <a (click)="shop_byCat(0)" class="dropdown-item category_dropdown">Tech</a>
+            <a (click)="shop_byCat(1)" class="dropdown-item category_dropdown">Home</a>
+            <a (click)="shop_byCat(2)" class="dropdown-item category_dropdown">Clothing</a>
           </div>
         </li>
         <li class="nav-item m-1 mr-4">
-          <a class="nav-link btn" data-placement="top" href="#" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }" >User Dashboard</a>
+          <a class="nav-link btn" data-placement="top" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }" >User Dashboard</a>
         </li>
         <li class="nav-item m-1 mr-4">
           <a class="nav-link btn" href="#" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }">Messages</a>
