@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mydb`;
 -- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: mydb
@@ -60,9 +58,12 @@ CREATE TABLE `category` (
   `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `image` blob,
+  `general_category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
-  UNIQUE KEY `category_id_UNIQUE` (`category_id`)
+  UNIQUE KEY `category_id_UNIQUE` (`category_id`),
+  KEY `category_general_category_general_category_id_fk` (`general_category_id`),
+  CONSTRAINT `category_general_category_general_category_id_fk` FOREIGN KEY (`general_category_id`) REFERENCES `general_category` (`general_category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -72,8 +73,34 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Technology',NULL),(2,'Sports',NULL),(3,'Fashion',NULL),(4,'Music',NULL),(5,'Books',NULL),(6,'House - Garden',NULL),(7,'Auto - Moto',NULL);
+INSERT INTO `category` VALUES (1,'Computers',NULL,1),(2,'Phones',NULL,1),(3,'Speakers',NULL,1),(4,'Guitars',NULL,2),(5,'Pianos',NULL,2),(6,'Violins',NULL,2),(7,'Cars',NULL,7);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `general_category`
+--
+
+DROP TABLE IF EXISTS `general_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `general_category` (
+  `general_category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `image` blob,
+  PRIMARY KEY (`general_category_id`),
+  UNIQUE KEY `general_category_general_category_id_uindex` (`general_category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `general_category`
+--
+
+LOCK TABLES `general_category` WRITE;
+/*!40000 ALTER TABLE `general_category` DISABLE KEYS */;
+INSERT INTO `general_category` VALUES (1,'Technology',NULL),(2,'Sports',NULL),(3,'Fashion',NULL),(4,'Music',NULL),(5,'Books',NULL),(6,'House - Garden',NULL),(7,'Auto - Moto',NULL);
+/*!40000 ALTER TABLE `general_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -138,7 +165,7 @@ CREATE TABLE `item_category` (
 
 LOCK TABLES `item_category` WRITE;
 /*!40000 ALTER TABLE `item_category` DISABLE KEYS */;
-INSERT INTO `item_category` VALUES (2,1),(1,5);
+INSERT INTO `item_category` VALUES (2,2),(1,5);
 /*!40000 ALTER TABLE `item_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +196,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `user_email_uindex` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +205,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','admin','Administrator','Administrator','admin@admin.com','6999999999999999','23425446532323453',NULL,NULL,'Y',NULL,NULL,NULL,'Y'),(2,'kostis','kostis','Konstantinos','Mich','osdjf@fsds.gr','32434343534','23436254243243',NULL,NULL,'N',NULL,NULL,NULL,'Y'),(3,'user24','pass','Giorgos','Georgiou','Gdfsfds@GDFd.sg','2435456856',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(5,'user234224','pass','Akis','Losad','asda@GDFd.sg','234245',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(6,'postman','test',NULL,NULL,'post@sdflsdjfsl.fd',NULL,'213235433',NULL,NULL,'N',NULL,NULL,NULL,'N');
+INSERT INTO `user` VALUES (1,'admin','admin','Administrator','Administrator','admin@admin.com','6999999999999999','23425446532323453',NULL,NULL,'Y',NULL,NULL,NULL,'Y'),(2,'kostis','kostis','Konstantinos','Mich','osdjf@fsds.gr','32434343534','23436254243243',NULL,NULL,'N',NULL,NULL,NULL,'Y'),(3,'user24','pass','Giorgos','Georgiou','Gdfsfds@GDFd.sg','2435456856',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(5,'user234224','pass','Akis','Losad','asda@GDFd.sg','234245',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(6,'postman','test',NULL,NULL,'post@sdflsdjfsl.fd',NULL,'213235433',NULL,NULL,'N',NULL,NULL,NULL,'N'),(7,'alekos','yolo',NULL,'resto','hre@fdd.sd',NULL,'sdfsgdsfsdsfs',0,0,'N',NULL,NULL,NULL,'N'),(9,'asdasdd','affa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'N',NULL,NULL,NULL,'N');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -191,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-07 17:21:16
+-- Dump completed on 2019-09-11 19:18:14

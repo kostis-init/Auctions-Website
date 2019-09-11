@@ -68,7 +68,7 @@ public class UserResource {
         String afm = userDTO.getAfm();
 
         User user = new User(username, password, firstName, lastName, email, telephoneNum, afm,
-                0.0, 0.0, "N", address, city, country, "N");
+                null, null, "N", address, city, country, "N");
 
         String result = userBean.register(user);
         if(result != null){

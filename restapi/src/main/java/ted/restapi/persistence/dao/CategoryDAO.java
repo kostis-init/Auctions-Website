@@ -1,6 +1,7 @@
 package ted.restapi.persistence.dao;
 
 import ted.restapi.persistence.entities.Category;
+import ted.restapi.persistence.entities.GeneralCategory;
 import ted.restapi.persistence.entities.Item;
 
 import javax.ejb.Stateless;
@@ -14,7 +15,7 @@ public class CategoryDAO {
     @PersistenceContext(unitName = "restapi_PU")
     private EntityManager em;
 
-    public List<Category> getAll() { return em.createNamedQuery("Category.findAll", Category.class).getResultList(); }
+    public List<GeneralCategory> getGeneralCategories() { return em.createNamedQuery("GeneralCategory.findAll", GeneralCategory.class).getResultList(); }
 
     public Category findById(int id) { return em.find(Category.class, id); }
 
@@ -38,4 +39,8 @@ public class CategoryDAO {
         em.remove(category);
     }
 
+    public List<Category> getCategoriesByGeneralCategoryId(int id) {
+        return em.createNamedQuery("Category.findByGeneralCategoryId", Category.class)
+                .setParameter(1, id).getResultList();
+    }
 }

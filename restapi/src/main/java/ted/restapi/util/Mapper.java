@@ -1,13 +1,7 @@
 package ted.restapi.util;
 
-import ted.restapi.dto.BidDTO;
-import ted.restapi.dto.CategoryDTO;
-import ted.restapi.dto.ItemDTO;
-import ted.restapi.dto.UserDTO;
-import ted.restapi.persistence.entities.Bid;
-import ted.restapi.persistence.entities.Category;
-import ted.restapi.persistence.entities.Item;
-import ted.restapi.persistence.entities.User;
+import ted.restapi.dto.*;
+import ted.restapi.persistence.entities.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,5 +30,9 @@ public class Mapper {
 
     public static BidDTO toDTO(Bid bid) {
         return new BidDTO(bid.getId(), bid.getTime(), bid.getAmount(), Mapper.toDTO(bid.getBidder()));
+    }
+
+    public static GeneralCategoryDTO toDTO(GeneralCategory generalCategory) {
+        return new GeneralCategoryDTO(generalCategory.getId(), generalCategory.getName(), generalCategory.getImage());
     }
 }

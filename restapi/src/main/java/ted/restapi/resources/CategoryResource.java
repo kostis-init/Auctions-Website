@@ -2,6 +2,7 @@ package ted.restapi.resources;
 
 import ted.restapi.beans.CategoryBean;
 import ted.restapi.dto.CategoryDTO;
+import ted.restapi.dto.GeneralCategoryDTO;
 import ted.restapi.dto.ItemDTO;
 import ted.restapi.util.Mapper;
 
@@ -24,13 +25,21 @@ public class CategoryResource {
 
     @GET
     public Response getAll(){
-        List<CategoryDTO> list = categoryBean.getAll().stream()
+        List<GeneralCategoryDTO> list = categoryBean.getGeneralCategories().stream()
                 .map(Mapper::toDTO).collect(Collectors.toList());
         return Response.ok(list).build();
     }
 
     @GET
     @Path("{id}")
+    public Response getCategoryByGeneralCategoryId(@PathParam("id") int id){
+        List<CategoryDTO> list = categoryBean.getCategoriesByGeneralCategoryId(id).stream()
+                .map(Mapper::toDTO).collect(Collectors.toList());
+        return Response.ok(list).build();
+    }
+
+    @GET
+    @Path("items/{id}")
     public Response getItemsByCategoryId(@PathParam("id") int id){
         List<ItemDTO> items = new ArrayList<>();
         categoryBean.getItemsByCategoryId(id).forEach( item -> items.add(Mapper.toDTO(item)));

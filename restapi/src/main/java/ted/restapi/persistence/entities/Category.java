@@ -9,13 +9,16 @@ import java.util.Objects;
 @Table(name = "category")
 @NamedQueries({
         @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
-        @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.id = ?1")
+        @NamedQuery(name = "Category.findByCategoryId", query = "SELECT c FROM Category c WHERE c.id = ?1"),
+        @NamedQuery(name = "Category.findByGeneralCategoryId", query = "SELECT c FROM Category c WHERE c.generalCategory.id = ?1")
+
 })
 public class Category {
     private int id;
     private String name;
     private Blob image;
     private List<Item> items;
+    private GeneralCategory generalCategory;
 
     @Id
     @Column(name = "category_id", nullable = false)
@@ -47,6 +50,11 @@ public class Category {
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }
 
+    @ManyToOne
+    @JoinColumn(name = "general_category_id", referencedColumnName = "general_category_id")
+    public GeneralCategory getGeneralCategory() { return generalCategory; }
+    public void setGeneralCategory(GeneralCategory generalCategory){ this.generalCategory = generalCategory;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,10 +62,11 @@ public class Category {
         Category category = (Category) o;
         return id == category.id &&
                 Objects.equals(name, category.name) &&
-                Objects.equals(image, category.image);
+                Objects.equals(image, category.image) &&
+                Objects.equals(generalCategory, category.generalCategory);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, image);
+        return Objects.hash(id, name, image, generalCategory);
     }
 }

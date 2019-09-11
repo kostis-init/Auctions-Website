@@ -2,6 +2,7 @@ package ted.restapi.beans;
 
 import ted.restapi.persistence.dao.CategoryDAO;
 import ted.restapi.persistence.entities.Category;
+import ted.restapi.persistence.entities.GeneralCategory;
 import ted.restapi.persistence.entities.Item;
 
 import javax.ejb.LocalBean;
@@ -14,9 +15,13 @@ import java.util.List;
 public class CategoryBean {
     @Inject private CategoryDAO categoryDAO;
 
-    public List<Category> getAll(){ return categoryDAO.getAll(); }
+    public List<GeneralCategory> getGeneralCategories(){ return categoryDAO.getGeneralCategories(); }
 
     public Category findById(int id) { return categoryDAO.findById(id); }
+
+    public List<Category> getCategoriesByGeneralCategoryId(int id){
+        return categoryDAO.getCategoriesByGeneralCategoryId(id);
+    }
 
     public List<Item> getItemsByCategoryId(int categoryId){
         return categoryDAO.findByCategoryId(categoryId).getItems();
