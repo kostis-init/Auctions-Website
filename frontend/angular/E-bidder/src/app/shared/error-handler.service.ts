@@ -13,11 +13,11 @@ export class ErrorHandlerService {
 
     let errorMessage = 'An unknown Error Occured';
     console.log(errorRes);
-    if( !errorRes.error || !errorRes.error.message){
+    if( !errorRes.error){
       return throwError(errorMessage);
     }
 
-    switch (errorRes.error.message) {
+    switch (errorRes.error) {
       case 'Email exists':
         errorMessage = 'This email exists already';
         break;
@@ -28,7 +28,12 @@ export class ErrorHandlerService {
       case 'Wrong Credentials':
         errorMessage = 'Wrong Email or Password';
         break;
+
+      case 'Invalid jwt':
+        errorMessage = 'Invalid jwt';
+        break;
     }
     return throwError(errorMessage);
   }
+
 }

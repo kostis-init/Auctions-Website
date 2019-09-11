@@ -11,9 +11,12 @@ import {HomeCategoryItemComponent} from "./home-categories/home-category-item/ho
 import {HomeSubcategoriesComponent} from "./home-categories/home-subcategories/home-subcategories.component";
 import {BrowsingComponent} from "./browsing/browsing.component";
 import {ItemComponent} from "./browsing/item/item.component";
+import {Shop_byComponent} from "./shop_by/shop_by.component";
+import {Shop_byCategoryItemComponent} from "./shop_by/shop_by-category-item/shop_by-category-item.component";
 import {ModalModule, TooltipModule} from "ngx-bootstrap";
 import {AuthModule} from "../auth/auth.module";
-
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -28,12 +31,16 @@ import {AuthModule} from "../auth/auth.module";
     HomeSubcategoriesComponent,
     BrowsingComponent,
     ItemComponent,
+    Shop_byComponent,
+    Shop_byCategoryItemComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MainPageRoutingModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
+    HttpClientModule,
     AuthModule
   ]
 })

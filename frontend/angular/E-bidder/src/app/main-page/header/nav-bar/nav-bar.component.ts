@@ -19,6 +19,7 @@ export class NavBarComponent implements OnInit {
   AuthState$: Observable<AuthState>;
   constructor(private store: Store<AppState>,
               private modalServise: BsModalService,
+              private router: Router,
               private auth: AuthService) { }
 
   ngOnInit() {
@@ -35,6 +36,11 @@ export class NavBarComponent implements OnInit {
 
   Logout() {
     this.auth.Logout();
+  }
+
+  shop_byCat(category: number){
+    //this.router.navigate(['categories', category]);
+    this.router.navigateByUrl('main/categories')
   }
 
 }

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {signup, singin} from "../shared/server-endpoints";
+import {Autosingin, signup, singin} from "../shared/server-endpoints";
 import {AppState} from "../store/app.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {AuthState} from "./store/auth.reducer";
 import {UserSignupModel} from "../shared/user-signup.model";
 import {catchError, take, tap} from "rxjs/operators";
-import {UserLogoutAction, UserSignUpAction, UserTryLoginAction} from "./store/auth.actions";
+import {UserAutoLogin, UserLogoutAction, UserSignUpAction, UserTryLoginAction} from "./store/auth.actions";
 import {ErrorHandlerService} from "../shared/error-handler.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -22,19 +22,41 @@ export interface AuthResponseData {
 @Injectable()
 export class AuthService {
 
-  constructor(private http:HttpClient,
+  constructor(private http: HttpClient,
               private store: Store<AppState>,
               private errorHandler: ErrorHandlerService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
-  Login(username: string, password: string):Observable<AuthResponseData> {
-    return this.DispatchLoginAction(username,password).pipe(
+
+  AutoLogin(): Observable<AuthResponseData> {
+    return this.DispatchAutoLoginAction().pipe(
       catchError(this.errorHandler.HttpErrorHandle)
     );
   }
 
-  DispatchLoginAction(username:string,password:string):Observable<AuthResponseData> {
+  DispatchAutoLoginAction(): Observable<AuthResponseData> {
+    return this.SendAutoLoginHttp().pipe(
+      take(1),
+      tap((Response: AuthResponseData) => {
+        this.store.dispatch(new UserAutoLogin({Data: Response}));
+      })
+    )
+  }
+
+  SendAutoLoginHttp(): Observable<AuthResponseData> {
+    return this.http.get<AuthResponseData>(Autosingin);
+
+  }
+
+  Login(username: string, password: string): Observable<AuthResponseData> {
+    return this.DispatchLoginAction(username, password).pipe(
+      catchError(this.errorHandler.HttpErrorHandle)
+    );
+  }
+
+  DispatchLoginAction(username: string, password: string): Observable<AuthResponseData> {
 
     return this.SendLoginHttp(username, password)
       .pipe(
@@ -48,18 +70,18 @@ export class AuthService {
 
   SendLoginHttp(username: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(singin,
-      {username:username,password: password});
+      {username: username, password: password});
   }
 
 
-  SignUp(userData: UserSignupModel):Observable<AuthResponseData> {
+  SignUp(userData: UserSignupModel): Observable<AuthResponseData> {
 
     return this.DispatchSignUpAction(userData).pipe(
       catchError(this.errorHandler.HttpErrorHandle)
     )
   }
 
-  DispatchSignUpAction(userData: UserSignupModel):Observable<AuthResponseData> {
+  DispatchSignUpAction(userData: UserSignupModel): Observable<AuthResponseData> {
 
     return this.SendSignHttp(userData)
       .pipe(
@@ -73,32 +95,49 @@ export class AuthService {
 
   SendSignHttp(userData: UserSignupModel): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(signup,
-      { username:userData.Username,
-              password:userData.Password,
-              firstName:userData.FirstName,
-              lastName:userData.LastName,
-              email:userData.Email,
-              telephoneNum:userData.PhoneNum,
-              afm:userData.Afm,
-              address:userData.Address,
-              city:userData.City,
-              country:userData.Country});
+      {
+        username: userData.Username,
+        password: userData.Password,
+        firstName: userData.FirstName,
+        lastName: userData.LastName,
+        email: userData.Email,
+        telephoneNum: userData.PhoneNum,
+        afm: userData.Afm,
+        address: userData.Address,
+        city: userData.City,
+        country: userData.Country
+      });
   }
 
 
-  Logout(){
+  Logout() {
     this.store.dispatch(new UserLogoutAction());
     localStorage.removeItem('token');
-    this.router.navigate(['/'],{relativeTo: this.route})
+    this.router.navigate(['/'], {relativeTo: this.route})
   }
 
   isAuthenticated(): boolean {
     let State: AuthState;
-    //TODO: check also if token expires
     this.store.select('auth').subscribe(
       (data) => State = data
     );
-    return State.loggedIn;
+
+    if (!localStorage.getItem('token'))
+      return State.loggedIn;
+    if (State.loggedIn)
+      return State.loggedIn;
+    else {
+      this.AutoLogin().subscribe(
+        () => {
+        },
+        (err) => {
+          this.router.navigateByUrl('welcome/login');
+        }
+      );
+      return true;
+    }
+
+
   }
 
   isAdmin(): boolean {
@@ -106,12 +145,9 @@ export class AuthService {
     this.store.select('auth').subscribe(
       (data) => State = data
     );
-
-    return State.userStatus == 'admin';
-
-
-
+      return State.userStatus ==='admin';
   }
+
 }
 
 

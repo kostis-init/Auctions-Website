@@ -2,21 +2,26 @@
   <div class="row">
     <div class="col-7 offset-2">
 
-      <div class="input-group p-3 mb-5 mt-4">
-        <input type="text" class="form-control " placeholder="Search Anything you need">
+      <form (ngSubmit)="onSearch(query)"  class="input-group p-3 mb-5 mt-4" #query="ngForm">
+
+        <input type="text" required ngModel class="form-control " id="SearchQuery" name="searchQuery" placeholder="Search Anything you need">
+
         <div class="input-group-append">
 
-              <select class="custom-select w-auto h-auto">
+              <select class="custom-select w-auto h-auto" id="Category" name="category">
+                <option value="All" selected>All Categories</option>
+                <optgroup label="-------------------"></optgroup>
                 <option value="Tech">Tech</option>
                 <option value="House">House</option>
                 <option value="Music">Music</option>
                 <option value="Sports">Sports</option>
                 <option value="Auto-Moto">Auto-Moto</option>
               </select>
-            <button style="cursor: pointer;" class="btn btn-primary w-auto h-auto" (click)="search()"><i class="fas fa-search text-grey" aria-hidden="true"></i> Search</button>
+
+            <button style="cursor: pointer;" class="btn btn-primary w-auto h-auto" type="submit"><i class="fas fa-search text-grey" aria-hidden="true"></i> Search</button>
 
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
