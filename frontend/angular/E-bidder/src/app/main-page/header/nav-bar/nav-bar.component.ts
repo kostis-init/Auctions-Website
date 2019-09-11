@@ -19,6 +19,7 @@ export class NavBarComponent implements OnInit {
   AuthState$: Observable<AuthState>;
   constructor(private store: Store<AppState>,
               private modalServise: BsModalService,
+              private router: Router,
               private auth: AuthService) { }
 
   ngOnInit() {
