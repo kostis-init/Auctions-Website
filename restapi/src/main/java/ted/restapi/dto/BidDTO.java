@@ -1,8 +1,5 @@
 package ted.restapi.dto;
 
-import ted.restapi.persistence.entities.Item;
-import ted.restapi.persistence.entities.User;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;

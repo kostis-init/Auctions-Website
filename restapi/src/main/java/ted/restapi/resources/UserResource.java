@@ -21,13 +21,27 @@ public class UserResource {
 
     @Inject private UserBean userBean;
 
+    @GET
+    @Path("autologin")
+    public Response autoLogin(@HeaderParam(value = "Authorization") String jwt){
+        String username = JWT.getUsername(jwt);
+        User user = userBean.getUserByUsername(username);
+        if(user == null){
+            return Response.status(500).entity("Username not found").build();
+        }
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setJwt(jwt);
+        loginResponseDTO.setIsAdmin(user.getIsAdmin());
+        return Response.ok(loginResponseDTO).build();
+    }
+
     @POST
     @Path("login")
     public Response login(UserDTO userDTO) {
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
-
-        if(userBean.validLogin(username, password)){
+        String result = userBean.login(username, password);
+        if(result == null){
             String jwt = JWT.createJWT(userDTO.getUsername());
             String isAdmin = userBean.isAdmin(username);
             LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
@@ -35,9 +49,7 @@ public class UserResource {
             loginResponseDTO.setIsAdmin(isAdmin);
             return Response.ok(loginResponseDTO).build();
         }else{
-            return Response.status(400)
-                    .entity(Json.createObjectBuilder().add("message", "Wrong Credentials").build())
-                    .build();
+            return Response.status(400).entity(result).build();
         }
     }
 

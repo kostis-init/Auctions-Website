@@ -4,15 +4,15 @@ import {AuthActions, AuthActionTypes} from "./auth.actions";
 export interface AuthState {
 
   userStatus: string;
-  // we may use a JWT API SO THIS MIGHT CHANGE TO AN OBJECT
   token: string;
+  // we may use a JWT API SO THIS MIGHT CHANGE TO AN OBJECT
   loggedIn: boolean;
 }
 
 
 export const initialAuthState: AuthState ={
-  userStatus: null,
   token: null,
+  userStatus: null,
   loggedIn: false
 };
 
@@ -36,15 +36,11 @@ export function authReducer(state = initialAuthState, action: AuthActions): Auth
 
 
     case AuthActionTypes.USER_SIGNUP:
-      return {
-        userStatus: 'user',
-        token: action.payload.token,
-        loggedIn: true
-      };
+      return state;
 
     case AuthActionTypes.USER_LOGOUT:
       return {
-        token:null,
+        token: null,
         userStatus:null,
         loggedIn:false
       };

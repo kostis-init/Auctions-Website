@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/app.reducer";
 import {NgForm} from "@angular/forms";
-import {UserModel} from "../../shared/user.model";
+import {UserSignupModel} from "../../shared/user-signup.model";
 
 @Component({
   selector: 'app-sign-up-form',
@@ -13,9 +13,9 @@ import {UserModel} from "../../shared/user.model";
 })
 export class SignUpFormComponent{
   @Input('CustomClass') FromClass:string;
-  @Output() SignUpComplete: EventEmitter<any> = new EventEmitter<any>();
 
   error:string = null;
+  SignUpSucces:boolean = false;
   lot:number;
   lat:number;
   constructor(private auth: AuthService,private route:ActivatedRoute,private router: Router, private store: Store<AppState>) { }
@@ -37,11 +37,10 @@ export class SignUpFormComponent{
   onSignup(form: NgForm){
 
     console.log(form);
-    const User:UserModel = this.setUpUser(form);
+    const User:UserSignupModel = this.setUpUser(form);
     this.auth.SignUp(User).
     subscribe(() => {
-        this.SignUpComplete.emit(null);
-        this.router.navigate(["/main/home"],{relativeTo:this.route})
+        this.SignUpSucces = true;
       },
       (error:string) => {
         this.error = error
@@ -52,7 +51,7 @@ export class SignUpFormComponent{
 
   setUpUser(form: NgForm) {
     console.log(form);
-    let User:UserModel = new UserModel(
+    let User:UserSignupModel = new UserSignupModel(
       form.form.value.username,
       form.form.value.password,
       form.form.value.passwordVerification,
@@ -62,7 +61,7 @@ export class SignUpFormComponent{
       form.form.value.phoneNumber,
       form.form.value.country,
       form.form.value.city,
-      form.form.value.adderss,
+      form.form.value.address,
       form.form.value.afm,
       form.form.value.latitude,
       form.form.value.longitude

@@ -1,3 +1,5 @@
-export const singin = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAPqAyuIVmQlrILoFaWcu6MJ-fmBA6QLso';
+export const singin = 'http://localhost:8080/restapi/api/users/login';
+export const signup = 'http://localhost:8080/restapi/api/users/registration';
+export const admin = 'http://localhost:8080/restapi/api/admin/users';
 
-export const signup = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAPqAyuIVmQlrILoFaWcu6MJ-fmBA6QLso';
+

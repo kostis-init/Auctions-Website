@@ -12,16 +12,20 @@ export class ErrorHandlerService {
   HttpErrorHandle(errorRes:HttpErrorResponse) {
 
     let errorMessage = 'An unknown Error Occured';
-    if( !errorRes.error || ! errorRes.error.error){
+    console.log(errorRes);
+    if( !errorRes.error || !errorRes.error.message){
       return throwError(errorMessage);
     }
 
-    switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
+    switch (errorRes.error.message) {
+      case 'Email exists':
         errorMessage = 'This email exists already';
         break;
-      case 'EMAIL_NOT_FOUND':
-      case 'INVALID_PASSWORD':
+      case 'Username exists':
+        errorMessage = 'This username exists already';
+        break;
+
+      case 'Wrong Credentials':
         errorMessage = 'Wrong Email or Password';
         break;
     }

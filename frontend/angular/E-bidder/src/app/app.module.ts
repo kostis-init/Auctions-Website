@@ -31,11 +31,7 @@ import {AuthModule} from "./auth/auth.module";
       maxAge: 20
     }),
     AuthModule,
-
-
   ],
-  providers: [],
-  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

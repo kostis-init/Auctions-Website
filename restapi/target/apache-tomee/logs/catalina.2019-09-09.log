@@ -1,0 +1,196 @@
+09-Sep-2019 19:05:59.502 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Server version:        Apache Tomcat (TomEE)/8.5.32 (7.0.5)
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Server built:          Jun 20 2018 19:50:35 UTC
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Server number:         8.5.32.0
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke OS Name:               Linux
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke OS Version:            4.15.0-60-generic
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Architecture:          amd64
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Java Home:             /usr/lib/jvm/java-8-openjdk-amd64/jre
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke JVM Version:           1.8.0_222-8u222-b10-1ubuntu1~18.04.1-b10
+09-Sep-2019 19:05:59.503 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke JVM Vendor:            Private Build
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke CATALINA_BASE:         /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke CATALINA_HOME:         /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -XX:+HeapDumpOnOutOfMemoryError
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dorg.apache.catalina.STRICT_SERVLET_COMPLIANCE=false
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dopenejb.session.manager=org.apache.tomee.catalina.session.QuickSessionManager
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dtomee.remote.support=true
+09-Sep-2019 19:05:59.504 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dopenejb.system.apps=false
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dtomee.jsp-development=true
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.util.logging.config.file=/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/conf/logging.properties
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -javaagent:/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/lib/openejb-javaagent.jar
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.io.tmpdir=/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/temp
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.base=/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.home=/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.ext.dirs=/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/lib
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dorg.apache.tomcat.util.http.ServerCookie.ALLOW_HTTP_SEPARATORS_IN_V0=true
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -ea
+09-Sep-2019 19:05:59.505 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib]
+09-Sep-2019 19:05:59.629 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Initializing ProtocolHandler ["http-nio-8080"]
+09-Sep-2019 19:05:59.644 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Using a shared selector for servlet write/read
+09-Sep-2019 19:05:59.653 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Initializing ProtocolHandler ["ajp-nio-8009"]
+09-Sep-2019 19:05:59.654 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Using a shared selector for servlet write/read
+09-Sep-2019 19:05:59.961 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'tomee.remote.support=true'
+09-Sep-2019 19:05:59.970 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.jdbc.datasource-creator=org.apache.tomee.jdbc.TomEEDataSourceCreator'
+09-Sep-2019 19:06:00.062 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> ********************************************************************************
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> OpenEJB http://tomee.apache.org/
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Startup: Mon Sep 09 19:06:00 EEST 2019
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Copyright 1999-2018 (C) Apache OpenEJB Project, All Rights Reserved.
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Version: 7.0.5
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Build date: 20180710
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Build time: 12:28
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> ********************************************************************************
+09-Sep-2019 19:06:00.063 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> openejb.home = /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee
+09-Sep-2019 19:06:00.064 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> openejb.base = /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee
+09-Sep-2019 19:06:00.067 INFO [main] org.apache.openejb.cdi.CdiBuilder.initializeOWB Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@f2f2cc1
+09-Sep-2019 19:06:00.067 INFO [main] org.apache.openejb.cdi.CdiBuilder.initializeOWB Succeeded in installing singleton service
+09-Sep-2019 19:06:00.109 INFO [main] org.apache.openejb.config.ConfigurationFactory.init TomEE configuration file is '/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/conf/tomee.xml'
+09-Sep-2019 19:06:00.152 INFO [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Tomcat Security Service, type=SecurityService, provider-id=Tomcat Security Service)
+09-Sep-2019 19:06:00.154 INFO [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
+09-Sep-2019 19:06:00.156 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.system.apps=false'
+09-Sep-2019 19:06:00.156 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.deployments.classpath=false'
+09-Sep-2019 19:06:00.174 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating TransactionManager(id=Default Transaction Manager)
+09-Sep-2019 19:06:00.227 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating SecurityService(id=Tomcat Security Service)
+09-Sep-2019 19:06:00.315 INFO [main] org.apache.openejb.server.ServiceManager.initServer Creating ServerService(id=cxf)
+09-Sep-2019 19:06:00.491 INFO [main] org.apache.openejb.server.ServiceManager.initServer Creating ServerService(id=cxf-rs)
+09-Sep-2019 19:06:00.611 INFO [main] org.apache.openejb.server.SimpleServiceManager.start   ** Bound Services **
+09-Sep-2019 19:06:00.611 INFO [main] org.apache.openejb.server.SimpleServiceManager.printRow   NAME                 IP              PORT  
+09-Sep-2019 19:06:00.611 INFO [main] org.apache.openejb.server.SimpleServiceManager.start -------
+09-Sep-2019 19:06:00.611 INFO [main] org.apache.openejb.server.SimpleServiceManager.start Ready!
+09-Sep-2019 19:06:00.612 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Initialization processed in 1480 ms
+09-Sep-2019 19:06:00.640 INFO [main] org.apache.tomee.catalina.OpenEJBNamingContextListener.bindResource Importing a Tomcat Resource with id 'UserDatabase' of type 'org.apache.catalina.UserDatabase'.
+09-Sep-2019 19:06:00.640 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=UserDatabase)
+09-Sep-2019 19:06:00.644 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting service [Catalina]
+09-Sep-2019 19:06:00.644 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting Servlet Engine: Apache Tomcat (TomEE)/8.5.32 (7.0.5)
+09-Sep-2019 19:06:00.661 INFO [localhost-startStop-1] sun.reflect.DelegatingMethodAccessorImpl.invoke Deploying web application archive [/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi.war]
+09-Sep-2019 19:06:00.670 INFO [localhost-startStop-1] org.apache.tomee.catalina.TomcatWebAppBuilder.init ------------------------- localhost -> /restapi
+09-Sep-2019 19:06:00.672 INFO [localhost-startStop-1] org.apache.openejb.util.JarExtractor.extract Extracting jar: /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi.war
+09-Sep-2019 19:06:00.789 INFO [localhost-startStop-1] org.apache.openejb.util.JarExtractor.extract Extracted path: /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi
+09-Sep-2019 19:06:00.790 INFO [localhost-startStop-1] org.apache.openejb.util.OptionsLog.info Using 'openejb.session.manager=org.apache.tomee.catalina.session.QuickSessionManager'
+09-Sep-2019 19:06:01.342 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureApplication Configuring enterprise application: /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi
+09-Sep-2019 19:06:01.489 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb ItemBean: EjbDeployment(deployment-id=ItemBean)
+09-Sep-2019 19:06:01.490 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb UserDAO: EjbDeployment(deployment-id=UserDAO)
+09-Sep-2019 19:06:01.490 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb CategoryBean: EjbDeployment(deployment-id=CategoryBean)
+09-Sep-2019 19:06:01.490 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb UserBean: EjbDeployment(deployment-id=UserBean)
+09-Sep-2019 19:06:01.490 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb CategoryDAO: EjbDeployment(deployment-id=CategoryDAO)
+09-Sep-2019 19:06:01.490 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb BidDAO: EjbDeployment(deployment-id=BidDAO)
+09-Sep-2019 19:06:01.490 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb ItemDAO: EjbDeployment(deployment-id=ItemDAO)
+09-Sep-2019 19:06:01.495 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=restapi/jdbc/mydb, type=Resource, provider-id=Default JDBC Database)
+09-Sep-2019 19:06:01.497 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.951 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Stateless Container, type=Container, provider-id=Default Stateless Container)
+09-Sep-2019 19:06:01.951 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.createContainer Auto-creating a container for bean ItemBean: Container(type=STATELESS, id=Default Stateless Container)
+09-Sep-2019 19:06:01.951 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Container(id=Default Stateless Container)
+09-Sep-2019 19:06:01.964 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean ItemBean to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.964 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean ItemBean to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.965 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean UserDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.965 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean UserDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.965 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean CategoryBean to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.966 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean CategoryBean to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.966 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean UserBean to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.966 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean UserBean to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.966 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean CategoryDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.967 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean CategoryDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.967 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean BidDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.967 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean BidDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.967 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean ItemDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.968 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean ItemDAO to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.968 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
+09-Sep-2019 19:06:01.968 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.createContainer Auto-creating a container for bean restapi.Comp7347754: Container(type=MANAGED, id=Default Managed Container)
+09-Sep-2019 19:06:01.969 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Container(id=Default Managed Container)
+09-Sep-2019 19:06:01.976 INFO [localhost-startStop-1] org.apache.openejb.core.managed.SimplePassivater.init Using directory /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/temp for stateful session passivation
+09-Sep-2019 19:06:01.984 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/restapi/jdbc/mydb' in bean restapi.Comp7347754 to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.984 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.processResourceRef Auto-linking resource-ref 'openejb/Resource/jdbc/mydb' in bean restapi.Comp7347754 to Resource(id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.984 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.deploy Configuring PersistenceUnit(name=restapi_PU, provider=org.eclipse.persistence.jpa.PersistenceProvider)
+09-Sep-2019 19:06:01.985 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.logAutoCreateResource Auto-creating a Resource with id 'restapi/jdbc/mydbNonJta' of type 'DataSource for 'restapi_PU'.
+09-Sep-2019 19:06:01.985 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.deploy Configuring Service(id=restapi/jdbc/mydbNonJta, type=Resource, provider-id=restapi/jdbc/mydb)
+09-Sep-2019 19:06:01.985 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=restapi/jdbc/mydbNonJta)
+09-Sep-2019 19:06:02.039 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.setJtaDataSource Adjusting PersistenceUnit restapi_PU <jta-data-source> to Resource ID 'restapi/jdbc/mydb' from 'jdbc/mydb'
+09-Sep-2019 19:06:02.039 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.setNonJtaDataSource Adjusting PersistenceUnit restapi_PU <non-jta-data-source> to Resource ID 'restapi/jdbc/mydbNonJta' from 'null'
+09-Sep-2019 19:06:02.054 INFO [localhost-startStop-1] org.apache.openejb.config.AppInfoBuilder.build Enterprise application "/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi" loaded.
+09-Sep-2019 19:06:02.056 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createApplication Assembling app: /home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi
+09-Sep-2019 19:06:02.671 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.ReloadableEntityManagerFactory.createDelegate PersistenceUnit(name=restapi_PU, provider=org.eclipse.persistence.jpa.PersistenceProvider) - provider time 601ms
+09-Sep-2019 19:06:02.738 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=ItemBeanLocalBean) --> Ejb(deployment-id=ItemBean)
+09-Sep-2019 19:06:02.738 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/ItemBean!ted.restapi.beans.ItemBean) --> Ejb(deployment-id=ItemBean)
+09-Sep-2019 19:06:02.739 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/ItemBean) --> Ejb(deployment-id=ItemBean)
+09-Sep-2019 19:06:02.740 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=UserDAOLocalBean) --> Ejb(deployment-id=UserDAO)
+09-Sep-2019 19:06:02.740 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/UserDAO!ted.restapi.persistence.dao.UserDAO) --> Ejb(deployment-id=UserDAO)
+09-Sep-2019 19:06:02.740 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/UserDAO) --> Ejb(deployment-id=UserDAO)
+09-Sep-2019 19:06:02.741 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=CategoryBeanLocalBean) --> Ejb(deployment-id=CategoryBean)
+09-Sep-2019 19:06:02.741 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/CategoryBean!ted.restapi.beans.CategoryBean) --> Ejb(deployment-id=CategoryBean)
+09-Sep-2019 19:06:02.741 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/CategoryBean) --> Ejb(deployment-id=CategoryBean)
+09-Sep-2019 19:06:02.742 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=UserBeanLocalBean) --> Ejb(deployment-id=UserBean)
+09-Sep-2019 19:06:02.742 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/UserBean!ted.restapi.beans.UserBean) --> Ejb(deployment-id=UserBean)
+09-Sep-2019 19:06:02.742 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/UserBean) --> Ejb(deployment-id=UserBean)
+09-Sep-2019 19:06:02.742 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=CategoryDAOLocalBean) --> Ejb(deployment-id=CategoryDAO)
+09-Sep-2019 19:06:02.742 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/CategoryDAO!ted.restapi.persistence.dao.CategoryDAO) --> Ejb(deployment-id=CategoryDAO)
+09-Sep-2019 19:06:02.743 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/CategoryDAO) --> Ejb(deployment-id=CategoryDAO)
+09-Sep-2019 19:06:02.743 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=BidDAOLocalBean) --> Ejb(deployment-id=BidDAO)
+09-Sep-2019 19:06:02.744 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/BidDAO!ted.restapi.persistence.dao.BidDAO) --> Ejb(deployment-id=BidDAO)
+09-Sep-2019 19:06:02.744 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/BidDAO) --> Ejb(deployment-id=BidDAO)
+09-Sep-2019 19:06:02.744 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=ItemDAOLocalBean) --> Ejb(deployment-id=ItemDAO)
+09-Sep-2019 19:06:02.744 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/ItemDAO!ted.restapi.persistence.dao.ItemDAO) --> Ejb(deployment-id=ItemDAO)
+09-Sep-2019 19:06:02.745 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/restapi/ItemDAO) --> Ejb(deployment-id=ItemDAO)
+09-Sep-2019 19:06:02.775 INFO [localhost-startStop-1] org.apache.openejb.cdi.CdiBuilder.initSingleton Existing thread singleton service in SystemInstance(): org.apache.openejb.cdi.ThreadSingletonServiceImpl@f2f2cc1
+09-Sep-2019 19:06:02.838 INFO [localhost-startStop-1] org.apache.openejb.cdi.OpenEJBLifecycle.startApplication OpenWebBeans Container is starting...
+09-Sep-2019 19:06:02.843 INFO [localhost-startStop-1] org.apache.webbeans.plugins.PluginLoader.startUp Adding OpenWebBeansPlugin : [CdiPlugin]
+09-Sep-2019 19:06:03.312 INFO [localhost-startStop-1] org.apache.webbeans.config.BeansDeployer.validateInjectionPoints All injection points were validated successfully.
+09-Sep-2019 19:06:03.316 INFO [localhost-startStop-1] org.apache.openejb.cdi.OpenEJBLifecycle.startApplication OpenWebBeans Container has started, it took 478 ms.
+09-Sep-2019 19:06:03.321 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=BidDAO, ejb-name=BidDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.321 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=ItemBean, ejb-name=ItemBean, container=Default Stateless Container)
+09-Sep-2019 19:06:03.322 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=UserDAO, ejb-name=UserDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.322 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=CategoryBean, ejb-name=CategoryBean, container=Default Stateless Container)
+09-Sep-2019 19:06:03.322 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=UserBean, ejb-name=UserBean, container=Default Stateless Container)
+09-Sep-2019 19:06:03.322 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=CategoryDAO, ejb-name=CategoryDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.322 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=ItemDAO, ejb-name=ItemDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.339 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=BidDAO, ejb-name=BidDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.346 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=ItemBean, ejb-name=ItemBean, container=Default Stateless Container)
+09-Sep-2019 19:06:03.350 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=UserDAO, ejb-name=UserDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.354 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=CategoryBean, ejb-name=CategoryBean, container=Default Stateless Container)
+09-Sep-2019 19:06:03.358 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=UserBean, ejb-name=UserBean, container=Default Stateless Container)
+09-Sep-2019 19:06:03.361 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=CategoryDAO, ejb-name=CategoryDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.365 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=ItemDAO, ejb-name=ItemDAO, container=Default Stateless Container)
+09-Sep-2019 19:06:03.372 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createApplication Deployed Application(path=/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi)
+09-Sep-2019 19:06:03.498 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication Using readers:
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.PrimitiveTextProvider@477cf7ea
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.FormEncodingProvider@6a43a93c
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.MultipartProvider@6c3a2e8c
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.SourceProvider@7f6141ed
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.JAXBElementTypedProvider@706e166f
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.JAXBElementProvider@7935b17
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.openejb.server.cxf.rs.johnzon.TomEEJohnzonProvider@15e3ac1d
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.openejb.server.cxf.rs.johnzon.TomEEJsonpProvider@110031d3
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.StringTextProvider@4dcb9452
+09-Sep-2019 19:06:03.741 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.BinaryDataProvider@6da8f9a6
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.DataSourceProvider@65a3234a
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication Using writers:
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.johnzon.jaxrs.WadlDocumentMessageBodyWriter@753d0884
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.StringTextProvider@4dcb9452
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.JAXBElementTypedProvider@706e166f
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.PrimitiveTextProvider@477cf7ea
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.FormEncodingProvider@6a43a93c
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.MultipartProvider@6c3a2e8c
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.SourceProvider@7f6141ed
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.JAXBElementProvider@7935b17
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.openejb.server.cxf.rs.johnzon.TomEEJohnzonProvider@15e3ac1d
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.openejb.server.cxf.rs.johnzon.TomEEJsonpProvider@110031d3
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.BinaryDataProvider@6da8f9a6
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.provider.DataSourceProvider@65a3234a
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication Using exception mappers:
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.impl.WebApplicationExceptionMapper@564370ae
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.openejb.server.cxf.rs.EJBExceptionMapper@629c86af
+09-Sep-2019 19:06:03.742 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.deployApplication      org.apache.cxf.jaxrs.validation.ValidationExceptionMapper@2fb52fca
+09-Sep-2019 19:06:03.744 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints REST Application: http://localhost:8080/restapi/api                    -> ted.restapi.resources.ApplicationConfig@6bb6095b
+09-Sep-2019 19:06:03.746 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8080/restapi/api/categories         -> Pojo ted.restapi.resources.CategoryResource
+09-Sep-2019 19:06:03.746 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8080/restapi/api/categories/        ->      Response getAll()                 
+09-Sep-2019 19:06:03.746 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8080/restapi/api/categories/{id}    ->      Response getItemsByCategoryId(int)
+09-Sep-2019 19:06:03.747 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8080/restapi/api/items              -> Pojo ted.restapi.resources.ItemResource    
+09-Sep-2019 19:06:03.747 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8080/restapi/api/items/{id}         ->      Response getItemById(int)
+09-Sep-2019 19:06:03.747 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8080/restapi/api/users              -> Pojo ted.restapi.resources.UserResource    
+09-Sep-2019 19:06:03.747 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints              POST http://localhost:8080/restapi/api/users/login        ->      Response login(UserDTO)       
+09-Sep-2019 19:06:03.747 INFO [localhost-startStop-1] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints              POST http://localhost:8080/restapi/api/users/registration ->      Response registration(UserDTO)
+09-Sep-2019 19:06:03.768 INFO [localhost-startStop-1] sun.reflect.DelegatingMethodAccessorImpl.invoke Deployment of web application archive [/home/supergohan/Desktop/6_th Semester/ΤΕΔ/E-bidder/restapi/target/apache-tomee/webapps/restapi.war] has finished in [3,107] ms
+09-Sep-2019 19:06:03.775 INFO [Catalina-startStop-1] org.apache.catalina.core.StandardContext.setClassLoaderProperty Unable to set the web application class loader property [clearReferencesRmiTargets] to [true] as the property does not exist.
+09-Sep-2019 19:06:03.775 INFO [Catalina-startStop-1] org.apache.catalina.core.StandardContext.setClassLoaderProperty Unable to set the web application class loader property [clearReferencesObjectStreamClassCaches] to [true] as the property does not exist.
+09-Sep-2019 19:06:03.788 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting ProtocolHandler ["http-nio-8080"]
+09-Sep-2019 19:06:03.793 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting ProtocolHandler ["ajp-nio-8009"]
+09-Sep-2019 19:06:03.824 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Server startup in 3212 ms

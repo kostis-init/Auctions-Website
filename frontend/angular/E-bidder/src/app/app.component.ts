@@ -12,6 +12,7 @@ export class AppComponent{
   title = 'E-bidder';
 
 
+  //TODO:implement auto login
 
 
 

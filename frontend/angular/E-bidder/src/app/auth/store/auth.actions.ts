@@ -21,7 +21,7 @@ export class UserTryLoginAction implements Action {
 
 export class UserLoginAction implements Action {
   readonly type = AuthActionTypes.USER_LOGIN;
-  constructor(public payload: {userStatus: string, token: string}) {}
+  constructor(public payload: {userStatus: string, token:string}) {}
 
 }
 
@@ -31,7 +31,6 @@ export class GuestLoginAction implements Action {
 
 export class  UserSignUpAction implements Action {
   readonly type = AuthActionTypes.USER_SIGNUP;
-  constructor(public payload: {token: string}) {}
 }
 
 export class UserLogoutAction implements Action {

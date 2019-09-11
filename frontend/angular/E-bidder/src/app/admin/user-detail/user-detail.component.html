@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12 m-5">
+    <h4 class="text-center"> User Detail</h4>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> Username: {{(usersState | async).users[index].username}}</li>
+      <li class="list-group-item"> Password: {{(usersState | async).users[index].password}}</li>
+      <li class="list-group-item"> Email: {{(usersState | async).users[index].email}}</li>
+      <li class="list-group-item"> First Name: {{(usersState | async).users[index].firstName}}</li>
+      <li class="list-group-item"> Last Name: {{(usersState | async).users[index].lastName}}</li>
+      <li class="list-group-item"> Country: {{(usersState | async).users[index].country}}</li>
+      <li class="list-group-item"> City: {{(usersState | async).users[index].city}}</li>
+      <li class="list-group-item"> Address: {{(usersState | async).users[index].address}}</li>
+      <li class="list-group-item"> Phone Number: {{(usersState | async).users[index].telephoneNumber}}</li>
+      <li class="list-group-item"> Afm : {{(usersState | async).users[index].afm}}</li>
+      <li class="list-group-item"> Bidder Rating : {{(usersState | async).users[index].bidderRating}}</li>
+      <li class="list-group-item"> Seller Rating : {{(usersState | async).users[index].sellerRating}}</li>
+      <li class="list-group-item fa-pull-left">
+        <div class="fa-pull-left pt-2">
+          Approved State : {{(usersState | async).users[index].isApproved == 'N' ? 'Pending' : 'Approved'}}
+        </div>
+
+
+        <div *ngIf="(usersState | async).users[index].isApproved === 'N'" class="fa-pull-right">
+
+          <button class="btn btn-success btn-sm m-1" (click)="onApprove()"> Approve</button>
+          <button class="btn btn-danger btn-sm m-1" (click)="onDecline()">Decline</button>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+</div>

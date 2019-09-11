@@ -54,9 +54,9 @@ export class SingInFormComponent implements OnInit {
     AuthState$.subscribe(
       ((data:AuthState) => {
         if (data.userStatus === 'user') {
-          this.router.navigateByUrl('main/home')
-        } else if (data.userStatus === 'guest') {
-          //navigate to admin page
+          this.router.navigateByUrl('main/home');
+        } else if (data.userStatus === 'admin') {
+          this.router.navigateByUrl('admin');
         }
       })
     )

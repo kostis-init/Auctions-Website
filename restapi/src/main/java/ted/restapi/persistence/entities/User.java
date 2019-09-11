@@ -1,12 +1,8 @@
 package ted.restapi.persistence.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 

@@ -3,9 +3,11 @@ import { CommonModule} from '@angular/common';
 import { SingInFormComponent } from './sing-in-form/sing-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import {AuthService} from "./auth.service";
-import {AuthGuardServise} from "./auth-guard.servise";
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {TokenInterceptorService} from "./token-interceptor.service";
+
 
 
 
@@ -13,13 +15,18 @@ import {SharedModule} from "../shared/shared.module";
   declarations: [SingInFormComponent, SignUpFormComponent],
   exports: [
     SingInFormComponent,
-    SignUpFormComponent
+    SignUpFormComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     SharedModule
   ],
-  providers:[AuthService, AuthGuardServise]
+  providers:[AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    }]
 })
 export class AuthModule { }

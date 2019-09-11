@@ -3,9 +3,6 @@ package ted.restapi.resources;
 import ted.restapi.beans.CategoryBean;
 import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.ItemDTO;
-import ted.restapi.dto.UserDTO;
-import ted.restapi.persistence.entities.Item;
-import ted.restapi.persistence.entities.User;
 import ted.restapi.util.Mapper;
 
 import javax.enterprise.context.RequestScoped;
@@ -27,7 +24,8 @@ public class CategoryResource {
 
     @GET
     public Response getAll(){
-        List<CategoryDTO> list = categoryBean.getAll().stream().map(Mapper::toDTO).collect(Collectors.toList());
+        List<CategoryDTO> list = categoryBean.getAll().stream()
+                .map(Mapper::toDTO).collect(Collectors.toList());
         return Response.ok(list).build();
     }
 
