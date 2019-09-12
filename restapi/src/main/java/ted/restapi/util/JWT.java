@@ -13,7 +13,7 @@ import java.util.Date;
 public class JWT {
 
     private static String SECRET_KEY = "gfgHYJYukiKUI6746g4TTtrgJYUhGFTyHyuIkikfssssdgfvDWFSedsVEdTZNOuOyqEGhXEbdJI-Z";
-    private static long TTL_MILLIS = 1000000;
+    private static long TTL_MILLIS = 4000000;
 
     public static String createJWT(String username){
         //The JWT signature algorithm we will be using to sign the token

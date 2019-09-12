@@ -16,7 +16,7 @@ import java.util.Objects;
 public class GeneralCategory {
     private int id;
     private String name;
-    private Blob image;
+    private byte[] image;
     private List<Category> categories;
 
     @Id
@@ -39,8 +39,8 @@ public class GeneralCategory {
 
     @Lob
     @Column(name = "image")
-    public Blob getImage() { return image; }
-    public void setImage(Blob image) { this.image = image; }
+    public byte[] getImage() { return image; }
+    public void setImage(byte[] image) { this.image = image; }
 
     @OneToMany(mappedBy = "generalCategory")
     @CascadeOnDelete

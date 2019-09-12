@@ -9,11 +9,11 @@ import java.sql.Blob;
 public class CategoryDTO implements Serializable {
     @XmlElement private int id;
     @XmlElement private String name;
-    @XmlElement private Blob image;
+    @XmlElement private byte[] image;
 
     public CategoryDTO() { }
 
-    public CategoryDTO(int id, String name, Blob image) {
+    public CategoryDTO(int id, String name, byte[] image) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -35,11 +35,11 @@ public class CategoryDTO implements Serializable {
         this.name = name;
     }
 
-    public Blob getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 }

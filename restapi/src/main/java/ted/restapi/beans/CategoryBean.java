@@ -26,4 +26,12 @@ public class CategoryBean {
     public List<Item> getItemsByCategoryId(int categoryId){
         return categoryDAO.findByCategoryId(categoryId).getItems();
     }
+
+    public byte[] getCategoryImage(int id) {
+        return categoryDAO.getCategoryImage(id);
+    }
+
+    public byte[] getGeneralCategoryImage(int id) {
+        return categoryDAO.getGeneralCategoryImage(id);
+    }
 }

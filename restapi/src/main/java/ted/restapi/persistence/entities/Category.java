@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Category {
     private int id;
     private String name;
-    private Blob image;
+    private byte[] image;
     private List<Item> items;
     private GeneralCategory generalCategory;
 
@@ -40,8 +40,8 @@ public class Category {
 
     @Lob
     @Column(name = "image")
-    public Blob getImage() { return image; }
-    public void setImage(Blob image) { this.image = image; }
+    public byte[] getImage() { return image; }
+    public void setImage(byte[] image) { this.image = image; }
 
     @ManyToMany
     @JoinTable(name = "item_category",

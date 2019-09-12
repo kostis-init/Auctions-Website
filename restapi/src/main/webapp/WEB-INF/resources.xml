@@ -2,9 +2,12 @@
 <tomee>
     <Resource id="jdbc/mydb" type="javax.sql.DataSource">
         JdbcDriver com.mysql.jdbc.Driver
-        JdbcUrl jdbc:mysql://localhost:3306/mydb?useSSL=false&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC
+<!--        JdbcUrl jdbc:mysql://localhost:3306/mydb?useSSL=false&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC-->
+        JdbcUrl jdbc:mysql://db4free.net:3306/ted_db?useSSL=false
         JtaManaged true
-        UserName root
-        Password root
+<!--        UserName root-->
+<!--        Password root-->
+        UserName ted2019_user
+        Password testpassword
     </Resource>
 </tomee>

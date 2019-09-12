@@ -37,7 +37,7 @@ public class ItemResource {
     @Path("search")
     public Response search(
             @DefaultValue("-1")@QueryParam("category") int categoryId,
-            @QueryParam("text") String text){
+            @DefaultValue(" ")@QueryParam("text") String text){
 
         Set<Item> items;
 
