@@ -196,7 +196,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   UNIQUE KEY `user_email_uindex` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +205,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','admin','Administrator','Administrator','admin@admin.com','6999999999999999','23425446532323453',NULL,NULL,'Y',NULL,NULL,NULL,'Y'),(2,'kostis','kostis','Konstantinos','Mich','osdjf@fsds.gr','32434343534','23436254243243',NULL,NULL,'N',NULL,NULL,NULL,'Y'),(3,'user24','pass','Giorgos','Georgiou','Gdfsfds@GDFd.sg','2435456856',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(5,'user234224','pass','Akis','Losad','asda@GDFd.sg','234245',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(6,'postman','test',NULL,NULL,'post@sdflsdjfsl.fd',NULL,'213235433',NULL,NULL,'N',NULL,NULL,NULL,'N'),(7,'alekos','yolo',NULL,'resto','hre@fdd.sd',NULL,'sdfsgdsfsdsfs',0,0,'N',NULL,NULL,NULL,'N');
+INSERT INTO `user` VALUES (1,'admin','$2a$10$1M30GotwFVFuP84M7mK9/OA9.8Wj.Op7oZHVfHIZgS4aX5Xd7O/du','Administrator','Administrator','admin@admin.com','6999999999999999','23425446532323453',NULL,NULL,'Y',NULL,NULL,NULL,'Y'),(2,'kostis','$2a$10$wV590SRkSAv/MjhotOpKg.bsWI9lTAlKxgsQvgH4wLY5MnldzNCPS','Konstantinos','Mich','osdjf@fsds.gr','32434343534','23436254243243',NULL,NULL,'N',NULL,NULL,NULL,'Y'),(3,'user24','$2a$10$XrgoyJXnDjqjPccxSnIJROZyBzBwpdaqZ5HiPZfYouD64LdFneloC','Giorgos','Georgiou','Gdfsfds@GDFd.sg','2435456856',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(5,'user234224','$2a$10$XrgoyJXnDjqjPccxSnIJROZyBzBwpdaqZ5HiPZfYouD64LdFneloC','Akis','Losad','asda@GDFd.sg','234245',NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y'),(6,'postman','$2a$10$WLi7nxENCxqcuSc80y5ErecO69ay7o0I384MIDHoTOcMUbrGZMdYW',NULL,NULL,'post@sdflsdjfsl.fd',NULL,'213235433',NULL,NULL,'N',NULL,NULL,NULL,'N'),(7,'alekos','$2a$10$z6pjQew.MndZWTEHB2Qff.PRPw96GtQa6GsDF1b66Yl8rX02S8w8q',NULL,'resto','hre@fdd.sd',NULL,'sdfsgdsfsdsfs',0,0,'N',NULL,NULL,NULL,'N'),(10,'testhash','$2a$10$LLD1kpFxowZQ2pBdkN2V0e43XNx.dUSHf4UYQavxHO2MaQW4/lK5i','hash','testre',NULL,NULL,NULL,NULL,NULL,'N',NULL,NULL,NULL,'Y');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -218,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-12 17:54:38
+-- Dump completed on 2019-09-12 19:36:25

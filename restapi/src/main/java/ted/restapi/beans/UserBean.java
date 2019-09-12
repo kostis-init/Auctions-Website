@@ -1,5 +1,6 @@
 package ted.restapi.beans;
 
+import org.mindrot.jbcrypt.BCrypt;
 import ted.restapi.persistence.dao.UserDAO;
 import ted.restapi.persistence.entities.User;
 
@@ -24,8 +25,7 @@ public class UserBean {
 
     public String login(String username, String password){
         User user = userDAO.findByUsername(username);
-        //TODO: hashing
-        if(user == null || !user.getPassword().equals(password)) {
+        if(user == null || !BCrypt.checkpw(password, user.getPassword())) {
             return "Wrong Credentials";
         }
         System.out.println("USER: " + user.toString());
@@ -49,6 +49,8 @@ public class UserBean {
         if(checkUser != null){
             return "Email exists";
         }
+        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10));
+        user.setPassword(hashedPassword);
         userDAO.register(user);
         return null;
     }
