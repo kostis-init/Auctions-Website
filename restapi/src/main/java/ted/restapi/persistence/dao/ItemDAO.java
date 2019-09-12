@@ -5,6 +5,7 @@ import ted.restapi.persistence.entities.Item;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 import java.util.List;
 
 @Stateless
@@ -30,4 +31,8 @@ public class ItemDAO {
         em.remove(item);
     }
 
+    public List<Item> searchByWord(String word) {
+        return em.createNamedQuery("Item.search", Item.class)
+                .setParameter(1, "%" + word + "%").getResultList();
+    }
 }

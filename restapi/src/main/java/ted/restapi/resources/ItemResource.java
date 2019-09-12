@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequestScoped
 @Path("items")
@@ -28,6 +31,24 @@ public class ItemResource {
         }
         ItemDTO itemDTO = Mapper.toDTO(item);
         return Response.ok(itemDTO).build();
+    }
+
+    @GET
+    @Path("search")
+    public Response search(
+            @DefaultValue("-1")@QueryParam("category") int categoryId,
+            @QueryParam("text") String text){
+
+        Set<Item> items;
+
+        if(categoryId == -1){
+            items = itemBean.search(text);
+        } else {
+            items = itemBean.searchByCategory(text, categoryId);
+        }
+        List<ItemDTO> itemsDTO = items.stream().map(Mapper::toDTO).collect(Collectors.toList());
+
+        return Response.ok(itemsDTO).build();
     }
 
 

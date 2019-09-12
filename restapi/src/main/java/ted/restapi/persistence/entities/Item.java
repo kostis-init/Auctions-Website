@@ -2,6 +2,7 @@ package ted.restapi.persistence.entities;
 
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,7 +12,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "item")
 @NamedQueries({
-        @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
+        @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
+        @NamedQuery(name = "Item.search", query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE ?1")
 })
 public class Item {
     private int id;
