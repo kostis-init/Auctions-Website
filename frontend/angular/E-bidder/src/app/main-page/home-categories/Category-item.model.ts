@@ -1,11 +1,11 @@
 export class CategoryItemModel{
-  ImgPath: string;
+  Id: number;
+  ImgPath: any;
   Name: string;
-  Description:string;
 
-  constructor(ImgPath:string, Name:string, Description:string){
+  constructor(Id: number, Name:string, ImgPath:any){
+    this.Id = Id;
+    this.Name = ImgPath;
     this.ImgPath = ImgPath;
-    this.Description = Description;
-    this.Name = Name;
   }
 }

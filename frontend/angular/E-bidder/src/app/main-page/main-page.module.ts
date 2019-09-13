@@ -17,7 +17,7 @@ import {ModalModule, TooltipModule} from "ngx-bootstrap";
 import {AuthModule} from "../auth/auth.module";
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-
+import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-bar-dropdown-item.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +33,7 @@ import {HttpClientModule} from '@angular/common/http';
     ItemComponent,
     Shop_byComponent,
     Shop_byCategoryItemComponent,
+    NavBarDropdownItemComponent,
   ],
   imports: [
     CommonModule,

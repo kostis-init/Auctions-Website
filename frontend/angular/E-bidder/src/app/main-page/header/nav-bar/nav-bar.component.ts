@@ -7,6 +7,9 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {UserLogoutAction} from "../../../auth/store/auth.actions";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../auth/auth.service";
+import {HttpClient} from '@angular/common/http';
+import {CategoryDataModel} from "../../../shared/category-data.model";
+import {NavBarDropdownItemComponent} from "./dropdown-item/nav-bar-dropdown-item.component";
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,13 +20,20 @@ export class NavBarComponent implements OnInit {
 
   modalRef: BsModalRef;
   AuthState$: Observable<AuthState>;
+
+  readonly ROOT_URL = 'http://localhost:8080/restapi/api';
+  CategoriesObservable : Observable<CategoryDataModel[]>;
+  categories: CategoryDataModel[];
+
   constructor(private store: Store<AppState>,
               private modalServise: BsModalService,
               private router: Router,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.AuthState$ = this.store.select('auth');
+    this.CategoriesObservable = this.httpClient.get<CategoryDataModel[]>(this.ROOT_URL + '/categories');
   }
 
   OpenModal(template: TemplateRef<any>) {
@@ -36,11 +46,6 @@ export class NavBarComponent implements OnInit {
 
   Logout() {
     this.auth.Logout();
-  }
-
-  shop_byCat(category: number){
-    //this.router.navigate(['categories', category]);
-    this.router.navigateByUrl('main/categories')
   }
 
 }

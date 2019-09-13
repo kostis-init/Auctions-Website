@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryItemModel} from "../../home-categories/Category-item.model";
+import {CategoryDataModel} from "../../../shared/category-data.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shop_by-category-item',
@@ -8,11 +9,16 @@ import {CategoryItemModel} from "../../home-categories/Category-item.model";
 })
 export class Shop_byCategoryItemComponent implements OnInit {
 
-  @Input() Item: CategoryItemModel;
+  @Input() Item: CategoryDataModel;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  searchCat(){
+    this.router.navigateByUrl('main/browse?category=' + this.Item.id);
+
+    window.scrollTo(0, 0);
+  }
 }

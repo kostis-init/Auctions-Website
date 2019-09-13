@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {CategoryItemModel} from "./Category-item.model";
+import {Component, OnInit, Output} from '@angular/core';
+import {Router} from "@angular/router";
+import {AuthService} from "../../auth/auth.service";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {CategoryDataModel} from "../../shared/category-data.model";
 
 @Component({
   selector: 'app-home-categories',
@@ -8,47 +12,19 @@ import {CategoryItemModel} from "./Category-item.model";
 })
 export class HomeCategoriesComponent implements OnInit {
 
-  Items: CategoryItemModel[] = [
-    new CategoryItemModel(
-      '../../assets/category_images/tech.jpg',
-      'Tech',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'),
+  readonly ROOT_URL = 'http://localhost:8080/restapi/api';
+  CategoriesObservable : Observable<CategoryDataModel[]>;
+  categories: CategoryDataModel[] = [];
 
-    new CategoryItemModel(
-      '../../assets/category_images/clothing.jpg',
-      'Clothing',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
+  @Output() Item: CategoryDataModel;
 
-    new CategoryItemModel(
-      '../../assets/category_images/house.jpg',
-      'House',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/sports.jpg',
-      'Sports',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/music.jpg',
-      'Music',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/car.jpg',
-      'Auto-Moto',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    )
-  ];
-
-
-  constructor() { }
+  constructor(private router: Router,
+              private auth: AuthService,
+              private httpClient: HttpClient) { }
 
   ngOnInit() {
+    this.CategoriesObservable = this.httpClient.get<CategoryDataModel[]>(this.ROOT_URL + '/categories');
+    this.CategoriesObservable.subscribe(categories => this.categories = categories);
   }
 
 }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SubcategoryModel} from "./Subcategory.model";
+import {CategoryDataModel} from "../../../shared/category-data.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,14 +9,14 @@ import {Router} from "@angular/router";
 })
 export class HomeSubcategoriesComponent implements OnInit {
 
-  @Input() Subcategory: SubcategoryModel;
+  @Input() Subcategory: CategoryDataModel;
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   searchCat(){
-    this.router.navigateByUrl('main/browse?Cat=bla&Sub=blo');
+    this.router.navigateByUrl('main/browse?category=' + this.Subcategory.id);
 
     window.scrollTo(0, 0);
   }
