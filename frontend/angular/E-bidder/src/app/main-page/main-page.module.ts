@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { NewAuctionComponent } from './new-auction/new-auction.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
+import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-bar-dropdown-item.component";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {SharedModule} from "../shared/shared.module";
     Shop_byComponent,
     Shop_byCategoryItemComponent,
     NewAuctionComponent,
+    NavBarDropdownItemComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import {SharedModule} from "../shared/shared.module";
     HttpClientModule,
     SharedModule,
     AuthModule,
-    NgbModule
+    NgbModule,
+
   ]
 })
 export class MainPageModule { }

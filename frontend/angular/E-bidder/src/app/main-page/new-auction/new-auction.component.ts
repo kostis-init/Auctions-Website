@@ -4,9 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {select, Store} from "@ngrx/store";
 import {MainPageState} from "../store/main-page.reducer";
 import {Observable} from "rxjs";
-import {selectSub} from "../store/main-page.selector";
 import {AppState} from "../../store/app.reducer";
-import {SubcategoryModel} from "../home-categories/home-subcategories/Subcategory.model";
 import {CategoryModel} from "../../shared/Models/category.model";
 
 
@@ -48,7 +46,7 @@ export class NewAuctionComponent implements OnInit{
 
   setSubCategories(fg:FormGroup) {
     const selectedCategory = fg.get('Control').value;
-    this.SelectedCategory$ = this.store.select(selectSub,{name:selectedCategory});
+    // this.SelectedCategory$ = this.store.select(selectSub,{name:selectedCategory});
 
 
   }

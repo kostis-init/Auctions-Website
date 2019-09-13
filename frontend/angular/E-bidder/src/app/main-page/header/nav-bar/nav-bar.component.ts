@@ -4,12 +4,10 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {AuthState} from "../../../auth/store/auth.reducer";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {UserLogoutAction} from "../../../auth/store/auth.actions";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../auth/auth.service";
-import {HttpClient} from '@angular/common/http';
-import {CategoryDataModel} from "../../../shared/category-data.model";
-import {NavBarDropdownItemComponent} from "./dropdown-item/nav-bar-dropdown-item.component";
+import {MainPageState} from "../../store/main-page.reducer";
+import {CategoryModel} from "../../../shared/Models/category.model";
 
 @Component({
   selector: 'app-nav-bar',
@@ -20,20 +18,19 @@ export class NavBarComponent implements OnInit {
 
   modalRef: BsModalRef;
   AuthState$: Observable<AuthState>;
+  MainPageState$: Observable<MainPageState>;
 
-  readonly ROOT_URL = 'http://localhost:8080/restapi/api';
-  CategoriesObservable : Observable<CategoryDataModel[]>;
-  categories: CategoryDataModel[];
+
+  categories: CategoryModel[];
 
   constructor(private store: Store<AppState>,
               private modalServise: BsModalService,
               private router: Router,
-              private auth: AuthService,
-              private httpClient: HttpClient) { }
+              private auth: AuthService){ }
 
   ngOnInit() {
     this.AuthState$ = this.store.select('auth');
-    this.CategoriesObservable = this.httpClient.get<CategoryDataModel[]>(this.ROOT_URL + '/categories');
+    this.MainPageState$ = this.store.select('mainPage');
   }
 
   OpenModal(template: TemplateRef<any>) {

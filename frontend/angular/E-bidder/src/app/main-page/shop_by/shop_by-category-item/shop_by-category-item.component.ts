@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryDataModel} from "../../../shared/category-data.model";
 import {Router} from "@angular/router";
+import {SubCategoryModel} from "../../../shared/Models/subCategory.model";
 
 @Component({
   selector: 'app-shop_by-category-item',
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class Shop_byCategoryItemComponent implements OnInit {
 
-  @Input() Item: CategoryDataModel;
+  @Input() Item: SubCategoryModel;
 
   constructor(private router: Router) { }
 

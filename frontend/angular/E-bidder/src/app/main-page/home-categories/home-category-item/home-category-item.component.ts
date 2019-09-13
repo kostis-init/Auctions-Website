@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CategoryModel} from "../../../shared/Models/category.model";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-home-category-item',
@@ -11,7 +12,7 @@ export class HomeCategoryItemComponent implements OnInit {
   @Input() Item:CategoryModel;
 
 
-  constructor() { }
+  constructor(private dom: DomSanitizer) { }
 
   ngOnInit() {
   }

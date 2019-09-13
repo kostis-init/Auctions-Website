@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, TemplateRef} from '@angular/core';
-import {CategoryDataModel} from "../../../../shared/category-data.model";
 import {Router} from "@angular/router";
 import {HttpClient} from '@angular/common/http';
+import {CategoryModel} from "../../../../shared/Models/category.model";
 
 @Component({
   selector: 'app-nav-bar-dropdown-item',
@@ -12,7 +12,7 @@ export class NavBarDropdownItemComponent implements OnInit {
 
   readonly ROOT_URL = 'http://localhost:8080/restapi/api';
 
-  @Input() category: CategoryDataModel;
+  @Input() category: CategoryModel;
 
   constructor(private router: Router,
               private httpClient: HttpClient) { }
