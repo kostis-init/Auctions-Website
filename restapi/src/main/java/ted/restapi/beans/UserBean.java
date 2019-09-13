@@ -28,7 +28,7 @@ public class UserBean {
         if(user == null || !BCrypt.checkpw(password, user.getPassword())) {
             return "Wrong Credentials";
         }
-        System.out.println("USER: " + user.toString());
+        System.out.println("LOGIN: " + user.toString());
         if(user.getIsApproved().equals("N")){
             return "User with username: " + user.getUsername() + ", is not approved";
         }

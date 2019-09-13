@@ -1,6 +1,7 @@
 package ted.restapi.resources;
 
 import ted.restapi.beans.CategoryBean;
+import ted.restapi.beans.Session;
 import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.GeneralCategoryDTO;
 import ted.restapi.dto.ItemDTO;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 public class CategoryResource {
 
+    @Inject private Session session;
     @Inject private CategoryBean categoryBean;
 
     @GET
@@ -45,5 +47,6 @@ public class CategoryResource {
         categoryBean.getItemsByCategoryId(id).forEach( item -> items.add(Mapper.toDTO(item)));
         return Response.ok(items).build();
     }
+
 
 }

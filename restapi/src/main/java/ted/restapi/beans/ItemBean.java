@@ -14,15 +14,11 @@ import java.util.*;
 public class ItemBean {
 
     @Inject private ItemDAO itemDAO;
-
-    public void create(Item item){
-        itemDAO.create(item);
-    }
+    @Inject private CategoryBean categoryBean;
 
     public List<Item> getAll() {
         return itemDAO.getAll();
     }
-
 
     public Item getItemById(int id) {
         return itemDAO.findById(id);
@@ -56,5 +52,37 @@ public class ItemBean {
             }
         });
         return newItems;
+    }
+
+    public Set<Item> searchByGeneralCategory(String text, int generalCategoryId) {
+        List<Category> categories = categoryBean.getCategoriesByGeneralCategoryId(generalCategoryId);
+        List<Integer> catIds = new ArrayList<>();
+        for (Category category : categories) {
+            catIds.add(category.getId());
+        }
+        Set<Item> items = search(text);
+        Set<Item> newItems = new HashSet<>();
+        items.forEach( item -> {
+            boolean exists = false;
+            for (Category category : item.getCategories()) {
+                if(catIds.contains(category.getId())){
+                    exists = true;
+                    break;
+                }
+            }
+            if(exists){
+                newItems.add(item);
+            }
+        });
+        return newItems;
+    }
+
+    public void createItem(Item item) {
+        itemDAO.create(item);
+    }
+
+
+    public void update(Item item) {
+        itemDAO.update(item);
     }
 }

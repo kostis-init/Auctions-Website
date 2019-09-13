@@ -34,4 +34,8 @@ public class CategoryBean {
     public byte[] getGeneralCategoryImage(int id) {
         return categoryDAO.getGeneralCategoryImage(id);
     }
+
+    public void update(Category category) {
+        categoryDAO.update(category);
+    }
 }

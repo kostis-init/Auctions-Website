@@ -33,7 +33,27 @@ public class Item {
     private User seller;
     private List<Category> categories;
 
+    public Item(){}
+
+    public Item(String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, User seller, List<Category> categories) {
+        this.name = name;
+        this.currentBid = currentBid;
+        this.buyPrice = buyPrice;
+        this.firstBid = firstBid;
+        this.numberOfBids = numberOfBids;
+        this.startedAt = startedAt;
+        this.endsAt = endsAt;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.city = city;
+        this.country = country;
+        this.seller = seller;
+        this.categories = categories;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id", nullable = false)
     public int getId() { return id; }
     public void setId(int itemId) { this.id = itemId; }
@@ -117,7 +137,6 @@ public class Item {
     }
 
     @OneToMany(mappedBy = "item")
-    @CascadeOnDelete
     public List<Bid> getBids() { return bids; }
     public void setBids(List<Bid> bids) { this.bids = bids; }
 
@@ -126,7 +145,10 @@ public class Item {
     public User getSeller() { return seller; }
     public void setSeller(User user) { this.seller = user; }
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany
+    @JoinTable(name = "item_category",
+            joinColumns = @JoinColumn(name = "item_id", referencedColumnName = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id"))
     public List<Category> getCategories() { return categories; }
     public void setCategories(List<Category> categories) { this.categories = categories; }
 

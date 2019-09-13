@@ -15,8 +15,8 @@ public class ItemDTO implements Serializable {
     @XmlElement private Double buyPrice;
     @XmlElement private Double firstBid;
     @XmlElement private int numberOfBids;
-    @XmlElement private Date startedAt;
-    @XmlElement private Date endsAt;
+    @XmlElement private String startedAt;
+    @XmlElement private String endsAt;
     @XmlElement private String description;
     @XmlElement private BigDecimal latitude;
     @XmlElement private BigDecimal longitude;
@@ -28,7 +28,7 @@ public class ItemDTO implements Serializable {
 
     public ItemDTO() { }
 
-    public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller, List<CategoryDTO> categories, List<BidDTO> bids) {
+    public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, String startedAt, String endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller, List<CategoryDTO> categories, List<BidDTO> bids) {
         this.id = id;
         this.name = name;
         this.currentBid = currentBid;
@@ -97,19 +97,19 @@ public class ItemDTO implements Serializable {
         this.numberOfBids = numberOfBids;
     }
 
-    public Date getStartedAt() {
+    public String getStartedAt() {
         return startedAt;
     }
 
-    public void setStartedAt(Date startedAt) {
+    public void setStartedAt(String startedAt) {
         this.startedAt = startedAt;
     }
 
-    public Date getEndsAt() {
+    public String getEndsAt() {
         return endsAt;
     }
 
-    public void setEndsAt(Date endsAt) {
+    public void setEndsAt(String endsAt) {
         this.endsAt = endsAt;
     }
 

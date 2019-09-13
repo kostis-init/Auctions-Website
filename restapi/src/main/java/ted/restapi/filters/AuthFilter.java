@@ -1,13 +1,18 @@
 package ted.restapi.filters;
 
+import ted.restapi.beans.Session;
 import ted.restapi.util.JWT;
 
+import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthFilter implements Filter {
+
+    @Inject private Session session;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException { }
 
@@ -20,6 +25,8 @@ public class AuthFilter implements Filter {
             response.getWriter().print("Invalid jwt");
             return;
         }
+
+        session.setCurrentUser(username);
 
         chain.doFilter(request, response);
     }
