@@ -13,6 +13,7 @@ import {Observable, of} from "rxjs";
 import {Store} from "@ngrx/store";
 import {MainPageState} from "./main-page.reducer";
 import {FetchedCategoriesModel} from "../../shared/Models/FetchedCategories.model";
+import {FetchedSubCategoriesModel} from "../../shared/Models/FetchedSubCategories";
 
 
 export class MainPageEffect {
@@ -57,11 +58,15 @@ export class MainPageEffect {
   fetchSubCategories = this.action$.pipe(
     ofType(FETCH_SUBCATEGORIES),
     switchMap((action:FetchSubCategories) =>{
-      return of( [this.http.get<SubCategoryModel[]>(categories + '/' + action.payload.GeneralCategoryId),action])
+      return of( [this.http.get<FetchedSubCategoriesModel[]>(categories + '/' + action.payload.GeneralCategoryId),action])
       }),
     map((res:Array<any>) =>{
-      res[0].subscribe(s=>{
-        this.store.dispatch(new SetSubCategory({SubCategories: s, GeneralCategoryId: res[1].payload.GeneralCategoryId}))
+      res[0].subscribe((s:FetchedSubCategoriesModel[])=>{
+        console.log(s);
+        let result:SubCategoryModel[]=[];
+        for(let subCategory of s)
+          result.push(new SubCategoryModel(subCategory.name,subCategory.id, subCategory.image));
+        this.store.dispatch(new SetSubCategory({SubCategories: result, GeneralCategoryId: res[1].payload.GeneralCategoryId}))
       });
     }),
 

@@ -13,6 +13,5 @@ export class CategoryModel {
     let stringchar = String.fromCharCode.apply(null, uints);
     let base64 = btoa(stringchar);
     this.imageUrl = base64;
-    console.log(this.imageUrl);
   }
 }
