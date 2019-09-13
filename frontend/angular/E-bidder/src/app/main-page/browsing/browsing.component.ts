@@ -13,40 +13,12 @@ import {Observable} from "rxjs";
 export class BrowsingComponent implements OnInit {
 
 
-  Items: ItemModel[] = [
-    new ItemModel(
-      '../../assets/item_images/iphone6s.jpg',
-      'I-Phone 6s',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum',
-      50
-    ),
-
-    new ItemModel(
-      '../../assets/item_images/iphonex.jpg',
-      'I-Phone X',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum',
-      50
-    ),
-
-    new ItemModel(
-      '../../assets/item_images/samsung_s10.jpg',
-      'Samsung S10+',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum',
-      50
-    ),
-
-    new ItemModel(
-      '../../assets/item_images/samsung_a70.jpg',
-      'Samsung A70',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum',
-      50
-    )
-  ];
-
+  Items: ItemModel[] = [];
 
   readonly ROOT_URL = 'http://localhost:8080/restapi/api';
   ItemsObservable : Observable<ItemModel[]>;
   items: any;
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private httpClient: HttpClient) {
@@ -58,11 +30,26 @@ export class BrowsingComponent implements OnInit {
   }
 
   getItems() {
-    const query = this.route.snapshot.paramMap.get('id');
+    const params = new HttpParams();
+    let subcategory_id : string;
 
+    if(this.route.snapshot.queryParamMap.has('subcategory')){
+      subcategory_id = this.route.snapshot.queryParamMap.get('subcategory');
+    }
 
-    const params = new HttpParams()
-      .set('text', query);
+    if(this.route.snapshot.queryParamMap.has('category')){
+      if (this.route.snapshot.queryParamMap.get('category') != 'All')
+      {
+        params.append('category', this.route.snapshot.queryParamMap.get('category'));
+      }
+    }
+
+    if(this.route.snapshot.queryParamMap.has('text')){
+      params.append('text', this.route.snapshot.queryParamMap.get('text'));
+    } else {
+      this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/categories/items/' + subcategory_id);
+      return;
+    }
 
     console.log(params.toString());
 

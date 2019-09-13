@@ -37,7 +37,7 @@ export class SearchBarComponent implements OnInit {
     console.log(SearchQuery);
     console.log(SearchCategory);
 
-    this.router.navigateByUrl('/main/browse/' + SearchQuery);
+    this.router.navigate(['/main/browse' ], {queryParams: {'category' : SearchCategory , 'text' : SearchQuery}});
   }
 
 }
