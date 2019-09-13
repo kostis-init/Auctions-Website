@@ -27,9 +27,4 @@ export class MainPageComponent implements OnInit {
     this.categories$ = this.store.select('mainPage');
   }
 
-  getCategories(){
-    this.categoryUrl = 'category';
-    return this.http.get(this.categoryUrl);
-  }
-
 }

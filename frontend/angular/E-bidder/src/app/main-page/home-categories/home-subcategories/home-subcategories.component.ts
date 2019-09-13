@@ -16,7 +16,7 @@ export class HomeSubcategoriesComponent implements OnInit {
   }
 
   searchCat(){
-    this.router.navigateByUrl('main/browse?Cat=bla&Sub=blo');
+    this.router.navigateByUrl('main/browse?subcategory=' + this.Subcategory.id);
 
     window.scrollTo(0, 0);
   }

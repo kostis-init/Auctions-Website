@@ -17,7 +17,7 @@ export class Shop_byCategoryItemComponent implements OnInit {
   }
 
   searchCat(){
-    this.router.navigateByUrl('main/browse?category=' + this.Item.id);
+    this.router.navigateByUrl('main/browse?subcategory=' + this.Item.id);
 
     window.scrollTo(0, 0);
   }
