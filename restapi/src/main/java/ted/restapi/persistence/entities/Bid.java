@@ -17,6 +17,7 @@ public class Bid{
     private Item item;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bid_id", nullable = false)
     public int getId() {
         return id;
@@ -26,7 +27,7 @@ public class Bid{
     }
 
     @Basic
-    @Column(name = "time", nullable = true)
+    @Column(name = "time")
     @Temporal(TemporalType.TIMESTAMP)
     public Date getTime() {
         return time;
@@ -36,7 +37,7 @@ public class Bid{
     }
 
     @Basic
-    @Column(name = "amount", nullable = true, precision = 0)
+    @Column(name = "amount")
     public Double getAmount() {
         return amount;
     }

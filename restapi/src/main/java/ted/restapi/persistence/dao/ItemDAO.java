@@ -1,5 +1,6 @@
 package ted.restapi.persistence.dao;
 
+import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
 
 import javax.ejb.Stateless;
@@ -22,7 +23,9 @@ public class ItemDAO {
         em.merge(item);
     }
 
-    public void create(Item item) { em.persist(item); }
+    public void create(Item item) {
+        em.persist(item);
+    }
 
     public void delete(Item item) {
         if (!em.contains(item)) {
@@ -35,4 +38,5 @@ public class ItemDAO {
         return em.createNamedQuery("Item.search", Item.class)
                 .setParameter(1, "%" + word + "%").getResultList();
     }
+
 }

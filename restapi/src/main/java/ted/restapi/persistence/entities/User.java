@@ -65,6 +65,7 @@ public class User{
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     public int getId() {
         return id;
@@ -184,12 +185,10 @@ public class User{
     public void setIsApproved(String isApproved) { this.isApproved = isApproved; }
 
     @OneToMany(mappedBy = "bidder")
-    @CascadeOnDelete
     public List<Bid> getBids() { return bids; }
     public void setBids(List<Bid> bids) { this.bids = bids; }
 
     @OneToMany(mappedBy = "seller")
-    @CascadeOnDelete
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }
 

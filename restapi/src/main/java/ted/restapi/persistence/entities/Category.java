@@ -21,6 +21,7 @@ public class Category {
     private GeneralCategory generalCategory;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id", nullable = false)
     public int getId() {
         return id;
@@ -43,10 +44,7 @@ public class Category {
     public byte[] getImage() { return image; }
     public void setImage(byte[] image) { this.image = image; }
 
-    @ManyToMany
-    @JoinTable(name = "item_category",
-            joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "item_id", nullable = false))
+    @ManyToMany(mappedBy = "categories")
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }
 
@@ -68,5 +66,9 @@ public class Category {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, image, generalCategory);
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
     }
 }

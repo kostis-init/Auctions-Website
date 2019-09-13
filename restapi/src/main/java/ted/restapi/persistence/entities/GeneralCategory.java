@@ -20,6 +20,7 @@ public class GeneralCategory {
     private List<Category> categories;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "general_category_id", nullable = false)
     public int getId() {
         return id;
