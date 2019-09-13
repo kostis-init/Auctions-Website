@@ -1,13 +1,13 @@
 export class ItemModel{
-  ImgPath: string;
-  Name: string;
-  Description:string;
-  Price:number;
+  imgPath: string;
+  name: string;
+  description:string;
+  price:number;
 
-  constructor(ImgPath:string, Name:string, Description:string, Price:number){
-    this.ImgPath = ImgPath;
-    this.Description = Description;
-    this.Name = Name;
-    this.Price = Price;
+  constructor(imgPath:string, name:string, description:string, price:number){
+    this.imgPath = imgPath;
+    this.description = description;
+    this.name = name;
+    this.price = price;
   }
 }
