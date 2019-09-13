@@ -4,7 +4,7 @@ import {
   FETCH_USERS, FetchUsers, SET_USERS,
 } from "./admin.actions";
 import {HttpClient} from "@angular/common/http";
-import {UserDataModel} from "../../shared/user-data.model";
+import {UserDataModel} from "../../shared/Models/user-data.model";
 import {map, switchMap, take} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {admin} from "../../shared/server-endpoints";

@@ -1,5 +1,5 @@
 import {Action} from "@ngrx/store";
-import {UserDataModel} from "../../shared/user-data.model";
+import {UserDataModel} from "../../shared/Models/user-data.model";
 
 export const FETCH_USERS = 'FETCH_USERS';
 export const APPROVE_SIGNUP = 'APPROVE_SIGNUP';

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryItemModel} from "./Category-item.model";
+import {CategoryModel} from "../../shared/Models/category.model";
+import {MainPageState} from "../store/main-page.reducer";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-home-categories',
@@ -8,47 +11,11 @@ import {CategoryItemModel} from "./Category-item.model";
 })
 export class HomeCategoriesComponent implements OnInit {
 
-  Items: CategoryItemModel[] = [
-    new CategoryItemModel(
-      '../../assets/category_images/tech.jpg',
-      'Tech',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'),
+  constructor(private store:Store<MainPageState>) { }
 
-    new CategoryItemModel(
-      '../../assets/category_images/clothing.jpg',
-      'Clothing',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/house.jpg',
-      'House',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/sports.jpg',
-      'Sports',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/music.jpg',
-      'Music',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    ),
-
-    new CategoryItemModel(
-      '../../assets/category_images/car.jpg',
-      'Auto-Moto',
-      'Make it so, starlight travelEcce.Clemens particulas ducunt ad vox.cubiculum'
-    )
-  ];
-
-
-  constructor() { }
-
+  state$:Observable<MainPageState>;
   ngOnInit() {
+    this.state$ = this.store.select('mainPage');
   }
 
 }

@@ -4,7 +4,7 @@ import * as fromAdmin from "../store/admin.reducer";
 import * as fromActions from "../store/admin.actions";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {UserDataModel} from "../../shared/user-data.model";
+import {UserDataModel} from "../../shared/Models/user-data.model";
 import {take} from "rxjs/operators";
 
 @Component({

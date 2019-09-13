@@ -5,6 +5,7 @@ import {HomeCategoriesComponent} from "./home-categories/home-categories.compone
 import {AuthGuardService} from "../auth/auth-guard.service";
 import {BrowsingComponent} from "./browsing/browsing.component";
 import {Shop_byComponent} from "./shop_by/shop_by.component";
+import {NewAuctionComponent} from "./new-auction/new-auction.component";
 
 
 const mainPageRoutes: Routes = [
@@ -13,7 +14,8 @@ const mainPageRoutes: Routes = [
       {path: 'browse', component:BrowsingComponent},
       {path: 'browse/:id', component:BrowsingComponent},
       {path: 'categories', component: Shop_byComponent},
-      {path: 'categories/:id', component: Shop_byComponent}
+      {path: 'categories/:id', component: Shop_byComponent},
+      {path: 'newAuction', component:NewAuctionComponent}
     ]}
 
 ];

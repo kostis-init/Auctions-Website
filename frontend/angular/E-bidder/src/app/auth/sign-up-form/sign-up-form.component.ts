@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/app.reducer";
 import {NgForm} from "@angular/forms";
-import {UserSignupModel} from "../../shared/user-signup.model";
+import {UserSignupModel} from "../../shared/Models/user-signup.model";
 
 @Component({
   selector: 'app-sign-up-form',

@@ -1,5 +1,5 @@
 import {AppState} from "../../store/app.reducer";
-import {UserDataModel} from "../../shared/user-data.model";
+import {UserDataModel} from "../../shared/Models/user-data.model";
 import {ADMIN_LOGOUT, APPROVE_SIGNUP, DELETE_USER, SET_USERS} from "./admin.actions";
 
 export interface FeatureState extends AppState {

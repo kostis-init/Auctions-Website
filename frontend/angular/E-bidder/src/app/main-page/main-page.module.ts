@@ -13,10 +13,13 @@ import {BrowsingComponent} from "./browsing/browsing.component";
 import {ItemComponent} from "./browsing/item/item.component";
 import {Shop_byComponent} from "./shop_by/shop_by.component";
 import {Shop_byCategoryItemComponent} from "./shop_by/shop_by-category-item/shop_by-category-item.component";
-import {ModalModule, TooltipModule} from "ngx-bootstrap";
+import {ModalModule} from "ngx-bootstrap";
 import {AuthModule} from "../auth/auth.module";
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { NewAuctionComponent } from './new-auction/new-auction.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -33,15 +36,18 @@ import {HttpClientModule} from '@angular/common/http';
     ItemComponent,
     Shop_byComponent,
     Shop_byCategoryItemComponent,
+    NewAuctionComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MainPageRoutingModule,
     ModalModule.forRoot(),
-    TooltipModule.forRoot(),
     HttpClientModule,
-    AuthModule
+    SharedModule,
+    AuthModule,
+    NgbModule
   ]
 })
 export class MainPageModule { }

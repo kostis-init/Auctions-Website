@@ -5,7 +5,7 @@ import {AppState} from "../store/app.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {AuthState} from "./store/auth.reducer";
-import {UserSignupModel} from "../shared/user-signup.model";
+import {UserSignupModel} from "../shared/Models/user-signup.model";
 import {catchError, take, tap} from "rxjs/operators";
 import {UserAutoLogin, UserLogoutAction, UserSignUpAction, UserTryLoginAction} from "./store/auth.actions";
 import {ErrorHandlerService} from "../shared/error-handler.service";

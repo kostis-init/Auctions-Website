@@ -1,2 +1,3 @@
 <app-header></app-header>
+<img [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + (categories$ |async).Categories[0].imageUrl )">
 <router-outlet></router-outlet>

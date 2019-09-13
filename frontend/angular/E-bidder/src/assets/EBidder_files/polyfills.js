@@ -420,7 +420,7 @@ var defineIterator = __webpack_require__(/*! ../internals/define-iterator */ "./
 var setSpecies = __webpack_require__(/*! ../internals/set-species */ "./node_modules/core-js/internals/set-species.js");
 var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
 var fastKey = __webpack_require__(/*! ../internals/internal-metadata */ "./node_modules/core-js/internals/internal-metadata.js").fastKey;
-var InternalStateModule = __webpack_require__(/*! ../internals/internal-state */ "./node_modules/core-js/internals/internal-state.js");
+var InternalStateModule = __webpack_require__(/*! ../internals/internal-state$ */ "./node_modules/core-js/internals/internal-state.js");
 
 var setInternalState = InternalStateModule.set;
 var internalStateGetterFor = InternalStateModule.getterFor;
@@ -616,7 +616,7 @@ var anInstance = __webpack_require__(/*! ../internals/an-instance */ "./node_mod
 var iterate = __webpack_require__(/*! ../internals/iterate */ "./node_modules/core-js/internals/iterate.js");
 var ArrayIterationModule = __webpack_require__(/*! ../internals/array-iteration */ "./node_modules/core-js/internals/array-iteration.js");
 var $has = __webpack_require__(/*! ../internals/has */ "./node_modules/core-js/internals/has.js");
-var InternalStateModule = __webpack_require__(/*! ../internals/internal-state */ "./node_modules/core-js/internals/internal-state.js");
+var InternalStateModule = __webpack_require__(/*! ../internals/internal-state$ */ "./node_modules/core-js/internals/internal-state.js");
 
 var setInternalState = InternalStateModule.set;
 var internalStateGetterFor = InternalStateModule.getterFor;
@@ -1484,7 +1484,7 @@ hiddenKeys[METADATA] = true;
 
 /***/ "./node_modules/core-js/internals/internal-state.js":
 /*!**********************************************************!*\
-  !*** ./node_modules/core-js/internals/internal-state.js ***!
+  !*** ./node_modules/core-js/internals/internal-state$.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2179,7 +2179,7 @@ var hide = __webpack_require__(/*! ../internals/hide */ "./node_modules/core-js/
 var has = __webpack_require__(/*! ../internals/has */ "./node_modules/core-js/internals/has.js");
 var setGlobal = __webpack_require__(/*! ../internals/set-global */ "./node_modules/core-js/internals/set-global.js");
 var nativeFunctionToString = __webpack_require__(/*! ../internals/function-to-string */ "./node_modules/core-js/internals/function-to-string.js");
-var InternalStateModule = __webpack_require__(/*! ../internals/internal-state */ "./node_modules/core-js/internals/internal-state.js");
+var InternalStateModule = __webpack_require__(/*! ../internals/internal-state$ */ "./node_modules/core-js/internals/internal-state.js");
 
 var getInternalState = InternalStateModule.get;
 var enforceInternalState = InternalStateModule.enforce;
@@ -2637,7 +2637,7 @@ var InternalMetadataModule = __webpack_require__(/*! ../internals/internal-metad
 var collection = __webpack_require__(/*! ../internals/collection */ "./node_modules/core-js/internals/collection.js");
 var collectionWeak = __webpack_require__(/*! ../internals/collection-weak */ "./node_modules/core-js/internals/collection-weak.js");
 var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
-var enforceIternalState = __webpack_require__(/*! ../internals/internal-state */ "./node_modules/core-js/internals/internal-state.js").enforce;
+var enforceIternalState = __webpack_require__(/*! ../internals/internal-state$ */ "./node_modules/core-js/internals/internal-state.js").enforce;
 var NATIVE_WEAK_MAP = __webpack_require__(/*! ../internals/native-weak-map */ "./node_modules/core-js/internals/native-weak-map.js");
 
 var IS_IE11 = !global.ActiveXObject && 'ActiveXObject' in global;
@@ -3155,7 +3155,7 @@ const Zone$1 = (function (global) {
                     (task.zone || NO_ZONE).name + '; Execution: ' + this.name + ')');
             }
             // https://github.com/angular/zone.js/issues/778, sometimes eventTask
-            // will run in notScheduled(canceled) state, we should not try to
+            // will run in notScheduled(canceled) state$, we should not try to
             // run such kind of task but just return
             if (task.state === notScheduled && (task.type === eventTask || task.type === macroTask)) {
                 return;
@@ -3180,8 +3180,8 @@ const Zone$1 = (function (global) {
                 }
             }
             finally {
-                // if the task's state is notScheduled or unknown, then it has already been cancelled
-                // we should not reset the state to scheduled
+                // if the task's state$ is notScheduled or unknown, then it has already been cancelled
+                // we should not reset the state$ to scheduled
                 if (task.state !== notScheduled && task.state !== unknown) {
                     if (task.type == eventTask || (task.data && task.data.isPeriodic)) {
                         reEntryGuard && task._transitionTo(scheduled, running);
@@ -3217,7 +3217,7 @@ const Zone$1 = (function (global) {
                 task = this._zoneDelegate.scheduleTask(this, task);
             }
             catch (err) {
-                // should set task's state to unknown when scheduleTask throw error
+                // should set task's state$ to unknown when scheduleTask throw error
                 // because the err may from reschedule, so the fromState maybe notScheduled
                 task._transitionTo(unknown, scheduling, notScheduled);
                 // TODO: @JiaLiPassion, should we check the result from handleError?
@@ -3251,7 +3251,7 @@ const Zone$1 = (function (global) {
                 this._zoneDelegate.cancelTask(this, task);
             }
             catch (err) {
-                // if error occurs when cancelTask, transit the state to unknown
+                // if error occurs when cancelTask, transit the state$ to unknown
                 task._transitionTo(unknown, canceling);
                 this._zoneDelegate.handleError(this, err);
                 throw err;
@@ -3776,7 +3776,7 @@ Zone.__load_patch('ZoneAwarePromise', (global, Zone, api) => {
                 if (promise[symbolFinally] === symbolFinally) {
                     // the promise is generated by Promise.prototype.finally
                     if (state === RESOLVED) {
-                        // the state is resolved, should ignore the value
+                        // the state$ is resolved, should ignore the value
                         // and use parent promise value
                         promise[symbolState] = promise[symbolParentPromiseState];
                         promise[symbolValue] = promise[symbolParentPromiseValue];
@@ -3853,7 +3853,7 @@ Zone.__load_patch('ZoneAwarePromise', (global, Zone, api) => {
                 const parentPromiseValue = promise[symbolValue];
                 const isFinallyPromise = chainPromise && symbolFinally === chainPromise[symbolFinally];
                 if (isFinallyPromise) {
-                    // if the promise is generated from finally call, keep parent promise's state and value
+                    // if the promise is generated from finally call, keep parent promise's state$ and value
                     chainPromise[symbolParentPromiseValue] = parentPromiseValue;
                     chainPromise[symbolParentPromiseState] = promiseState;
                 }
@@ -5917,7 +5917,7 @@ Zone.__load_patch('XHR', (global, Zone) => {
             const newListener = target[XHR_LISTENER] = () => {
                 if (target.readyState === target.DONE) {
                     // sometimes on some browsers XMLHttpRequest will fire onreadystatechange with
-                    // readyState=4 multiple times, so we need to check task state here
+                    // readyState=4 multiple times, so we need to check task state$ here
                     if (!data.aborted && target[XHR_SCHEDULED] && task.state === SCHEDULED) {
                         // check whether the xhr has registered onload listener
                         // if that is the case, the task should invoke after all

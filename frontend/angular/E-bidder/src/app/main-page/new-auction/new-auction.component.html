@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center mb-3 border border-primary rounded bg-light">New Auction</h1>
+
+      <form [formGroup]="AuctionForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="Name">The Auctions Name</label>
+          <input formControlName="name" class="form-control shadow-sm" type="text" name="Name" id="Name">
+        </div>
+
+
+
+        <!--Need to fetch these-->
+
+        <div class="row" formGroupName="Cat">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="GeneralCategoryDropdown" ngbDropdownToggle>General Category</button>
+                <div ngbDropdownMenu aria-labelledby="GeneralCategoryDropdown">
+
+                  <div ngbDropdownItem class="form-check" *ngFor="let Category of (state$ |async).Categories">
+                    <input formControlName="Category" type="radio" class="form-check-input" name="Category" id="{{Category.id}}" value="{{Category.name}}">
+                    <label for="{{Category.id}}" class="form-check-label">{{Category.name}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="SubCategoryDropdown" ngbDropdownToggle>Sub Category</button>
+                  <div ngbDropdownMenu aria-labelledby="SubCategoryDropdown">
+
+<!--                    <div ngbDropdownItem class="form-check" *ngFor="let SubCategory of (SelectedCategory$ |async).SubCategories">-->
+<!--                      <input class="form-check-input" formGroupName="SubCategory" type="checkbox" value="{{SubCategory.name}}" id="{{SubCategory.id}}">-->
+<!--                      <label class="form-check-label" for="{{SubCategory.id}}">-->
+<!--                        {{SubCategory.name}}-->
+<!--                      </label>-->
+<!--                    </div>-->
+
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--depending the category chosen give subcategories-->
+
+        <div class="form-group">
+          <label for="BuyPrice">The price a user can buy a product instantly</label>
+          <div class="input-group">
+            <input class="form-control shadow-sm" formControlName="BuyPrice" id="BuyPrice" type="number" name="BuyPrice">
+            <div class="input-group-append">
+              <span class="input-group-text">&euro;</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="FirstBid">The Starting Bid of the Auction</label>
+          <div class="input-group">
+            <input class="form-control shadow-sm" formControlName="StartingBid" type="number" id="FirstBid" name="FirtsBid">
+            <div class="input-group-append">
+              <span class="input-group-text">&euro;</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="Description">Auction Description</label>
+          <textarea formControlName="Description" class="form-control shadow-sm" id="Description" rows="10" cols="10"></textarea>
+        </div>
+
+
+
+
+
+        <!--Image Upload-->
+      </form>
+
+
+      <button class="btn btn-block btn-success mb-3" type="submit" [disabled]="AuctionForm.invalid">Save Auction</button>
+    </div>
+  </div>
+
+
+
+
+</div>
+

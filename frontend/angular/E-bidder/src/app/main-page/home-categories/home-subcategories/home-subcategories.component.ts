@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SubcategoryModel} from "./Subcategory.model";
 import {Router} from "@angular/router";
+import {SubCategoryModel} from "../../../shared/Models/subCategory.model";
 
 @Component({
   selector: 'app-home-subcategories',
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class HomeSubcategoriesComponent implements OnInit {
 
-  @Input() Subcategory: SubcategoryModel;
+  @Input() Subcategory:SubCategoryModel;
   constructor(private router: Router) { }
 
   ngOnInit() {

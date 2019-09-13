@@ -13,6 +13,7 @@ import {reducers} from "./store/app.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffect} from "./auth/store/auth.effect";
 import {AuthModule} from "./auth/auth.module";
+import {MainPageEffect} from "./main-page/store/main-page.effect";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {AuthModule} from "./auth/auth.module";
     MainPageModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffect]),
+    EffectsModule.forRoot([AuthEffect, MainPageEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 20
     }),
