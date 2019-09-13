@@ -62,7 +62,6 @@ export class MainPageEffect {
       }),
     map((res:Array<any>) =>{
       res[0].subscribe((s:FetchedSubCategoriesModel[])=>{
-        console.log(s);
         let result:SubCategoryModel[]=[];
         for(let subCategory of s)
           result.push(new SubCategoryModel(subCategory.name,subCategory.id, subCategory.image));
