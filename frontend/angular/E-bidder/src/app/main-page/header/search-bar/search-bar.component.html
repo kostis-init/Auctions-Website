@@ -6,16 +6,12 @@
 
         <input type="text" required ngModel class="form-control " id="SearchQuery" name="searchQuery" placeholder="Search Anything you need">
 
-        <div class="input-group-append">
+        <div class="input-group-append ">
 
-              <select class="custom-select w-auto h-auto" id="Category" name="category">
-                <option value="All" selected>All Categories</option>
+              <select class="custom-select w-auto h-auto">
+                <option value="All" selected="">All Categories</option>
                 <optgroup label="-------------------"></optgroup>
-                <option value="Tech">Tech</option>
-                <option value="House">House</option>
-                <option value="Music">Music</option>
-                <option value="Sports">Sports</option>
-                <option value="Auto-Moto">Auto-Moto</option>
+                <option *ngFor="let category of (CategoriesObservable2 | async)" value="{{category.id}}">{{category.name}}</option>
               </select>
 
             <button style="cursor: pointer;" class="btn btn-primary w-auto h-auto" type="submit"><i class="fas fa-search text-grey" aria-hidden="true"></i> Search</button>

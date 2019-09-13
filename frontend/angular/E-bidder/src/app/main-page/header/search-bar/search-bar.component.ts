@@ -1,6 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CategoryDataModel} from "../../../shared/category-data.model";
+import {Observable} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-search-bar',
@@ -11,10 +14,16 @@ export class SearchBarComponent implements OnInit {
 
   @Output() Search: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private router: Router) {
+  readonly ROOT_URL = 'http://localhost:8080/restapi/api';
+  CategoriesObservable2 : Observable<CategoryDataModel[]>;
+  categories: CategoryDataModel;
+
+  constructor(private router: Router,
+              private httpClient: HttpClient) {
   }
 
   ngOnInit() {
+    this.CategoriesObservable2 = this.httpClient.get<CategoryDataModel[]>(this.ROOT_URL + '/categories');
   }
 
   onSearch(query: NgForm) {
@@ -25,7 +34,7 @@ export class SearchBarComponent implements OnInit {
     console.log(SearchQuery);
     console.log(SearchCategory);
 
-    this.router.navigateByUrl('/main/browse');
+    this.router.navigateByUrl('/main/browse/' + SearchQuery);
   }
 
 }

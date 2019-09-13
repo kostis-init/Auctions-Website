@@ -56,7 +56,7 @@
 
     <div class="col-md-9">
       <div class="list-group">
-        <app-item class="col p-3" style="padding-left: 0px !important" [Item]="item"  *ngFor="let item of Items"></app-item>
+        <app-item class="col p-3" style="padding-left: 0px !important" *ngFor="let item of (ItemsObservable | async)" [Item]="item"></app-item>
       </div>
     </div>
 

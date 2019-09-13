@@ -58,7 +58,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-
 
 /***/ "./node_modules/raw-loader/index.js!./src/app/home/header/nav-bar/nav-bar.component.html":
 /*!**************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/main-page/header/nav-bar/nav-bar.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/main-page/header/nav-bar/search-option-item.component.html ***!
   \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -398,7 +398,7 @@ LogoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ "./src/app/home/header/nav-bar/nav-bar.component.css":
 /*!***********************************************************!*\
-  !*** ./src/app/main-page/header/nav-bar/nav-bar.component.css ***!
+  !*** ./src/app/main-page/header/nav-bar/search-option-item.component.css ***!
   \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -409,9 +409,9 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/home/header/nav-bar/nav-bar.component.ts":
 /*!**********************************************************!*\
-  !*** ./src/app/main-page/header/nav-bar/nav-bar.component.ts ***!
+  !*** ./src/app/main-page/header/nav-bar/search-option-item.component.ts ***!
   \**********************************************************/
-/*! exports provided: NavBarComponent */
+/*! exports provided: SearchOptionItemComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -429,8 +429,8 @@ let NavBarComponent = class NavBarComponent {
 NavBarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-nav-bar',
-        template: __webpack_require__(/*! raw-loader!./nav-bar.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/header/nav-bar/nav-bar.component.html"),
-        styles: [__webpack_require__(/*! ./nav-bar.component.css */ "./src/app/home/header/nav-bar/nav-bar.component.css")]
+        template: __webpack_require__(/*! raw-loader!./search-option-item.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/header/nav-bar/nav-bar.component.html"),
+        styles: [__webpack_require__(/*! ./search-option-item.component.css */ "./src/app/home/header/nav-bar/nav-bar.component.css")]
     })
 ], NavBarComponent);
 
@@ -614,9 +614,9 @@ HomeCategoryItemComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ "./src/app/home/home-categories/home-subcategories/Subcategory.model.ts":
 /*!******************************************************************************!*\
-  !*** ./src/app/main-page/main-page-categories/main-page-subcategories/Subcategory.model.ts ***!
+  !*** ./src/app/main-page/main-page-categories/main-page-subcategories/subcategory-data.model.ts ***!
   \******************************************************************************/
-/*! exports provided: SubcategoryModel */
+/*! exports provided: SubcategoryDataModel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
