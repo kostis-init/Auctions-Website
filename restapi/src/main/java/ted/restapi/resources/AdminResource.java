@@ -2,6 +2,7 @@ package ted.restapi.resources;
 
 import ted.restapi.beans.UserBean;
 import ted.restapi.dto.UserDTO;
+import ted.restapi.persistence.entities.User;
 import ted.restapi.util.Mapper;
 
 import javax.enterprise.context.RequestScoped;
@@ -23,8 +24,11 @@ public class AdminResource {
     @GET
     @Path("users")
     public Response getUsers(){
-        List<UserDTO> list = userBean.getAll().stream()
-                .map(Mapper::toDTO).collect(Collectors.toList());
+        List<User> users = userBean.getAll();
+        if(users.isEmpty()){
+            return Response.ok("No users were found in database").build();
+        }
+        List<UserDTO> list = users.stream().map(Mapper::toDTO).collect(Collectors.toList());
         return Response.ok(list).build();
     }
 

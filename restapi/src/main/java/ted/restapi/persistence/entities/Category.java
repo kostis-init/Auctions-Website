@@ -67,8 +67,4 @@ public class Category {
     public int hashCode() {
         return Objects.hash(id, name, image, generalCategory);
     }
-
-    public void addItem(Item item) {
-        items.add(item);
-    }
 }

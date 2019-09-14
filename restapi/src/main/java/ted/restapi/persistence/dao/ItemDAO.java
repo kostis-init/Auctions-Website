@@ -39,4 +39,11 @@ public class ItemDAO {
                 .setParameter(1, "%" + word + "%").getResultList();
     }
 
+    public Item findByName(String name) {
+        List<Item> items = em.createNamedQuery("Item.findByName", Item.class).setParameter(1,name).getResultList();
+        if(items.isEmpty()){
+            return null;
+        }
+        return items.get(0);
+    }
 }

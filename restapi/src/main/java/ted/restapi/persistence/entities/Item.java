@@ -13,7 +13,8 @@ import java.util.Objects;
 @Table(name = "item")
 @NamedQueries({
         @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
-        @NamedQuery(name = "Item.search", query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE ?1")
+        @NamedQuery(name = "Item.search", query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE ?1"),
+        @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE LOWER(i.name) = LOWER(?1)")
 })
 public class Item {
     private int id;

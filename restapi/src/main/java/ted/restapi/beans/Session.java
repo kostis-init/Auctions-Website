@@ -22,7 +22,11 @@ public class Session {
         return currentUser;
     }
 
-    public void setCurrentUser(String username) {
+    public String setCurrentUser(String username) {
         currentUser = userBean.getUserByUsername(username);
+        if(currentUser == null){
+            return "Session: no user found";
+        }
+        return null;
     }
 }

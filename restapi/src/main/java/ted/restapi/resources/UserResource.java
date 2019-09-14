@@ -1,5 +1,6 @@
 package ted.restapi.resources;
 
+import ted.restapi.beans.Session;
 import ted.restapi.beans.UserBean;
 import ted.restapi.dto.LoginResponseDTO;
 import ted.restapi.dto.UserDTO;
@@ -19,16 +20,13 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
+    @Inject private Session session;
     @Inject private UserBean userBean;
 
     @GET
     @Path("autologin")
     public Response autoLogin(@HeaderParam(value = "Authorization") String jwt){
-        String username = JWT.getUsername(jwt);
-        User user = userBean.getUserByUsername(username);
-        if(user == null){
-            return Response.status(500).entity("Username not found").build();
-        }
+        User user = session.getCurrentUser();
         LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
         loginResponseDTO.setJwt(jwt);
         loginResponseDTO.setIsAdmin(user.getIsAdmin());

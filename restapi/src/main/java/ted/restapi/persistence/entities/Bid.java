@@ -16,6 +16,15 @@ public class Bid{
     private User bidder;
     private Item item;
 
+    public Bid() { }
+
+    public Bid(Date time, Double amount, User bidder, Item item) {
+        this.time = time;
+        this.amount = amount;
+        this.bidder = bidder;
+        this.item = item;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bid_id", nullable = false)

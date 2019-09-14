@@ -77,8 +77,21 @@ public class ItemBean {
         return newItems;
     }
 
-    public void createItem(Item item) {
+    public String createItem(Item item) {
+        Item checkItem = itemDAO.findByName(item.getName());
+        if(checkItem != null){
+            return "Item name already exists";
+        }
+
+        if(item.getFirstBid() == null || item.getFirstBid() <= 0){
+            return "Unacceptable first bid";
+        }
+        if(item.getBuyPrice() != null && item.getBuyPrice() < item.getFirstBid()){
+            return "Unacceptable buy price";
+        }
+
         itemDAO.create(item);
+        return null;
     }
 
 

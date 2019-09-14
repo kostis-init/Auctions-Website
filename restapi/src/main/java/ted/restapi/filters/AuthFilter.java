@@ -26,7 +26,12 @@ public class AuthFilter implements Filter {
             return;
         }
 
-        session.setCurrentUser(username);
+        String result = session.setCurrentUser(username);
+        if(result != null){
+            ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().print("Current user not found");
+            return;
+        }
 
         chain.doFilter(request, response);
     }

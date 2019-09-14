@@ -5,6 +5,7 @@ import ted.restapi.beans.Session;
 import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.GeneralCategoryDTO;
 import ted.restapi.dto.ItemDTO;
+import ted.restapi.persistence.entities.Item;
 import ted.restapi.util.Mapper;
 
 import javax.enterprise.context.RequestScoped;
@@ -34,7 +35,7 @@ public class CategoryResource {
 
     @GET
     @Path("{id}")
-    public Response getCategoryByGeneralCategoryId(@PathParam("id") int id){
+    public Response getCategoriesByGeneralCategoryId(@PathParam("id") int id){
         List<CategoryDTO> list = categoryBean.getCategoriesByGeneralCategoryId(id).stream()
                 .map(Mapper::toDTO).collect(Collectors.toList());
         return Response.ok(list).build();
@@ -43,9 +44,12 @@ public class CategoryResource {
     @GET
     @Path("items/{id}")
     public Response getItemsByCategoryId(@PathParam("id") int id){
-        List<ItemDTO> items = new ArrayList<>();
-        categoryBean.getItemsByCategoryId(id).forEach( item -> items.add(Mapper.toDTO(item)));
-        return Response.ok(items).build();
+        List<ItemDTO> itemsDTO = new ArrayList<>();
+        List<Item> items = categoryBean.getItemsByCategoryId(id);
+        for (Item item : items) {
+            itemsDTO.add(Mapper.toDTO(item));
+        }
+        return Response.ok(itemsDTO).build();
     }
 
 

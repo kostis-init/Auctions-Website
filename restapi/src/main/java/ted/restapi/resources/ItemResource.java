@@ -30,8 +30,6 @@ import java.util.stream.Collectors;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ItemResource {
-@PersistenceContext
-private EntityManager em;
 
     @Inject private Session session;
     @Inject private ItemBean itemBean;
@@ -42,7 +40,7 @@ private EntityManager em;
     public Response getItemById(@PathParam("id") int id){
         Item item = itemBean.getItemById(id);
         if(item == null){
-            return Response.status(400).build();
+            return Response.status(400).entity("No item with this id").build();
         }
         ItemDTO itemDTO = Mapper.toDTO(item);
         return Response.ok(itemDTO).build();
@@ -64,6 +62,9 @@ private EntityManager em;
         } else {
             return Response.status(400).entity("Wrong query parameters").build();
         }
+        if(items.isEmpty()){
+            return Response.ok(items).build();
+        }
         List<ItemDTO> itemsDTO = items.stream().map(Mapper::toDTO).collect(Collectors.toList());
         return Response.ok(itemsDTO).build();
     }
@@ -80,7 +81,10 @@ private EntityManager em;
             Item item = new Item(itemDTO.getName(),itemDTO.getFirstBid(),itemDTO.getBuyPrice(),itemDTO.getFirstBid(),
                     0, startedAt,endsAt,itemDTO.getDescription(),itemDTO.getLatitude(), itemDTO.getLongitude(),
                     itemDTO.getCity(),itemDTO.getCountry(),session.getCurrentUser(),categories);
-            itemBean.createItem(item);
+            String result = itemBean.createItem(item);
+            if(result != null){
+                return Response.status(400).entity(result).build();
+            }
             return Response.ok().build();
         } catch (ParseException e){
             return Response.status(400).entity("Cannot parse date:" + e.getMessage()).build();

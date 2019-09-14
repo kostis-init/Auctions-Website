@@ -1,4 +1,4 @@
-package ted.restapi.resources;
+package ted.restapi.appconfig;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
