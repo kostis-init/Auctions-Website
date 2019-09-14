@@ -26,29 +26,29 @@ export class BrowsingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getItems()
+    this.getItems();
   }
 
-  getItems() {
-    const params = new HttpParams();
+  public getItems() {
+    let params = new HttpParams();
     let subcategory_id : string;
 
     if(this.route.snapshot.queryParamMap.has('subcategory')){
       subcategory_id = this.route.snapshot.queryParamMap.get('subcategory');
     }
 
-    if(this.route.snapshot.queryParamMap.has('category')){
-      if (this.route.snapshot.queryParamMap.get('category') != 'All')
-      {
-        params.append('category', this.route.snapshot.queryParamMap.get('category'));
-      }
-    }
-
     if(this.route.snapshot.queryParamMap.has('text')){
-      params.append('text', this.route.snapshot.queryParamMap.get('text'));
+      params = params.set('text', this.route.snapshot.queryParamMap.get('text'));
     } else {
       this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/categories/items/' + subcategory_id);
       return;
+    }
+
+    if(this.route.snapshot.queryParamMap.has('category')){
+      if (this.route.snapshot.queryParamMap.get('category') != '')
+      {
+        params = params.set('category', this.route.snapshot.queryParamMap.get('category'));
+      }
     }
 
     console.log(params.toString());

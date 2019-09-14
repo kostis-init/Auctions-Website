@@ -17,7 +17,7 @@ export class ItemComponent implements OnInit {
   }
 
   goto_item(ItemID: number){
-    this.router.navigate(['/main', ItemID],{relativeTo: this.route});
+    this.router.navigate(['/main/items', ItemID],{relativeTo: this.route});
   }
 
 }

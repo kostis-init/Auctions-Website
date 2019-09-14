@@ -1,12 +1,12 @@
-<a (click)="goto_item(101)" class="list-group-item list-group-item-action flex-column align-items-start item_box" style="width:inherit">
+<a (click)="goto_item(Item.id)" class="list-group-item list-group-item-action flex-column align-items-start item_box" style="width:inherit">
 
   <div class="row">
     <div class="col-md-10">
       <div class="d-flex justify-content-start">
-        <img class="card-img-top img-fluid" style="height: 80px; width: 80px;" src="{{Item.imgPath}}" alt="">
+        <img class="card-img-top img-fluid" style="height: 80px; width: 80px;" src="{{Item.img}}" alt="">
         <h5>{{Item.name}}</h5>
       </div>
-      <p class="mb-1">Οθόνη: 6.3", RAM: 4GB, Χωρητικότητα: 64GB, Κάμερα: 48MP + 5MP, Selfie: 13MP, Πυρήνες CPU: 4+4</p>
+      <p class="mb-1">{{Item.description}}</p>
     </div>
 
     <div class="col-md-2" style="border-left: 1px solid #a1aeb3;">

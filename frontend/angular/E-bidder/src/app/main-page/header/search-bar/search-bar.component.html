@@ -4,11 +4,11 @@
 
       <form (ngSubmit)="onSearch(query)"  class="input-group p-3 mb-5 mt-4" #query="ngForm">
 
-        <input type="text" required ngModel class="form-control " id="SearchQuery" name="searchQuery" placeholder="Search Anything you need">
+        <input type="text" ngModel class="form-control " id="SearchQuery" name="searchQuery" placeholder="Search Anything you need">
 
         <div class="input-group-append ">
 
-              <select class="custom-select w-auto h-auto">
+              <select required ngModel class="custom-select w-auto h-auto" id="SearchCategory" name="searchCategory">
                 <option value="All" selected="">All Categories</option>
                 <optgroup label="-------------------"></optgroup>
                 <option *ngFor="let category of (state$ | async).Categories" value="{{category.id}}">{{category.name}}</option>

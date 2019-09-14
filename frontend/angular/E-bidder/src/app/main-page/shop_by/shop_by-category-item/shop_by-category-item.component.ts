@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {SubCategoryModel} from "../../../shared/Models/subCategory.model";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-shop_by-category-item',
@@ -11,7 +12,8 @@ export class Shop_byCategoryItemComponent implements OnInit {
 
   @Input() Item: SubCategoryModel;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private dom: DomSanitizer) { }
 
   ngOnInit() {
   }

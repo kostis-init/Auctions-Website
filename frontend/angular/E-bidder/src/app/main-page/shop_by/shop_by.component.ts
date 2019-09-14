@@ -7,6 +7,7 @@ import {CategoryModel} from "../../shared/Models/category.model";
 import {MainPageState} from "../store/main-page.reducer";
 import {select, Store} from "@ngrx/store";
 import {map} from "rxjs/operators";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-shop_by',
