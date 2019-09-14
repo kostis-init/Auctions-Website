@@ -1,8 +1,5 @@
 package ted.restapi.persistence.entities;
 
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-
-import javax.inject.Named;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +14,7 @@ import java.util.Objects;
         @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE LOWER(i.name) = LOWER(?1)"),
         @NamedQuery(name = "Item.findBySellerId", query = "SELECT i FROM Item i WHERE i.seller.id = ?1")
 })
+@Cacheable(false)
 public class Item {
     private int id;
     private String name;
@@ -34,6 +32,7 @@ public class Item {
     private List<Bid> bids;
     private User seller;
     private List<Category> categories;
+    private List<ItemImage> images;
 
     public Item(){}
 
@@ -154,6 +153,10 @@ public class Item {
     public List<Category> getCategories() { return categories; }
     public void setCategories(List<Category> categories) { this.categories = categories; }
 
+    @OneToMany(mappedBy = "item")
+    public List<ItemImage> getImages() { return images; }
+    public void setImages(List<ItemImage> images) { this.images = images; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -167,15 +170,19 @@ public class Item {
                 Objects.equals(firstBid, item.firstBid) &&
                 Objects.equals(startedAt, item.startedAt) &&
                 Objects.equals(endsAt, item.endsAt) &&
+                Objects.equals(description, item.description) &&
                 Objects.equals(latitude, item.latitude) &&
                 Objects.equals(longitude, item.longitude) &&
                 Objects.equals(city, item.city) &&
                 Objects.equals(country, item.country) &&
-                Objects.equals(description, item.description);
+                Objects.equals(bids, item.bids) &&
+                Objects.equals(seller, item.seller) &&
+                Objects.equals(categories, item.categories) &&
+                Objects.equals(images, item.images);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt,
-                            endsAt, description, latitude, longitude, city, country);
+        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt, endsAt, description, latitude, longitude, city, country, bids, seller, categories, images);
     }
 }

@@ -4,6 +4,7 @@ import ted.restapi.dto.*;
 import ted.restapi.persistence.entities.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,10 @@ public class Mapper {
     public static ItemDTO toDTO(Item item){
         List<CategoryDTO> categories = item.getCategories().stream().map(Mapper::toDTONoImage).collect(Collectors.toList());
         List<BidDTO> bids = item.getBids().stream().map(Mapper::toDTO).collect(Collectors.toList());
+        List<byte[]> images = new ArrayList<>();
+        for (ItemImage image : item.getImages()) {
+            images.add(image.getImage());
+        }
         String startedAt = null;
         if(item.getStartedAt() != null){
             startedAt = new SimpleDateFormat(Constants.DATE_FORMAT).format(item.getStartedAt());
@@ -31,7 +36,7 @@ public class Mapper {
         return new ItemDTO(item.getId(), item.getName(), item.getCurrentBid(), item.getBuyPrice(),
                 item.getFirstBid(), item.getNumberOfBids(), startedAt, endsAt,
                 item.getDescription(), item.getLatitude(), item.getLongitude(), item.getCity(),
-                item.getCountry(), Mapper.toDTO(item.getSeller()), categories, bids);
+                item.getCountry(), Mapper.toDTO(item.getSeller()), categories, bids, images);
     }
 
     public static CategoryDTO toDTO(Category category) {

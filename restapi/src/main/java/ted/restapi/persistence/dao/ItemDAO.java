@@ -2,6 +2,7 @@ package ted.restapi.persistence.dao;
 
 import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
+import ted.restapi.persistence.entities.ItemImage;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,5 +50,9 @@ public class ItemDAO {
 
     public List<Item> findBySellerId(int id) {
         return em.createNamedQuery("Item.findBySellerId", Item.class).setParameter(1, id).getResultList();
+    }
+
+    public void createItemImage(ItemImage itemImage) {
+        em.persist(itemImage);
     }
 }

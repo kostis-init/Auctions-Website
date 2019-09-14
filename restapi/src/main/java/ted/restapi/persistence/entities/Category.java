@@ -2,6 +2,7 @@ package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,11 +61,15 @@ public class Category {
         Category category = (Category) o;
         return id == category.id &&
                 Objects.equals(name, category.name) &&
-                Objects.equals(image, category.image) &&
+                Arrays.equals(image, category.image) &&
+                Objects.equals(items, category.items) &&
                 Objects.equals(generalCategory, category.generalCategory);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, image, generalCategory);
+        int result = Objects.hash(id, name, items, generalCategory);
+        result = 31 * result + Arrays.hashCode(image);
+        return result;
     }
 }

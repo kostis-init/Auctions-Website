@@ -13,6 +13,7 @@ import java.util.Objects;
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = ?1"),
         @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = ?1")
 })
+@Cacheable(false)
 public class User{
     private int id;
     private String username;

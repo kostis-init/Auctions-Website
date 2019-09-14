@@ -7,6 +7,8 @@ import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.ItemDTO;
 import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
+import ted.restapi.persistence.entities.ItemImage;
+import ted.restapi.persistence.entities.User;
 import ted.restapi.util.Constants;
 import ted.restapi.util.Mapper;
 
@@ -81,6 +83,7 @@ public class ItemResource {
 
     @POST
     public Response createItem(ItemDTO itemDTO) {
+        User currentUser = session.getCurrentUser();
         try{
             Date startedAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getStartedAt());
             Date endsAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getEndsAt());
@@ -88,13 +91,22 @@ public class ItemResource {
             for (CategoryDTO category : itemDTO.getCategories()) {
                 categories.add(categoryBean.findById(category.getId()));
             }
-            Item item = new Item(itemDTO.getName(),itemDTO.getFirstBid(),itemDTO.getBuyPrice(),itemDTO.getFirstBid(),
-                    0, startedAt,endsAt,itemDTO.getDescription(),itemDTO.getLatitude(), itemDTO.getLongitude(),
-                    itemDTO.getCity(),itemDTO.getCountry(),session.getCurrentUser(),categories);
+
+            Item item = new Item(itemDTO.getName(), itemDTO.getFirstBid(), itemDTO.getBuyPrice(), itemDTO.getFirstBid(),
+                    0, startedAt, endsAt, itemDTO.getDescription(), itemDTO.getLatitude(), itemDTO.getLongitude(),
+                    currentUser.getCity(), currentUser.getCountry(), currentUser, categories);
             String result = itemBean.createItem(item);
             if(result != null){
                 return Response.status(400).entity(result).build();
             }
+
+            for (byte[] image : itemDTO.getImages()) {
+                ItemImage itemImage = new ItemImage();
+                itemImage.setImage(image);
+                itemImage.setItem(item);
+                itemBean.createItemImage(itemImage);
+            }
+
             return Response.ok().build();
         } catch (ParseException e){
             return Response.status(400).entity("Cannot parse date:" + e.getMessage()).build();

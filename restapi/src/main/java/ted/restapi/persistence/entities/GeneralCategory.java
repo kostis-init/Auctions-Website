@@ -4,6 +4,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.sql.Blob;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,13 +56,14 @@ public class GeneralCategory {
         GeneralCategory that = (GeneralCategory) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(image, that.image) &&
+                Arrays.equals(image, that.image) &&
                 Objects.equals(categories, that.categories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, image, categories);
+        int result = Objects.hash(id, name, categories);
+        result = 31 * result + Arrays.hashCode(image);
+        return result;
     }
-
 }

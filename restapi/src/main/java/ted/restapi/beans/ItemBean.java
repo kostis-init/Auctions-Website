@@ -3,6 +3,7 @@ package ted.restapi.beans;
 import ted.restapi.persistence.dao.ItemDAO;
 import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
+import ted.restapi.persistence.entities.ItemImage;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -99,5 +100,9 @@ public class ItemBean {
 
     public List<Item> getItemsBySellerId(int id) {
         return itemDAO.findBySellerId(id);
+    }
+
+    public void createItemImage(ItemImage itemImage) {
+        itemDAO.createItemImage(itemImage);
     }
 }

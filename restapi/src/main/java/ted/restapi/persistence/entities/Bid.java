@@ -9,6 +9,7 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "Bid.findAll", query = "SELECT b FROM Bid b")
 })
+@Cacheable(false)
 public class Bid{
     private int id;
     private Date time;
