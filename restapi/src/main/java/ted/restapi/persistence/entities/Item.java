@@ -175,14 +175,11 @@ public class Item {
                 Objects.equals(longitude, item.longitude) &&
                 Objects.equals(city, item.city) &&
                 Objects.equals(country, item.country) &&
-                Objects.equals(bids, item.bids) &&
-                Objects.equals(seller, item.seller) &&
-                Objects.equals(categories, item.categories) &&
-                Objects.equals(images, item.images);
+                Objects.equals(seller, item.seller);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt, endsAt, description, latitude, longitude, city, country, bids, seller, categories, images);
+        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt, endsAt, description, latitude, longitude, city, country, seller);
     }
 }
