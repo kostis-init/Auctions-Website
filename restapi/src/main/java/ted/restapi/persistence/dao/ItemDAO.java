@@ -46,4 +46,8 @@ public class ItemDAO {
         }
         return items.get(0);
     }
+
+    public List<Item> findBySellerId(int id) {
+        return em.createNamedQuery("Item.findBySellerId", Item.class).setParameter(1, id).getResultList();
+    }
 }
