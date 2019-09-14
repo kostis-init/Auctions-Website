@@ -55,4 +55,8 @@ public class ItemDAO {
     public void createItemImage(ItemImage itemImage) {
         em.persist(itemImage);
     }
+
+    public void updateItemImage(ItemImage itemImage) {
+        em.merge(itemImage);
+    }
 }

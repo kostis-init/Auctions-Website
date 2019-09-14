@@ -87,6 +87,11 @@ public class ItemResource {
         try{
             Date startedAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getStartedAt());
             Date endsAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getEndsAt());
+            Date curDate = new Date();
+            if(startedAt.before(curDate) || endsAt.before(startedAt)){
+                return Response.status(400).entity("Unacceptable date values").build();
+            }
+
             List<Category> categories = new ArrayList<>();
             for (CategoryDTO category : itemDTO.getCategories()) {
                 categories.add(categoryBean.findById(category.getId()));
@@ -112,6 +117,74 @@ public class ItemResource {
             return Response.status(400).entity("Cannot parse date:" + e.getMessage()).build();
         }
 
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response editItem(ItemDTO itemDTO, @PathParam("id") int id){
+        User currentUser = session.getCurrentUser();
+        Item item = itemBean.getItemById(id);
+        if(item == null){
+            return Response.status(400).entity("Item not found").build();
+        }
+        if(item.getSeller().getId() != currentUser.getId()){
+            return Response.status(400).entity("Cannot edit an item of another user").build();
+        }
+        if(item.getNumberOfBids() > 0){
+            return Response.status(400).entity("Cannot edit an item that someone has made a bid").build();
+        }
+        try{
+            Date startedAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getStartedAt());
+            Date endsAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getEndsAt());
+            Date curDate = new Date();
+            if(startedAt.before(curDate) || endsAt.before(startedAt)){
+                return Response.status(400).entity("Unacceptable date values").build();
+            }
+
+            List<Category> categories = new ArrayList<>();
+            for (CategoryDTO category : itemDTO.getCategories()) {
+                categories.add(categoryBean.findById(category.getId()));
+            }
+
+            Item newItem = new Item(itemDTO.getName(), itemDTO.getFirstBid(), itemDTO.getBuyPrice(), itemDTO.getFirstBid(),
+                    0, startedAt, endsAt, itemDTO.getDescription(), itemDTO.getLatitude(), itemDTO.getLongitude(),
+                    currentUser.getCity(), currentUser.getCountry(), currentUser, categories);
+            newItem.setId(id);
+            String result = itemBean.update(newItem);
+            if(result != null){
+                return Response.status(400).entity(result).build();
+            }
+
+            for (byte[] image : itemDTO.getImages()) {
+                ItemImage itemImage = new ItemImage();
+                itemImage.setImage(image);
+                itemImage.setItem(item);
+                itemBean.updateItemImage(itemImage);
+            }
+
+            return Response.ok().build();
+        } catch (ParseException e){
+            return Response.status(400).entity("Cannot parse date:" + e.getMessage()).build();
+        }
+
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response deleteItem(@PathParam("id") int id){
+        User currentUser = session.getCurrentUser();
+        Item item = itemBean.getItemById(id);
+        if(item == null){
+            return Response.status(400).entity("Item not found").build();
+        }
+        if(item.getSeller().getId() != currentUser.getId()){
+            return Response.status(400).entity("Cannot delete an item of another user").build();
+        }
+        if(item.getNumberOfBids() > 0){
+            return Response.status(400).entity("Cannot delete an item that someone has made a bid").build();
+        }
+        itemBean.delete(item);
+        return Response.ok().build();
     }
 
 }

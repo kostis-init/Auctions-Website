@@ -29,10 +29,10 @@ public class ItemBean {
         Set<Item> items = new HashSet<>();
         List<String> words = Arrays.asList(text.split(" "));
 
-        words.forEach(word -> {
+        for (String word : words) {
             items.addAll(itemDAO.searchByWord(word));
             System.out.println(word + "\n" + items + "\n");
-        });
+        }
 
         return items;
     }
@@ -94,8 +94,15 @@ public class ItemBean {
     }
 
 
-    public void update(Item item) {
+    public String update(Item item) {
+        if(item.getFirstBid() == null || item.getFirstBid() <= 0){
+            return "Unacceptable first bid";
+        }
+        if(item.getBuyPrice() != null && item.getBuyPrice() < item.getFirstBid()){
+            return "Unacceptable buy price";
+        }
         itemDAO.update(item);
+        return null;
     }
 
     public List<Item> getItemsBySellerId(int id) {
@@ -104,5 +111,13 @@ public class ItemBean {
 
     public void createItemImage(ItemImage itemImage) {
         itemDAO.createItemImage(itemImage);
+    }
+
+    public void updateItemImage(ItemImage itemImage) {
+        itemDAO.updateItemImage(itemImage);
+    }
+
+    public void delete(Item item) {
+        itemDAO.delete(item);
     }
 }
