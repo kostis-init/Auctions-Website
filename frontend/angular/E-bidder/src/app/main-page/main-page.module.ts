@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {MainPageRoutingModule} from "./main-page-routing.module";
 import {MainPageComponent} from "./main-page.component";
 import {HeaderComponent} from "./header/header.component";
@@ -51,6 +51,7 @@ import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-ba
     AuthModule,
     NgbModule,
 
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class MainPageModule { }

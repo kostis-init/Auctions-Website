@@ -7,86 +7,204 @@
 
         <div class="form-group">
           <label for="Name">The Auctions Name</label>
-          <input formControlName="name" class="form-control shadow-sm" type="text" name="Name" id="Name">
+          <input
+            formControlName="name"
+            class="shadow-sm"
+            [ngClass]=" {'form-control': true, 'is-invalid': AuctionForm.get('name').invalid && AuctionForm.get('name').touched,
+             'is-valid': AuctionForm.get('name').valid } "
+            type="text"
+            name="Name"
+            id="Name">
+
+          <small *ngIf="AuctionForm.get('name').errors?.required && AuctionForm.get('name').touched"
+                 class="form-text invalid-feedback">Field is required</small>
         </div>
 
+        <div formGroupName="Cat">
 
-
-        <!--Need to fetch these-->
-
-        <div class="row" formGroupName="Cat">
-          <div class="col-lg-6">
-            <div class="form-group">
-              <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="GeneralCategoryDropdown" ngbDropdownToggle>General Category</button>
-                <div ngbDropdownMenu aria-labelledby="GeneralCategoryDropdown">
-
-                  <div ngbDropdownItem class="form-check" *ngFor="let Category of (state$ |async).Categories">
-                    <input formControlName="Category" type="radio" class="form-check-input" name="Category" id="{{Category.id}}" value="{{Category.name}}">
-                    <label for="{{Category.id}}" class="form-check-label">{{Category.name}}</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="form-group">
-              <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="SubCategoryDropdown" ngbDropdownToggle>Sub Category</button>
-                  <div ngbDropdownMenu aria-labelledby="SubCategoryDropdown">
-
-<!--                    <div ngbDropdownItem class="form-check" *ngFor="let SubCategory of (SelectedCategory$ |async).SubCategories">-->
-<!--                      <input class="form-check-input" formGroupName="SubCategory" type="checkbox" value="{{SubCategory.name}}" id="{{SubCategory.id}}">-->
-<!--                      <label class="form-check-label" for="{{SubCategory.id}}">-->
-<!--                        {{SubCategory.name}}-->
-<!--                      </label>-->
-<!--                    </div>-->
-
-                  </div>
+        <div class="form-group">
+          <div ngbDropdown class="d-inline-block">
+            <button
+              class="btn btn-outline-primary btn-block"
+              type="button"
+              id="GeneralCategoryDropdown"
+              ngbDropdownToggle>General Category</button>
+            <div ngbDropdownMenu aria-labelledby="GeneralCategoryDropdown">
+              <div ngbDropdownItem class="form-check" *ngFor="let Category of (state$ |async).Categories">
+                <input formControlName="Category" type="radio" class="form-check-input" name="Category" id="{{Category.id}}" value="{{Category.name}}">
+                <label for="{{Category.id}}" class="form-check-label">{{Category.name}}</label>
               </div>
             </div>
           </div>
         </div>
 
-        <!--depending the category chosen give subcategories-->
+        <div class="form-group" *ngIf="categorySelected" formArrayName="SubCategory">
+          <div class="form-check form-check-inline"
+               *ngFor="let SubCategory of (SubCategories$| async); let ArrayEl of getControls();let i = index" [formGroupName]="i">
+            <input class="form-check-input" type="checkbox" [formControlName]="SubCategory.name" id="{{SubCategory.id}}">
+            <label class="form-check-label" for="{{SubCategory.id}}">{{SubCategory.name}}</label>
+          </div>
+        </div>
+
+      </div>
 
         <div class="form-group">
-          <label for="BuyPrice">The price a user can buy a product instantly</label>
-          <div class="input-group">
-            <input class="form-control shadow-sm" formControlName="BuyPrice" id="BuyPrice" type="number" name="BuyPrice">
-            <div class="input-group-append">
-              <span class="input-group-text">&euro;</span>
+          <div>
+            <button class="btn btn-outline-primary" type="button"
+                    (click)="ToggleBuyPrice()">Toggle Buy Price</button>
+          </div>
+
+          <div *ngIf="SetBuyPrice">
+            <label for="BuyPrice">The price a user can buy a product instantly</label>
+            <div class="input-group">
+              <input
+                class=" shadow-sm form-control"
+                formControlName="BuyPrice"
+                id="BuyPrice"
+                type="number"
+                name="BuyPrice"
+                [ngClass]=" {'is-invalid': AuctionForm.get('BuyPrice').invalid && AuctionForm.get('BuyPrice').touched,
+                    'is-valid': AuctionForm.get('BuyPrice').valid } "
+              >
+              <div class="input-group-append">
+                <span class="input-group-text">&euro;</span>
+              </div>
+              <small *ngIf="AuctionForm.get('BuyPrice').errors?.required && AuctionForm.get('BuyPrice').touched"
+                     class="form-text invalid-feedback">Field is required</small>
+
+              <small *ngIf="AuctionForm.get('StartingBid').errors?.pattern && AuctionForm.get('BuyPrice').touched"
+                     class="form-text invalid-feedback">Enter only positive amount</small>
             </div>
           </div>
         </div>
 
-
         <div class="form-group">
-          <label for="FirstBid">The Starting Bid of the Auction</label>
-          <div class="input-group">
-            <input class="form-control shadow-sm" formControlName="StartingBid" type="number" id="FirstBid" name="FirtsBid">
-            <div class="input-group-append">
-              <span class="input-group-text">&euro;</span>
+            <label for="FirstBid">The Starting Bid of the Auction</label>
+            <div class="input-group">
+              <input
+                class="form-control shadow-sm"
+                formControlName="StartingBid"
+                type="number"
+                id="FirstBid"
+                name="FirtsBid"
+                [ngClass]="
+                {'is-invalid': AuctionForm.get('StartingBid').invalid && AuctionForm.get('StartingBid').touched,
+                  'is-valid': AuctionForm.get('StartingBid').valid } ">
+              <div class="input-group-append">
+                <span class="input-group-text">&euro;</span>
+              </div>
+
+              <small *ngIf="AuctionForm.get('StartingBid').errors?.required && AuctionForm.get('StartingBid').touched"
+                     class="form-text invalid-feedback">Field is required</small>
+              <small *ngIf="AuctionForm.get('StartingBid').errors?.pattern && AuctionForm.get('StartingBid').touched"
+                     class="form-text invalid-feedback">Enter only positive amount</small>
+
             </div>
           </div>
-        </div>
-
 
         <div class="form-group">
           <label for="Description">Auction Description</label>
-          <textarea formControlName="Description" class="form-control shadow-sm" id="Description" rows="10" cols="10"></textarea>
+
+          <textarea formControlName="Description"
+                    class="shadow-sm"
+                    id="Description"
+                    rows="10"
+                    cols="10"
+                    [ngClass]=" {'form-control': true, 'is-invalid': AuctionForm.get('Description').invalid && AuctionForm.get('Description').touched,
+                    'is-valid': AuctionForm.get('Description').valid } "
+          ></textarea>
+
+          <small *ngIf="AuctionForm.get('Description').errors?.required && AuctionForm.get('Description').touched"
+                 class="form-text invalid-feedback">Field is required</small>
         </div>
 
+        <div class="form-group" formGroupName="Location">
+          <app-open-map (GetLat)="Setlat($event)" (GetLot)="Setlot($event)"></app-open-map>
+        </div>
 
+        <div class="form-group" formGroupName="StartDate">
 
+          <label>Starting Date and Time</label>
+          <div class="row">
 
+            <div class="col-md-6">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="dp"
+                  formControlName="STDate"
+                  ngbDatepicker
+                  [minDate]="{year:CurrDate.getFullYear(), month:CurrDate.getMonth()+1 , day: CurrDate.getDate()}"
+                  #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
 
-        <!--Image Upload-->
+            <div class="col-md-6">
+            <ngb-timepicker formControlName="STTime" [spinners]="false"></ngb-timepicker>
+            </div>
+          </div>
+
+          <small
+            *ngIf="AuctionForm.get('StartDate').errors?.InvalidStart"
+            class="text-danger  text-center">
+            Invalid Date
+          </small>
+        </div>
+
+        <div class="form-group" formGroupName="EndDate">
+
+          <label>End Date and Time</label>
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="dp"
+                  formControlName="ENDate"
+                  ngbDatepicker
+                  [minDate]="{year:CurrDate.getFullYear(), month:CurrDate.getMonth()+1 , day: CurrDate.getDate()}"
+                  #de="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="de.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <ngb-timepicker formControlName="ENTime" [spinners]="false"></ngb-timepicker>
+            </div>
+          </div>
+
+          <small
+            *ngIf="AuctionForm.get('EndDate').errors?.InvalidEnd"
+            class="text-danger  text-center">
+            Invalid Date
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="Image">Choose Image</label>
+          <input
+              type="file"
+              class="form-control-file"
+              id="Image"
+              formControlName="Image"
+              [ngClass]=" {'is-invalid': AuctionForm.get('Image').invalid && AuctionForm.get('Image').touched,
+                    'is-valid': AuctionForm.get('Image').valid }">
+          <small *ngIf="AuctionForm.get('Image').errors?.pattern && AuctionForm.get('Image').touched"
+                 class="form-text invalid-feedback">Field Required</small>
+        </div>
+
+        <button class="btn btn-block btn-success mb-3" type="submit"
+                [disabled]="AuctionForm.invalid">Save Auction</button>
+
       </form>
-
-
-      <button class="btn btn-block btn-success mb-3" type="submit" [disabled]="AuctionForm.invalid">Save Auction</button>
     </div>
   </div>
 

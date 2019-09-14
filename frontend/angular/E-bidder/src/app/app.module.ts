@@ -14,6 +14,7 @@ import {EffectsModule} from "@ngrx/effects";
 import {AuthEffect} from "./auth/store/auth.effect";
 import {AuthModule} from "./auth/auth.module";
 import {MainPageEffect} from "./main-page/store/main-page.effect";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
