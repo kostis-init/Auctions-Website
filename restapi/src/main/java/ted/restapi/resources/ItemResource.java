@@ -36,6 +36,16 @@ public class ItemResource {
     @Inject private CategoryBean categoryBean;
 
     @GET
+    public Response getItemsOfCurrentUser(){
+        List<ItemDTO> itemsDTO = new ArrayList<>();
+        List<Item> items = itemBean.getItemsBySellerId(session.getCurrentUser().getId());
+        for (Item item : items) {
+            itemsDTO.add(Mapper.toDTO(item));
+        }
+        return Response.ok(itemsDTO).build();
+    }
+
+    @GET
     @Path("{id}")
     public Response getItemById(@PathParam("id") int id){
         Item item = itemBean.getItemById(id);

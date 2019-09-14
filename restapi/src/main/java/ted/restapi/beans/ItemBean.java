@@ -82,14 +82,12 @@ public class ItemBean {
         if(checkItem != null){
             return "Item name already exists";
         }
-
         if(item.getFirstBid() == null || item.getFirstBid() <= 0){
             return "Unacceptable first bid";
         }
         if(item.getBuyPrice() != null && item.getBuyPrice() < item.getFirstBid()){
             return "Unacceptable buy price";
         }
-
         itemDAO.create(item);
         return null;
     }
@@ -97,5 +95,9 @@ public class ItemBean {
 
     public void update(Item item) {
         itemDAO.update(item);
+    }
+
+    public List<Item> getItemsBySellerId(int id) {
+        return itemDAO.findBySellerId(id);
     }
 }
