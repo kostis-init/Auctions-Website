@@ -113,7 +113,7 @@ module.exports = "<a class=\"card-link\" href=\"#\">\n  <li class=\"list-group-i
 
 /***/ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html":
 /*!********************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/main-page/browsing.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/main-page/item-page.component.html ***!
   \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -216,9 +216,9 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/app.component.ts":
 /*!**********************************!*\
-  !*** ./src/app/app.component.ts ***!
+  !*** ./src/app/footer.component.ts ***!
   \**********************************/
-/*! exports provided: AppComponent */
+/*! exports provided: FooterComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -521,7 +521,7 @@ module.exports = "\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJz
 /*!*******************************************************************!*\
   !*** ./src/app/main-page/main-page-categories/main-page-categories.component.ts ***!
   \*******************************************************************/
-/*! exports provided: BrowsingComponent */
+/*! exports provided: ItemPageComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -681,7 +681,7 @@ HomeSubcategoriesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ "./src/app/home/home.component.css":
 /*!*****************************************!*\
-  !*** ./src/app/main-page/browsing.component.css ***!
+  !*** ./src/app/main-page/item-page.component.css ***!
   \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -692,9 +692,9 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/home/home.component.ts":
 /*!****************************************!*\
-  !*** ./src/app/main-page/browsing.component.ts ***!
+  !*** ./src/app/main-page/item-page.component.ts ***!
   \****************************************/
-/*! exports provided: BrowsingComponent */
+/*! exports provided: ItemPageComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -712,8 +712,8 @@ let HomeComponent = class HomeComponent {
 HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-main-page',
-        template: __webpack_require__(/*! raw-loader!./browsing.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html"),
-        styles: [__webpack_require__(/*! ./browsing.component.css */ "./src/app/home/home.component.css")]
+        template: __webpack_require__(/*! raw-loader!./item-page.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/home.component.html"),
+        styles: [__webpack_require__(/*! ./item-page.component.css */ "./src/app/home/home.component.css")]
     })
 ], HomeComponent);
 

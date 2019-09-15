@@ -22,8 +22,6 @@ export class ItemComponent implements OnInit {
     let base64 = btoa(stringchar);
     this.Item.imageUrl = base64;
 
-    console.log(this.Item.categories)
-
   }
 
   goto_item(ItemID: number){

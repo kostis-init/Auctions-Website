@@ -13,6 +13,7 @@ import {BrowsingComponent} from "./browsing/browsing.component";
 import {ItemComponent} from "./browsing/item/item.component";
 import {Shop_byComponent} from "./shop_by/shop_by.component";
 import {Shop_byCategoryItemComponent} from "./shop_by/shop_by-category-item/shop_by-category-item.component";
+import {ItemPageComponent} from "./item-page/item-page.component";
 import {ModalModule} from "ngx-bootstrap";
 import {AuthModule} from "../auth/auth.module";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -21,6 +22,7 @@ import { NewAuctionComponent } from './new-auction/new-auction.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-bar-dropdown-item.component";
+import {FooterComponent} from "./footer/footer.component";
 import {SaveAuctionService} from "./new-auction/save-auction.service";
 
 
@@ -39,7 +41,9 @@ import {SaveAuctionService} from "./new-auction/save-auction.service";
     Shop_byComponent,
     Shop_byCategoryItemComponent,
     NewAuctionComponent,
-    NavBarDropdownItemComponent
+    NavBarDropdownItemComponent,
+    ItemPageComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
