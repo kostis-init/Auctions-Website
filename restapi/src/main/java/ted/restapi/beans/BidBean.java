@@ -24,7 +24,7 @@ public class BidBean {
         if(bid.getAmount() <= item.getCurrentBid()){
             return "Unacceptable bid. Bid cannot be <= than currentBid";
         }
-        if(bid.getAmount() >= item.getBuyPrice()){
+        if(item.getBuyPrice() != null && bid.getAmount() >= item.getBuyPrice()){
             return "Unacceptable bid. Bid cannot be >= than buyPrice. Just buy it!";
         }
         bidDAO.create(bid);

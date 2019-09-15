@@ -28,4 +28,9 @@ public class MessageBean {
         }
         return chat;
     }
+
+    public void sendMessage(User currentUser, User otherUser, String text) {
+        Message message = new Message(currentUser, otherUser, text);
+        messageDAO.create(message);
+    }
 }

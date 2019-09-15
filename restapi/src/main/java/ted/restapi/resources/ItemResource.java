@@ -21,10 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -36,6 +33,8 @@ public class ItemResource {
     @Inject private Session session;
     @Inject private ItemBean itemBean;
     @Inject private CategoryBean categoryBean;
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
 
     @GET
     public Response getItemsOfCurrentUser(){
@@ -85,9 +84,10 @@ public class ItemResource {
     public Response createItem(ItemDTO itemDTO) {
         User currentUser = session.getCurrentUser();
         try{
-            Date startedAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getStartedAt());
-            Date endsAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getEndsAt());
+            Date startedAt = simpleDateFormat.parse(itemDTO.getStartedAt());
+            Date endsAt = simpleDateFormat.parse(itemDTO.getEndsAt());
             Date curDate = new Date();
+
             if(startedAt.before(curDate) || endsAt.before(startedAt)){
                 return Response.status(400).entity("Unacceptable date values").build();
             }
@@ -134,8 +134,8 @@ public class ItemResource {
             return Response.status(400).entity("Cannot edit an item that someone has made a bid").build();
         }
         try{
-            Date startedAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getStartedAt());
-            Date endsAt = new SimpleDateFormat(Constants.DATE_FORMAT).parse(itemDTO.getEndsAt());
+            Date startedAt = simpleDateFormat.parse(itemDTO.getStartedAt());
+            Date endsAt = simpleDateFormat.parse(itemDTO.getEndsAt());
             Date curDate = new Date();
             if(startedAt.before(curDate) || endsAt.before(startedAt)){
                 return Response.status(400).entity("Unacceptable date values").build();
