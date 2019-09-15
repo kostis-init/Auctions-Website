@@ -21,6 +21,7 @@ import { NewAuctionComponent } from './new-auction/new-auction.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-bar-dropdown-item.component";
+import {SaveAuctionService} from "./new-auction/save-auction.service";
 
 
 @NgModule({
@@ -52,6 +53,6 @@ import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-ba
     NgbModule,
 
   ],
-  providers:[DatePipe]
+  providers:[DatePipe,SaveAuctionService]
 })
 export class MainPageModule { }

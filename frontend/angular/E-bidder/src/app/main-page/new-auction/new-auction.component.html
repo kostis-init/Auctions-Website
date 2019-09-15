@@ -20,35 +20,42 @@
                  class="form-text invalid-feedback">Field is required</small>
         </div>
 
-        <div formGroupName="Cat">
-
         <div class="form-group">
-          <div ngbDropdown class="d-inline-block">
-            <button
-              class="btn btn-outline-primary btn-block"
-              type="button"
-              id="GeneralCategoryDropdown"
-              ngbDropdownToggle>General Category</button>
-            <div ngbDropdownMenu aria-labelledby="GeneralCategoryDropdown">
-              <div ngbDropdownItem class="form-check" *ngFor="let Category of (state$ |async).Categories">
-                <input formControlName="Category" type="radio" class="form-check-input" name="Category" id="{{Category.id}}" value="{{Category.name}}">
-                <label for="{{Category.id}}" class="form-check-label">{{Category.name}}</label>
+          <div class="row">
+            <div class="col-md-6">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-sm btn-primary" id="Dropdown" type="button" ngbDropdownToggle>Select Cateogry</button>
+                <div ngbDropdownMenu aria-labelledby="Dropdown">
+                  <button
+                    *ngFor="let category of (state$ | async).Categories"
+                    type="button"
+                    ngbDropdownItem
+                    id="{{category.id}}"
+                    class="p-1"
+                    (click)="onSelectCategory(category)"
+                  >{{category.name}}</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="form-group" *ngIf="categorySelected" formArrayName="SubCategory">
-          <div class="form-check form-check-inline"
-               *ngFor="let SubCategory of (SubCategories$| async); let ArrayEl of getControls();let i = index" [formGroupName]="i">
-            <input class="form-check-input" type="checkbox" [formControlName]="SubCategory.name" id="{{SubCategory.id}}">
-            <label class="form-check-label" for="{{SubCategory.id}}">{{SubCategory.name}}</label>
+        <div class="form-group" *ngIf="categorySelected">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-check form-check-inline"
+                   *ngFor="let SubCategory of (SubCategoriesLoaded)">
+                <button class="btn btn-sm btn-outline-secondary m-1"
+                        [ngClass]="{active: isSelected(SubCategory)}"
+                        (click)="ToggleSubcategory(SubCategory, sub)"
+                        type="button" #sub>{{SubCategory.name}}</button>
+              </div>
+            </div>
+
           </div>
         </div>
 
-      </div>
-
-        <div class="form-group">
+        <div class="form-group mt-2">
           <div>
             <button class="btn btn-outline-primary" type="button"
                     (click)="ToggleBuyPrice()">Toggle Buy Price</button>
@@ -188,21 +195,41 @@
           </small>
         </div>
 
-        <div class="form-group">
-          <label for="Image">Choose Image</label>
-          <input
-              type="file"
-              class="form-control-file"
-              id="Image"
-              formControlName="Image"
-              [ngClass]=" {'is-invalid': AuctionForm.get('Image').invalid && AuctionForm.get('Image').touched,
-                    'is-valid': AuctionForm.get('Image').valid }">
-          <small *ngIf="AuctionForm.get('Image').errors?.pattern && AuctionForm.get('Image').touched"
-                 class="form-text invalid-feedback">Field Required</small>
+        <div class="form-group" formArrayName="Image">
+          <label>Choose Image</label>
+          <div  class="row mb-3" *ngFor=" let ImageCrl of getControlsImages(); let i = index">
+
+            <div class="col-sm-10">
+              <input
+                type="file"
+                class="form-control-file"
+                (change)="onFileChange($event,i)"
+                id="Image">
+            </div>
+
+            <div class="col-sm-2">
+              <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDeleteImage(i)">X</button>
+            </div>
+          </div>
+
+          <div class="row mt-1">
+            <div class="col-12">
+              <button type="button" class="btn btn-block  btn-outline-primary" (click)="onAddImage()">Add Image</button>
+            </div>
+          </div>
+
         </div>
 
-        <button class="btn btn-block btn-success mb-3" type="submit"
-                [disabled]="AuctionForm.invalid">Save Auction</button>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-block btn-outline-success mb-3" type="submit"
+                    [disabled]="AuctionForm.invalid">Save Auction</button>
+          </div>
+
+          <div class="col-md-6">
+            <button class="btn btn-block btn-outline-danger mb-3" type="button" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
 
       </form>
     </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit,} from '@angular/core';
+import {Component, ElementRef, OnInit,} from '@angular/core';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {select, Store} from "@ngrx/store";
@@ -9,6 +9,8 @@ import {CategoryModel} from "../../shared/Models/category.model";
 import {map, tap} from "rxjs/operators";
 import {SubCategoryModel} from "../../shared/Models/subCategory.model";
 import {DatePipe} from "@angular/common";
+import {Router} from "@angular/router";
+import {SaveAuctionService} from "./save-auction.service";
 
 
 @Component({
@@ -20,29 +22,28 @@ export class NewAuctionComponent implements OnInit{
 
   AuctionForm:FormGroup;
   CurrDate = new Date();
-  SetBuyPrice= false;
+  SetBuyPrice=false;
   time: NgbTimeStruct = {hour: 0, minute:0,second:0};
-  SubCategories$:Observable<SubCategoryModel[]>;
+  SubCategoriesLoaded:SubCategoryModel[];
+  SubCategoriesSelected:SubCategoryModel[] = [];
+  ImageSelected:ArrayBuffer[] = [];
   state$:Observable<MainPageState>;
   categorySelected:boolean;
 
 
-  constructor(private store:Store<AppState>, private fb: FormBuilder, private datePipe: DatePipe) { }
+  constructor(private store:Store<AppState>,
+              private fb: FormBuilder,
+              private datePipe: DatePipe,
+              private router: Router,
+              private SaveAuction: SaveAuctionService) { }
 
-  getControls(){
-    return (this.AuctionForm.get('SubCategory') as FormArray).controls;
-  }
 
   ngOnInit() {
     this.state$ = this.store.select('mainPage');
     this.AuctionForm = this.fb.group({
       ['name']: this.fb.control('',[Validators.required]),
 
-      ['Cat']:this.fb.group({
-        ['Category']: this.fb.control('',[Validators.required]),
-        ['SubCategory']: this.fb.array([],[Validators.required]),
-      },{validators:this.setSubCategories.bind(this), updateOn:"blur"}),
-
+      ['SubCategory']: this.fb.control(null,[Validators.required]),
 
       ['BuyPrice']: this.fb.control(null),
 
@@ -67,36 +68,68 @@ export class NewAuctionComponent implements OnInit{
         ['ENTime']: this.fb.control(null,[Validators.required])
       }),
 
-      ['Image']:this.fb.control(null,[Validators.required])
+      ['Image']:this.fb.array([])
     })
+  }
+
+
+  isSelected(Subcategory:SubCategoryModel){
+    return this.SubCategoriesSelected.find((sub)=> sub.id === Subcategory.id);
+  }
+
+  onFileChange(event,i){
+    let file:File = event.target.files[0];
+    let fileReader = new FileReader();
+    fileReader.onload = ()=>{
+      let data:ArrayBuffer = (fileReader.result as ArrayBuffer);
+      let arr = [];
+      let view = new DataView(data);
+      for(let i =0;i<view.byteLength;i++)
+        arr.push(view.getInt8(i));
+      (this.AuctionForm.get('Image') as FormArray).controls[i].reset();
+      (this.AuctionForm.get('Image') as FormArray).controls[i].setValue(arr);
+    };
+
+    fileReader.readAsArrayBuffer(file);
 
 
   }
 
-  setSubCategories(fg:FormGroup) {
-    const selectedCategory = fg.get('Category').value;
-    if(selectedCategory!=''){
-      this.SubCategories$ = this.store.pipe(
-        select('mainPage'),
-        map((state:MainPageState) =>{
-          return state.Categories;
-        }),
-        map((categories:CategoryModel[])=>{
-          return categories.find((category:CategoryModel)=> category.name === selectedCategory);
-        }),
-        map((category: CategoryModel)=>{
-          const Array =(fg.get('SubCategory') as FormArray);
-          Array.clear();
-          for(let SubCategory of category.SubCategories){
-            Array.push(this.fb.group({
-              [SubCategory.name]: this.fb.control('')
-            }))
-          }
-          return category.SubCategories;
-        })
-      );
-      this.categorySelected=true;
+  onCancel(){
+    this.router.navigateByUrl('main/home');
+  }
+
+  onSelectCategory(Category:CategoryModel){
+    this.SubCategoriesLoaded = Category.SubCategories;
+    this.categorySelected = true;
+  }
+
+  onDeleteImage(index){
+    (this.AuctionForm.get('Image') as FormArray).removeAt(index);
+  }
+
+  onAddImage(){
+    (this.AuctionForm.get('Image') as FormArray).push(
+      this.fb.control(null,Validators.required)
+    )
+  }
+
+  ToggleSubcategory(SubCategory: SubCategoryModel, model:HTMLButtonElement){
+
+    if(model.classList.contains('active')){
+      let index = this.SubCategoriesSelected.indexOf(SubCategory);
+      this.SubCategoriesSelected.splice(index,1);
+    }else{
+      this.SubCategoriesSelected.push(SubCategory);
     }
+
+    this.AuctionForm.get('SubCategory').setValue(this.SubCategoriesSelected)
+
+
+  }
+
+  getControlsImages(){
+    return (this.AuctionForm.get('Image') as FormArray).controls;
   }
 
   CheckStartTime(fg: FormGroup){
@@ -174,8 +207,13 @@ export class NewAuctionComponent implements OnInit{
   }
 
   onSubmit(){
-    if(this.CheckEndTime())
-      console.log(this.AuctionForm.value);
+    if(this.CheckEndTime()){
+      console.log(this.AuctionForm.value)
+      this.SaveAuction.PostAuction(this.AuctionForm.value).subscribe(()=>{
+        this.router.navigateByUrl('main/home');
+      },(err)=>{console.log(err)});
+
+    }
   }
 
 }
