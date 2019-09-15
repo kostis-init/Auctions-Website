@@ -42,7 +42,7 @@ export class SearchBarComponent implements OnInit {
 
     this.router.navigate(['/main/browse' ], {queryParams: {'category' : SearchCategory , 'text' : SearchQuery}});
 
-    this.results.getItems();
+    this.results.ngOnInit();
   }
 
   load_page(){

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ItemModel} from "../item.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-item',
@@ -11,13 +12,22 @@ export class ItemComponent implements OnInit {
 
   @Input() Item: ItemModel;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private dom: DomSanitizer) { }
 
   ngOnInit() {
+    let uints = new Uint8Array(this.Item.images[0]);
+    let stringchar = String.fromCharCode.apply(null, uints);
+    let base64 = btoa(stringchar);
+    this.Item.imageUrl = base64;
+
+    console.log(this.Item.categories)
+
   }
 
   goto_item(ItemID: number){
-    this.router.navigate(['/main/items', ItemID],{relativeTo: this.route});
+    this.router.navigateByUrl('/main/items/' + ItemID);
   }
 
 }

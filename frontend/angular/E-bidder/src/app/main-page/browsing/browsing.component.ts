@@ -13,11 +13,8 @@ import {Observable} from "rxjs";
 export class BrowsingComponent implements OnInit {
 
 
-  Items: ItemModel[] = [];
-
   readonly ROOT_URL = 'http://localhost:8080/restapi/api';
   ItemsObservable : Observable<ItemModel[]>;
-  items: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -54,6 +51,8 @@ export class BrowsingComponent implements OnInit {
     console.log(params.toString());
 
     this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/items/search', {params});
+
+    console.log('new items');
   }
 
 }
