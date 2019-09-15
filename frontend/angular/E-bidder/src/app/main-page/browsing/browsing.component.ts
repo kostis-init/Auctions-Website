@@ -23,36 +23,38 @@ export class BrowsingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      this.getItems();
+    });
     this.getItems();
   }
 
   public getItems() {
     let params = new HttpParams();
     let subcategory_id : string;
+    let query_Params : any;
 
-    if(this.route.snapshot.queryParamMap.has('subcategory')){
-      subcategory_id = this.route.snapshot.queryParamMap.get('subcategory');
+    /* subscribe to the query parameters for changes */
+    this.route.queryParams.subscribe(queryParams => { query_Params = queryParams});
+
+    if(query_Params['subcategory'] != null){
+      subcategory_id = query_Params['subcategory'];
     }
 
-    if(this.route.snapshot.queryParamMap.has('text')){
-      params = params.set('text', this.route.snapshot.queryParamMap.get('text'));
+    if(query_Params['text'] != null){
+      params = params.set('text', query_Params['text']);
     } else {
       this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/categories/items/' + subcategory_id);
       return;
     }
 
-    if(this.route.snapshot.queryParamMap.has('category')){
-      if (this.route.snapshot.queryParamMap.get('category') != '')
-      {
-        params = params.set('category', this.route.snapshot.queryParamMap.get('category'));
-      }
+    if(query_Params['category'] != ''){
+        params = params.set('category', query_Params['category']);
     }
 
     console.log(params.toString());
 
     this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/items/search', {params});
-
-    console.log('new items');
   }
 
 }

@@ -28,6 +28,14 @@ export class Shop_byComponent implements OnInit {
               private store: Store<MainPageState>) { }
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      return this.getSubcategories();
+    });
+
+    return this.getSubcategories();
+  }
+
+  getSubcategories() {
     const id = this.route.snapshot.paramMap.get('id');
     // this.CategoriesObservable = this.httpClient.get<CategoryModel[]>(this.ROOT_URL + '/categories/' + id);
 
