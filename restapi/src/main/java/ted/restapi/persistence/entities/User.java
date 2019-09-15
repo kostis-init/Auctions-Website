@@ -32,6 +32,8 @@ public class User{
     private String isApproved;
     private List<Bid> bids;
     private List<Item> items;
+    private List<Message> sentMessages;
+    private List<Message> receivedMessages;
 
     public User() { }
 
@@ -192,6 +194,14 @@ public class User{
     @OneToMany(mappedBy = "seller")
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }
+
+    @OneToMany(mappedBy = "sender")
+    public List<Message> getSentMessages() { return sentMessages; }
+    public void setSentMessages(List<Message> sentMessages) { this.sentMessages = sentMessages; }
+
+    @OneToMany(mappedBy = "receiver")
+    public List<Message> getReceivedMessages() { return receivedMessages; }
+    public void setReceivedMessages(List<Message> receivedMessages) { this.receivedMessages = receivedMessages; }
 
     @Override
     public boolean equals(Object o) {
