@@ -1,0 +1,94 @@
+<div class="my-5">
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{AuctionItem.name}}</h5>
+        <ul class="list-group list-group-flush card-text mb-3">
+          <li class="list-group-item"> Categories: {{AuctionItem.Categories}}</li>
+          <li class="list-group-item"> Start Date: {{AuctionItem.startedAt}}</li>
+          <li class="list-group-item"> End Date: {{AuctionItem.endsAt}}</li>
+          <li class="list-group-item">Buy Price: {{AuctionItem.buyPrice}}</li>
+          <li class="list-group-item">Current Bid: {{AuctionItem.firstBid}}</li>
+        </ul>
+
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <button type="button" class="btn btn-outline-primary mt-1 btn-block" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" [disabled]="!IsActive"
+                  aria-controls="collapseBasic">Show Bids
+          </button>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mt-1">
+          <button type="button" class="btn btn-outline-success btn-block"
+                  (click)="OpenModal(Edit)" [disabled]="IsActive">Edit</button>
+        </div>
+
+        <div class="col-md-4 col-sm-12 mt-1">
+         <button type="button" class="btn btn-outline-danger btn-block"
+                 (click)="OpenModal(delete)" [disabled]="IsActive">Delete</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+    <div class="well well-lg card card-block card-header mt-1" *ngIf="AuctionItem.bids===[]">
+      <div class="alert alert-info">
+        <p>No Bis Yet</p>
+      </div>
+    </div>
+
+    <div class="well well-lg card card-block card-header mt-1" *ngFor="let bid of AuctionItem.bids">
+
+
+      <ul class="list-group">
+        <li class="list-group-item"> User: {{bid.bidder.id}}</li>
+        <li class="list-group-item"> Amount: {{bid.amount}}</li>
+        <li class="list-group-item"> Date: {{bid.time}}</li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+</div>
+
+
+<ng-template #Edit>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Auction</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <p>Edit</p>
+  </div>
+</ng-template>
+
+
+<ng-template #delete>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Warning</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <h5>Are you sure you want to delete this auction?</h5>
+
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-block btn-danger" (click)="ItemDeleted(Index)">Delete</button>
+      </div>
+
+      <div class="col-6">
+        <button class="btn btn-block btn-info" (click)="CloseModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

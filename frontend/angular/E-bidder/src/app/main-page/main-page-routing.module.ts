@@ -7,6 +7,7 @@ import {BrowsingComponent} from "./browsing/browsing.component";
 import {Shop_byComponent} from "./shop_by/shop_by.component";
 import {NewAuctionComponent} from "./new-auction/new-auction.component";
 import {ItemPageComponent} from "./item-page/item-page.component";
+import {UserDashboardComponent} from "./user-dashboard/user-dashboard.component";
 
 
 const mainPageRoutes: Routes = [
@@ -17,7 +18,8 @@ const mainPageRoutes: Routes = [
       {path: 'categories', component: Shop_byComponent},
       {path: 'categories/:id', component: Shop_byComponent},
       {path: 'newAuction', component: NewAuctionComponent},
-      {path: 'items/:id', component: ItemPageComponent}
+      {path: 'items/:id', component: ItemPageComponent},
+      {path: 'dashboard',component:UserDashboardComponent}
     ]}
 
 ];

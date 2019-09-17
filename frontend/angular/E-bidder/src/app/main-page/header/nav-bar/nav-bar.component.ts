@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, TemplateRef} from '@angular/core';
 import {AppState} from "../../../store/app.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
@@ -22,6 +22,7 @@ export class NavBarComponent implements OnInit {
 
 
   categories: CategoryModel[];
+
 
   constructor(private store: Store<AppState>,
               private modalServise: BsModalService,

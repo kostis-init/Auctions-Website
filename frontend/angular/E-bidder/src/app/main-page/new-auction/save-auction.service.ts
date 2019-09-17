@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AuctionModel} from "../../shared/Models/Auction.model";
+import {itemModel} from "../../shared/Models/ItemModel";
 import {HttpClient} from "@angular/common/http";
 import {items} from "../../shared/server-endpoints";
 
@@ -16,7 +16,7 @@ export class SaveAuctionService {
 
 
 
-     let AuctionData = new AuctionModel(
+     let AuctionData = new itemModel(
        AuctionReceived.name,
        AuctionReceived.Description,
        StartDate,
@@ -52,8 +52,8 @@ export class SaveAuctionService {
     return converted;
   }
 
-  PostData(AuctionData:AuctionModel){
-    return this.http.post<AuctionModel>(items,AuctionData);
+  PostData(AuctionData:itemModel){
+    return this.http.post<itemModel>(items,AuctionData);
   }
 
   converImages(Images){

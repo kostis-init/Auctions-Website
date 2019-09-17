@@ -1,5 +1,11 @@
 import {CategoryModel} from "../../shared/Models/category.model";
-import {FETCH_SUBCATEGORIES, MainPageActions, SET_CATEGORIES, SET_SUBCATEGORIES} from "./main-page.action";
+import {
+  FETCH_SUBCATEGORIES,
+  MainPageActions,
+  SET_CATEGORIES,
+  SET_CATEGORIES_WITH_IMAGES,
+  SET_SUBCATEGORIES
+} from "./main-page.action";
 
 export interface MainPageState{
   Categories:CategoryModel[];
@@ -16,6 +22,19 @@ export function MainPageReducers(state = InitialState, action: MainPageActions):
     case SET_CATEGORIES:
       return {
         Categories: action.payload.Categories
+      };
+
+    case SET_CATEGORIES_WITH_IMAGES:
+      const oldCategories:CategoryModel[] = [...state.Categories];
+      for(let i=0; i<oldCategories.length; i++ ){
+          const newCategory = action.payload.Categories.find((category) => category.id === oldCategories[i].id)
+          oldCategories[i] = {
+            ...oldCategories[i],
+            imageUrl: newCategory.imageUrl
+          }
+      }
+      return {
+        Categories: oldCategories
       };
 
     case SET_SUBCATEGORIES:
@@ -35,9 +54,6 @@ export function MainPageReducers(state = InitialState, action: MainPageActions):
         ...state,
         Categories: categories
       };
-
-    case FETCH_SUBCATEGORIES:
-
 
     default:
       return state;

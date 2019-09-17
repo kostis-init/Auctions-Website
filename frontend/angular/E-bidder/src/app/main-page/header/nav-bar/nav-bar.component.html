@@ -13,13 +13,13 @@
           </ul>
         </li>
         <li class="nav-item m-1 mr-4">
-          <a class="nav-link btn" data-placement="top" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }" >User Dashboard</a>
+          <a class="nav-link btn" data-placement="top" routerLinkActive="active" routerLink="/main/dashboard"  [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }" >User Dashboard</a>
         </li>
         <li class="nav-item m-1 mr-4">
           <a class="nav-link btn" href="#" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }">Messages</a>
         </li>
         <li class="nav-item m-1 mr-4">
-          <a class="nav-link btn" href="#" routerLink="/main/newAuction" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }">New Auction</a>
+          <a class="nav-link btn" href="#" routerLink="/main/newAuction" routerLinkActive="active" [ngClass]="{ 'disabled': (AuthState$|async).userStatus === 'guest' }">New Auction</a>
         </li>
       </ul>
       <div class="login_buttons mr-3">

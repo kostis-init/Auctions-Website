@@ -38,6 +38,7 @@ export class Shop_byComponent implements OnInit {
   getSubcategories() {
     const id = this.route.snapshot.paramMap.get('id');
     // this.CategoriesObservable = this.httpClient.get<CategoryModel[]>(this.ROOT_URL + '/categories/' + id);
+    //fetch subcategory Images
 
     this.Category$ = this.store.pipe(select('mainPage'),
       map((state:MainPageState) => {

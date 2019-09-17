@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {Store} from "@ngrx/store";
 import {MainPageState} from "./store/main-page.reducer";
 import * as fromActions from './store/main-page.action';
-import {FetchSubCategories} from "./store/main-page.action";
-import {take} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 @Injectable()
