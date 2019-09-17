@@ -1,6 +1,7 @@
 package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.Objects;
                 "OR (m.receiver.id = ?1 AND m.sender.id = ?2)")
 })
 @Cacheable(false)
-public class Message {
+public class Message implements Serializable {
 
     private int id;
     private User sender;

@@ -1,6 +1,7 @@
 package ted.restapi.resources;
 
 import ted.restapi.beans.CategoryBean;
+import ted.restapi.beans.ItemBean;
 import ted.restapi.beans.Session;
 import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.GeneralCategoryDTO;
@@ -25,11 +26,12 @@ public class CategoryResource {
 
     @Inject private Session session;
     @Inject private CategoryBean categoryBean;
+    @Inject private ItemBean itemBean;
 
     @GET
     public Response getAll(){
         List<GeneralCategoryDTO> list = categoryBean.getGeneralCategories().stream()
-                .map(Mapper::toDTO).collect(Collectors.toList());
+                .map(Mapper::toDTONoImage).collect(Collectors.toList());
         return Response.ok(list).build();
     }
 
@@ -37,7 +39,7 @@ public class CategoryResource {
     @Path("{id}")
     public Response getCategoriesByGeneralCategoryId(@PathParam("id") int id){
         List<CategoryDTO> list = categoryBean.getCategoriesByGeneralCategoryId(id).stream()
-                .map(Mapper::toDTO).collect(Collectors.toList());
+                .map(Mapper::toDTONoImage).collect(Collectors.toList());
         return Response.ok(list).build();
     }
 
@@ -46,8 +48,19 @@ public class CategoryResource {
     public Response getItemsByCategoryId(@PathParam("id") int id){
         List<ItemDTO> itemsDTO = new ArrayList<>();
         List<Item> items = categoryBean.getItemsByCategoryId(id);
+        items = itemBean.getOnlyActiveItems(items);
         for (Item item : items) {
             itemsDTO.add(Mapper.toDTO(item));
+        }
+        //only 1 image
+        for (ItemDTO itemDTO : itemsDTO) {
+            List<byte[]> images = itemDTO.getImages();
+            if(!images.isEmpty()){
+                byte[] image = images.get(0);
+                images.clear();
+                images.add(image);
+            }
+            itemDTO.setImages(images);
         }
         return Response.ok(itemsDTO).build();
     }

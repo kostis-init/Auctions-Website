@@ -20,7 +20,7 @@ public class Mapper {
 
     public static ItemDTO toDTO(Item item){
         List<CategoryDTO> categories = item.getCategories().stream().map(Mapper::toDTONoImage).collect(Collectors.toList());
-        List<BidDTO> bids = item.getBids().stream().map(Mapper::toDTO).collect(Collectors.toList());
+        List<BidDTO> bids = item.getBids().stream().map(Mapper::toDTOtruncated).collect(Collectors.toList());
         List<byte[]> images = new ArrayList<>();
         for (ItemImage image : item.getImages()) {
             images.add(image.getImage());
@@ -36,7 +36,11 @@ public class Mapper {
         return new ItemDTO(item.getId(), item.getName(), item.getCurrentBid(), item.getBuyPrice(),
                 item.getFirstBid(), item.getNumberOfBids(), startedAt, endsAt,
                 item.getDescription(), item.getLatitude(), item.getLongitude(), item.getCity(),
-                item.getCountry(), Mapper.toDTO(item.getSeller()), categories, bids, images);
+                item.getCountry(), Mapper.toDTOtruncated(item.getSeller()), categories, bids, images);
+    }
+
+    private static UserDTO toDTOtruncated(User user) {
+        return new UserDTO(user.getId(), user.getUsername(), user.getBidderRating(), user.getSellerRating(), user.getAddress(), user.getCity(), user.getCountry());
     }
 
     public static CategoryDTO toDTO(Category category) {
@@ -49,6 +53,10 @@ public class Mapper {
 
     public static BidDTO toDTO(Bid bid) {
         return new BidDTO(bid.getId(), bid.getTime(), bid.getAmount(), Mapper.toDTO(bid.getBidder()));
+    }
+
+    public static BidDTO toDTOtruncated(Bid bid) {
+        return new BidDTO(bid.getId(), bid.getTime(), bid.getAmount(), Mapper.toDTOtruncated(bid.getBidder()));
     }
 
     public static GeneralCategoryDTO toDTO(GeneralCategory generalCategory) {

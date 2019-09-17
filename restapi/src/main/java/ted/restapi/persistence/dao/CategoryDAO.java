@@ -59,4 +59,8 @@ public class CategoryDAO {
         }
         return generalCategories.get(0).getImage();
     }
+
+    public List<Category> getCategories() {
+        return em.createNamedQuery("Category.findAll", Category.class).getResultList();
+    }
 }

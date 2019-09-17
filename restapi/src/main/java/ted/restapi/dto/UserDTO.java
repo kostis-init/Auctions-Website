@@ -42,6 +42,16 @@ public class UserDTO implements Serializable {
         this.country = country;
     }
 
+    public UserDTO(int id, String username, Double bidderRating, Double sellerRating, String address, String city, String country) {
+        this.id = id;
+        this.username = username;
+        this.bidderRating = bidderRating;
+        this.sellerRating = sellerRating;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+    }
+
     public int getId() {
         return id;
     }

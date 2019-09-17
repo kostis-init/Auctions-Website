@@ -3,6 +3,7 @@ package ted.restapi.persistence.entities;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ import java.util.Objects;
         @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = ?1")
 })
 @Cacheable(false)
-public class User{
+public class User implements Serializable {
     private int id;
     private String username;
     private String password;

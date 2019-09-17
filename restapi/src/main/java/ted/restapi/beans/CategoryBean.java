@@ -17,6 +17,10 @@ public class CategoryBean {
 
     public List<GeneralCategory> getGeneralCategories(){ return categoryDAO.getGeneralCategories(); }
 
+    public List<Category> getCategories(){
+        return categoryDAO.getCategories();
+    }
+
     public Category findById(int id) { return categoryDAO.findById(id); }
 
     public List<Category> getCategoriesByGeneralCategoryId(int id){

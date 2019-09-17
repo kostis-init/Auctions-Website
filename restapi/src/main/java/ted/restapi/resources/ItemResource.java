@@ -43,6 +43,17 @@ public class ItemResource {
         for (Item item : items) {
             itemsDTO.add(Mapper.toDTO(item));
         }
+        //only 1 image
+        for (ItemDTO itemDTO : itemsDTO) {
+            List<byte[]> images = itemDTO.getImages();
+            if(!images.isEmpty()){
+                byte[] image = images.get(0);
+                images.clear();
+                images.add(image);
+            }
+            itemDTO.setImages(images);
+        }
+
         return Response.ok(itemsDTO).build();
     }
 
@@ -77,6 +88,16 @@ public class ItemResource {
             return Response.ok(items).build();
         }
         List<ItemDTO> itemsDTO = items.stream().map(Mapper::toDTO).collect(Collectors.toList());
+        //only 1 image
+        for (ItemDTO itemDTO : itemsDTO) {
+            List<byte[]> images = itemDTO.getImages();
+            if(!images.isEmpty()){
+                byte[] image = images.get(0);
+                images.clear();
+                images.add(image);
+            }
+            itemDTO.setImages(images);
+        }
         return Response.ok(itemsDTO).build();
     }
 

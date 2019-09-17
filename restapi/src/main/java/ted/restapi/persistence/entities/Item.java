@@ -1,6 +1,7 @@
 package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Objects;
         @NamedQuery(name = "Item.findBySellerId", query = "SELECT i FROM Item i WHERE i.seller.id = ?1")
 })
 @Cacheable(false)
-public class Item {
+public class Item  implements Serializable {
     private int id;
     private String name;
     private Double currentBid;

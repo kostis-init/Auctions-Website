@@ -1,6 +1,7 @@
 package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
         @NamedQuery(name = "Bid.findAll", query = "SELECT b FROM Bid b")
 })
 @Cacheable(false)
-public class Bid{
+public class Bid implements Serializable {
     private int id;
     private Date time;
     private Double amount;

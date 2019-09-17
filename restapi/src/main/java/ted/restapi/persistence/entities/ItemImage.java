@@ -1,6 +1,7 @@
 package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
         @NamedQuery(name = "ItemImage.findAll", query = "SELECT i FROM ItemImage i")
 })
 @Cacheable(false)
-public class ItemImage {
+public class ItemImage implements Serializable {
     private int id;
     private Item item;
     private byte[] image;

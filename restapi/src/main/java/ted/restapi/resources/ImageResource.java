@@ -1,34 +1,44 @@
 package ted.restapi.resources;
 
 import ted.restapi.beans.CategoryBean;
+import ted.restapi.dto.CategoryDTO;
+import ted.restapi.dto.GeneralCategoryDTO;
+import ted.restapi.persistence.entities.Category;
+import ted.restapi.persistence.entities.GeneralCategory;
+import ted.restapi.util.Mapper;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestScoped
 @Path("images")
-@Produces("image/jpg")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ImageResource {
 
     @Inject private CategoryBean categoryBean;
 
     @GET
-    @Path("categories/{id}")
-    public Response categoryImage(@PathParam("id")int id){
-        return Response.ok(categoryBean.getGeneralCategoryImage(id)).build();
+    @Path("categories")
+    public Response categories(){
+        List<GeneralCategoryDTO> list = categoryBean.getGeneralCategories().stream()
+                .map(Mapper::toDTO).collect(Collectors.toList());
+        return Response.ok(list).build();
     }
 
     @GET
-    @Path("subcategories/{id}")
-    public Response subcategoryImage(@PathParam("id")int id){
-        return Response.ok(categoryBean.getCategoryImage(id)).build();
+    @Path("subcategories")
+    public Response subcategories(){
+        List<CategoryDTO> list = categoryBean.getCategories().stream()
+                .map(Mapper::toDTO).collect(Collectors.toList());
+        return Response.ok(list).build();
     }
-
 
 }

@@ -25,6 +25,34 @@ public class ItemBean {
         return itemDAO.findById(id);
     }
 
+    public Set<Item> getOnlyActiveItems(Set<Item> items) {
+        Set<Item> newItems = new HashSet<>();
+        for (Item item : items) {
+            Date currentDate = new Date();
+            // not started yet || has finished || has been bought
+            if(item.getStartedAt().after(currentDate) || item.getEndsAt().before(currentDate) || (item.getBuyPrice() != null && item.getCurrentBid() >= item.getBuyPrice())){
+                continue;
+            } else {
+                newItems.add(item);
+            }
+        }
+        return newItems;
+    }
+
+    public List<Item> getOnlyActiveItems(List<Item> items) {
+        List<Item> newItems = new ArrayList<>();
+        for (Item item : items) {
+            Date currentDate = new Date();
+            // not started yet || has finished || has been bought
+            if(item.getStartedAt().after(currentDate) || item.getEndsAt().before(currentDate) || (item.getBuyPrice() != null && item.getCurrentBid() >= item.getBuyPrice())){
+                continue;
+            } else {
+                newItems.add(item);
+            }
+        }
+        return newItems;
+    }
+
     public Set<Item> search(String text) {
         Set<Item> items = new HashSet<>();
         List<String> words = Arrays.asList(text.split(" "));
@@ -33,6 +61,8 @@ public class ItemBean {
             items.addAll(itemDAO.searchByWord(word));
             System.out.println(word + "\n" + items + "\n");
         }
+
+        items = getOnlyActiveItems(items);
 
         return items;
     }

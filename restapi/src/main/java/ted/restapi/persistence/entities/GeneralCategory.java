@@ -3,6 +3,7 @@ package ted.restapi.persistence.entities;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Objects;
         @NamedQuery(name = "GeneralCategory.findAll", query = "SELECT g FROM GeneralCategory g"),
         @NamedQuery(name = "GeneralCategory.findById", query = "SELECT g FROM GeneralCategory g WHERE g.id = ?1")
 })
-public class GeneralCategory {
+public class GeneralCategory implements Serializable {
     private int id;
     private String name;
     private byte[] image;

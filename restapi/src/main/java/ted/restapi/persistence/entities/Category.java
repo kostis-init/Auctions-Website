@@ -1,6 +1,7 @@
 package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Objects;
         @NamedQuery(name = "Category.findByGeneralCategoryId", query = "SELECT c FROM Category c WHERE c.generalCategory.id = ?1")
 
 })
-public class Category {
+public class Category implements Serializable {
     private int id;
     private String name;
     private byte[] image;
