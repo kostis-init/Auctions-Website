@@ -2,7 +2,7 @@ package ted.restapi.resources;
 
 import ted.restapi.beans.BidBean;
 import ted.restapi.beans.ItemBean;
-import ted.restapi.beans.Session;
+import ted.restapi.beans.SessionBean;
 import ted.restapi.dto.BidDTO;
 import ted.restapi.persistence.entities.Bid;
 
@@ -19,14 +19,14 @@ import java.util.Date;
 @Produces(MediaType.APPLICATION_JSON)
 public class BidResource {
 
-    @Inject private Session session;
+    @Inject private SessionBean sessionBean;
     @Inject private ItemBean itemBean;
     @Inject private BidBean bidBean;
 
     @POST
     @Path("{itemId}")
     public Response createBid(BidDTO bidDTO, @PathParam("itemId") int itemId){
-        Bid bid = new Bid(new Date(),bidDTO.getAmount(),session.getCurrentUser(),itemBean.getItemById(itemId));
+        Bid bid = new Bid(new Date(),bidDTO.getAmount(), sessionBean.getCurrentUser(),itemBean.getItemById(itemId));
         String result = bidBean.create(bid);
         if(result != null){
             return Response.status(400).entity(result).build();

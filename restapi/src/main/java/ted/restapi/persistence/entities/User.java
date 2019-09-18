@@ -1,5 +1,6 @@
 package ted.restapi.persistence.entities;
 
+import org.apache.openjpa.persistence.jdbc.Columns;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
@@ -33,8 +34,10 @@ public class User implements Serializable {
     private String isApproved;
     private List<Bid> bids;
     private List<Item> items;
+    private List<Item> boughtItems;
     private List<Message> sentMessages;
     private List<Message> receivedMessages;
+
 
     public User() { }
 
@@ -195,6 +198,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "seller")
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }
+
+    @OneToMany(mappedBy = "buyer")
+    public List<Item> getBoughtItems() { return boughtItems; }
+    public void setBoughtItems(List<Item> boughtItems) { this.boughtItems = boughtItems; }
 
     @OneToMany(mappedBy = "sender")
     public List<Message> getSentMessages() { return sentMessages; }

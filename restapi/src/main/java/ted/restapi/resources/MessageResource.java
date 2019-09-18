@@ -1,10 +1,9 @@
 package ted.restapi.resources;
 
 import ted.restapi.beans.MessageBean;
-import ted.restapi.beans.Session;
+import ted.restapi.beans.SessionBean;
 import ted.restapi.beans.UserBean;
 import ted.restapi.dto.MessageDTO;
-import ted.restapi.dto.UserDTO;
 import ted.restapi.persistence.entities.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -21,14 +20,14 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class MessageResource {
 
-    @Inject private Session session;
+    @Inject private SessionBean sessionBean;
     @Inject private MessageBean messageBean;
     @Inject private UserBean userBean;
 
     @GET
     @Path("{userId}")
     public Response getChat(@PathParam("userId")int id){
-        User currentUser = session.getCurrentUser();
+        User currentUser = sessionBean.getCurrentUser();
         User otherUser = userBean.findById(id);
         if(otherUser == null){
             return Response.status(400).entity("No other user found").build();
@@ -41,7 +40,7 @@ public class MessageResource {
     @POST
     @Path("{userId}")
     public Response sendMessage(MessageDTO messageDTO, @PathParam("userId")int id){
-        User currentUser = session.getCurrentUser();
+        User currentUser = sessionBean.getCurrentUser();
         User otherUser = userBean.findById(id);
         if(otherUser == null){
             return Response.status(400).entity("No other user found").build();

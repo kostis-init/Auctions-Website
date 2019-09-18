@@ -1,6 +1,6 @@
 package ted.restapi.filters;
 
-import ted.restapi.beans.Session;
+import ted.restapi.beans.SessionBean;
 import ted.restapi.util.JWT;
 
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class AuthFilter implements Filter {
 
-    @Inject private Session session;
+    @Inject private SessionBean sessionBean;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException { }
@@ -26,7 +26,7 @@ public class AuthFilter implements Filter {
             return;
         }
 
-        String result = session.setCurrentUser(username);
+        String result = sessionBean.setCurrentUser(username);
         if(result != null){
             ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().print("Current user not found");

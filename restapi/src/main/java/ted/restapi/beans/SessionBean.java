@@ -2,17 +2,15 @@ package ted.restapi.beans;
 
 import ted.restapi.persistence.entities.User;
 
-import javax.ejb.DependsOn;
-import javax.ejb.LocalBean;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.ejb.*;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import java.io.Serializable;
 
-@Singleton
+@SessionScoped
+@Stateful
 @LocalBean
-@Startup
-@DependsOn("UserBean")
-public class Session {
+public class SessionBean implements Serializable {
 
     @Inject private UserBean userBean;
 

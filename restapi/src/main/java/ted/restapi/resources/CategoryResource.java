@@ -2,7 +2,7 @@ package ted.restapi.resources;
 
 import ted.restapi.beans.CategoryBean;
 import ted.restapi.beans.ItemBean;
-import ted.restapi.beans.Session;
+import ted.restapi.beans.SessionBean;
 import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.GeneralCategoryDTO;
 import ted.restapi.dto.ItemDTO;
@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 public class CategoryResource {
 
-    @Inject private Session session;
     @Inject private CategoryBean categoryBean;
     @Inject private ItemBean itemBean;
 

@@ -11,7 +11,8 @@ import java.util.Objects;
 @Table(name = "item")
 @NamedQueries({
         @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
-        @NamedQuery(name = "Item.search", query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE ?1"),
+        @NamedQuery(name = "Item.findByState", query = "SELECT i FROM Item i WHERE i.state = ?1"),
+        @NamedQuery(name = "Item.searchByState", query = "SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(?1) AND i.state = ?2"),
         @NamedQuery(name = "Item.findByName", query = "SELECT i FROM Item i WHERE LOWER(i.name) = LOWER(?1)"),
         @NamedQuery(name = "Item.findBySellerId", query = "SELECT i FROM Item i WHERE i.seller.id = ?1")
 })
@@ -30,10 +31,13 @@ public class Item  implements Serializable {
     private BigDecimal longitude;
     private String city;
     private String country;
+    private String state;
     private List<Bid> bids;
     private User seller;
+    private User buyer;
     private List<Category> categories;
     private List<ItemImage> images;
+
 
     public Item(){}
 
@@ -138,6 +142,10 @@ public class Item  implements Serializable {
         this.country = country;
     }
 
+    @Column(name = "state")
+    public String getState() { return state; }
+    public void setState(String state) { this.state = state; }
+
     @OneToMany(mappedBy = "item")
     public List<Bid> getBids() { return bids; }
     public void setBids(List<Bid> bids) { this.bids = bids; }
@@ -146,6 +154,11 @@ public class Item  implements Serializable {
     @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
     public User getSeller() { return seller; }
     public void setSeller(User user) { this.seller = user; }
+
+    @ManyToOne
+    @JoinColumn(name = "buyer_id", referencedColumnName = "user_id")
+    public User getBuyer() { return buyer; }
+    public void setBuyer(User buyer) { this.buyer = buyer; }
 
     @ManyToMany
     @JoinTable(name = "item_category",

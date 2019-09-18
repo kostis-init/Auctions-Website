@@ -4,10 +4,13 @@ import ted.restapi.persistence.dao.ItemDAO;
 import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
 import ted.restapi.persistence.entities.ItemImage;
+import ted.restapi.persistence.entities.User;
+import ted.restapi.util.Constants;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 import java.util.*;
 
 @Stateless
@@ -25,28 +28,10 @@ public class ItemBean {
         return itemDAO.findById(id);
     }
 
-    public Set<Item> getOnlyActiveItems(Set<Item> items) {
-        Set<Item> newItems = new HashSet<>();
-        for (Item item : items) {
-            Date currentDate = new Date();
-            // not started yet || has finished || has been bought
-            if(item.getStartedAt().after(currentDate) || item.getEndsAt().before(currentDate) || (item.getBuyPrice() != null && item.getCurrentBid() >= item.getBuyPrice())){
-                continue;
-            } else {
-                newItems.add(item);
-            }
-        }
-        return newItems;
-    }
-
     public List<Item> getOnlyActiveItems(List<Item> items) {
         List<Item> newItems = new ArrayList<>();
         for (Item item : items) {
-            Date currentDate = new Date();
-            // not started yet || has finished || has been bought
-            if(item.getStartedAt().after(currentDate) || item.getEndsAt().before(currentDate) || (item.getBuyPrice() != null && item.getCurrentBid() >= item.getBuyPrice())){
-                continue;
-            } else {
+            if(item.getState().equals(Constants.ITEM_ACTIVE_STATE)){
                 newItems.add(item);
             }
         }
@@ -61,8 +46,6 @@ public class ItemBean {
             items.addAll(itemDAO.searchByWord(word));
             System.out.println(word + "\n" + items + "\n");
         }
-
-        items = getOnlyActiveItems(items);
 
         return items;
     }
@@ -147,7 +130,35 @@ public class ItemBean {
         itemDAO.updateItemImage(itemImage);
     }
 
-    public void delete(Item item) {
+    public String delete(User currentUser, Item item) {
+        if(item == null){
+            return "Item not found";
+        }
+        if(item.getSeller().getId() != currentUser.getId()){
+            return "Cannot delete an item of another user";
+        }
+        if(item.getNumberOfBids() > 0){
+            return "Cannot delete an item that someone has made a bid";
+        }
+
         itemDAO.delete(item);
+        return null;
+    }
+
+    public String buyNow(User currentUser, Item item) {
+        if(item == null){
+            return "Item not found";
+        }
+        if(item.getBuyPrice() == null){
+            return "Item has no buy price";
+        }
+
+        item.setCurrentBid(item.getBuyPrice());
+        item.setState(Constants.ITEM_ENDED_STATE);
+        currentUser.getBoughtItems().add(item);
+        item.setBuyer(currentUser);
+        itemDAO.update(item);
+
+        return null;
     }
 }

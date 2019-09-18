@@ -2,7 +2,7 @@ package ted.restapi.resources;
 
 import ted.restapi.beans.CategoryBean;
 import ted.restapi.beans.ItemBean;
-import ted.restapi.beans.Session;
+import ted.restapi.beans.SessionBean;
 import ted.restapi.dto.CategoryDTO;
 import ted.restapi.dto.ItemDTO;
 import ted.restapi.persistence.entities.Category;
@@ -14,8 +14,6 @@ import ted.restapi.util.Mapper;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,7 +28,7 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 public class ItemResource {
 
-    @Inject private Session session;
+    @Inject private SessionBean sessionBean;
     @Inject private ItemBean itemBean;
     @Inject private CategoryBean categoryBean;
 
@@ -39,7 +37,7 @@ public class ItemResource {
     @GET
     public Response getItemsOfCurrentUser(){
         List<ItemDTO> itemsDTO = new ArrayList<>();
-        List<Item> items = itemBean.getItemsBySellerId(session.getCurrentUser().getId());
+        List<Item> items = itemBean.getItemsBySellerId(sessionBean.getCurrentUser().getId());
         for (Item item : items) {
             itemsDTO.add(Mapper.toDTO(item));
         }
@@ -103,7 +101,7 @@ public class ItemResource {
 
     @POST
     public Response createItem(ItemDTO itemDTO) {
-        User currentUser = session.getCurrentUser();
+        User currentUser = sessionBean.getCurrentUser();
         try{
             Date startedAt = simpleDateFormat.parse(itemDTO.getStartedAt());
             Date endsAt = simpleDateFormat.parse(itemDTO.getEndsAt());
@@ -140,10 +138,11 @@ public class ItemResource {
 
     }
 
+    //TODO: check update for images
     @PUT
     @Path("{id}")
     public Response editItem(ItemDTO itemDTO, @PathParam("id") int id){
-        User currentUser = session.getCurrentUser();
+        User currentUser = sessionBean.getCurrentUser();
         Item item = itemBean.getItemById(id);
         if(item == null){
             return Response.status(400).entity("Item not found").build();
@@ -193,18 +192,24 @@ public class ItemResource {
     @DELETE
     @Path("{id}")
     public Response deleteItem(@PathParam("id") int id){
-        User currentUser = session.getCurrentUser();
+        User currentUser = sessionBean.getCurrentUser();
         Item item = itemBean.getItemById(id);
-        if(item == null){
-            return Response.status(400).entity("Item not found").build();
+        String result = itemBean.delete(currentUser, item);
+        if(result != null){
+            return Response.status(400).entity(result).build();
         }
-        if(item.getSeller().getId() != currentUser.getId()){
-            return Response.status(400).entity("Cannot delete an item of another user").build();
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("{id}/buynow")
+    public Response buyNow(@PathParam("id") int id){
+        User currentUser = sessionBean.getCurrentUser();
+        Item item = itemBean.getItemById(id);
+        String result = itemBean.buyNow(currentUser, item);
+        if(result != null){
+            return Response.status(400).entity(result).build();
         }
-        if(item.getNumberOfBids() > 0){
-            return Response.status(400).entity("Cannot delete an item that someone has made a bid").build();
-        }
-        itemBean.delete(item);
         return Response.ok().build();
     }
 

@@ -3,6 +3,7 @@ package ted.restapi.persistence.dao;
 import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.Item;
 import ted.restapi.persistence.entities.ItemImage;
+import ted.restapi.util.Constants;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +17,21 @@ public class ItemDAO {
     @PersistenceContext(unitName = "restapi_PU")
     private EntityManager em;
 
-    public List<Item> getAll() { return em.createNamedQuery("Item.findAll", Item.class).getResultList(); }
+    public List<Item> getAll() {
+        return em.createNamedQuery("Item.findAll", Item.class).getResultList();
+    }
+
+    public List<Item> getReadyItems() {
+        return em.createNamedQuery("Item.findByState", Item.class).setParameter(1, Constants.ITEM_READY_STATE).getResultList();
+    }
+
+    public List<Item> getActiveItems() {
+        return em.createNamedQuery("Item.findByState", Item.class).setParameter(1, Constants.ITEM_ACTIVE_STATE).getResultList();
+    }
+
+    public List<Item> getEndedItems() {
+        return em.createNamedQuery("Item.findByState", Item.class).setParameter(1, Constants.ITEM_ENDED_STATE).getResultList();
+    }
 
     public Item findById(int id) { return em.find(Item.class, id); }
 
@@ -36,8 +51,8 @@ public class ItemDAO {
     }
 
     public List<Item> searchByWord(String word) {
-        return em.createNamedQuery("Item.search", Item.class)
-                .setParameter(1, "%" + word + "%").getResultList();
+        return em.createNamedQuery("Item.searchByState", Item.class)
+                .setParameter(1, "%" + word + "%").setParameter(2, Constants.ITEM_ACTIVE_STATE).getResultList();
     }
 
     public Item findByName(String name) {
