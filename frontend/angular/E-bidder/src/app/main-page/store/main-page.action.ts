@@ -15,7 +15,7 @@ export class SetCategoriesImages{
   constructor(public payload:{Categories:CategoryModel[]}){};
 }
 
-export class SetSubCategoriedImages {
+export class SetSubCategoriesImages {
   readonly type = SET_SUBCATEGORIES_IMAGES;
   constructor(public  payload:{SubCategories:SubCategoryModel[], GeneralCategoryId:number}){};
 
@@ -51,4 +51,4 @@ export class SetSubCategory {
   constructor(public payload: {SubCategories:SubCategoryModel[], GeneralCategoryId:number}) {}
 }
 
-export type MainPageActions = FetchCategories | FetchSubCategories | SetCategories | SetSubCategory | SetSubCategoriedImages | SetCategoriesImages;
+export type MainPageActions = FetchCategories | FetchSubCategories | SetCategories | SetSubCategory | SetSubCategoriesImages | SetCategoriesImages | FetchSubCategoriesImages | FetchCategoriesImages;

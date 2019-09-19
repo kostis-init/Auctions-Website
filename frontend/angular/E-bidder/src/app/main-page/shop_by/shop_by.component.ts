@@ -6,8 +6,9 @@ import {ActivatedRoute} from "@angular/router";
 import {CategoryModel} from "../../shared/Models/category.model";
 import {MainPageState} from "../store/main-page.reducer";
 import {select, Store} from "@ngrx/store";
-import {map} from "rxjs/operators";
-import {DomSanitizer} from "@angular/platform-browser";
+import {map, take, takeUntil} from "rxjs/operators";
+import {FetchSubCategoriesImages} from "../store/main-page.action";
+
 
 @Component({
   selector: 'app-shop_by',
@@ -15,12 +16,9 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./shop_by.component.css']
 })
 export class Shop_byComponent implements OnInit {
-
-  // readonly ROOT_URL = 'http://localhost:8080/restapi/api';
-  // CategoriesObservable : Observable<CategoryModel[]>;
   Category$:Observable<CategoryModel>;
-
   categories: CategoryModel;
+  state$:Observable<MainPageState>;
 
   constructor(private router : Router,
               private route: ActivatedRoute,
@@ -28,25 +26,39 @@ export class Shop_byComponent implements OnInit {
               private store: Store<MainPageState>) { }
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.state$=this.store.select('mainPage');
+
     this.router.events.subscribe((event) => {
       return this.getSubcategories();
     });
-
     return this.getSubcategories();
   }
 
   getSubcategories() {
     const id = this.route.snapshot.paramMap.get('id');
-    // this.CategoriesObservable = this.httpClient.get<CategoryModel[]>(this.ROOT_URL + '/categories/' + id);
-    //fetch subcategory Images
 
     this.Category$ = this.store.pipe(select('mainPage'),
       map((state:MainPageState) => {
         return state.Categories
       }),
       map((categories:CategoryModel[]) =>{
-        return categories.find((category:CategoryModel)=> category.id === +id);
-      }))
+        let category = categories.find((category:CategoryModel)=> category.id === +id);
+        if(category!=null){
+          // this.store.dispatch(new FetchSubCategoriesImages({GeneralCategoryId: category.id}));
+          return category;
+        }
+      }));
+
+    // this.Category$.subscribe((category)=>{
+    //   if(category!=null){
+    //     this.store.dispatch(new FetchSubCategoriesImages({GeneralCategoryId: category.id}))
+    //   }
+    // })
+
+
+
+
   }
 
 }

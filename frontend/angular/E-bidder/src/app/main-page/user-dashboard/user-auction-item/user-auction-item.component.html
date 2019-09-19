@@ -4,11 +4,17 @@
     <div class="card-body">
       <h5 class="card-title">{{AuctionItem.name}}</h5>
         <ul class="list-group list-group-flush card-text mb-3">
-          <li class="list-group-item"> Categories: {{AuctionItem.Categories}}</li>
-          <li class="list-group-item"> Start Date: {{AuctionItem.startedAt}}</li>
-          <li class="list-group-item"> End Date: {{AuctionItem.endsAt}}</li>
+          <li class="list-group-item">Categories: {{Categories}}</li>
+          <li class="list-group-item">Start Date: {{AuctionItem.startedAt}}</li>
+          <li class="list-group-item">End Date: {{AuctionItem.endsAt}}</li>
           <li class="list-group-item">Buy Price: {{AuctionItem.buyPrice}}</li>
-          <li class="list-group-item">Current Bid: {{AuctionItem.firstBid}}</li>
+          <li class="list-group-item">First Bid: {{AuctionItem.firstBid}}</li>
+          <li class="list-group-item">Current Bid: {{AuctionItem.currentBid}}</li>
+          <li class="list-group-item">Description:
+            <p>
+              {{AuctionItem.description}}
+            </p>
+          </li>
         </ul>
 
       <div class="row">
@@ -36,7 +42,7 @@
 
 
   <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-    <div class="well well-lg card card-block card-header mt-1" *ngIf="AuctionItem.bids===[]">
+    <div class="well well-lg card card-block card-header mt-1" *ngIf="AuctionItem.bids.length===0">
       <div class="alert alert-info">
         <p>No Bis Yet</p>
       </div>
@@ -46,8 +52,8 @@
 
 
       <ul class="list-group">
-        <li class="list-group-item"> User: {{bid.bidder.id}}</li>
-        <li class="list-group-item"> Amount: {{bid.amount}}</li>
+        <li class="list-group-item"> User: {{bid.bidder.username}}</li>
+        <li class="list-group-item"> Amount: {{bid.amount}} &#8364; </li>
         <li class="list-group-item"> Date: {{bid.time}}</li>
       </ul>
     </div>
@@ -65,7 +71,7 @@
   </div>
 
   <div class="modal-body">
-    <p>Edit</p>
+    <app-new-auction-form [EditMode]="true"></app-new-auction-form>
   </div>
 </ng-template>
 

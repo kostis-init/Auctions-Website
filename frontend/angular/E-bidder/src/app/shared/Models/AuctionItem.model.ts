@@ -2,7 +2,8 @@ import {BidModel} from "./Bid.model";
 import {BidderSellerModel} from "./Bidder-Seller.model";
 
 export class AuctionItemModel {
-  constructor(public name:string,
+  constructor(public id:number,
+              public name:string,
               public description:string,
               public currentBid:number,
               public firstBid:number,
@@ -14,7 +15,7 @@ export class AuctionItemModel {
               public longitude:string,
               public country:string,
               public city:string,
-              public Categories:{id: number, name:string}[],
+              public categories:{id: number, name:string}[],
               public seller:BidderSellerModel,
               public bids:BidModel[]){}
 }

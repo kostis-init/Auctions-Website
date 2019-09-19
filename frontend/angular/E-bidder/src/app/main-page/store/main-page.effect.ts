@@ -1,13 +1,13 @@
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {HttpClient} from "@angular/common/http";
 import {
-  FETCH_CATEGORIES, FETCH_CATEGORIES_WITH_IMAGES, FETCH_SUBCATEGORIES,
-  FetchCategories, FetchSubCategories,
-  SET_CATEGORIES, SET_CATEGORIES_WITH_IMAGES, SET_SUBCATEGORIES, SetCategories, SetSubCategory,
+  FETCH_CATEGORIES, FETCH_CATEGORIES_WITH_IMAGES, FETCH_SUBCATEGORIES, FETCH_SUBCATEGORIES_IMAGES,
+  FetchCategories, FetchCategoriesImages, FetchSubCategories,
+  SET_CATEGORIES, SET_CATEGORIES_WITH_IMAGES, SET_SUBCATEGORIES, SetCategories, SetSubCategoriesImages, SetSubCategory,
 } from "./main-page.action";
 import {map, mergeMap, switchMap} from "rxjs/operators";
 import {CategoryModel} from "../../shared/Models/category.model";
-import {categories, categoryImages} from "../../shared/server-endpoints";
+import {categories, categoryImages, subCategoryImages} from "../../shared/server-endpoints";
 import {SubCategoryModel} from "../../shared/Models/subCategory.model";
 import {Observable, of} from "rxjs";
 import {Store} from "@ngrx/store";
@@ -31,7 +31,7 @@ export class MainPageEffect {
     map((categories:FetchedCategoriesModel[]) =>{
       let cat:CategoryModel[]=[];
       for (let category of categories){
-        cat.push(new CategoryModel(category.name, category.id));
+        cat.push(new CategoryModel(category.name, category.id,null));
       }
       return{
         type: SET_CATEGORIES,
@@ -49,7 +49,7 @@ export class MainPageEffect {
     map((categories:FetchedCategoriesModel[]) =>{
       let cat:CategoryModel[]=[];
       for (let category of categories){
-        let NewCategory = new CategoryModel(category.name,category.id);
+        let NewCategory = new CategoryModel(category.name,category.id,null);
         let uints = new Uint8Array(category.image);
         let stringchar = String.fromCharCode.apply(null, uints);
         let base64 = btoa(stringchar);
@@ -93,7 +93,27 @@ export class MainPageEffect {
         this.store.dispatch(new SetSubCategory({SubCategories: result, GeneralCategoryId: res[1].payload.GeneralCategoryId}))
       });
     }),
+  );
 
-
+  @Effect()
+  fetchSubCategoriesImages = this.action$.pipe(
+    ofType(FETCH_SUBCATEGORIES_IMAGES),
+    switchMap((action:FetchSubCategories) =>{
+      return of( [this.http.get<FetchedSubCategoriesModel[]>(subCategoryImages + '/' + action.payload.GeneralCategoryId),action])
+    }),
+    map((res:Array<any>) =>{
+      res[0].subscribe((s:FetchedSubCategoriesModel[])=>{
+        let result:SubCategoryModel[]=[];
+        for(let subCategory of s){
+          let newSub = new SubCategoryModel(subCategory.name,subCategory.id);
+          let uints = new Uint8Array(subCategory.image);
+          let stringchar = String.fromCharCode.apply(null, uints);
+          let base64 = btoa(stringchar);
+          newSub.imageUrl = base64;
+          result.push(newSub);
+        }
+        this.store.dispatch(new SetSubCategoriesImages({SubCategories: result, GeneralCategoryId: res[1].payload.GeneralCategoryId}))
+      });
+    }),
   )
 }

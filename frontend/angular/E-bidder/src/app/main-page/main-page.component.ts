@@ -14,15 +14,12 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class MainPageComponent implements OnInit {
 
-  categoryUrl: string;
 
   constructor(private http: HttpClient, private store: Store<MainPageState>, private dom: DomSanitizer) { }
 
-  categories$: Observable<MainPageState>;
 
   ngOnInit() {
     this.store.dispatch(new fromActions.FetchCategories());
-    this.categories$ = this.store.select('mainPage');
   }
 
 }

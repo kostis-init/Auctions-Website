@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {itemModel} from "../../shared/Models/ItemModel";
+import {itemModel} from "../Models/ItemModel";
 import {HttpClient} from "@angular/common/http";
-import {items} from "../../shared/server-endpoints";
+import {items} from "../server-endpoints";
 
 @Injectable()
 export class SaveAuctionService {

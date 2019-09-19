@@ -14,7 +14,7 @@ import {ItemComponent} from "./browsing/item/item.component";
 import {Shop_byComponent} from "./shop_by/shop_by.component";
 import {Shop_byCategoryItemComponent} from "./shop_by/shop_by-category-item/shop_by-category-item.component";
 import {ItemPageComponent} from "./item-page/item-page.component";
-import {CollapseModule, ModalModule} from "ngx-bootstrap";
+import {CollapseModule, ModalModule, PaginationModule} from "ngx-bootstrap";
 import {AuthModule} from "../auth/auth.module";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -23,7 +23,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import {NavBarDropdownItemComponent} from "./header/nav-bar/dropdown-item/nav-bar-dropdown-item.component";
 import {FooterComponent} from "./footer/footer.component";
-import {SaveAuctionService} from "./new-auction/save-auction.service";
+import {SaveAuctionService} from "../shared/new-auction-form/save-auction.service";
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserAuctionItemComponent } from './user-dashboard/user-auction-item/user-auction-item.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -57,6 +57,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ReactiveFormsModule,
     MainPageRoutingModule,
     ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     HttpClientModule,
     SharedModule,
     AuthModule,
@@ -64,6 +65,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CollapseModule
 
   ],
-  providers:[DatePipe,SaveAuctionService]
+  providers:[DatePipe]
 })
 export class MainPageModule { }

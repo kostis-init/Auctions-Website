@@ -17,12 +17,22 @@ export class UserAuctionItemComponent implements OnInit {
   isCollapsed = true;
   IsActive:boolean;
   modalRef: BsModalRef;
+  Categories:string[]=[];
   constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
     this.CheckIfAuctionHasStarted(this.AuctionItem.startedAt);
-    console.log(this.AuctionItem.bids ===null);
+    console.log(this.AuctionItem);
+    this.GetCategories(this.AuctionItem.categories);
   }
+
+  GetCategories(categories){
+    // console.log(categories);
+    for (let category of categories){
+      this.Categories.push(category.name);
+    }
+  }
+
 
   OpenModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -41,7 +51,7 @@ export class UserAuctionItemComponent implements OnInit {
     str[3]=strTime[0];
     str.push(strTime[1]);
     str.push(strTime[2]);
-    return new Date(str[2],str[1]-1,str[0],str[3],str[4],str[5]);
+    return new Date(str[0],str[1]-1,str[2],str[3],str[4],str[5]);
   }
 
   CheckIfAuctionHasStarted(AuctionDate){
@@ -52,6 +62,7 @@ export class UserAuctionItemComponent implements OnInit {
   ItemDeleted(index){
     //send delete req to server;
     this.AuctionDeleted.emit(index);
+    this.modalRef.hide();
   }
 
   Update(NewAuction){
