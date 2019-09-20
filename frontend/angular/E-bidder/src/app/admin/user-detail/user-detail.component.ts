@@ -15,6 +15,7 @@ import {take} from "rxjs/operators";
 export class UserDetailComponent implements OnInit {
 
   usersState: Observable<fromAdmin.State>;
+  CurrentUser:UserDataModel;
   index: number;
   constructor(private route: ActivatedRoute,
               private store: Store<fromAdmin.FeatureState>,
@@ -25,9 +26,15 @@ export class UserDetailComponent implements OnInit {
       (params: Params) =>{
         this.index = +params['id'];
         this.usersState = this.store.select('users');
+        this.usersState.subscribe((use)=>{
+          this.CurrentUser = use.users[this.index];
+          }
+        )
       }
     )
   }
+
+
 
   onApprove(){
     this.store.dispatch( new fromActions.AproveSignup({index: this.index}));

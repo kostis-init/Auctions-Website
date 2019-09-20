@@ -7,7 +7,7 @@ export class UserDataModel {
     public firstName: string,
     public lastName: string,
     public email:string,
-    public telephoneNumber:number,
+    public telephoneNum:number,
     public country: string,
     public city: string,
     public address:string,

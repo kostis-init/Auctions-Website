@@ -105,7 +105,9 @@ export class AuthService {
         afm: userData.Afm,
         address: userData.Address,
         city: userData.City,
-        country: userData.Country
+        country: userData.Country,
+        latitude:userData.Latitude,
+        longitude:userData.Longitude,
       });
   }
 

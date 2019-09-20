@@ -7,8 +7,6 @@ export class itemModel {
               public firstBid:number,
               public buyPrice:number,
               public images:any[][],
-              public latitude:number,
-              public longitude:number,
               public categories:Array<any>){}
 }
 

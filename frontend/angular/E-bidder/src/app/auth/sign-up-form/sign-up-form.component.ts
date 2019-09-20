@@ -36,7 +36,6 @@ export class SignUpFormComponent{
 
   onSignup(form: NgForm){
 
-    console.log(form);
     const User:UserSignupModel = this.setUpUser(form);
     this.auth.SignUp(User).
     subscribe(() => {
@@ -67,7 +66,6 @@ export class SignUpFormComponent{
       form.form.value.longitude
     );
 
-    console.log(User);
     return User;
   }
 

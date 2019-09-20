@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import {itemModel} from "../Models/ItemModel";
 import {HttpClient} from "@angular/common/http";
 import {items} from "../server-endpoints";
+import {catchError} from "rxjs/operators";
+import {ErrorHandlerService} from "../error-handler.service";
 
 @Injectable()
 export class SaveAuctionService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private ErrorHandler:ErrorHandlerService) { }
   PostAuction(AuctionReceived){
      let StartDate = this.convertStartDate(AuctionReceived.StartDate);
      let EndDate = this.convertEndDate(AuctionReceived.EndDate);
@@ -24,12 +26,7 @@ export class SaveAuctionService {
        AuctionReceived.StartingBid,
        AuctionReceived.BuyPrice,
        images,
-       AuctionReceived.Location.Lat,
-       AuctionReceived.Location.Lot,
        Categories);
-
-     console.log(JSON.stringify(AuctionData));
-
      return this.PostData(AuctionData);
   }
 
@@ -53,7 +50,9 @@ export class SaveAuctionService {
   }
 
   PostData(AuctionData:itemModel){
-    return this.http.post<itemModel>(items,AuctionData);
+    return this.http.post<itemModel>(items,AuctionData).pipe(
+      catchError(this.ErrorHandler.HttpErrorHandle)
+    );
   }
 
   converImages(Images){
