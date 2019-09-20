@@ -93,3 +93,98 @@
 .shopbycard:hover {
   background-color: #dadada;
 }
+
+.thumbs {
+  width: 15%;
+  float: left;
+  margin-right: 1%;
+}
+
+.thumbs a {
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  border: 1px solid #e2e2e3;
+  display: block;
+  margin-bottom: 8px;
+  position: relative;
+  width: 100%;
+}
+
+.thumbs a.active {
+  border-color: #086fcf;
+}
+
+.thumbs a.active:hover {
+  border-color: #086fcf;
+}
+
+.thumbs a:hover {
+  border-color: #b5b6bd;
+}
+
+.thumbs img {
+  display: block;
+  width: 100%;
+}
+
+.big {
+  width: 83.5%;
+  float: right;
+  margin-right: 0;
+}
+
+.big .img {
+  -moz-transition: all 600ms ease-out 0s;
+  -o-transition: all 600ms ease-out 0s;
+  -webkit-transition: all 600ms ease-out;
+  -webkit-transition-delay: 0s;
+  transition: all 600ms ease-out 0s;
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  background: transparent no-repeat center center;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  -webkit-background-size: contain;
+  background-size: contain;
+  border: 1px solid #e2e2e3;
+  display: block;
+  height: 0;
+  opacity: 1;
+  padding-bottom: 133%;
+}
+
+.big .img.animate {
+  -moz-transition: all 0ms ease-out 0s;
+  -o-transition: all 0ms ease-out 0s;
+  -webkit-transition: all 0ms ease-out;
+  -webkit-transition-delay: 0s;
+  transition: all 0ms ease-out 0s;
+  -moz-transform: translateY(-30px);
+  -ms-transform: translateY(-30px);
+  -webkit-transform: translateY(-30px);
+  transform: translateY(-30px);
+  opacity: 0;
+}
+
+.big #banner-gallery {
+  display: none;
+}
+
+.left-col {
+  margin-left: 10%;
+}
+
+.bids {
+
+}
+
