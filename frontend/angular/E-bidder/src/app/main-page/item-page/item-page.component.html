@@ -125,7 +125,6 @@
   </div>
 </ng-template>
 
-
 <ng-template #BuyNow>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Buy Now</h4>
@@ -135,7 +134,13 @@
   </div>
 
   <div class="modal-body">
-    <p>You are trying to instantly buy the item for {{Item.buyPrice}} $.</p>
+    <div class="alert alert-dismissible alert-info">
+      We need you to confirm the payment in order to complete your purchase.
+    </div>
+    <hr>
+    <p>Item: {{Item.name}}</p>
+    <hr>
+    <p><b>Total: {{Item.buyPrice}} $</b></p>
   </div>
 
   <div class="modal-footer">

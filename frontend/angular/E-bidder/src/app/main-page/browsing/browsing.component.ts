@@ -54,7 +54,7 @@ export class BrowsingComponent implements OnInit {
 
     console.log(params.toString());
 
-    this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/items/search', {params});
+    this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/freeitems/search', {params});
   }
 
 }

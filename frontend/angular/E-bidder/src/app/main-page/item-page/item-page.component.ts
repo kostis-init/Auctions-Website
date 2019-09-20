@@ -37,7 +37,7 @@ export class ItemPageComponent implements OnInit {
 
   getItem() {
     const Item_id = this.route.snapshot.paramMap.get('id');
-    this.ItemObservable = this.httpClient.get<ItemModel>(this.ROOT_URL + '/items/' + Item_id);
+    this.ItemObservable = this.httpClient.get<ItemModel>(this.ROOT_URL + '/freeitems/' + Item_id);
     this.ItemObservable.subscribe(item => this.Item = item);
   }
 
