@@ -13,6 +13,7 @@ import javax.json.Json;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 
 @RequestScoped
 @Path("users")
@@ -64,9 +65,11 @@ public class UserResource {
         String city = userDTO.getCity();
         String address = userDTO.getAddress();
         String afm = userDTO.getAfm();
+        BigDecimal latitude = userDTO.getLatitude();
+        BigDecimal longitude = userDTO.getLongitude();
 
         User user = new User(username, password, firstName, lastName, email, telephoneNum, afm,
-                null, null, "N", address, city, country, "N");
+                null, null, "N", address, latitude, longitude, city, country, "N");
 
         String result = userBean.register(user);
         if(result != null){

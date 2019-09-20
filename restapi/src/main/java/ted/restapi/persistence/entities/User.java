@@ -5,6 +5,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +30,8 @@ public class User implements Serializable {
     private Double sellerRating;
     private String isAdmin;
     private String address;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
     private String city;
     private String country;
     private String isApproved;
@@ -41,7 +44,7 @@ public class User implements Serializable {
 
     public User() { }
 
-    public User(String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, Double bidderRating, Double sellerRating, String isAdmin, String address, String city, String country, String isApproved) {
+    public User(String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, Double bidderRating, Double sellerRating, String isAdmin, String address, BigDecimal latitude, BigDecimal longitude, String city, String country, String isApproved) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -53,6 +56,8 @@ public class User implements Serializable {
         this.sellerRating = sellerRating;
         this.isAdmin = isAdmin;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.city = city;
         this.country = country;
         this.isApproved = isApproved;
@@ -176,17 +181,30 @@ public class User implements Serializable {
     public String getAddress(){ return address;}
     public void setAddress(String address){this.address = address;}
 
-    @Basic
+    @Column(name = "latitude", nullable = true, precision = 8)
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    @Column(name = "longitude", nullable = true, precision = 8)
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
     @Column(name = "city")
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
 
-    @Basic
     @Column(name = "country")
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
 
-    @Basic
     @Column(name = "is_approved")
     public String getIsApproved() { return isApproved; }
     public void setIsApproved(String isApproved) { this.isApproved = isApproved; }

@@ -27,10 +27,6 @@ public class Item  implements Serializable {
     private Date startedAt;
     private Date endsAt;
     private String description;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
-    private String city;
-    private String country;
     private String state;
     private List<Bid> bids;
     private User seller;
@@ -41,7 +37,7 @@ public class Item  implements Serializable {
 
     public Item(){}
 
-    public Item(String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, User seller, List<Category> categories) {
+    public Item(String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, User seller, List<Category> categories) {
         this.name = name;
         this.currentBid = currentBid;
         this.buyPrice = buyPrice;
@@ -50,10 +46,6 @@ public class Item  implements Serializable {
         this.startedAt = startedAt;
         this.endsAt = endsAt;
         this.description = description;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.city = city;
-        this.country = country;
         this.seller = seller;
         this.categories = categories;
     }
@@ -106,42 +98,6 @@ public class Item  implements Serializable {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    @Basic
-    @Column(name = "latitude", nullable = true, precision = 8)
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
-    }
-
-    @Basic
-    @Column(name = "longitude", nullable = true, precision = 8)
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
-    }
-
-    @Basic
-    @Column(name = "city", nullable = true, length = 45)
-    public String getCity() {
-        return city;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    @Basic
-    @Column(name = "country", nullable = true, length = 45)
-    public String getCountry() {
-        return country;
-    }
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     @Column(name = "state")
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
@@ -185,15 +141,11 @@ public class Item  implements Serializable {
                 Objects.equals(startedAt, item.startedAt) &&
                 Objects.equals(endsAt, item.endsAt) &&
                 Objects.equals(description, item.description) &&
-                Objects.equals(latitude, item.latitude) &&
-                Objects.equals(longitude, item.longitude) &&
-                Objects.equals(city, item.city) &&
-                Objects.equals(country, item.country) &&
                 Objects.equals(seller, item.seller);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt, endsAt, description, latitude, longitude, city, country, seller);
+        return Objects.hash(id, name, currentBid, buyPrice, firstBid, numberOfBids, startedAt, endsAt, description, seller);
     }
 }

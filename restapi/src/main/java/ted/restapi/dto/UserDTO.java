@@ -3,6 +3,7 @@ package ted.restapi.dto;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @XmlRootElement
 public class UserDTO implements Serializable {
@@ -19,6 +20,8 @@ public class UserDTO implements Serializable {
     @XmlElement private String isAdmin;
     @XmlElement private String isApproved;
     @XmlElement private String address;
+    @XmlElement private BigDecimal latitude;
+    @XmlElement private BigDecimal longitude;
     @XmlElement private String city;
     @XmlElement private String country;
 
@@ -146,6 +149,18 @@ public class UserDTO implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public BigDecimal getLatitude() { return latitude; }
+
+    public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
     }
 
     public String getCity() {

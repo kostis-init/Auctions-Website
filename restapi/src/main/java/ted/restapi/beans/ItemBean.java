@@ -10,7 +10,6 @@ import ted.restapi.util.Constants;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import java.util.*;
 
 @Stateless
@@ -40,7 +39,7 @@ public class ItemBean {
 
     public Set<Item> search(String text) {
         Set<Item> items = new HashSet<>();
-        List<String> words = Arrays.asList(text.split(" "));
+        String[] words = text.split(" ");
 
         for (String word : words) {
             items.addAll(itemDAO.searchByWord(word));

@@ -33,10 +33,11 @@ public class Mapper {
         if(item.getEndsAt() != null) {
             endsAt = new SimpleDateFormat(Constants.DATE_FORMAT).format(item.getEndsAt());
         }
+        User seller = item.getSeller();
         return new ItemDTO(item.getId(), item.getName(), item.getCurrentBid(), item.getBuyPrice(),
                 item.getFirstBid(), item.getNumberOfBids(), startedAt, endsAt,
-                item.getDescription(), item.getLatitude(), item.getLongitude(), item.getCity(),
-                item.getCountry(), Mapper.toDTOtruncated(item.getSeller()), categories, bids, images);
+                item.getDescription(), seller.getLatitude(), seller.getLongitude(), seller.getCity(),
+                seller.getCountry(), Mapper.toDTOtruncated(seller), categories, bids, images);
     }
 
     private static UserDTO toDTOtruncated(User user) {
@@ -52,11 +53,19 @@ public class Mapper {
     }
 
     public static BidDTO toDTO(Bid bid) {
-        return new BidDTO(bid.getId(), bid.getTime(), bid.getAmount(), Mapper.toDTO(bid.getBidder()));
+        String time = null;
+        if(bid.getTime() != null){
+            time = new SimpleDateFormat(Constants.DATE_FORMAT).format(bid.getTime());
+        }
+        return new BidDTO(bid.getId(), time, bid.getAmount(), Mapper.toDTO(bid.getBidder()));
     }
 
     public static BidDTO toDTOtruncated(Bid bid) {
-        return new BidDTO(bid.getId(), bid.getTime(), bid.getAmount(), Mapper.toDTOtruncated(bid.getBidder()));
+        String time = null;
+        if(bid.getTime() != null){
+            time = new SimpleDateFormat(Constants.DATE_FORMAT).format(bid.getTime());
+        }
+        return new BidDTO(bid.getId(), time, bid.getAmount(), Mapper.toDTOtruncated(bid.getBidder()));
     }
 
     public static GeneralCategoryDTO toDTO(GeneralCategory generalCategory) {

@@ -55,50 +55,6 @@ public class ItemResource {
         return Response.ok(itemsDTO).build();
     }
 
-    @GET
-    @Path("{id}")
-    public Response getItemById(@PathParam("id") int id){
-        Item item = itemBean.getItemById(id);
-        if(item == null){
-            return Response.status(400).entity("No item with this id").build();
-        }
-        ItemDTO itemDTO = Mapper.toDTO(item);
-        return Response.ok(itemDTO).build();
-    }
-
-    @GET
-    @Path("search")
-    public Response search(
-            @DefaultValue("-1")@QueryParam("category") int generalCategoryId,
-            @DefaultValue("-1")@QueryParam("subcategory") int categoryId,
-            @DefaultValue(" ")@QueryParam("text") String text){
-        Set<Item> items;
-        if(categoryId == -1 && generalCategoryId == -1){
-            items = itemBean.search(text);
-        } else if (generalCategoryId == -1){
-            items = itemBean.searchByCategory(text, categoryId);
-        } else if (categoryId == -1){
-            items = itemBean.searchByGeneralCategory(text, generalCategoryId);
-        } else {
-            return Response.status(400).entity("Wrong query parameters").build();
-        }
-        if(items.isEmpty()){
-            return Response.ok(items).build();
-        }
-        List<ItemDTO> itemsDTO = items.stream().map(Mapper::toDTO).collect(Collectors.toList());
-        //only 1 image
-        for (ItemDTO itemDTO : itemsDTO) {
-            List<byte[]> images = itemDTO.getImages();
-            if(!images.isEmpty()){
-                byte[] image = images.get(0);
-                images.clear();
-                images.add(image);
-            }
-            itemDTO.setImages(images);
-        }
-        return Response.ok(itemsDTO).build();
-    }
-
     @POST
     public Response createItem(ItemDTO itemDTO) {
         User currentUser = sessionBean.getCurrentUser();
@@ -117,8 +73,7 @@ public class ItemResource {
             }
 
             Item item = new Item(itemDTO.getName(), itemDTO.getFirstBid(), itemDTO.getBuyPrice(), itemDTO.getFirstBid(),
-                    0, startedAt, endsAt, itemDTO.getDescription(), itemDTO.getLatitude(), itemDTO.getLongitude(),
-                    currentUser.getCity(), currentUser.getCountry(), currentUser, categories);
+                    0, startedAt, endsAt, itemDTO.getDescription(), currentUser, categories);
             String result = itemBean.createItem(item);
             if(result != null){
                 return Response.status(400).entity(result).build();
@@ -167,8 +122,7 @@ public class ItemResource {
             }
 
             Item newItem = new Item(itemDTO.getName(), itemDTO.getFirstBid(), itemDTO.getBuyPrice(), itemDTO.getFirstBid(),
-                    0, startedAt, endsAt, itemDTO.getDescription(), itemDTO.getLatitude(), itemDTO.getLongitude(),
-                    currentUser.getCity(), currentUser.getCountry(), currentUser, categories);
+                    0, startedAt, endsAt, itemDTO.getDescription(), currentUser, categories);
             newItem.setId(id);
             String result = itemBean.update(newItem);
             if(result != null){

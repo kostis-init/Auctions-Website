@@ -8,13 +8,13 @@ import java.util.Date;
 @XmlRootElement
 public class BidDTO implements Serializable {
     @XmlElement private int id;
-    @XmlElement private Date time;
+    @XmlElement private String time;
     @XmlElement private Double amount;
     @XmlElement private UserDTO bidder;
 
     public BidDTO(){ }
 
-    public BidDTO(int id, Date time, Double amount, UserDTO bidder) {
+    public BidDTO(int id, String time, Double amount, UserDTO bidder) {
         this.id = id;
         this.time = time;
         this.amount = amount;
@@ -29,11 +29,11 @@ public class BidDTO implements Serializable {
         this.id = id;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
