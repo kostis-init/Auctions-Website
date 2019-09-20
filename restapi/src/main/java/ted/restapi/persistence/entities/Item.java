@@ -1,5 +1,7 @@
 package ted.restapi.persistence.entities;
 
+import ted.restapi.util.Constants;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -27,7 +29,7 @@ public class Item  implements Serializable {
     private Date startedAt;
     private Date endsAt;
     private String description;
-    private String state;
+    private String state = Constants.ITEM_READY_STATE;
     private List<Bid> bids;
     private User seller;
     private User buyer;
@@ -98,7 +100,7 @@ public class Item  implements Serializable {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    @Column(name = "state")
+    @Column(name = "state", nullable = false)
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
 
