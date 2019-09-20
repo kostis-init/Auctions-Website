@@ -125,10 +125,6 @@ public class ItemBean {
         itemDAO.createItemImage(itemImage);
     }
 
-    public void updateItemImage(ItemImage itemImage) {
-        itemDAO.updateItemImage(itemImage);
-    }
-
     public String delete(User currentUser, Item item) {
         if(item == null){
             return "Item not found";
@@ -159,5 +155,11 @@ public class ItemBean {
         itemDAO.update(item);
 
         return null;
+    }
+
+    public void removeItemImages(Item item) {
+        for (ItemImage image : item.getImages()) {
+            itemDAO.removeImage(image);
+        }
     }
 }

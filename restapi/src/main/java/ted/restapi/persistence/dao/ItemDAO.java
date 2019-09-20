@@ -74,4 +74,11 @@ public class ItemDAO {
     public void updateItemImage(ItemImage itemImage) {
         em.merge(itemImage);
     }
+
+    public void removeImage(ItemImage image) {
+        if (!em.contains(image)) {
+            image = em.merge(image);
+        }
+        em.remove(image);
+    }
 }

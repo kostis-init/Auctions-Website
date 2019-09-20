@@ -69,7 +69,7 @@ public class UserResource {
         BigDecimal longitude = userDTO.getLongitude();
 
         User user = new User(username, password, firstName, lastName, email, telephoneNum, afm,
-                null, null, "N", address, latitude, longitude, city, country, "N");
+                0.0, 0.0, "N", address, latitude, longitude, city, country, "N");
 
         String result = userBean.register(user);
         if(result != null){

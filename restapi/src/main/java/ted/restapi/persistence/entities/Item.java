@@ -36,7 +36,6 @@ public class Item  implements Serializable {
     private List<Category> categories;
     private List<ItemImage> images;
 
-
     public Item(){}
 
     public Item(String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, Date startedAt, Date endsAt, String description, User seller, List<Category> categories) {
@@ -96,7 +95,7 @@ public class Item  implements Serializable {
     public void setEndsAt(Date endsAt) { this.endsAt = endsAt; }
 
     @Basic
-    @Column(name = "description", nullable = true, length = -1)
+    @Column(name = "description", nullable = true)
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 

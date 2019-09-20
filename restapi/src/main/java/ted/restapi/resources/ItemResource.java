@@ -93,7 +93,6 @@ public class ItemResource {
 
     }
 
-    //TODO: check update for images
     @PUT
     @Path("{id}")
     public Response editItem(ItemDTO itemDTO, @PathParam("id") int id){
@@ -108,39 +107,40 @@ public class ItemResource {
         if(item.getNumberOfBids() > 0){
             return Response.status(400).entity("Cannot edit an item that someone has made a bid").build();
         }
+
+        Date startedAt;
+        Date endsAt;
+        Date curDate = new Date();
         try{
-            Date startedAt = simpleDateFormat.parse(itemDTO.getStartedAt());
-            Date endsAt = simpleDateFormat.parse(itemDTO.getEndsAt());
-            Date curDate = new Date();
-            if(startedAt.before(curDate) || endsAt.before(startedAt)){
-                return Response.status(400).entity("Unacceptable date values").build();
-            }
-
-            List<Category> categories = new ArrayList<>();
-            for (CategoryDTO category : itemDTO.getCategories()) {
-                categories.add(categoryBean.findById(category.getId()));
-            }
-
-            Item newItem = new Item(itemDTO.getName(), itemDTO.getFirstBid(), itemDTO.getBuyPrice(), itemDTO.getFirstBid(),
-                    0, startedAt, endsAt, itemDTO.getDescription(), currentUser, categories);
-            newItem.setId(id);
-            String result = itemBean.update(newItem);
-            if(result != null){
-                return Response.status(400).entity(result).build();
-            }
-
-            for (byte[] image : itemDTO.getImages()) {
-                ItemImage itemImage = new ItemImage();
-                itemImage.setImage(image);
-                itemImage.setItem(item);
-                itemBean.updateItemImage(itemImage);
-            }
-
-            return Response.ok().build();
+            startedAt = simpleDateFormat.parse(itemDTO.getStartedAt());
+            endsAt = simpleDateFormat.parse(itemDTO.getEndsAt());
         } catch (ParseException e){
             return Response.status(400).entity("Cannot parse date:" + e.getMessage()).build();
         }
+        if(startedAt.before(curDate) || endsAt.before(startedAt)){
+            return Response.status(400).entity("Unacceptable date values").build();
+        }
 
+        List<Category> categories = new ArrayList<>();
+        for (CategoryDTO category : itemDTO.getCategories()) {
+            categories.add(categoryBean.findById(category.getId()));
+        }
+
+        Item newItem = new Item(itemDTO.getName(), itemDTO.getFirstBid(), itemDTO.getBuyPrice(), itemDTO.getFirstBid(),
+                0, startedAt, endsAt, itemDTO.getDescription(), currentUser, categories);
+        newItem.setId(id);
+        String result = itemBean.update(newItem);
+        if(result != null){
+            return Response.status(400).entity(result).build();
+        }
+        itemBean.removeItemImages(item);
+        for (byte[] image : itemDTO.getImages()) {
+            ItemImage itemImage = new ItemImage();
+            itemImage.setImage(image);
+            itemImage.setItem(item);
+            itemBean.createItemImage(itemImage);
+        }
+        return Response.ok().build();
     }
 
     @DELETE
