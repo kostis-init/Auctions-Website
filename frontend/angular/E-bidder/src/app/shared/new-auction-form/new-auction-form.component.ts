@@ -45,6 +45,7 @@ export class NewAuctionFormComponent implements OnInit {
   ngOnInit() {
 
     this.state$ = this.store.select('mainPage');
+    this.initForm();
 
   }
 
@@ -65,7 +66,6 @@ export class NewAuctionFormComponent implements OnInit {
       Description = this.Item.description;
       BuyPrice = this.Item.buyPrice;
       StartingBid = this.Item.firstBid;
-
     }
 
 

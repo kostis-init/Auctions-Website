@@ -6,6 +6,9 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {Observable} from "rxjs";
 import {NgForm} from "@angular/forms";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {AppState} from "../../store/app.reducer";
+import {Store} from "@ngrx/store";
+import {AuthState} from "../../auth/store/auth.reducer";
 
 @Component({
   selector: 'app-item-page',
@@ -17,6 +20,7 @@ export class ItemPageComponent implements OnInit {
 
   readonly ROOT_URL = 'http://localhost:8080/restapi/api';
   ItemObservable: Observable<ItemModel>;
+  auth$: Observable<AuthState>;
   Item: ItemModel;
   modalRef: BsModalRef;
   new_bid: number;
@@ -25,10 +29,12 @@ export class ItemPageComponent implements OnInit {
               private route: ActivatedRoute,
               private dom: DomSanitizer,
               private  httpClient: HttpClient,
-              private modalService: BsModalService,) { }
+              private modalService: BsModalService,
+              private store:Store<AppState>) { }
 
   ngOnInit() {
 
+    this.auth$ = this.store.select('auth');
     this.router.events.subscribe((event) => {
       this.getItem();
     });

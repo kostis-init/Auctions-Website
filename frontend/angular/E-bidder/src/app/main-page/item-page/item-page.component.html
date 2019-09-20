@@ -1,6 +1,13 @@
 <div class="container-fluid">
   <div class="row">
 
+    <div class="col-12" *ngIf="(auth$|async).userStatus==='guest'">
+      <div class="alert alert-secondary">
+        <small>
+          You are logged in as a guest. Please create an account or log in as a user to make a bid</small>
+      </div>
+    </div>
+
     <div class="left-col col-lg-3">
 
       <div class="thumbs">
@@ -40,42 +47,77 @@
           <hr>
 
           <div class="row bids">
-            <div class="col-2">
+            <div class="col-sm-2 col-4 pr-0 align-self-center">
               <p>Price:</p>
             </div>
-            <h5 class="card-text text-muted">{{Item.currentBid}} $</h5>
+
+            <div class="col-sm-10  col-8 pl-0">
+              <h5 class="card-text text-muted">{{Item.currentBid}} &euro;</h5>
+            </div>
           </div>
+
+
 
           <div class="row bids">
             <form (ngSubmit)="checkPrice(bid, PlaceBid)" class="input-group" #bid="ngForm">
 
-              <div class="form-group col-3">
-                <input required ngModel type="number" class="form-control" placeholder="Place Bid" id="NewBid" name="newBid">
+              <div class="form-group col-md-5">
+                <input
+                  required ngModel
+                  type="number"
+                  class="form-control"
+                  placeholder="Place Bid"
+                  id="NewBid"
+                  name="newBid">
               </div>
 
-              <button type="submit" class="btn btn-primary col-2 offset-1" style="margin-bottom: 1rem;">Place Bid</button>
+              <div class="col-md-7">
+                <button type="submit" class="btn btn-primary btn-block"
+                        [disabled]="!bid.valid || (auth$|async).userStatus==='guest'">Place Bid</button>
+              </div>
 
-              <div class="offset-1">
-                <p class="text-secondary p-2">Number of Bids: {{Item.numberOfBids}}</p>
+              <div class="col-md-12">
+                <small class="text-secondary">Number of Bids: {{Item.numberOfBids}}</small>
               </div>
 
             </form>
           </div>
 
-          <h4 class="text-secondary offset-2" *ngIf="Item.buyPrice != null">OR</h4>
+
 
           <div class="row bids" *ngIf="Item.buyPrice != null">
-            <div class="col-3">
-              <p class="text-secondary p-2">Buy now at: {{Item.buyPrice}} $</p>
+
+            <div class="col-12">
+              <h4 class="text-secondary text-center" *ngIf="Item.buyPrice != null">OR</h4>
             </div>
-            <button type="button" class="btn btn-success col-2 offset-1" (click)="OpenModal(BuyNow)">Buy now</button>
+
+            <div class="col-12">
+              <button
+                type="button"
+                [disabled]="(auth$|async).userStatus==='guest'"
+                class="btn btn-success btn-block"
+                (click)="OpenModal(BuyNow)">
+                Buy now at : {{Item.buyPrice}} &euro;
+              </button>
+            </div>
           </div>
 
-          <br>
-          <h6>Located at: </h6><h5>{{Item.city}}, {{Item.country}}</h5>
+          <div class="row mt-1">
+            <div class="col-sm-3 col-4 pr-0 align-self-center">
+              <h6>Located at: </h6>
+            </div>
+
+            <div class="col-sm-9 col-8">
+              <h5>City Country</h5>
+            </div>
+          </div>
+
         </div>
+
         <div class="card-footer text-muted">
-          <span class="badge badge-pill badge-primary col-3" style="white-space: normal;">Ends at 26-12-2019 23:59</span>
+          <div class="col-12">
+            <span class="badge badge-pill badge-primary" style="white-space: normal;">Ends at 26-12-2019 23:59</span>
+          </div>
         </div>
 
       </div>
