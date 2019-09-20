@@ -11,15 +11,19 @@ import { UserItemComponent } from './user-list/user-item/user-item.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import {TokenInterceptorService} from "../auth/token-interceptor.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {RatingModule} from "ngx-bootstrap";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [AdminComponent, UserListComponent, UserItemComponent, UserDetailComponent],
   imports: [
     AdminRoutingModule,
+    RatingModule.forRoot(),
     CommonModule,
     StoreModule.forFeature('users', AdminReducer),
     EffectsModule.forFeature([AdminEffect]),
+    FormsModule,
   ]
 })
 export class AdminModule { }

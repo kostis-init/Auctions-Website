@@ -1,28 +1,56 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="left-col col-lg-3">
-
+    <div class="left-col col-lg-3 mb-2">
       <div class="thumbs">
-        <a class="thumb-image active" href="../../../assets/item_images/rhodes.jpg" data-index="0">
-          <span><img src="../../../assets/item_images/rhodes.jpg" alt="Tommy Hilfiger T-Shirt New York"></span>
+        <a
+          class="thumb-image active"
+          href="../../../assets/item_images/rhodes.jpg"
+          data-index="0">
+          <span>
+            <img src="../../../assets/item_images/rhodes.jpg"
+                 alt="Tommy Hilfiger T-Shirt New York">
+          </span>
         </a>
-        <a class="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179" data-index="1">
-          <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_150x150.jpg?v=1447104179" alt="Tommy Hilfiger T-Shirt New York"></span>
+
+        <a
+          class="thumb-image"
+          href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+          data-index="1">
+          <span>
+            <img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_150x150.jpg?v=1447104179"
+                 alt="Tommy Hilfiger T-Shirt New York">
+          </span>
         </a>
-        <a class="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180" data-index="2">
-          <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_150x150.jpg?v=1447104180" alt="Tommy Hilfiger T-Shirt New York"></span>
+
+        <a class="thumb-image"
+           href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180"
+           data-index="2">
+          <span>
+            <img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_150x150.jpg?v=1447104180"
+                 alt="Tommy Hilfiger T-Shirt New York">
+          </span>
         </a>
-        <a class="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182" data-index="3">
-          <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_150x150.jpg?v=1447104182" alt="Tommy Hilfiger T-Shirt New York"></span>
+
+        <a
+          class="thumb-image"
+          href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182" data-index="3">
+          <span>
+            <img
+              src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_150x150.jpg?v=1447104182"
+              alt="Tommy Hilfiger T-Shirt New York">
+          </span>
         </a>
+
       </div>
 
       <div class="big">
         <span id="big-image" class="img" style="background-image: url('../../../assets/item_images/rhodes.jpg')" data-src="../../../assets/item_images/rhodes.jpg"></span>
         <div id="banner-gallery" class="swipe">
           <div class="swipe-wrap">
-            <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/product_large.png?v=1446769025')"></div>
+            <div
+              style="background-image:
+              url('//cdn.shopify.com/s/files/1/1047/6452/products/product_large.png?v=1446769025')"></div>
             <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_large.jpg?v=1447104179')"></div>
             <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_large.jpg?v=1447104180')"></div>
             <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_large.jpg?v=1447104182')"></div>
@@ -35,39 +63,66 @@
     <div class="right-col col-lg-5">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">{{Item.name}}</h3>
-          <h6 class="card-subtitle mb-2 text-muted">Posted 19-09-2019 19:54</h6>
+          <h3 class="card-title">My Super Piano</h3>
+          <h6 class="card-subtitle my-2 text-muted">Posted 19-09-2019 19:54</h6>
           <hr>
 
           <div class="row bids">
-            <div class="col-2">
+            <div class="col-sm-2 col-3 pr-0">
               <p>Price:</p>
             </div>
-            <h5 class="card-text text-muted">{{Item.currentBid}} $</h5>
+
+            <div class="col-sm-8 col-9 p-0">
+              <h5 class="card-text text-muted">400000 $</h5>
+            </div>
           </div>
 
           <div class="row bids">
-            <div class="form-group col-3">
+            <div class="form-group col-md-6 mb-1">
               <input type="number" class="form-control" placeholder="Place Bid" id="newbid">
             </div>
-            <button type="button" class="btn btn-primary col-2 offset-1" style="margin-bottom: 1rem;">Place Bid</button>
-            <div class="offset-1">
-              <p class="text-secondary p-2">Number of Bids: {{Item.numberOfBids}}</p>
+
+            <div class="col-md-6">
+              <button type="button" class="btn btn-block btn-primary">Place Bid</button>
+            </div>
+
+            <div class="col-12">
+              <small class="text-secondary p-2">Number of Bids: 400</small>
             </div>
           </div>
 
-          <h4 class="text-secondary offset-2">OR</h4>
 
-          <div class="row bids" *ngIf="Item.buyPrice != null">
-            <div class="col-3">
-              <p class="text-secondary p-2">Buy now at: {{Item.buyPrice}} $</p>
+          <div class="row mt-3">
+            <div class="col-12">
+              <h4 class="text-secondary text-center">OR:</h4>
             </div>
-            <button type="button" class="btn btn-success col-2 offset-1">Buy now</button>
+
+            <div class="col-12">
+              <button type="button" class="btn btn btn-block btn-success">Buy Now for 255</button>
+            </div>
           </div>
 
-          <br>
-          <h6>Located at: </h6><h5>{{Item.city}}, {{Item.country}}</h5>
+          <div class="row mt-1">
+
+            <div class="col-4 pr-0 mr-1 align-self-center">
+              <h6>Located at: </h6>
+            </div>
+
+            <div class="col-7 pl-0">
+              <h5>City, Country</h5>
+            </div>
+          </div>
+
         </div>
+
+        <div class="row">
+          <div class="col-md-3">
+
+          </div>
+        </div>
+
+
+
         <div class="card-footer text-muted">
           <span class="badge badge-pill badge-primary col-3">Ends at 26-12-2019 23:59</span>
         </div>

@@ -1,5 +1,11 @@
 <form [formGroup]="AuctionForm" (ngSubmit)="onSubmit()">
 
+  <div *ngIf="error">
+    <div class="alert alert-danger" role="alert">
+      <p class="text-center">Error: {{error}}</p>
+    </div>
+  </div>
+
   <div class="form-group">
     <label for="Name">The Auctions Name</label>
     <input
@@ -118,10 +124,6 @@
 
     <small *ngIf="AuctionForm.get('Description').errors?.required && AuctionForm.get('Description').touched"
            class="form-text invalid-feedback">Field is required</small>
-  </div>
-
-  <div class="form-group" formGroupName="Location">
-    <app-open-map (GetLat)="Setlat($event)" (GetLot)="Setlot($event)"></app-open-map>
   </div>
 
   <div class="form-group" formGroupName="StartDate">

@@ -10,6 +10,8 @@ import {DatePipe} from "@angular/common";
 import {Router} from "@angular/router";
 import {SaveAuctionService} from "./save-auction.service";
 import {CategoryModel} from "../Models/category.model";
+import {ErrorHandlerService} from "../error-handler.service";
+import {AuctionItemModel} from "../Models/AuctionItem.model";
 
 @Component({
   selector: 'app-new-auction-form',
@@ -19,6 +21,7 @@ import {CategoryModel} from "../Models/category.model";
 export class NewAuctionFormComponent implements OnInit {
 
   @Input() EditMode:boolean;
+  @Input() Item:AuctionItemModel;
 
   AuctionForm:FormGroup;
   CurrDate = new Date();
@@ -29,6 +32,7 @@ export class NewAuctionFormComponent implements OnInit {
   ImageSelected:ArrayBuffer[] = [];
   state$:Observable<MainPageState>;
   categorySelected:boolean;
+  error:string=null;
 
 
   constructor(private store:Store<AppState>,
@@ -39,37 +43,58 @@ export class NewAuctionFormComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.state$ = this.store.select('mainPage');
+
+  }
+
+  initForm(){
+
+    let AuctionName = '';
+    let SubCategory = null;
+    let BuyPrice = null;
+    let StartingBid: number = null;
+    let Description = null;
+    let STDate = null;
+    let STTIme=null;
+    let ENDate=null;
+    let ENTime=null;
+
+    if(this.EditMode){
+      AuctionName = this.Item.name;
+      Description = this.Item.description;
+      BuyPrice = this.Item.buyPrice;
+      StartingBid = this.Item.firstBid;
+
+    }
+
+
     this.AuctionForm = this.fb.group({
-      ['name']: this.fb.control('',[Validators.required]),
+      ['name']: this.fb.control(AuctionName,[Validators.required]),
 
-      ['SubCategory']: this.fb.control(null,[Validators.required]),
+      ['SubCategory']: this.fb.control(SubCategory,[Validators.required]),
 
-      ['BuyPrice']: this.fb.control(null),
+      ['BuyPrice']: this.fb.control(BuyPrice),
 
-      ['StartingBid']: this.fb.control('',
+      ['StartingBid']: this.fb.control(StartingBid,
         [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
 
-      ['Description']: this.fb.control('',[Validators.required]),
-
-
-      ['Location']:this.fb.group({
-        ['Lot']:this.fb.control('',[Validators.required]),
-        ['Lat']:this.fb.control('',[Validators.required])
-      }),
+      ['Description']: this.fb.control(Description,[Validators.required]),
 
       ['StartDate']:this.fb.group({
-        ['STDate']: this.fb.control( null,[Validators.required]),
-        ['STTime']: this.fb.control(null,[Validators.required])
+        ['STDate']: this.fb.control( STDate,[Validators.required]),
+        ['STTime']: this.fb.control(STTIme,[Validators.required])
       },{validators:this.CheckStartTime.bind(this)}),
 
       ['EndDate']:this.fb.group({
-        ['ENDate']: this.fb.control( null,[Validators.required]),
-        ['ENTime']: this.fb.control(null,[Validators.required])
+        ['ENDate']: this.fb.control( ENDate,[Validators.required]),
+        ['ENTime']: this.fb.control(ENTime,[Validators.required])
       }),
 
       ['Image']:this.fb.array([])
     })
+
+
   }
 
 
@@ -198,20 +223,14 @@ export class NewAuctionFormComponent implements OnInit {
     }
   }
 
-  Setlot(value: number) {
-    this.AuctionForm.get('Location').get('Lot').patchValue(value);
-  }
-
-  Setlat(value:number){
-    this.AuctionForm.get('Location').get('Lat').patchValue(value);
-  }
-
   onSubmit(){
     if(this.CheckEndTime()){
-      console.log(this.AuctionForm.value)
       this.SaveAuction.PostAuction(this.AuctionForm.value).subscribe(()=>{
-        this.router.navigateByUrl('main/home');
-      },(err)=>{console.log(err)});
+        if(!this.EditMode)
+          this.router.navigateByUrl('main/home');
+      },(err)=>{
+        this.error=err;
+      });
 
     }
   }
