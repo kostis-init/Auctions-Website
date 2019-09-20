@@ -47,29 +47,35 @@
           </div>
 
           <div class="row bids">
-            <div class="form-group col-3">
-              <input type="number" class="form-control" placeholder="Place Bid" id="newbid">
-            </div>
-            <button type="button" class="btn btn-primary col-2 offset-1" style="margin-bottom: 1rem;">Place Bid</button>
-            <div class="offset-1">
-              <p class="text-secondary p-2">Number of Bids: {{Item.numberOfBids}}</p>
-            </div>
+            <form (ngSubmit)="checkPrice(bid, PlaceBid)" class="input-group" #bid="ngForm">
+
+              <div class="form-group col-3">
+                <input required ngModel type="number" class="form-control" placeholder="Place Bid" id="NewBid" name="newBid">
+              </div>
+
+              <button type="submit" class="btn btn-primary col-2 offset-1" style="margin-bottom: 1rem;">Place Bid</button>
+
+              <div class="offset-1">
+                <p class="text-secondary p-2">Number of Bids: {{Item.numberOfBids}}</p>
+              </div>
+
+            </form>
           </div>
 
-          <h4 class="text-secondary offset-2">OR</h4>
+          <h4 class="text-secondary offset-2" *ngIf="Item.buyPrice != null">OR</h4>
 
           <div class="row bids" *ngIf="Item.buyPrice != null">
             <div class="col-3">
               <p class="text-secondary p-2">Buy now at: {{Item.buyPrice}} $</p>
             </div>
-            <button type="button" class="btn btn-success col-2 offset-1">Buy now</button>
+            <button type="button" class="btn btn-success col-2 offset-1" (click)="OpenModal(BuyNow)">Buy now</button>
           </div>
 
           <br>
           <h6>Located at: </h6><h5>{{Item.city}}, {{Item.country}}</h5>
         </div>
         <div class="card-footer text-muted">
-          <span class="badge badge-pill badge-primary col-3">Ends at 26-12-2019 23:59</span>
+          <span class="badge badge-pill badge-primary col-3" style="white-space: normal;">Ends at 26-12-2019 23:59</span>
         </div>
 
       </div>
@@ -100,3 +106,40 @@
 
 </div>
 <!-- /.container -->
+
+<ng-template #PlaceBid>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Place Bid</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+  <p>You are trying to place a {{new_bid}} $ bid. Continue? </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="placeBid()">Confirm Bid</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="CloseModal()">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #BuyNow>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Buy Now</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <p>You are trying to instantly buy the item for {{Item.buyPrice}} $.</p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="buyNow()">Confirm Payment</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="CloseModal()">Close</button>
+  </div>
+</ng-template>
