@@ -43,7 +43,7 @@
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">{{Item.name}}</h3>
-          <h6 class="card-subtitle mb-2 text-muted">Posted 19-09-2019 19:54</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Posted {{Item.startedAt}}</h6>
           <hr>
 
           <div class="row bids">
@@ -108,7 +108,7 @@
             </div>
 
             <div class="col-sm-9 col-8">
-              <h5>City Country</h5>
+              <h5>{{Item.seller.city}} {{Item.seller.country}}</h5>
             </div>
           </div>
 
@@ -116,7 +116,7 @@
 
         <div class="card-footer text-muted">
           <div class="col-12">
-            <span class="badge badge-pill badge-primary" style="white-space: normal;">Ends at 26-12-2019 23:59</span>
+            <span class="badge badge-pill badge-primary" style="white-space: normal;">Ends at {{Item.endsAt}}</span>
           </div>
         </div>
 

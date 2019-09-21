@@ -11,14 +11,15 @@ export class ItemModel{
   numberOfBids: number;
   currentBid: number;
   buyPrice: number;
-  city: string;
-  country: string;
+  startedAt: string;
+  endsAt: string;
   seller: UserDataModel;
   categories: SubCategoryModel;
   images: any[][];
 
   constructor(bids: any, images: any[][], categories: SubCategoryModel, description: string, id: number, name: string,
-              numberOfBids: number, currentBid: number, buyPrice: number, city: string, country: string, seller: UserDataModel){
+              numberOfBids: number, currentBid: number, buyPrice: number, seller: UserDataModel,
+              startedAt: string, endsAt: string){
     this.id = id;
     this.name = name;
     this.description = description;
@@ -27,8 +28,8 @@ export class ItemModel{
     this.buyPrice = buyPrice;
     this.bids = bids;
     this.seller = seller;
-    this.city = city;
-    this.country = country;
+    this.startedAt = startedAt;
+    this.endsAt = endsAt;
     let uints = new Uint8Array(images[0]);
     let stringchar = String.fromCharCode.apply(null, uints);
     let base64 = btoa(stringchar);

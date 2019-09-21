@@ -28,7 +28,7 @@ export class ItemPageComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private dom: DomSanitizer,
-              private  httpClient: HttpClient,
+              private httpClient: HttpClient,
               private modalService: BsModalService,
               private store:Store<AppState>) { }
 
@@ -61,7 +61,9 @@ export class ItemPageComponent implements OnInit {
     this.getItem();
     this.modalRef.hide();
 
-    this.router.navigateByUrl('main/items/' + this.Item.id);
+    //tricking the router that the navigation has ended
+    this.router.navigated = false;
+    this.router.navigateByUrl('/main/items/' + this.Item.id);
 
   }
 
