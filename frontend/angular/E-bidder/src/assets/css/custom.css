@@ -95,9 +95,9 @@
 }
 
 .thumbs {
-  width: 15%;
-  float: left;
-  margin-right: 1%;
+  width: 100%;
+  margin-top: 3%;
+  max-height: 64px;
 }
 
 .thumbs a {
@@ -130,15 +130,24 @@
 .thumbs img {
   display: block;
   width: 100%;
+  max-height: 100px;
+  max-width: 100px;
 }
 
 .big {
-  width: 83.5%;
+  width: 100%;
   float: right;
   margin-right: 0;
+  max-height: 400px;
 }
 
-.big .img {
+.img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: 400px;
+  display: block;
+  object-fit: contain;
   -moz-transition: all 600ms ease-out 0s;
   -o-transition: all 600ms ease-out 0s;
   -webkit-transition: all 600ms ease-out;
@@ -157,10 +166,7 @@
   -webkit-background-size: contain;
   background-size: contain;
   border: 1px solid #e2e2e3;
-  display: block;
-  height: 0;
   opacity: 1;
-  padding-bottom: 133%;
 }
 
 .big .img.animate {
@@ -176,15 +182,10 @@
   opacity: 0;
 }
 
-.big #banner-gallery {
-  display: none;
-}
-
 .left-col {
   margin-left: 10%;
 }
 
 .bids {
-
 }
 

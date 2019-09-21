@@ -10,31 +10,14 @@
 
     <div class="left-col col-lg-3">
 
-      <div class="thumbs">
-        <a class="thumb-image active" href="../../../assets/item_images/rhodes.jpg" data-index="0">
-          <span><img src="../../../assets/item_images/rhodes.jpg" alt="Tommy Hilfiger T-Shirt New York"></span>
-        </a>
-        <a class="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179" data-index="1">
-          <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_150x150.jpg?v=1447104179" alt="Tommy Hilfiger T-Shirt New York"></span>
-        </a>
-        <a class="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180" data-index="2">
-          <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_150x150.jpg?v=1447104180" alt="Tommy Hilfiger T-Shirt New York"></span>
-        </a>
-        <a class="thumb-image" href="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182" data-index="3">
-          <span><img src="//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_150x150.jpg?v=1447104182" alt="Tommy Hilfiger T-Shirt New York"></span>
-        </a>
+      <div class="row justify-content-center big">
+        <img id="big-img" class="img" [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + this.BigImageUrl)" alt="{{Item.name}}">
       </div>
 
-      <div class="big">
-        <span id="big-image" class="img" style="background-image: url('../../../assets/item_images/rhodes.jpg')" data-src="../../../assets/item_images/rhodes.jpg"></span>
-        <div id="banner-gallery" class="swipe">
-          <div class="swipe-wrap">
-            <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/product_large.png?v=1446769025')"></div>
-            <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko1_large.jpg?v=1447104179')"></div>
-            <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko2_large.jpg?v=1447104180')"></div>
-            <div style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/tricko3_large.jpg?v=1447104182')"></div>
-          </div>
-        </div>
+      <div class="thumbs row justify-content-center">
+        <a *ngFor="let image of imagesUrl" class="thumb-image col make_pointer" data-index="0" (click)="setBigImage(image)">
+          <span><img [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + image)" alt=""></span>
+        </a>
       </div>
 
     </div>
@@ -76,6 +59,8 @@
                         [disabled]="!bid.valid || (auth$|async).userStatus==='guest'">Place Bid</button>
               </div>
 
+              <div class="col-md-9 text-danger" [hidden]="!this.low_bid"><small>Your bid must be higher than the current one.</small></div>
+
               <div class="col-md-12">
                 <small class="text-secondary">Number of Bids: {{Item.numberOfBids}}</small>
               </div>
@@ -108,7 +93,7 @@
             </div>
 
             <div class="col-sm-9 col-8">
-              <h5>{{Item.seller.city}} {{Item.seller.country}}</h5>
+              <h5>{{Item.seller.city}}, {{Item.seller.country}}</h5>
             </div>
           </div>
 

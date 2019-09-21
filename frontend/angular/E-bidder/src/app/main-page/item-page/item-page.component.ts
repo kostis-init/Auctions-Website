@@ -22,8 +22,13 @@ export class ItemPageComponent implements OnInit {
   ItemObservable: Observable<ItemModel>;
   auth$: Observable<AuthState>;
   Item: ItemModel;
+  imagesUrl: string[];
   modalRef: BsModalRef;
   new_bid: number;
+  //variable used to display error message on low bid
+  low_bid: boolean;
+  //Image in the big box
+  BigImageUrl: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -33,18 +38,34 @@ export class ItemPageComponent implements OnInit {
               private store:Store<AppState>) { }
 
   ngOnInit() {
-
+    this.low_bid = false;
     this.auth$ = this.store.select('auth');
     this.router.events.subscribe((event) => {
       this.getItem();
+      this.load_images();
     });
     this.getItem();
+    this.load_images();
   }
 
   getItem() {
     const Item_id = this.route.snapshot.paramMap.get('id');
     this.ItemObservable = this.httpClient.get<ItemModel>(this.ROOT_URL + '/freeitems/' + Item_id);
-    this.ItemObservable.subscribe(item => this.Item = item);
+    this.ItemObservable.subscribe(item => {this.Item = item; this.load_images()});
+  }
+
+  load_images() {
+    let i: number;
+    this.imagesUrl = [];
+    i = 0;
+    for (let image of this.Item.images) {
+      let uints = new Uint8Array(image);
+      let stringchar = String.fromCharCode.apply(null, uints);
+      let base64 = btoa(stringchar);
+      this.imagesUrl[i] = base64;
+      i++;
+    }
+    this.BigImageUrl = this.imagesUrl[0];
   }
 
   placeBid() {
@@ -60,6 +81,7 @@ export class ItemPageComponent implements OnInit {
 
     this.getItem();
     this.modalRef.hide();
+    this.low_bid = false;
 
     //tricking the router that the navigation has ended
     this.router.navigated = false;
@@ -86,12 +108,17 @@ export class ItemPageComponent implements OnInit {
     this.new_bid = bid.value.newBid;
 
     if (this.new_bid <= this.Item.currentBid) {
+      this.low_bid = true;
       console.log('New bid must be higher');
       return;
     }
 
     this.OpenModal(template);
 
+  }
+
+  setBigImage(image: string) {
+    this.BigImageUrl = image;
   }
 
   OpenModal(template: TemplateRef<any>) {
