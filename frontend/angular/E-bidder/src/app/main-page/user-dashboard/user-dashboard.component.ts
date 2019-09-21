@@ -44,9 +44,10 @@ export class UserDashboardComponent implements OnInit {
     this.returnedArray= this.UserAuctions.slice(event,event+1);
   }
 
-  AuctionUpdated(event){
-
-
+  AuctionUpdated(event:AuctionItemModel){
+    let index = this.UserAuctions.findIndex((Item:AuctionItemModel)=>Item.id==event.id);
+    this.UserAuctions[index]=event;
+    this.returnedArray[0]=event;
   }
 
   NewAuction(){

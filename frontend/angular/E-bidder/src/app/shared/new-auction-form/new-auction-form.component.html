@@ -6,6 +6,8 @@
     </div>
   </div>
 
+  <div *ngIf=""></div>
+
   <div class="form-group">
     <label for="Name">The Auctions Name</label>
     <input
@@ -56,59 +58,73 @@
     </div>
   </div>
 
-  <div class="form-group mt-2">
-    <div>
-      <button class="btn btn-outline-primary" type="button"
-              (click)="ToggleBuyPrice()">Toggle Buy Price</button>
+  <div formGroupName="Pricing">
+
+    <div class="form-group mt-2">
+      <div>
+        <button class="btn btn-outline-primary" type="button"
+                (click)="ToggleBuyPrice()">Toggle Buy Price</button>
+      </div>
+      <div *ngIf="SetBuyPrice">
+        <label for="BuyPrice">The price a user can buy a product instantly</label>
+        <div class="input-group">
+          <input
+            class=" shadow-sm form-control"
+            formControlName="BuyPrice"
+            id="BuyPrice"
+            type="number"
+            name="BuyPrice"
+            [ngClass]=" {'is-invalid': AuctionForm.get('Pricing').get('BuyPrice').invalid
+                                       && AuctionForm.get('Pricing').get('BuyPrice').touched,
+                             'is-valid': AuctionForm.get('Pricing').get('BuyPrice').valid } "
+          >
+          <div class="input-group-append">
+            <span class="input-group-text">&euro;</span>
+          </div>
+          <small *ngIf="AuctionForm.get('Pricing').get('BuyPrice').errors?.required
+                    && AuctionForm.get('Pricing').get('BuyPrice').touched"
+                 class="form-text invalid-feedback">Field is required</small>
+
+          <small *ngIf="AuctionForm.get('Pricing').get('BuyPrice').errors?.pattern
+                        && AuctionForm.get('Pricing').get('BuyPrice').touched"
+                 class="form-text invalid-feedback">Enter only positive amount</small>
+
+          <small *ngIf="AuctionForm.get('Pricing').get('BuyPrice').errors?.InvalidBuyPrice &&
+                      AuctionForm.get('Pricing').get('BuyPrice').touched"
+                 class="form-text invalid-feedback">Invalid Buy Price</small>
+        </div>
+      </div>
     </div>
 
-    <div *ngIf="SetBuyPrice">
-      <label for="BuyPrice">The price a user can buy a product instantly</label>
+    <div class="form-group">
+      <label for="FirstBid">The Starting Bid of the Auction</label>
       <div class="input-group">
         <input
-          class=" shadow-sm form-control"
-          formControlName="BuyPrice"
-          id="BuyPrice"
+          class="form-control shadow-sm"
+          formControlName="StartingBid"
           type="number"
-          name="BuyPrice"
-          [ngClass]=" {'is-invalid': AuctionForm.get('BuyPrice').invalid && AuctionForm.get('BuyPrice').touched,
-                    'is-valid': AuctionForm.get('BuyPrice').valid } "
-        >
+          id="FirstBid"
+          name="FirtsBid"
+          [ngClass]="
+                {'is-invalid': AuctionForm.get('Pricing').get('StartingBid').invalid
+                               && AuctionForm.get('StartingBid').touched,
+                  'is-valid': AuctionForm.get('Pricing').get('StartingBid').valid } ">
         <div class="input-group-append">
           <span class="input-group-text">&euro;</span>
         </div>
-        <small *ngIf="AuctionForm.get('BuyPrice').errors?.required && AuctionForm.get('BuyPrice').touched"
+
+        <small *ngIf="AuctionForm.get('Pricing').get('StartingBid').errors?.required
+                      && AuctionForm.get('Pricing').get('StartingBid').touched"
                class="form-text invalid-feedback">Field is required</small>
-
-        <small *ngIf="AuctionForm.get('StartingBid').errors?.pattern && AuctionForm.get('BuyPrice').touched"
+        <small *ngIf="AuctionForm.get('Pricing').get('StartingBid').errors?.pattern
+                      && AuctionForm.get('Pricing').get('StartingBid').touched"
                class="form-text invalid-feedback">Enter only positive amount</small>
+
       </div>
     </div>
+
   </div>
 
-  <div class="form-group">
-    <label for="FirstBid">The Starting Bid of the Auction</label>
-    <div class="input-group">
-      <input
-        class="form-control shadow-sm"
-        formControlName="StartingBid"
-        type="number"
-        id="FirstBid"
-        name="FirtsBid"
-        [ngClass]="
-                {'is-invalid': AuctionForm.get('StartingBid').invalid && AuctionForm.get('StartingBid').touched,
-                  'is-valid': AuctionForm.get('StartingBid').valid } ">
-      <div class="input-group-append">
-        <span class="input-group-text">&euro;</span>
-      </div>
-
-      <small *ngIf="AuctionForm.get('StartingBid').errors?.required && AuctionForm.get('StartingBid').touched"
-             class="form-text invalid-feedback">Field is required</small>
-      <small *ngIf="AuctionForm.get('StartingBid').errors?.pattern && AuctionForm.get('StartingBid').touched"
-             class="form-text invalid-feedback">Enter only positive amount</small>
-
-    </div>
-  </div>
 
   <div class="form-group">
     <label for="Description">Auction Description</label>
@@ -150,6 +166,11 @@
       <div class="col-md-6">
         <ngb-timepicker formControlName="STTime" [spinners]="false"></ngb-timepicker>
       </div>
+
+      <div class="col-12 mt-2">
+        <button class="btn btn-primary btn-block" (click)="onStartNow()" type="button">Start Now</button>
+      </div>
+
     </div>
 
     <small
@@ -192,9 +213,10 @@
     </small>
   </div>
 
-  <div class="form-group" formArrayName="Image">
+  <div class="form-group" *ngIf="!EditMode" formArrayName="Image">
     <label>Choose Image</label>
     <div  class="row mb-3" *ngFor=" let ImageCrl of getControlsImages(); let i = index">
+
 
       <div class="col-sm-10">
         <input

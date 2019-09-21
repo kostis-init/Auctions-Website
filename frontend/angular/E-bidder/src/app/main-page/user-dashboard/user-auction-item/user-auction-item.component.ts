@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angu
 import {itemModel} from "../../../shared/Models/ItemModel";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {AuctionItemModel} from "../../../shared/Models/AuctionItem.model";
+import {HttpClient} from "@angular/common/http";
+import {freeItems, items} from "../../../shared/server-endpoints";
 
 @Component({
   selector: 'app-user-auction-item',
@@ -18,11 +20,10 @@ export class UserAuctionItemComponent implements OnInit {
   IsActive:boolean;
   modalRef: BsModalRef;
   Categories:string[]=[];
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService,private http:HttpClient) { }
 
   ngOnInit() {
     this.CheckIfAuctionHasStarted(this.AuctionItem.startedAt);
-    console.log(this.AuctionItem);
     this.GetCategories(this.AuctionItem.categories);
   }
 
@@ -60,14 +61,23 @@ export class UserAuctionItemComponent implements OnInit {
   }
 
   ItemDeleted(index){
-    //send delete req to server;
-    this.AuctionDeleted.emit(index);
-    this.modalRef.hide();
+    this.http.delete<AuctionItemModel>(items+'/'+this.AuctionItem.id).subscribe(
+      ()=>{
+        this.AuctionDeleted.emit(index);
+        this.modalRef.hide();
+      }
+    );
+
   }
 
-  Update(NewAuction){
-    //make the Auction
-    this.AuctionUpdated.emit(NewAuction);
+  Update(id){
+    this.http.get<AuctionItemModel>(freeItems+'/'+id).subscribe(
+      (NewItem:AuctionItemModel)=>{
+        this.AuctionUpdated.emit(NewItem);
+        this.modalRef.hide();
+
+      }
+    )
   }
 
 }

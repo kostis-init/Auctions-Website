@@ -17,5 +17,6 @@ export class AuctionItemModel {
               public city:string,
               public categories:{id: number, name:string}[],
               public seller:BidderSellerModel,
-              public bids:BidModel[]){}
+              public bids:BidModel[],
+              public images:any[]){}
 }

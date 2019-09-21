@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbTimeStruct} from "@ng-bootstrap/ng-bootstrap";
 import {SubCategoryModel} from "../Models/subCategory.model";
 import {Observable} from "rxjs";
@@ -10,8 +10,8 @@ import {DatePipe} from "@angular/common";
 import {Router} from "@angular/router";
 import {SaveAuctionService} from "./save-auction.service";
 import {CategoryModel} from "../Models/category.model";
-import {ErrorHandlerService} from "../error-handler.service";
 import {AuctionItemModel} from "../Models/AuctionItem.model";
+
 
 @Component({
   selector: 'app-new-auction-form',
@@ -22,6 +22,7 @@ export class NewAuctionFormComponent implements OnInit {
 
   @Input() EditMode:boolean;
   @Input() Item:AuctionItemModel;
+  @Output() UpdateComplete:EventEmitter<any> = new EventEmitter<any>();
 
   AuctionForm:FormGroup;
   CurrDate = new Date();
@@ -65,8 +66,20 @@ export class NewAuctionFormComponent implements OnInit {
       AuctionName = this.Item.name;
       Description = this.Item.description;
       BuyPrice = this.Item.buyPrice;
+      if(BuyPrice){
+        this.SetBuyPrice=true;
+      }
       StartingBid = this.Item.firstBid;
+      SubCategory = this.Item.categories;
+      this.SubCategoriesSelected=this.Item.categories;
+      let Start = this.Item.startedAt.split(' ');
+      STDate = this.GetDate(Start[0]);
+      STTIme= this.GetTime(Start[1]);
+      let End = this.Item.endsAt.split(' ');
+      ENDate=this.GetDate(End[0]);
+      ENTime=this.GetTime(End[1]);
     }
+
 
 
     this.AuctionForm = this.fb.group({
@@ -74,15 +87,18 @@ export class NewAuctionFormComponent implements OnInit {
 
       ['SubCategory']: this.fb.control(SubCategory,[Validators.required]),
 
-      ['BuyPrice']: this.fb.control(BuyPrice),
+      ['Pricing']:this.fb.group({
+        ['BuyPrice']: this.fb.control(BuyPrice,
+          [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+        ['StartingBid']: this.fb.control(StartingBid,
+          [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+      },{validators:this.CheckBuyPrice.bind(this)}),
 
-      ['StartingBid']: this.fb.control(StartingBid,
-        [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
 
       ['Description']: this.fb.control(Description,[Validators.required]),
 
       ['StartDate']:this.fb.group({
-        ['STDate']: this.fb.control( STDate,[Validators.required]),
+        ['STDate']: this.fb.control(STDate,[Validators.required]),
         ['STTime']: this.fb.control(STTIme,[Validators.required])
       },{validators:this.CheckStartTime.bind(this)}),
 
@@ -91,12 +107,68 @@ export class NewAuctionFormComponent implements OnInit {
         ['ENTime']: this.fb.control(ENTime,[Validators.required])
       }),
 
-      ['Image']:this.fb.array([])
+      ['Image']: this.GetImages()
     })
-
 
   }
 
+  CheckBuyPrice(fg:FormGroup){
+    let buyPrice = fg.get('BuyPrice').value;
+    let StartingBid =fg.get('StartingBid').value;
+
+    if(buyPrice!=null){
+      if(buyPrice<StartingBid){
+        fg.get('BuyPrice').setErrors({InvalidBuyPrice: true});
+      }
+    }
+  }
+
+  onStartNow(){
+    let now=new Date(Date.now());
+    this.AuctionForm.get('StartDate').get('STDate').setValue({
+      year: now.getFullYear(),
+      month: now.getMonth()+1,
+      day: now.getDate(),
+    });
+
+    this.AuctionForm.get('StartDate').get('STTime').setValue({
+      hour: now.getHours(),
+      minute: now.getMinutes()+1,
+      second: now.getSeconds(),
+    })
+
+  }
+
+  GetImages(){
+    if(!this.EditMode)
+      return this.fb.array([]);
+    let contr = this.fb.array([]);
+    for(let image of this.Item.images){
+      (contr as FormArray).push(
+         this.fb.control(image,Validators.required)
+      )
+    }
+    return contr;
+
+  }
+
+  GetDate(Date) {
+    let DateStr = Date.split('-');
+    return {
+      year: +DateStr[0],
+      month: +DateStr[1],
+      day: +DateStr[2],
+    };
+  }
+
+  GetTime(Time){
+    let TimeStr = Time.split(':');
+    return {
+      hour: +TimeStr[0],
+      minute: +TimeStr[1],
+      second: +TimeStr[2],
+    }
+  }
 
   isSelected(Subcategory:SubCategoryModel){
     return this.SubCategoriesSelected.find((sub)=> sub.id === Subcategory.id);
@@ -133,9 +205,9 @@ export class NewAuctionFormComponent implements OnInit {
     (this.AuctionForm.get('Image') as FormArray).removeAt(index);
   }
 
-  onAddImage(){
+  onAddImage(img=null){
     (this.AuctionForm.get('Image') as FormArray).push(
-      this.fb.control(null,Validators.required)
+      this.fb.control(img,Validators.required)
     )
   }
 
@@ -213,24 +285,32 @@ export class NewAuctionFormComponent implements OnInit {
   }
 
   ToggleBuyPrice(){
-    this.AuctionForm.get('BuyPrice').clearValidators();
+    this.AuctionForm.get('Pricing').get('BuyPrice').clearValidators();
     this.SetBuyPrice = !this.SetBuyPrice;
-    this.AuctionForm.get('BuyPrice').setValue(null);
+    this.AuctionForm.get('Pricing').get('BuyPrice').setValue(null);
     if(this.SetBuyPrice){
-      this.AuctionForm.get('BuyPrice').setValidators(
+      this.AuctionForm.get('Pricing').get('BuyPrice').setValidators(
         [Validators.required,Validators.pattern(/^[1-9]+[0-9]*$/)]);
-      this.AuctionForm.get('BuyPrice').reset();
+      this.AuctionForm.get('Pricing').get('BuyPrice').reset();
     }
   }
 
   onSubmit(){
     if(this.CheckEndTime()){
-      this.SaveAuction.PostAuction(this.AuctionForm.value).subscribe(()=>{
-        if(!this.EditMode)
-          this.router.navigateByUrl('main/home');
-      },(err)=>{
-        this.error=err;
-      });
+      if(this.EditMode){
+        this.SaveAuction.PostAuction(this.AuctionForm.value,this.EditMode,this.Item.id).subscribe(()=>{
+          this.UpdateComplete.emit(this.Item.id);
+        },(err)=>{
+          this.error=err;
+        });
+      } else {
+        this.SaveAuction.PostAuction(this.AuctionForm.value,this.EditMode).subscribe(()=>{
+            this.router.navigateByUrl('main/home');
+        },(err)=>{
+          this.error=err;
+        });
+      }
+
 
     }
   }

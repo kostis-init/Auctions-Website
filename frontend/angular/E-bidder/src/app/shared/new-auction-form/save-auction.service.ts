@@ -9,11 +9,11 @@ import {ErrorHandlerService} from "../error-handler.service";
 export class SaveAuctionService {
 
   constructor(private http:HttpClient, private ErrorHandler:ErrorHandlerService) { }
-  PostAuction(AuctionReceived){
+  PostAuction(AuctionReceived,EditMode,id=null){
      let StartDate = this.convertStartDate(AuctionReceived.StartDate);
      let EndDate = this.convertEndDate(AuctionReceived.EndDate);
      let Categories = this.convertCategories(AuctionReceived.SubCategory);
-     let images = this.converImages(AuctionReceived.Image);
+     let images = this.convertImages(AuctionReceived.Image);
 
 
 
@@ -23,11 +23,19 @@ export class SaveAuctionService {
        AuctionReceived.Description,
        StartDate,
        EndDate,
-       AuctionReceived.StartingBid,
-       AuctionReceived.BuyPrice,
+       AuctionReceived.Pricing.StartingBid,
+       AuctionReceived.Pricing.BuyPrice,
        images,
        Categories);
+     if(EditMode)
+       return this.PutData(AuctionData,id);
      return this.PostData(AuctionData);
+  }
+
+  PutData(AuctionData,id){
+    return this.http.put<itemModel>(items+'/'+id,AuctionData).pipe(
+      catchError(this.ErrorHandler.HttpErrorHandle)
+    );
   }
 
   convertEndDate(Date) {
@@ -55,8 +63,7 @@ export class SaveAuctionService {
     );
   }
 
-  converImages(Images){
-    console.log(Images);
+  convertImages(Images){
     let converted:any[][]=[];
     for(let image of Images){
       converted.push(image)

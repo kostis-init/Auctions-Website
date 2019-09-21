@@ -32,6 +32,8 @@ export class ErrorHandlerService {
       case 'Invalid jwt':
         errorMessage = 'Invalid jwt';
         break;
+      case 'Item name already exists':
+        errorMessage='Item name already exists';
     }
     return throwError(errorMessage);
   }
