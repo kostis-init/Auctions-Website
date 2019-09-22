@@ -115,6 +115,7 @@ export class AuthService {
   Logout() {
     this.store.dispatch(new UserLogoutAction());
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     this.router.navigate(['/'], {relativeTo: this.route})
   }
 

@@ -7,11 +7,14 @@ import {BrowsingComponent} from "./browsing/browsing.component";
 import {Shop_byComponent} from "./shop_by/shop_by.component";
 import {NewAuctionComponent} from "./new-auction/new-auction.component";
 import {ItemPageComponent} from "./item-page/item-page.component";
+import {UserAuctionsComponent} from "./user-dashboard/user-auctions/user-auctions.component";
+import {UserPurchesesComponent} from "./user-dashboard/user-purcheaes/user-purcheses.component";
+import {UserActiveBidsComponent} from "./user-dashboard/user-active-bids/user-active-bids.component";
 import {UserDashboardComponent} from "./user-dashboard/user-dashboard.component";
 
 
 const mainPageRoutes: Routes = [
-  {path: 'main',canActivate: [AuthGuardService],pathMatch: 'prefix', component:MainPageComponent,children: [
+  {path: '',canActivate: [AuthGuardService],pathMatch: 'prefix', component:MainPageComponent,children: [
       {path: 'home', component:HomeCategoriesComponent},
       {path: 'browse', component:BrowsingComponent},
       {path: 'browse/:id', component:BrowsingComponent},
@@ -19,7 +22,11 @@ const mainPageRoutes: Routes = [
       {path: 'categories/:id', component: Shop_byComponent},
       {path: 'newAuction', component: NewAuctionComponent},
       {path: 'items/:id', component: ItemPageComponent},
-      {path: 'dashboard',component:UserDashboardComponent}
+      {path: 'dashboard',component:UserDashboardComponent,children:[
+          {path:'auctions',component:UserAuctionsComponent},
+          {path:'purchases',component:UserPurchesesComponent},
+          {path:'bids',component:UserActiveBidsComponent}
+        ]}
     ]}
 
 ];

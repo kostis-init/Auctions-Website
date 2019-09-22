@@ -1,9 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, RouterOutlet} from "@angular/router";
-import {AppState} from "./store/app.reducer";
-import {Store} from "@ngrx/store";
-import {UserAutoLogin} from "./auth/store/auth.actions";
-import {AuthService} from "./auth/auth.service";
+import {Component} from '@angular/core';
+import {RouterOutlet} from "@angular/router";
+
 
 
 @Component({

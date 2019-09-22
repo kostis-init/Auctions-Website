@@ -1,0 +1,44 @@
+<div class="my-5">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{AuctionItem.name}}</h5>
+      <ul class="list-group list-group-flush card-text mb-3">
+        <li class="list-group-item">Categories:{{Categories}}</li>
+        <li class="list-group-item">End Date: {{AuctionItem.endsAt}}</li>
+        <li class="list-group-item">Buy Price: {{AuctionItem.buyPrice}}</li>
+        <li class="list-group-item">Current Bid: {{AuctionItem.currentBid}}</li>
+        <li class="list-group-item text-success" *ngIf="isWinning">You are winning the auction</li>
+
+        <li class="list-group-item text-danger" *ngIf="!isWinning">
+          <div class="fa-pull-left">
+            You are losing the auction
+          </div>
+
+          <div class="fa-pull-right">
+            <button class="btn btn-primary" (click)="OnBidAgain()">Bid Again</button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-block btn-outline-primary mt-1"
+                  (click)="isCollapsed=!isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                  aria-controls="collapseBasic"
+          >Your Bids</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+    <div class="well well-lg card card-block card-header mt-1" *ngFor="let bid of MyBids">
+      <ul class="list-group">
+        <li class="list-group-item">Amount: {{bid.amount}}</li>
+        <li class="list-group-item">Time: {{bid.time}}</li>
+      </ul>
+    </div>
+
+  </div>
+</div>

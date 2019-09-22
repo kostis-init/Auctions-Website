@@ -1,46 +1,26 @@
 <div class="container">
 
-  <div class="d-flex justify-content-center" *ngIf="IsLoading">
-    <div  class="spinner-border" role="status" style="width: 8rem; height: 8rem">
-      <span class="sr-only">Loading..</span>
-    </div>
+<div class="row">
+  <div class="col-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link text-primary" routerLinkActive="active" routerLink="auctions">Auctions</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-primary" routerLinkActive="active" routerLink="purchases">Purchases</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-primary" routerLinkActive="active" routerLink="bids">Bids</a>
+      </li>
+    </ul>
+
+
+    <router-outlet></router-outlet>
   </div>
-
-  <div class="row">
-
-
-    <div class="col-md-7 offset-md-2" *ngIf="UserAuctions && UserAuctions.length===0">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">No Auctions</h5>
-          <p class="card-text">
-            Sorry but you have not created any auction yes
-          </p>
-          <button class="btn btn-primary" (click)="NewAuction()">Create an Auction</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-7 offset-md-2">
-      <div class="content-item" *ngFor="let auction of returnedArray">
-        <app-user-auction-item
-          (AuctionDeleted)="AuctionDeleted($event)"
-          (AuctionUpdated)="AuctionUpdated($event)"
-
-          [AuctionItem]="auction"
-          [Index]="GetIndexFromId(auction)"></app-user-auction-item>
-      </div>
+</div>
 
 
-      <div class="row justify-content-center" *ngIf="UserAuctions&&UserAuctions.length!=0">
-        <div class="col">
-          <pagination
-            [totalItems]="UserAuctions.length" [itemsPerPage]="1" (pageChanged)="pageChanged($event)">
-          </pagination>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>
 

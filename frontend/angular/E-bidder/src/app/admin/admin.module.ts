@@ -9,8 +9,6 @@ import {AdminEffect} from "./store/admin.effect";
 import { UserListComponent } from './user-list/user-list.component';
 import { UserItemComponent } from './user-list/user-item/user-item.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import {TokenInterceptorService} from "../auth/token-interceptor.service";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {RatingModule} from "ngx-bootstrap";
 import {FormsModule} from "@angular/forms";
 

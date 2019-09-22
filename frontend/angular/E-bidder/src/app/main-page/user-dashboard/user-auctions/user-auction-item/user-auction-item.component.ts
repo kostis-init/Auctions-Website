@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {itemModel} from "../../../shared/Models/ItemModel";
+import {itemModel} from "../../../../shared/Models/ItemModel";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {AuctionItemModel} from "../../../shared/Models/AuctionItem.model";
+import {AuctionItemModel} from "../../../../shared/Models/AuctionItem.model";
 import {HttpClient} from "@angular/common/http";
-import {freeItems, items} from "../../../shared/server-endpoints";
+import {freeItems, items} from "../../../../shared/server-endpoints";
 
 @Component({
   selector: 'app-user-auction-item',
@@ -28,7 +28,6 @@ export class UserAuctionItemComponent implements OnInit {
   }
 
   GetCategories(categories){
-    // console.log(categories);
     for (let category of categories){
       this.Categories.push(category.name);
     }

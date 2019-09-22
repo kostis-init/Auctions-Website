@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+  <div  class="spinner-border" role="status" style="width: 8rem; height: 8rem">
+    <span class="sr-only">Loading..</span>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-7 offset-md-2 mt-4" *ngIf="UserAuctions && UserAuctions.length===0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">No Auctions</h5>
+        <p class="card-text">
+          Sorry but you have not Bided on any auction yet
+        </p>
+        <a class="btn btn-primary" [routerLink]="['/main/browse']" [queryParams]="{text:'',category:''}">
+          Find something to buy</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-7 offset-md-2 mt-4">
+    <div class="content-item" *ngFor="let auction of returnedArray">
+      <app-user-bid-item [AuctionItem]="auction"></app-user-bid-item>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="UserAuctions&&UserAuctions.length!=0">
+      <div class="col">
+        <pagination
+          [totalItems]="UserAuctions.length" [itemsPerPage]="1" (pageChanged)="pageChanged($event)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

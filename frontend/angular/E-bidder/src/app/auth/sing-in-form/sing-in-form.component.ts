@@ -37,6 +37,7 @@ export class SingInFormComponent implements OnInit {
     const Password = form.value.password;
     this.authService.Login(Username,Password).subscribe( () => {
         this.LoginCompleted.emit(null);
+        localStorage.setItem('username',Username);
         this.Navigate();
       },
       (error:string) => {

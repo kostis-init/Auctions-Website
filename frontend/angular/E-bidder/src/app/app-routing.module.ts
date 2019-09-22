@@ -9,6 +9,7 @@ const routes: Routes =[
   {path: '', redirectTo:'welcome', pathMatch: 'full' },
   {path: 'forbidden', component: AccessDeniedComponent},
   {path: 'admin',canLoad:[AdminPageGuardService], loadChildren: './admin/admin.module#AdminModule'},
+  {path: 'main',loadChildren:'./main-page/main-page.module#MainPageModule'}
 ];
 
 @NgModule({

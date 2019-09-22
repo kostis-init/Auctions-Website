@@ -1,0 +1,25 @@
+<div class="my-5">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-text">{{PurchaseItem.name}}</h5>
+      <ul class="list-group list-group-flush card-text mb-3">
+        <li class="list-group-item">Categories: {{Categories}}</li>
+        <li class="list-group-item">Description: {{PurchaseItem.description}} </li>
+        <li class="list-group-item">Bought for: {{BuyPrice}}&euro;</li>
+        <li class="list-group-item">Time of Purchase: {{PurchaseDate}}</li>
+        <li class="list-group-item">Seller: {{PurchaseItem.seller.username}}</li>
+        <li class="list-group-item">SellerRating:
+          <rating [max]="5" [readonly]="true" [(ngModel)]="PurchaseItem.seller.sellerRating"></rating>
+        </li>
+      </ul>
+
+
+      <div class="col-md-12">
+        <button class="btn btn-primary btn-block" (click)="MessageSeller()">
+          Message the Seller
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

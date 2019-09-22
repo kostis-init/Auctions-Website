@@ -6,7 +6,6 @@
     </div>
   </div>
 
-  <div *ngIf=""></div>
 
   <div class="form-group">
     <label for="Name">The Auctions Name</label>
@@ -107,7 +106,7 @@
           name="FirtsBid"
           [ngClass]="
                 {'is-invalid': AuctionForm.get('Pricing').get('StartingBid').invalid
-                               && AuctionForm.get('StartingBid').touched,
+                               && AuctionForm.get('Pricing').get('StartingBid').touched,
                   'is-valid': AuctionForm.get('Pricing').get('StartingBid').valid } ">
         <div class="input-group-append">
           <span class="input-group-text">&euro;</span>
