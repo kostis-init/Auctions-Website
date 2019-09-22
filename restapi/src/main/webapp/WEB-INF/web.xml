@@ -24,7 +24,8 @@
         <url-pattern>/api/admin/*</url-pattern>
         <url-pattern>/api/bids/*</url-pattern>
         <url-pattern>/api/messages/*</url-pattern>
-<!--        <url-pattern>/api/images/*</url-pattern>-->
+        <url-pattern>/api/ratings/*</url-pattern>
+        <!--        <url-pattern>/api/images/*</url-pattern>-->
         <url-pattern>/api/users/autologin</url-pattern>
     </filter-mapping>
 </web-app>

@@ -108,4 +108,16 @@ public class UserBean implements Serializable {
             }
         }
     }
+
+    public void addBidderRating(User user, Double rating) {
+        user.setBidderRatings(user.getBidderRatings() + 1);
+        user.setBidderRatingSum(user.getBidderRatingSum() + rating);
+        userDAO.update(user);
+    }
+
+    public void addSellerRating(User user, Double rating) {
+        user.setSellerRatings(user.getSellerRatings() + 1);
+        user.setSellerRatingSum(user.getSellerRatingSum() + rating);
+        userDAO.update(user);
+    }
 }

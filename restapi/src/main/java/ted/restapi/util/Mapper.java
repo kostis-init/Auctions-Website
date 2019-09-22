@@ -5,17 +5,36 @@ import ted.restapi.persistence.entities.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Mapper {
 
     public static UserDTO toDTO(User user){
+        Double bidderRating = 0.0;
+        Double sellerRating = 0.0;
+        if(user.getBidderRatings() > 0){
+            bidderRating = user.getBidderRatingSum() / user.getBidderRatings();
+        }
+        if(user.getSellerRatings() > 0){
+            sellerRating = user.getSellerRatingSum() / user.getSellerRatings();
+        }
         return new UserDTO(user.getId(), user.getUsername(), user.getPassword(),
                 user.getFirstName(), user.getLastName(), user.getEmail(), user.getTelephoneNum(),
-                user.getAfm(), user.getBidderRating(), user.getSellerRating(), user.getIsAdmin(),
+                user.getAfm(), bidderRating, sellerRating, user.getIsAdmin(),
                 user.getIsApproved(), user.getAddress(), user.getCity(), user.getCountry());
+    }
+
+    private static UserDTO toDTOtruncated(User user) {
+        Double bidderRating = 0.0;
+        Double sellerRating = 0.0;
+        if(user.getBidderRatings() > 0){
+            bidderRating = user.getBidderRatingSum() / user.getBidderRatings();
+        }
+        if(user.getSellerRatings() > 0){
+            sellerRating = user.getSellerRatingSum() / user.getSellerRatings();
+        }
+        return new UserDTO(user.getId(), user.getUsername(), bidderRating, sellerRating, user.getAddress(), user.getCity(), user.getCountry());
     }
 
     public static ItemDTO toDTO(Item item){
@@ -38,10 +57,6 @@ public class Mapper {
                 item.getFirstBid(), item.getNumberOfBids(), startedAt, endsAt,
                 item.getDescription(), seller.getLatitude(), seller.getLongitude(), seller.getCity(),
                 seller.getCountry(), Mapper.toDTOtruncated(seller), categories, bids, images);
-    }
-
-    private static UserDTO toDTOtruncated(User user) {
-        return new UserDTO(user.getId(), user.getUsername(), user.getBidderRating(), user.getSellerRating(), user.getAddress(), user.getCity(), user.getCountry());
     }
 
     public static CategoryDTO toDTO(Category category) {

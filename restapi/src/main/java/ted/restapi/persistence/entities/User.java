@@ -1,8 +1,5 @@
 package ted.restapi.persistence.entities;
 
-import org.apache.openjpa.persistence.jdbc.Columns;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -26,8 +23,10 @@ public class User implements Serializable {
     private String email;
     private String telephoneNum;
     private String afm;
-    private Double bidderRating;
-    private Double sellerRating;
+    private Double bidderRatingSum;
+    private Double sellerRatingSum;
+    private int bidderRatings;
+    private int sellerRatings;
     private String isAdmin;
     private String address;
     private BigDecimal latitude;
@@ -44,7 +43,7 @@ public class User implements Serializable {
 
     public User() { }
 
-    public User(String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, Double bidderRating, Double sellerRating, String isAdmin, String address, BigDecimal latitude, BigDecimal longitude, String city, String country, String isApproved) {
+    public User(String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, int bidderRatings, int sellerRatings, Double bidderRatingSum, Double sellerRatingSum, String isAdmin, String address, BigDecimal latitude, BigDecimal longitude, String city, String country, String isApproved) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -52,8 +51,10 @@ public class User implements Serializable {
         this.email = email;
         this.telephoneNum = telephoneNum;
         this.afm = afm;
-        this.bidderRating = bidderRating;
-        this.sellerRating = sellerRating;
+        this.bidderRatingSum = bidderRatingSum;
+        this.sellerRatingSum = sellerRatingSum;
+        this.bidderRatings = bidderRatings;
+        this.sellerRatings = sellerRatings;
         this.isAdmin = isAdmin;
         this.address = address;
         this.latitude = latitude;
@@ -150,21 +151,35 @@ public class User implements Serializable {
     }
 
     @Basic
-    @Column(name = "bidder_rating", nullable = true, precision = 0)
-    public Double getBidderRating() {
-        return bidderRating;
+    @Column(name = "bidder_rating_sum", nullable = true, precision = 0)
+    public Double getBidderRatingSum() {
+        return bidderRatingSum;
     }
-    public void setBidderRating(Double bidderRating) {
-        this.bidderRating = bidderRating;
+    public void setBidderRatingSum(Double bidderRating) {
+        this.bidderRatingSum = bidderRating;
     }
 
     @Basic
-    @Column(name = "seller_rating", nullable = true, precision = 0)
-    public Double getSellerRating() {
-        return sellerRating;
+    @Column(name = "seller_rating_sum", nullable = true, precision = 0)
+    public Double getSellerRatingSum() {
+        return sellerRatingSum;
     }
-    public void setSellerRating(Double sellerRating) {
-        this.sellerRating = sellerRating;
+    public void setSellerRatingSum(Double sellerRating) {
+        this.sellerRatingSum = sellerRating;
+    }
+
+    @Basic
+    @Column(name = "bidder_ratings")
+    public int getBidderRatings() { return bidderRatings; }
+    public void setBidderRatings(int bidderRatings) {
+        this.bidderRatings = bidderRatings;
+    }
+
+    @Basic
+    @Column(name = "seller_ratings")
+    public int getSellerRatings() { return sellerRatings; }
+    public void setSellerRatings(int sellerRatings) {
+        this.sellerRatings = sellerRatings;
     }
 
     @Basic
@@ -242,8 +257,8 @@ public class User implements Serializable {
                 Objects.equals(email, user.email) &&
                 Objects.equals(telephoneNum, user.telephoneNum) &&
                 Objects.equals(afm, user.afm) &&
-                Objects.equals(bidderRating, user.bidderRating) &&
-                Objects.equals(sellerRating, user.sellerRating) &&
+                Objects.equals(bidderRatingSum, user.bidderRatingSum) &&
+                Objects.equals(sellerRatingSum, user.sellerRatingSum) &&
                 Objects.equals(address, user.address) &&
                 Objects.equals(city, user.city) &&
                 Objects.equals(country, user.country) &&
@@ -253,6 +268,6 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, firstName, lastName, email, telephoneNum,
-                            afm, address, city, country, bidderRating, sellerRating, isAdmin, isApproved);
+                            afm, address, city, country, bidderRatingSum, sellerRatingSum, isAdmin, isApproved);
     }
 }
