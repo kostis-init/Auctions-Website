@@ -5,50 +5,32 @@
         <h4 style="text-align: center; margin-bottom: 20px;">Filters</h4>
         <hr>
         <!-- filters -->
-
-        <h5 class="col p-3">Constructor</h5>
-        <div class="form-group">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1">Apple</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck2">
-            <label class="custom-control-label" for="customCheck2">Samsung</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck3">
-            <label class="custom-control-label" for="customCheck3">Sony</label>
-          </div>
-        </div>
-
         <h5 class="col p-3">Location</h5>
-        <div class="form-group">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck4">
-            <label class="custom-control-label" for="customCheck4">America</label>
+        <form class="form-group">
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="Country" placeholder="Country">
           </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck5">
-            <label class="custom-control-label" for="customCheck5">Europe</label>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="City" placeholder="City">
           </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck6">
-            <label class="custom-control-label" for="customCheck6">Asia</label>
-          </div>
-        </div>
+        </form>
 
         <h5 class="col p-3">Price</h5>
-        <div class="row">
-          <div class="col-md-4 form-group">
-            <input type="text" class="form-control" placeholder="From" id="minprice">
+        <form>
+          <div class="row">
+            <div class="col-6 form-group">
+              <input type="text" class="form-control" placeholder="From" id="minprice">
+            </div>
+            <div class="col-6 form-group">
+              <input type="text" class="form-control" placeholder="To" id="maxprice">
+            </div>
           </div>
-          <div class="col-md-4 form-group">
-            <input type="text" class="form-control" placeholder="To" id="maxprice">
-          </div>
-          <div class="col-md-3">
-            <button type="button" class="btn btn-primary"> > </button>
-          </div>
+        </form>
+        <hr>
+        <div class="row justify-content-start mt-4">
+          <button type="button" class="btn btn-primary btn-block" style="margin-left: 5%; margin-right: 5%;"> Apply Filters </button>
         </div>
         <!-- end of filters -->
       </div>
