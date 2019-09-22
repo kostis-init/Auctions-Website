@@ -1,10 +1,8 @@
 package ted.restapi.beans;
 
+import ted.restapi.persistence.dao.BidDAO;
 import ted.restapi.persistence.dao.ItemDAO;
-import ted.restapi.persistence.entities.Category;
-import ted.restapi.persistence.entities.Item;
-import ted.restapi.persistence.entities.ItemImage;
-import ted.restapi.persistence.entities.User;
+import ted.restapi.persistence.entities.*;
 import ted.restapi.util.Constants;
 
 import javax.ejb.LocalBean;
@@ -16,6 +14,7 @@ import java.util.*;
 @LocalBean
 public class ItemBean {
 
+    @Inject private BidDAO bidDAO;
     @Inject private ItemDAO itemDAO;
     @Inject private CategoryBean categoryBean;
 
@@ -148,7 +147,11 @@ public class ItemBean {
             return "Item has no buy price";
         }
 
+        Bid buyBid = new Bid(new Date(), item.getBuyPrice(), currentUser, item);
+        bidDAO.create(buyBid);
+
         item.setCurrentBid(item.getBuyPrice());
+        item.setNumberOfBids(item.getNumberOfBids() + 1);
         item.setState(Constants.ITEM_ENDED_STATE);
         currentUser.getBoughtItems().add(item);
         item.setBuyer(currentUser);
@@ -161,5 +164,24 @@ public class ItemBean {
         for (ItemImage image : item.getImages()) {
             itemDAO.removeImage(image);
         }
+    }
+
+    public List<Item> getBiddenActiveItems(User currentUser) {
+        List<Item> items = itemDAO.getActiveItems();
+        List<Bid> bids = currentUser.getBids();
+        List<Integer> itemIds = new ArrayList<>();
+        for (Bid bid : bids) {
+            if(!itemIds.contains(bid.getItem().getId())){
+                itemIds.add(bid.getItem().getId());
+            }
+        }
+        List<Item> newItems = new ArrayList<>();
+        for (Item item : items) {
+            if(itemIds.contains(item.getId())){
+                newItems.add(item);
+            }
+        }
+
+        return newItems;
     }
 }

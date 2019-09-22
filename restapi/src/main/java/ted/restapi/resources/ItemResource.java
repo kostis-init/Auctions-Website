@@ -35,7 +35,51 @@ public class ItemResource {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
 
     @GET
-    public Response getItemsOfCurrentUser(){
+    @Path("bought")
+    public Response getBoughtItemsOfCurrentUser(){
+        List<ItemDTO> itemsDTO = new ArrayList<>();
+        List<Item> items = sessionBean.getCurrentUser().getBoughtItems();
+        for (Item item : items) {
+            itemsDTO.add(Mapper.toDTO(item));
+        }
+        //only 1 image
+        for (ItemDTO itemDTO : itemsDTO) {
+            List<byte[]> images = itemDTO.getImages();
+            if(!images.isEmpty()){
+                byte[] image = images.get(0);
+                images.clear();
+                images.add(image);
+            }
+            itemDTO.setImages(images);
+        }
+
+        return Response.ok(itemsDTO).build();
+    }
+
+    @GET
+    @Path("watching")
+    public Response getBiddenActiveItemsOfCurrentUser(){
+        List<ItemDTO> itemsDTO = new ArrayList<>();
+        List<Item> items = itemBean.getBiddenActiveItems(sessionBean.getCurrentUser());
+        for (Item item : items) {
+            itemsDTO.add(Mapper.toDTO(item));
+        }
+        //only 1 image
+        for (ItemDTO itemDTO : itemsDTO) {
+            List<byte[]> images = itemDTO.getImages();
+            if(!images.isEmpty()){
+                byte[] image = images.get(0);
+                images.clear();
+                images.add(image);
+            }
+            itemDTO.setImages(images);
+        }
+
+        return Response.ok(itemsDTO).build();
+    }
+
+    @GET
+    public Response getSellingItemsOfCurrentUser(){
         List<ItemDTO> itemsDTO = new ArrayList<>();
         List<Item> items = itemBean.getItemsBySellerId(sessionBean.getCurrentUser().getId());
         for (Item item : items) {
