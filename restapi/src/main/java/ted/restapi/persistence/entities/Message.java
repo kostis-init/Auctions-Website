@@ -2,6 +2,7 @@ package ted.restapi.persistence.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,14 +21,16 @@ public class Message implements Serializable {
     private User receiver;
     private String text;
     private String seen;
+    private Date time;
 
     public Message() {}
 
-    public Message(User sender, User receiver, String text, String seen) {
+    public Message(User sender, User receiver, String text, String seen, Date time) {
         this.sender = sender;
         this.receiver = receiver;
         this.text = text;
         this.seen = seen;
+        this.time = time;
     }
 
     @Id
@@ -53,6 +56,11 @@ public class Message implements Serializable {
     @Column(name = "seen")
     public String getSeen() { return seen; }
     public void setSeen(String seen) { this.seen = seen; }
+
+    @Column(name = "time")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getTime() { return time; }
+    public void setTime(Date time) { this.time = time; }
 
     @Override
     public boolean equals(Object o) {

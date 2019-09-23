@@ -59,4 +59,8 @@ public class UserDAO{
     public void register(User user) {
         em.persist(user);
     }
+
+    public List<User> getAllExceptOne(User currentUser) {
+        return em.createNamedQuery("User.findAllExceptOne", User.class).setParameter(1, currentUser.getId()).getResultList();
+    }
 }
