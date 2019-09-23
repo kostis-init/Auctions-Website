@@ -26,6 +26,14 @@ public class MessageResource {
     @Inject private UserBean userBean;
 
     @GET
+    @Path("all")
+    public Response getAllChatsOfCurrentUser(){
+        User currentUser = sessionBean.getCurrentUser();
+        List<List<MessageDTO>> allChats = messageBean.getAllChats(currentUser);
+        return Response.ok(allChats).build();
+    }
+
+    @GET
     @Path("{userId}")
     public Response getChat(@PathParam("userId")int id){
         User currentUser = sessionBean.getCurrentUser();
@@ -34,7 +42,6 @@ public class MessageResource {
             return Response.status(400).entity("No other user found").build();
         }
         List<MessageDTO> chat = messageBean.getChat(currentUser, otherUser);
-        chat.sort(Comparator.comparingInt(MessageDTO::getId));
         return Response.ok(chat).build();
     }
 
