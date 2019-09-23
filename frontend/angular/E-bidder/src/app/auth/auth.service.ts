@@ -125,6 +125,7 @@ export class AuthService {
       (data) => State = data
     );
 
+
     if (!localStorage.getItem('token'))
       return State.loggedIn;
     if (State.loggedIn)

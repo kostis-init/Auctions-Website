@@ -22,6 +22,7 @@ export class UserAuctionsComponent implements OnInit {
 
     this.http.get(items).subscribe((res:AuctionItemModel[])=>{
       this.UserAuctions = res;
+      console.log(res);
       this.IsLoading = false;
       this.returnedArray = this.UserAuctions.slice(0,1);
     })

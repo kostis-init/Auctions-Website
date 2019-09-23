@@ -11,15 +11,16 @@ import {AuthService} from "./auth.service";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class AuthGuardService implements CanLoad {
+export class AuthGuardService implements CanActivate {
   constructor(public auth: AuthService, public router: Router) {}
 
-  canLoad(route: Route, segments: UrlSegment[]) :boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):boolean{
     if(!this.auth.isAuthenticated()) {
       this.router.navigateByUrl('/welcome');
       return false;
     }
     return true;
   }
+
 
 }

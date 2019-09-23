@@ -7,7 +7,7 @@ import {AuthGuardService} from "../auth/auth-guard.service";
 
 
 const mainPageRoutes: Routes = [
-  {path: '',canLoad: [AuthGuardService],pathMatch: 'prefix', component:MainPageComponent,children: [
+  {path: '',canActivate: [AuthGuardService],pathMatch: 'prefix', component:MainPageComponent,children: [
       {path: 'home', loadChildren: './home-categories/home-categories.module#HomeCategoriesModule'},
       {path: 'browse', loadChildren: './browsing/browsing.module#BrowsingModule'},
       {path: 'categories/:id', loadChildren: './shop_by/shop-by.module#ShopByModule'},
