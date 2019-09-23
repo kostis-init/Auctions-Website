@@ -30,7 +30,6 @@ export class NewAuctionFormComponent implements OnInit {
   time: NgbTimeStruct = {hour: 0, minute:0,second:0};
   SubCategoriesLoaded:SubCategoryModel[];
   SubCategoriesSelected:SubCategoryModel[] = [];
-  ImageSelected:ArrayBuffer[] = [];
   state$:Observable<MainPageState>;
   categorySelected:boolean;
   error:string=null;
@@ -89,7 +88,7 @@ export class NewAuctionFormComponent implements OnInit {
 
       ['Pricing']:this.fb.group({
         ['BuyPrice']: this.fb.control(BuyPrice,
-          [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+          [Validators.pattern(/^[1-9]+[0-9]*$/)]),
         ['StartingBid']: this.fb.control(StartingBid,
           [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
       },{validators:this.CheckBuyPrice.bind(this)}),

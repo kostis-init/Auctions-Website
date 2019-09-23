@@ -1,32 +1,20 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes, CanActivate} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {MainPageComponent} from "./main-page.component";
-import {HomeCategoriesComponent} from "./home-categories/home-categories.component";
 import {AuthGuardService} from "../auth/auth-guard.service";
-import {BrowsingComponent} from "./browsing/browsing.component";
-import {Shop_byComponent} from "./shop_by/shop_by.component";
-import {NewAuctionComponent} from "./new-auction/new-auction.component";
-import {ItemPageComponent} from "./item-page/item-page.component";
-import {UserAuctionsComponent} from "./user-dashboard/user-auctions/user-auctions.component";
-import {UserPurchesesComponent} from "./user-dashboard/user-purcheaes/user-purcheses.component";
-import {UserActiveBidsComponent} from "./user-dashboard/user-active-bids/user-active-bids.component";
-import {UserDashboardComponent} from "./user-dashboard/user-dashboard.component";
+
+
 
 
 const mainPageRoutes: Routes = [
-  {path: '',canActivate: [AuthGuardService],pathMatch: 'prefix', component:MainPageComponent,children: [
-      {path: 'home', component:HomeCategoriesComponent},
-      {path: 'browse', component:BrowsingComponent},
-      {path: 'browse/:id', component:BrowsingComponent},
-      {path: 'categories', component: Shop_byComponent},
-      {path: 'categories/:id', component: Shop_byComponent},
-      {path: 'newAuction', component: NewAuctionComponent},
-      {path: 'items/:id', component: ItemPageComponent},
-      {path: 'dashboard',component:UserDashboardComponent,children:[
-          {path:'auctions',component:UserAuctionsComponent},
-          {path:'purchases',component:UserPurchesesComponent},
-          {path:'bids',component:UserActiveBidsComponent}
-        ]}
+  {path: '',canLoad: [AuthGuardService],pathMatch: 'prefix', component:MainPageComponent,children: [
+      {path: 'home', loadChildren: './home-categories/home-categories.module#HomeCategoriesModule'},
+      {path: 'browse', loadChildren: './browsing/browsing.module#BrowsingModule'},
+      {path: 'categories/:id', loadChildren: './shop_by/shop-by.module#ShopByModule'},
+      {path: 'newAuction', loadChildren: './new-auction/new-auction.module#NewAuctionModule'},
+      {path: 'items/:id', loadChildren: './item-page/item-page.module#ItemPageModule'},
+      {path: 'dashboard', loadChildren: './user-dashboard/user-dashboard.module#UserDashboardModule'},
+      {path: 'messaging', loadChildren: './messaging/messaging.module#MessagingModule'},
     ]}
 
 ];
