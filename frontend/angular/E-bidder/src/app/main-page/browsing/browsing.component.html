@@ -4,41 +4,41 @@
       <div class="filters mt-3">
         <h4 style="text-align: center; margin-bottom: 20px;">Filters</h4>
         <hr>
-        <!-- filters -->
-        <h5 class="col p-3">Location</h5>
-        <form class="form-group">
-          <div class="form-group">
-            <label for="country">Country</label>
-            <input type="text" class="form-control" id="country" name="Country" placeholder="Country">
-          </div>
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city" name="City" placeholder="City">
-          </div>
-        </form>
 
-        <h5 class="col p-3">Price</h5>
-        <form>
+        <!-- filters -->
+        <form (ngSubmit)="apply_filters(filters)" #filters="ngForm">
+          <h5 class="col p-3">Location</h5>
+          <div class="form-group">
+            <label for="Country">Country</label>
+            <input type="text" ngModel class="form-control" id="Country" name="country" placeholder="Country">
+          </div>
+          <div class="form-group">
+            <label for="City">City</label>
+            <input type="text" ngModel class="form-control" id="City" name="city" placeholder="City">
+          </div>
+
+          <h5 class="col p-3">Price</h5>
           <div class="row">
             <div class="col-6 form-group">
-              <input type="text" class="form-control" placeholder="From" id="minprice">
+              <input type="text" ngModel class="form-control" placeholder="From" id="minprice" name="MinPrice">
             </div>
             <div class="col-6 form-group">
-              <input type="text" class="form-control" placeholder="To" id="maxprice">
+              <input type="text" ngModel class="form-control" placeholder="To" id="maxprice" name="MaxPrice">
             </div>
           </div>
+          <hr>
+          <div class="row justify-content-start mt-4">
+            <button type="submit" class="btn btn-primary btn-block" style="margin-left: 5%; margin-right: 5%;"> Apply Filters </button>
+          </div>
         </form>
-        <hr>
-        <div class="row justify-content-start mt-4">
-          <button type="button" class="btn btn-primary btn-block" style="margin-left: 5%; margin-right: 5%;"> Apply Filters </button>
-        </div>
         <!-- end of filters -->
+
       </div>
     </div>
 
     <div class="col-md-9">
       <div class="list-group">
-        <app-item class="col p-3" style="padding-left: 0px !important" *ngFor="let item of (ItemsObservable | async)" [Item]="item"></app-item>
+        <app-item class="col p-3" style="padding-left: 0px !important" *ngFor="let item of (ItemsObservable | async) | BrowsingFilter: filter_args" [Item]="item"></app-item>
       </div>
     </div>
 

@@ -42,16 +42,14 @@ export class ItemPageComponent implements OnInit {
     this.auth$ = this.store.select('auth');
     this.router.events.subscribe((event) => {
       this.getItem();
-      this.load_images();
     });
     this.getItem();
-    this.load_images();
   }
 
   getItem() {
     const Item_id = this.route.snapshot.paramMap.get('id');
     this.ItemObservable = this.httpClient.get<ItemModel>(this.ROOT_URL + '/freeitems/' + Item_id);
-    this.ItemObservable.subscribe(item => {this.Item = item; this.load_images()});
+    this.ItemObservable.subscribe(item => {this.Item = item; this.load_images();});
   }
 
   load_images() {
@@ -70,14 +68,7 @@ export class ItemPageComponent implements OnInit {
 
   placeBid() {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-
-    this.httpClient.post(this.ROOT_URL + '/bids/' + this.Item.id, {amount: this.new_bid}, httpOptions).toPromise();
+    this.httpClient.post(this.ROOT_URL + '/bids/' + this.Item.id, {amount: this.new_bid}).toPromise();
 
     this.getItem();
     this.modalRef.hide();
@@ -91,17 +82,10 @@ export class ItemPageComponent implements OnInit {
 
   buyNow() {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-
-    this.httpClient.post(this.ROOT_URL + '/items/' + this.Item.id + '/buynow', {}, httpOptions).toPromise();
+    this.httpClient.post(this.ROOT_URL + '/items/' + this.Item.id + '/buynow', {}).toPromise();
 
     this.modalRef.hide();
-    this.router.navigateByUrl('/main/dashboard');
+    this.router.navigateByUrl('/main/dashboard/purchases');
   }
 
   checkPrice(bid: NgForm, template: TemplateRef<any>){
