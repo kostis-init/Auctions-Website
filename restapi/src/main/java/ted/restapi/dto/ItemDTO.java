@@ -22,6 +22,7 @@ public class ItemDTO implements Serializable {
     @XmlElement private BigDecimal longitude;
     @XmlElement private String city;
     @XmlElement private String country;
+    @XmlElement private String state;
     @XmlElement private UserDTO seller;
     @XmlElement private List<CategoryDTO> categories;
     @XmlElement private List<BidDTO> bids;
@@ -29,7 +30,7 @@ public class ItemDTO implements Serializable {
 
     public ItemDTO() { }
 
-    public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, String startedAt, String endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller, List<CategoryDTO> categories, List<BidDTO> bids, List<byte[]> images) {
+    public ItemDTO(int id, String name, Double currentBid, Double buyPrice, Double firstBid, int numberOfBids, String startedAt, String endsAt, String description, BigDecimal latitude, BigDecimal longitude, String city, String country, UserDTO seller, List<CategoryDTO> categories, List<BidDTO> bids, List<byte[]> images, String state) {
         this.id = id;
         this.name = name;
         this.currentBid = currentBid;
@@ -47,6 +48,7 @@ public class ItemDTO implements Serializable {
         this.categories = categories;
         this.bids = bids;
         this.images = images;
+        this.state = state;
     }
 
 
@@ -183,4 +185,11 @@ public class ItemDTO implements Serializable {
 
     public void setImages(List<byte[]> images) { this.images = images; }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 }

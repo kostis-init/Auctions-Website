@@ -56,7 +56,7 @@ public class Mapper {
         return new ItemDTO(item.getId(), item.getName(), item.getCurrentBid(), item.getBuyPrice(),
                 item.getFirstBid(), item.getNumberOfBids(), startedAt, endsAt,
                 item.getDescription(), seller.getLatitude(), seller.getLongitude(), seller.getCity(),
-                seller.getCountry(), Mapper.toDTOtruncated(seller), categories, bids, images);
+                seller.getCountry(), Mapper.toDTOtruncated(seller), categories, bids, images, item.getState());
     }
 
     public static CategoryDTO toDTO(Category category) {
