@@ -21,16 +21,25 @@ public class MessageBean {
         List<MessageDTO> chat = new ArrayList<>();
         for (Message message : messages) {
             if(message.getSender().getId() == currentUser.getId()){
-                chat.add(new MessageDTO(message.getId(), currentUser.getUsername(), message.getText()));
+                chat.add(new MessageDTO(message.getId(), currentUser.getUsername(), message.getText(), message.getSeen()));
             } else {
-                chat.add(new MessageDTO(message.getId(), otherUser.getUsername(), message.getText()));
+                chat.add(new MessageDTO(message.getId(), otherUser.getUsername(), message.getText(), message.getSeen()));
             }
         }
         return chat;
     }
 
     public void sendMessage(User currentUser, User otherUser, String text) {
-        Message message = new Message(currentUser, otherUser, text);
+        Message message = new Message(currentUser, otherUser, text, "N");
         messageDAO.create(message);
+    }
+
+    public Message getMsgById(int id) {
+        return messageDAO.findById(id);
+    }
+
+    public void messageSeen(Message msg) {
+        msg.setSeen("Y");
+        messageDAO.update(msg);
     }
 }

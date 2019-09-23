@@ -19,13 +19,15 @@ public class Message implements Serializable {
     private User sender;
     private User receiver;
     private String text;
+    private String seen;
 
     public Message() {}
 
-    public Message(User sender, User receiver, String text) {
+    public Message(User sender, User receiver, String text, String seen) {
         this.sender = sender;
         this.receiver = receiver;
         this.text = text;
+        this.seen = seen;
     }
 
     @Id
@@ -47,6 +49,10 @@ public class Message implements Serializable {
     @Column(name = "text")
     public String getText() { return text; }
     public void setText(String text) { this.text = text; }
+
+    @Column(name = "seen")
+    public String getSeen() { return seen; }
+    public void setSeen(String seen) { this.seen = seen; }
 
     @Override
     public boolean equals(Object o) {

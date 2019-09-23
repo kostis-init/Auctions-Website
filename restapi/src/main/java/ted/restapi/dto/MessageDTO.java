@@ -8,13 +8,15 @@ public class MessageDTO {
     @XmlElement private int id;
     @XmlElement private String senderUsername;
     @XmlElement private String text;
+    @XmlElement private String seen;
 
     public MessageDTO() { }
 
-    public MessageDTO(int id, String senderUsername, String text) {
+    public MessageDTO(int id, String senderUsername, String text, String seen) {
         this.id = id;
         this.senderUsername = senderUsername;
         this.text = text;
+        this.seen = seen;
     }
 
     public int getId() {
@@ -40,4 +42,8 @@ public class MessageDTO {
     public void setText(String text) {
         this.text = text;
     }
+
+    public String getSeen() { return seen; }
+
+    public void setSeen(String seen) { this.seen = seen; }
 }

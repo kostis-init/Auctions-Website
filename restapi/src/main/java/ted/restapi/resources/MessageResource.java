@@ -4,6 +4,7 @@ import ted.restapi.beans.MessageBean;
 import ted.restapi.beans.SessionBean;
 import ted.restapi.beans.UserBean;
 import ted.restapi.dto.MessageDTO;
+import ted.restapi.persistence.entities.Message;
 import ted.restapi.persistence.entities.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -46,6 +47,17 @@ public class MessageResource {
             return Response.status(400).entity("No other user found").build();
         }
         messageBean.sendMessage(currentUser, otherUser, messageDTO.getText());
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("seen/{msgId}")
+    public Response messageSeen(@PathParam("msgId")int id){
+        Message msg = messageBean.getMsgById(id);
+        if(msg == null){
+            return Response.status(400).entity("No message found").build();
+        }
+        messageBean.messageSeen(msg);
         return Response.ok().build();
     }
 
