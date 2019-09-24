@@ -7,6 +7,10 @@ import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptorService} from "./token-interceptor.service";
+import {StoreModule} from "@ngrx/store";
+import {authReducer} from "./store/auth.reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffect} from "./store/auth.effect";
 
 
 
@@ -20,7 +24,7 @@ import {TokenInterceptorService} from "./token-interceptor.service";
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers:[AuthService,
     {

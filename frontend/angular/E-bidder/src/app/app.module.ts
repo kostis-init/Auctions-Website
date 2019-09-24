@@ -26,7 +26,7 @@ import {MainPageEffect} from "./main-page/store/main-page.effect";
     WelcomePageModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffect, MainPageEffect]),
+    EffectsModule.forRoot([AuthEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 20
     }),

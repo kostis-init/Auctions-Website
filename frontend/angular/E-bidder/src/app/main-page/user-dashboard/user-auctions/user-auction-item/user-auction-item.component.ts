@@ -1,9 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {itemModel} from "../../../../shared/Models/ItemModel";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {AuctionItemModel} from "../../../../shared/Models/AuctionItem.model";
 import {HttpClient} from "@angular/common/http";
 import {freeItems, items} from "../../../../shared/server-endpoints";
+import {RatingService} from "../../rating.service";
+import {FormBuilder, Validators} from "@angular/forms";
+import {MessagingService} from "../../../messaging/messaging.service";
 
 @Component({
   selector: 'app-user-auction-item',
@@ -16,11 +18,49 @@ export class UserAuctionItemComponent implements OnInit {
   @Input() Index:number;
   @Output() AuctionDeleted: EventEmitter<any> = new EventEmitter<any>();
   @Output() AuctionUpdated: EventEmitter<any> = new EventEmitter<any>();
+
+  NewMessage = this.fb.group({
+    ['Message'] : this.fb.control('',Validators.required)
+  });
+
   isCollapsed = true;
   IsActive:boolean;
+  isReadonly = false;
   modalRef: BsModalRef;
   Categories:string[]=[];
-  constructor(private modalService: BsModalService,private http:HttpClient) { }
+  Rating:number=3;
+  constructor(private modalService: BsModalService,
+              private http:HttpClient,
+              private RateService:RatingService,
+              private fb:FormBuilder,
+              private MessagingService:MessagingService) { }
+
+
+  overStar: number | undefined;
+  percent: number;
+
+  Send(){
+    this.MessagingService.SendMessage(
+      this.NewMessage.get('Message').value,
+      this.AuctionItem.bids[this.AuctionItem.bids.length - 1].bidder.id
+    ).subscribe();
+    this.CloseModal();
+  }
+
+  onRate(){
+    this.RateService.RateBuyer(this.Rating, this.AuctionItem.bids[this.AuctionItem.bids.length-1].bidder.id).subscribe();
+    this.modalRef.hide();
+  }
+
+  hoveringOver(value: number): void {
+    this.overStar = value;
+    this.percent = (value / 5) * 100;
+  }
+
+  resetStar(): void {
+    this.overStar = void 0;
+  }
+
 
   ngOnInit() {
     this.CheckIfAuctionHasStarted(this.AuctionItem.startedAt);

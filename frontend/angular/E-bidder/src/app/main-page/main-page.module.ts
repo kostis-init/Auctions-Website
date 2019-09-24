@@ -8,6 +8,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {HeaderModule} from "./header/header.module";
 import {FooterModule} from "./footer/footer.module";
+import {MessagingService} from "./messaging/messaging.service";
+import {StoreModule} from "@ngrx/store";
+import {MainPageReducers} from "./store/main-page.reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {MainPageEffect} from "./store/main-page.effect";
 
 
 @NgModule({
@@ -21,10 +26,12 @@ import {FooterModule} from "./footer/footer.module";
     FooterModule,
     MainPageRoutingModule,
     ModalModule.forRoot(),
+    StoreModule.forFeature('mainPage',MainPageReducers),
+    EffectsModule.forFeature([MainPageEffect]),
     HttpClientModule,
     NgbModule,
 
   ],
-  providers:[DatePipe]
+  providers:[DatePipe,MessagingService]
 })
 export class MainPageModule { }

@@ -1,0 +1,38 @@
+<div class="row   m-2" >
+  <div class="col-12">
+
+    <div class="container border border-dark my-3 bg-light rounded-sm shadow" *ngFor="let message of Conversation">
+      <div class="row my-2">
+        <div class="col-md-6 offset-md-7 m-0">
+          <small class="text-muted">{{message.senderUsername}} at {{message.time}}</small>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-8">
+          <h5 class="text-black-50 text-left">{{message.text}}</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div [formGroup]="NewMessage" class="input-group">
+
+          <textarea formControlName="Message"
+                    class="form-control"
+                    name="" id="" cols="50" rows="1"
+                    [ngClass]="{'is-invalid': !NewMessage.get('Message').valid && NewMessage.get('Message').touched,
+                                 'is-valid': NewMessage.get('Message').valid && NewMessage.get('Message').touched}"
+          ></textarea>
+
+          <div class="input-group-append">
+            <button class="btn btn-light border border-dark"
+                    [disabled]="!NewMessage.get('Message').valid"
+                    (click)="Send()">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

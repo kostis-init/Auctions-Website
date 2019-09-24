@@ -4,6 +4,7 @@ import {BidderSellerModel} from "./Bidder-Seller.model";
 export class AuctionItemModel {
   constructor(public id:number,
               public name:string,
+              public state:string,
               public description:string,
               public currentBid:number,
               public firstBid:number,

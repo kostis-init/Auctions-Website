@@ -10,7 +10,8 @@ import {UserPurchaseItemComponent} from "./user-purcheaes/user-purchase-item/use
 import {UserBidItemComponent} from "./user-active-bids/user-bid-item/user-bid-item.component";
 import {CollapseModule, PaginationModule, RatingModule} from "ngx-bootstrap";
 import {SharedModule} from "../../shared/shared.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RatingService} from "./rating.service";
 
 
 
@@ -31,9 +32,9 @@ import {FormsModule} from "@angular/forms";
     PaginationModule.forRoot(),
     CollapseModule,
     RatingModule,
-    SharedModule
-
-
-  ]
+    SharedModule,
+    ReactiveFormsModule
+  ],
+  providers:[RatingService]
 })
 export class UserDashboardModule { }

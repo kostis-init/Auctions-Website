@@ -1,0 +1,11 @@
+
+    <ul class="list-group mt-2" *ngIf="(MessagingState | async)!= null">
+      <a
+        class="shadow-sm p-1 m-1 bg-light text-primary  list-group-item list-group-item-action"
+        *ngFor="let conversation of (MessagingState |async).Conversations; let i=index"
+        routerLinkActive="active"
+        [routerLink]="[i]"
+        (click)="OpenConversation(conversation,i)">
+        <app-conversation-list-item [Conversation]="conversation"></app-conversation-list-item>
+      </a>
+    </ul>

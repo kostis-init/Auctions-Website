@@ -9,4 +9,8 @@ export const watching = 'http://localhost:8080/restapi/api/items/watching';
 export const categoryImages = 'http://localhost:8080/restapi/api/images/categories';
 export const subCategoryImages = 'http://localhost:8080/restapi/api/images/subcategories';
 export const freeItems = 'http://localhost:8080/restapi/api/freeitems';
-
+export const messagesAll = 'http://localhost:8080/restapi/api/messages/all';
+export const messageSeen='http://localhost:8080/restapi/api/messages/seen';
+export const message = 'http://localhost:8080/restapi/api/messages';
+export const rateBidder = ' http://localhost:8080/restapi/api/ratings/bidder';
+export const rateSeller = ' http://localhost:8080/restapi/api/ratings/seller';

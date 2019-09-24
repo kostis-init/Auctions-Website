@@ -13,9 +13,12 @@
         </li>
       </ul>
 
-
       <div class="col-md-12">
-        <button class="btn btn-primary btn-block" (click)="MessageSeller()">
+        <button class="btn btn-primary btn-block" (click)="OpenModal(Rate)">Rate Seller</button>
+      </div>
+
+      <div class="col-md-12 mt-2">
+        <button class="btn btn-primary btn-block" (click)="OpenModal(Message)">
           Message the Seller
         </button>
       </div>
@@ -23,3 +26,82 @@
     </div>
   </div>
 </div>
+
+
+
+<ng-template #Rate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Give Your Rating </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <h5>User Details</h5>
+
+    <div class="row">
+      <div class="col-12">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Username: {{PurchaseItem.seller.id}}</li>
+          <li class="list-group-item">
+            Current rating:
+            <rating
+              [max]="5" [readonly]="true"
+              [(ngModel)]="PurchaseItem.seller.sellerRating">
+            </rating>
+          </li>
+
+          <li class="list-group-item">
+            Your Rating:
+            <rating [max]="5" (onHover)="hoveringOver($event)"  (onLeave)="resetStar()"
+                    [(ngModel)]="Rating" [readonly]="isReadonly"></rating>
+            <span class="label"
+                  [ngClass]="
+              {'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"
+                  [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{percent}}%</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-success btn-block" (click)="onRate()">Ok</button>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #Message>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Send a Message to {{PurchaseItem.seller.username}} </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div [formGroup]="NewMessage" class="input-group">
+
+          <textarea formControlName="Message"
+                    class="form-control"
+                    name="" id="" cols="50" rows="1"
+                    [ngClass]="{'is-invalid': !NewMessage.get('Message').valid && NewMessage.get('Message').touched,
+                                 'is-valid': NewMessage.get('Message').valid && NewMessage.get('Message').touched}"
+          ></textarea>
+
+          <div class="input-group-append">
+            <button class="btn btn-light border border-dark"
+                    [disabled]="!NewMessage.get('Message').valid"
+                    (click)="Send()">Send Message</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>

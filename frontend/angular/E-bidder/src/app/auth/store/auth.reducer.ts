@@ -5,7 +5,6 @@ export interface AuthState {
 
   userStatus: string;
   token: string;
-  // we may use a JWT API SO THIS MIGHT CHANGE TO AN OBJECT
   loggedIn: boolean;
 }
 
