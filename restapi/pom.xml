@@ -71,16 +71,12 @@
             <version>0.6.0</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.3m</version>
         </dependency>
-
-
-
     </dependencies>
 
     <build>
@@ -97,6 +93,19 @@
                     <useBinaries>true</useBinaries>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomee.maven</groupId>
+                <artifactId>tomee-embedded-maven-plugin</artifactId>
+                <version>7.0.0-M1</version>
+                <configuration>
+                    <context>restapi</context>
+                    <keystoreFile>C:\Users\usw031\IdeaProjects\ted\restapi\localhost-rsa.jks</keystoreFile>
+                    <keystorePass>123456</keystorePass>
+                    <keystoreType>PKCS12</keystoreType>
+                </configuration>
+            </plugin>
+
         </plugins>
 
     </build>
