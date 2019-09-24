@@ -184,4 +184,22 @@ public class ItemBean {
 
         return newItems;
     }
+
+    public List<Item> getBiddenItems(User currentUser) {
+        List<Item> items = new ArrayList<>();
+        List<Bid> bids = currentUser.getBids();
+        List<Integer> itemIds = new ArrayList<>();
+        for (Bid bid : bids) {
+            if(!itemIds.contains(bid.getItem().getId())){
+                items.add(bid.getItem());
+                itemIds.add(bid.getItem().getId());
+            }
+        }
+        return items;
+    }
+
+    public List<Item> getVisitedItems(User currentUser) {
+        //TODO
+        return null;
+    }
 }

@@ -19,19 +19,17 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-<!--        <url-pattern>/api/categories/*</url-pattern>-->
+        <url-pattern>/api/users/autologin</url-pattern>
         <url-pattern>/api/items/*</url-pattern>
         <url-pattern>/api/admin/*</url-pattern>
         <url-pattern>/api/bids/*</url-pattern>
         <url-pattern>/api/messages/*</url-pattern>
         <url-pattern>/api/ratings/*</url-pattern>
-        <!--        <url-pattern>/api/images/*</url-pattern>-->
-        <url-pattern>/api/users/autologin</url-pattern>
+        <url-pattern>/api/recommendations/*</url-pattern>
     </filter-mapping>
 
 <!--    <security-constraint>-->
 <!--        <web-resource-collection>-->
-<!--            <web-resource-name>securedapp</web-resource-name>-->
 <!--            <url-pattern>/*</url-pattern>-->
 <!--        </web-resource-collection>-->
 <!--        <user-data-constraint>-->

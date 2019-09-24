@@ -21,7 +21,7 @@ public class Mapper {
         }
         return new UserDTO(user.getId(), user.getUsername(), user.getPassword(),
                 user.getFirstName(), user.getLastName(), user.getEmail(), user.getTelephoneNum(),
-                user.getAfm(), bidderRating, sellerRating, user.getIsAdmin(),
+                user.getAfm(), (double) Math.round(bidderRating), (double) Math.round(sellerRating), user.getIsAdmin(),
                 user.getIsApproved(), user.getAddress(), user.getCity(), user.getCountry());
     }
 
@@ -34,7 +34,7 @@ public class Mapper {
         if(user.getSellerRatings() > 0){
             sellerRating = user.getSellerRatingSum() / user.getSellerRatings();
         }
-        return new UserDTO(user.getId(), user.getUsername(), bidderRating, sellerRating, user.getAddress(), user.getCity(), user.getCountry());
+        return new UserDTO(user.getId(), user.getUsername(), (double) Math.round(bidderRating), (double) Math.round(sellerRating), user.getAddress(), user.getCity(), user.getCountry());
     }
 
     public static ItemDTO toDTO(Item item){

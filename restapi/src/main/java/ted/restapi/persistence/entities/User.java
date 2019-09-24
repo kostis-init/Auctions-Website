@@ -41,7 +41,6 @@ public class User implements Serializable {
     private List<Message> sentMessages;
     private List<Message> receivedMessages;
 
-
     public User() { }
 
     public User(String username, String password, String firstName, String lastName, String email, String telephoneNum, String afm, int bidderRatings, int sellerRatings, Double bidderRatingSum, Double sellerRatingSum, String isAdmin, String address, BigDecimal latitude, BigDecimal longitude, String city, String country, String isApproved) {
@@ -250,25 +249,10 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(telephoneNum, user.telephoneNum) &&
-                Objects.equals(afm, user.afm) &&
-                Objects.equals(bidderRatingSum, user.bidderRatingSum) &&
-                Objects.equals(sellerRatingSum, user.sellerRatingSum) &&
-                Objects.equals(address, user.address) &&
-                Objects.equals(city, user.city) &&
-                Objects.equals(country, user.country) &&
-                Objects.equals(isAdmin, user.isAdmin) &&
-                Objects.equals(isApproved, user.isApproved);
+        return id == user.id;
     }
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, firstName, lastName, email, telephoneNum,
-                            afm, address, city, country, bidderRatingSum, sellerRatingSum, isAdmin, isApproved);
+        return Objects.hash(id);
     }
 }
