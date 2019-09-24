@@ -12,12 +12,12 @@ export class BrowsingFilterPipe implements PipeTransform {
     // filter items array, items which match and return true will be
     // kept, false will be filtered out
     if (filter.maxprice == null) {
-      return items.filter(item => (item.seller.city.indexOf(filter.city) !== -1)
-        && (item.seller.country.indexOf(filter.country) !== -1)
+      return items.filter(item => (item.seller.city.toLocaleLowerCase().indexOf(filter.city.toLocaleLowerCase()) !== -1)
+        && (item.seller.country.toLocaleLowerCase().indexOf(filter.country.toLocaleLowerCase()) !== -1)
         && (item.currentBid > filter.minprice));
     }else{
-      return items.filter(item => (item.seller.city.indexOf(filter.city) !== -1)
-        && (item.seller.country.indexOf(filter.country) !== -1)
+      return items.filter(item => (item.seller.city.toLocaleLowerCase().indexOf(filter.city.toLocaleLowerCase()) !== -1)
+        && (item.seller.country.toLocaleLowerCase().indexOf(filter.country.toLocaleLowerCase()) !== -1)
         && (item.currentBid >= filter.minprice)
         && (item.currentBid <= filter.maxprice));
     }
