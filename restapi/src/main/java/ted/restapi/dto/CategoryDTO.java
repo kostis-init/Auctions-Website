@@ -1,15 +1,25 @@
 package ted.restapi.dto;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.sql.Blob;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CategoryDTO implements Serializable {
-    @XmlElement private int id;
-    @XmlElement private String name;
-    @XmlElement private byte[] image;
+    @XmlAttribute(name = "CategoryID")
+    private int id;
+
+    @XmlElement(name = "Name")
+    private String name;
+
+    @XmlTransient
+    private byte[] image;
 
     public CategoryDTO() { }
 

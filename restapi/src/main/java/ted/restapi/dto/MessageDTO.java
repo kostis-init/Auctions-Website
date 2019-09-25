@@ -1,9 +1,17 @@
 package ted.restapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MessageDTO {
     @XmlElement private int id;
     @XmlElement private int senderId;

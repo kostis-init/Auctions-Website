@@ -1,16 +1,28 @@
 package ted.restapi.dto;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder
+@XmlRootElement(name = "Bid")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BidDTO implements Serializable {
-    @XmlElement private int id;
-    @XmlElement private String time;
-    @XmlElement private Double amount;
-    @XmlElement private UserDTO bidder;
+    @XmlAttribute(name = "BidID")
+    private int id;
+
+    @XmlElement(name = "Time")
+    private String time;
+
+    @XmlElement(name = "Amount")
+    private Double amount;
+
+    @XmlElement(name = "Bidder")
+    private UserDTO bidder;
 
     public BidDTO(){ }
 

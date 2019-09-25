@@ -1,32 +1,73 @@
 package ted.restapi.dto;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@XmlRootElement
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder
+@XmlRootElement(name = "Item")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ItemDTO implements Serializable {
-    @XmlElement private int id;
-    @XmlElement private String name;
-    @XmlElement private Double currentBid;
-    @XmlElement private Double buyPrice;
-    @XmlElement private Double firstBid;
-    @XmlElement private int numberOfBids;
-    @XmlElement private String startedAt;
-    @XmlElement private String endsAt;
-    @XmlElement private String description;
-    @XmlElement private BigDecimal latitude;
-    @XmlElement private BigDecimal longitude;
-    @XmlElement private String city;
-    @XmlElement private String country;
-    @XmlElement private String state;
-    @XmlElement private UserDTO seller;
-    @XmlElement private List<CategoryDTO> categories;
-    @XmlElement private List<BidDTO> bids;
-    @XmlElement private List<byte[]> images;
+    @XmlAttribute(name = "ItemID")
+    private int id;
+
+    @XmlElement(name = "Name")
+    private String name;
+
+    @XmlElement(name = "Category")
+    private List<CategoryDTO> categories;
+
+    @XmlElement(name = "Currently")
+    private Double currentBid;
+
+    @XmlElement(name = "Buy_Price")
+    private Double buyPrice;
+
+    @XmlElement(name = "First_Bid")
+    private Double firstBid;
+
+    @XmlElement(name = "Number_of_Bids")
+    private int numberOfBids;
+
+    @XmlElementWrapper(name = "Bids")
+    @XmlElement(name = "Bid")
+    private List<BidDTO> bids;
+
+    @XmlElement(name = "Latitude")
+    private BigDecimal latitude;
+
+    @XmlElement(name = "Longitude")
+    private BigDecimal longitude;
+
+    @XmlElement(name = "City")
+    private String city;
+
+    @XmlElement(name = "Country")
+    private String country;
+
+    @XmlTransient
+    private String state;
+
+    @XmlElement(name = "Started")
+    private String startedAt;
+
+    @XmlElement(name = "Ends")
+    private String endsAt;
+
+    @XmlElement(name = "Seller")
+    private UserDTO seller;
+
+    @XmlElement(name = "Description")
+    private String description;
+
+    @XmlTransient
+    private List<byte[]> images;
 
     public ItemDTO() { }
 

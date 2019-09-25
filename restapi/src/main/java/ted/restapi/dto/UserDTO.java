@@ -1,29 +1,34 @@
 package ted.restapi.dto;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UserDTO implements Serializable {
-    @XmlElement private int id;
-    @XmlElement private String username;
-    @XmlElement private String password;
+    @XmlAttribute(name = "UserID") private int id;
+    @XmlElement(name = "Username") private String username;
+    @XmlTransient private String password;
     @XmlElement private String firstName;
     @XmlElement private String lastName;
     @XmlElement private String email;
     @XmlElement private String telephoneNum;
     @XmlElement private String afm;
-    @XmlElement private Double bidderRating;
-    @XmlElement private Double sellerRating;
+    @XmlElement(name = "Bidder_Rating") private Double bidderRating;
+    @XmlElement(name = "Seller_Rating") private Double sellerRating;
     @XmlElement private String isAdmin;
     @XmlElement private String isApproved;
-    @XmlElement private String address;
-    @XmlElement private BigDecimal latitude;
-    @XmlElement private BigDecimal longitude;
-    @XmlElement private String city;
-    @XmlElement private String country;
+    @XmlTransient private String address;
+    @XmlTransient private BigDecimal latitude;
+    @XmlTransient private BigDecimal longitude;
+    @XmlElement(name = "City") private String city;
+    @XmlElement(name = "Country") private String country;
 
     public UserDTO() { }
 
