@@ -124,9 +124,21 @@
           <p class="card-text">{{Item.description}}</p>
         </div>
       </div>
+
+
+      <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+          Location
+        </div>
+
+        <div class="card-body p-0">
+            <app-open-map [Static]="true" [lon]="Item.longitude" [lat]="Item.latitude"></app-open-map>
+        </div>
+      </div>
       <!-- /.card -->
     </div>
     <!-- /.col-lg-9 -->
+
 
   </div>
 

@@ -33,16 +33,13 @@
 
     <div class="modal-body">
       <div class="row">
-        <div class="col-12">
-          Choose path
+
+        <div class="col-md-6 mt-1">
+          <button class="btn btn-block btn-primary" type="button" (click)="getXml()">Download XML</button>
         </div>
 
-        <div class="col-md-6">
-          <button class="btn btn-block btn-primary" type="button" (click)="getXml()">Export XML</button>
-        </div>
-
-        <div class="col-md-6">
-          <button class="btn btn-block btn-primary" type="button" (click)="getJson()">Export JSON</button>
+        <div class="col-md-6 mt-1">
+          <button class="btn btn-block btn-primary" type="button" (click)="getJson()">Download JSON</button>
         </div>
       </div>
     </div>

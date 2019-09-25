@@ -14,6 +14,8 @@ export class ItemModel{
   startedAt: string;
   endsAt: string;
   seller: UserDataModel;
+  longitude:number;
+  latitude:number;
   categories: SubCategoryModel;
   images: any[][];
 

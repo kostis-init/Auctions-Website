@@ -5,7 +5,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { NewAuctionFormComponent } from './new-auction-form/new-auction-form.component';
 import {SaveAuctionService} from "./new-auction-form/save-auction.service";
 import {ReactiveFormsModule} from "@angular/forms";
-import {NgbDatepickerModule, NgbModule, NgbTimepickerModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -13,7 +13,7 @@ import {NgbDatepickerModule, NgbModule, NgbTimepickerModule} from "@ng-bootstrap
   declarations: [OpenMapComponent, AccessDeniedComponent, NewAuctionFormComponent],
   exports: [
     OpenMapComponent,
-    NewAuctionFormComponent
+    NewAuctionFormComponent,
   ],
   imports: [
     CommonModule,

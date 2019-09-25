@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 declare var ol: any;
 
@@ -11,51 +11,52 @@ export class OpenMapComponent implements OnInit {
 
   constructor() { }
   map: any;
+  @Input() lon=73.8567;
+  @Input() lat=18.5204;
+  @Input() Static;
   @Output() GetLat: EventEmitter<any> = new EventEmitter<any>();
   @Output() GetLot: EventEmitter<any> = new EventEmitter<any>();
 
   markerStyle = new ol.style.Style({
     image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-      anchor: [0.5, 46],
-      anchorXUnits: 'fraction',
-      anchorYUnits: 'pixels',
       opacity: 0.75,
-      src: 'https://openlayers.org/en/v4.6.4/examples/data/icon.png'
+      color:'#ffcd46',
+      scale: 0.5,
+      src: '../../../assets/EBidder_files/point.png'
     }))
   });
+
+
 
   markerSource = new ol.source.Vector;
 
   ngOnInit() {
 
-    var mousePositionControl = new ol.control.MousePosition({
-      coordinateFormat: ol.coordinate.createStringXY(4),
-      projection: 'EPSG:4326',
-      // comment the following two lines to have the mouse position
-      // be placed within the map.
-      className: 'custom-mouse-position',
-      target: document.getElementById('mouse-position'),
-      undefinedHTML: '&nbsp;'
-    });
+    this.markerSource.addFeature(
+      new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.transform([this.lon, this.lat], 'EPSG:4326',
+          'EPSG:3857')),
+        name: 'Null Island',
+        population: 4000,
+        rainfall: 500
+      })
+    );
+
+
 
     this.map = new ol.Map({
       target: 'map',
-      controls: ol.control.defaults({
-        atributionOption: {
-          collapsible: false
-        }
-      }).extend([mousePositionControl]),
       layers: [
         new ol.layer.Tile({
           source: new ol.source.OSM()
         }),
         new ol.layer.Vector({
           source:this.markerSource,
-          stye:this.markerStyle
-        })
+          style:this.markerStyle
+        }),
       ],
       view: new ol.View({
-        center: ol.proj.fromLonLat([73.8567, 18.5204]),
+        center: ol.proj.fromLonLat([this.lon, this.lat]),
         zoom: 5
       })
     });
@@ -64,6 +65,7 @@ export class OpenMapComponent implements OnInit {
 
   getLotLat(args){
 
+  if(!this.Static){
     var coordinate =this.map.getEventCoordinate(args);
     var lonlat = ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326');
 
@@ -80,6 +82,8 @@ export class OpenMapComponent implements OnInit {
 
     this.GetLot.emit(lonlat[0]);
     this.GetLat.emit(lonlat[1]);
+  }
+
 
   }
 

@@ -40,7 +40,10 @@ export class AdminComponent implements OnInit {
         console.log(data);
         const blob = new Blob([data], {type: 'text/plain'});
         const url = window.URL.createObjectURL(blob);
-        window.open(url);
+        const link = document.createElement('a');
+        link.href=url;
+        link.download="items.json";
+        link.click();
       }
     );
 
@@ -48,12 +51,14 @@ export class AdminComponent implements OnInit {
   }
 
   getJson(){
-    this.http.get('http://localhost:8080/restapi/api/admin/export/json',{responseType:'blob'}).subscribe(
+    this.http.get('http://localhost:8080/restapi/api/admin/export/json',{responseType: 'blob'}).subscribe(
       (data)=>{
-        console.log(data);
         const blob = new Blob([data], {type: 'text/plain'});
         const url = window.URL.createObjectURL(blob);
-        window.open(url);
+        const link = document.createElement('a');
+        link.href=url;
+        link.download="items.json";
+        link.click();
       }
     );
 
