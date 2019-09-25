@@ -14,3 +14,4 @@ export const messageSeen='http://localhost:8080/restapi/api/messages/seen';
 export const message = 'http://localhost:8080/restapi/api/messages';
 export const rateBidder = ' http://localhost:8080/restapi/api/ratings/bidder';
 export const rateSeller = ' http://localhost:8080/restapi/api/ratings/seller';
+export const recommendations = 'http://localhost:8080/restapi/api/recommendations/';

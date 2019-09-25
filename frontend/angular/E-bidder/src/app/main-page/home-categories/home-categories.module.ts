@@ -4,6 +4,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeCategoriesComponent} from "./home-categories.component";
 import {HomeSubcategoriesComponent} from "./home-subcategories/home-subcategories.component";
 import {HomeCategoryItemComponent} from "./home-category-item/home-category-item.component";
+import { HomeRecomendationsComponent } from './home-recomendations/home-recomendations.component';
+import {CarouselModule} from "ngx-bootstrap";
 
 const routes: Routes = [
   {path:'',component:HomeCategoriesComponent}
@@ -14,11 +16,13 @@ const routes: Routes = [
   declarations: [
     HomeCategoriesComponent,
     HomeSubcategoriesComponent,
-    HomeCategoryItemComponent
+    HomeCategoryItemComponent,
+    HomeRecomendationsComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    CarouselModule.forRoot()
   ]
 })
 export class HomeCategoriesModule { }

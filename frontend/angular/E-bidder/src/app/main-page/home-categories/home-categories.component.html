@@ -1,4 +1,16 @@
 <div class="container-fluid pr-5 pl-5">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-center" style="font-weight:300">Recommended</h3>
+    </div>
+  </div>
+  <hr>
+  <div class="row rounded bg-light p-2">
+    <div class="col-12 ">
+      <app-home-recomendations></app-home-recomendations>
+    </div>
+  </div>
+  <hr>
   <div class="row card-columns">
     <app-home-category-item class="col-md-4 p-3" [Item]="category"  *ngFor="let category of (state$ | async).Categories"></app-home-category-item>
   </div>
