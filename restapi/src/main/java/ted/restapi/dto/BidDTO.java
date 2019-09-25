@@ -1,14 +1,15 @@
 package ted.restapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder
+@JsonIgnoreProperties(ignoreUnknown=true)
 @XmlRootElement(name = "Bid")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BidDTO implements Serializable {

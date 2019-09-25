@@ -28,8 +28,11 @@
         <url-pattern>/api/recommendations/*</url-pattern>
     </filter-mapping>
 
+<!--    Uncomment the following lines to enable SSL-->
+
 <!--    <security-constraint>-->
 <!--        <web-resource-collection>-->
+<!--            <web-resource-name>test</web-resource-name>-->
 <!--            <url-pattern>/*</url-pattern>-->
 <!--        </web-resource-collection>-->
 <!--        <user-data-constraint>-->

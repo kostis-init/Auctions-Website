@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 public class RecommendationResource {
 
-    private final static int MAX_RECOMMENDED_ITEMS = 7;
+    private final static int MAX_RECOMMENDED_ITEMS = 4;
 
     @Inject private SessionBean sessionBean;
     @Inject private ItemBean itemBean;
@@ -61,15 +61,25 @@ public class RecommendationResource {
 
         List<Item> recommendedItems = new ArrayList<>();
         List<Item> ownedItems = currentUser.getItems();
+        List<Item> excludedItems = new ArrayList<>();
+        excludedItems.addAll(ownedItems);
+        excludedItems.addAll(biddenItems);
         for(User user : neighbors.keySet()){
             if(recommendedItems.size() >= MAX_RECOMMENDED_ITEMS){
                 break;
             }
             System.out.println("Checking neighbor:" + user.getUsername());
-            List<Item> nomineeItems = itemBean.getBiddenItems(user);
-            nomineeItems.removeAll(ownedItems);
-            nomineeItems.removeAll(biddenItems);
+            List<Item> nomineeItems = itemBean.getBiddenActiveItems(user);
+            nomineeItems.removeAll(excludedItems);
+            nomineeItems.removeAll(recommendedItems);
             recommendedItems.addAll(nomineeItems);
+        }
+
+        //not enough recommended, put some top items
+        int remaining = MAX_RECOMMENDED_ITEMS - recommendedItems.size();
+        if(remaining > 0){
+            excludedItems.addAll(recommendedItems);
+            recommendedItems.addAll(itemBean.getTopItems(excludedItems, remaining));
         }
 
         for (Item recommendedItem : recommendedItems) {

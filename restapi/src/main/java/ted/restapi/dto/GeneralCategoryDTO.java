@@ -1,5 +1,6 @@
 package ted.restapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import ted.restapi.persistence.entities.GeneralCategory;
@@ -13,6 +14,7 @@ import java.sql.Blob;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder
+@JsonIgnoreProperties(ignoreUnknown=true)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GeneralCategoryDTO implements Serializable {
