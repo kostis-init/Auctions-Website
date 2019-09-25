@@ -39,12 +39,12 @@ export class SaveAuctionService {
   }
 
   convertEndDate(Date) {
-    return Date.ENDate.year + '-'+ Date.ENDate.day +'-'+ Date.ENDate.month +' '+ Date.ENTime.hour + ':' + Date.ENTime.minute + ':00' ;
+    return Date.ENDate.year + '-'+ Date.ENDate.month +'-'+ Date.ENDate.day +' '+ Date.ENTime.hour + ':' + Date.ENTime.minute + ':00' ;
 
   }
 
   convertStartDate(Date){
-    return Date.STDate.year + '-'+ Date.STDate.day +'-'+ Date.STDate.month +' '+ Date.STTime.hour + ':' + Date.STTime.minute + ':00' ;
+    return Date.STDate.year + '-'+ Date.STDate.month +'-'+ Date.STDate.day +' '+ Date.STTime.hour + ':' + Date.STTime.minute + ':00' ;
 
   }
 
@@ -58,6 +58,7 @@ export class SaveAuctionService {
   }
 
   PostData(AuctionData:itemModel){
+    console.log(AuctionData);
     return this.http.post<itemModel>(items,AuctionData).pipe(
       catchError(this.ErrorHandler.HttpErrorHandle)
     );
