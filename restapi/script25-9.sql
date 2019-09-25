@@ -34,7 +34,7 @@ CREATE TABLE `bid` (
   KEY `fk_bid_user_idx` (`bidder_id`),
   CONSTRAINT `fk_bid_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_bid_user` FOREIGN KEY (`bidder_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `bid` (
 
 LOCK TABLES `bid` WRITE;
 /*!40000 ALTER TABLE `bid` DISABLE KEYS */;
-INSERT INTO `bid` (`bid_id`, `time`, `amount`, `bidder_id`, `item_id`) VALUES (7,'2019-09-11 22:22:00',600,2,24);
+INSERT INTO `bid` (`bid_id`, `time`, `amount`, `bidder_id`, `item_id`) VALUES (7,'2019-09-11 22:22:00',600,2,24),(8,'2019-09-11 21:22:00',300,18,24),(9,'2019-09-11 20:22:00',305,17,24),(10,'2019-09-11 19:22:00',310,18,24),(11,'2019-09-11 18:22:00',400,17,24),(12,'2019-09-11 17:22:00',450,18,24),(13,'2019-09-11 16:22:00',500,16,24),(14,'2019-09-25 00:54:48',400,18,1),(16,'2019-09-11 22:22:00',400,2,2),(17,'2019-09-11 21:22:00',800,18,2);
 /*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` (`item_id`, `name`, `current_bid`, `buy_price`, `first_bid`, `number_of_bids`, `started_at`, `ends_at`, `seller_id`, `description`, `state`, `buyer_id`) VALUES (1,'Yamaha Upright Piano',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',3,'Through the larger dimensions and the sophisticated design the new b2 piano is also richer in volume, in proportion to the size.','active',NULL),(2,'Xiaomi 7 plus',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',5,'The Xiaomi 7 comes in a black box with the phone printed on it, the Mi 9 SE here doesn\'t show up with as much flair. It\'s still a nice looking box, plain white as it may be, with the odd silver logo stamped here and there.','active',NULL),(3,'Apple Iphone 6s',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'Ios 7, Used for 12 months, included headphones','active',NULL),(4,'Apple Iphone 10',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',3,'Brand new Iphone, hardly every used','active',NULL),(5,'Acer s24 laptop',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',5,'very good laptop many cores','active',NULL),(6,'Sony Smartwatch',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',7,'Few scratches, overall in good condition','active',NULL),(7,'Homo Deus',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',7,'Book that you read and you pass on the next.','active',NULL),(9,'Mazda RX-8 ',10,60,10,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'Japanese car, very fast 0-60mph, service required, paid taxes','active',NULL),(10,'Fender Rhodes Electric Piano',10,60,10,0,'2019-09-13 13:39:52','2107-06-05 00:00:00',2,'1978 collective fender rhodes electric piano','active',NULL),(11,'Samsung S10',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'used samsung phone, no scratches, like new','active',NULL),(12,'Samsung a70',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',2,'Broken screen','active',NULL),(15,'Huawei P10 Lite',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'Never used, Sealed in its box.','active',NULL),(24,'Xiaomi 9T Pro',600,600,200,1,'2019-09-09 22:22:00','2019-09-18 13:22:00',2,'New phone anegixto','ended',2),(25,'Smooth bed',100,NULL,100,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',17,'A bed for everyone, very smooth, check it out!','active',NULL),(26,'Les Paul 12345',1500,20000,1500,0,'2019-05-09 22:22:00','2021-05-09 22:22:00',18,'The one and only les paul 12345 guitar, signed by slash','active',NULL),(27,'Adidas Ultraboost 19',140.5,NULL,140.5,0,'2020-05-09 22:22:00','2021-05-09 22:22:00',16,'Best running shoes ever made, 10 km in 30 minutes guaranteed','ready',NULL);
+INSERT INTO `item` (`item_id`, `name`, `current_bid`, `buy_price`, `first_bid`, `number_of_bids`, `started_at`, `ends_at`, `seller_id`, `description`, `state`, `buyer_id`) VALUES (1,'Yamaha Upright Piano',400,1453.13,358.2,1,'2019-09-13 13:39:52','2059-09-13 13:39:52',3,'Through the larger dimensions and the sophisticated design the new b2 piano is also richer in volume, in proportion to the size.','active',NULL),(2,'Xiaomi 7 plus',800,1453.13,358.2,2,'2019-09-09 22:22:00','2021-05-09 22:22:00',5,'The Xiaomi 7 comes in a black box with the phone printed on it, the Mi 9 SE here doesn\'t show up with as much flair. It\'s still a nice looking box, plain white as it may be, with the odd silver logo stamped here and there.','active',NULL),(3,'Apple Iphone 6s',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'Ios 7, Used for 12 months, included headphones','active',NULL),(4,'Apple Iphone 10',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',3,'Brand new Iphone, hardly every used','active',NULL),(5,'Acer s24 laptop',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',5,'very good laptop many cores','active',NULL),(6,'Sony Smartwatch',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',7,'Few scratches, overall in good condition','active',NULL),(7,'Homo Deus',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',7,'Book that you read and you pass on the next.','active',NULL),(9,'Mazda RX-8 ',10,60,10,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'Japanese car, very fast 0-60mph, service required, paid taxes','active',NULL),(10,'Fender Rhodes Electric Piano',10,60,10,0,'2019-09-13 13:39:52','2107-06-05 00:00:00',2,'1978 collective fender rhodes electric piano','active',NULL),(11,'Samsung S10',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'used samsung phone, no scratches, like new','active',NULL),(12,'Samsung a70',358.2,1453.13,358.2,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',2,'Broken screen','active',NULL),(15,'Huawei P10 Lite',358.2,1453.13,358.2,0,'2019-09-13 13:39:52','2059-09-13 13:39:52',2,'Never used, Sealed in its box.','active',NULL),(24,'Xiaomi 9T Pro',600,600,200,7,'2019-09-09 22:22:00','2019-09-18 13:22:00',2,'New phone anegixto','ended',2),(25,'Smooth bed',100,NULL,100,0,'2019-09-09 22:22:00','2021-05-09 22:22:00',17,'A bed for everyone, very smooth, check it out!','active',NULL),(26,'Les Paul 12345',1500,20000,1500,0,'2019-05-09 22:22:00','2021-05-09 22:22:00',18,'The one and only les paul 12345 guitar, signed by slash','active',NULL),(27,'Adidas Ultraboost 19',140.5,NULL,140.5,0,'2020-05-09 22:22:00','2021-05-09 22:22:00',16,'Best running shoes ever made, 10 km in 30 minutes guaranteed','ready',NULL);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ CREATE TABLE `item_images` (
   UNIQUE KEY `item_images_pk` (`item_images_id`),
   KEY `item_images_fk` (`item_id`),
   CONSTRAINT `item_images_fk` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,6 +274,34 @@ LOCK TABLES `user` WRITE;
 INSERT INTO `user` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `telephone_num`, `afm`, `bidder_rating_sum`, `seller_rating_sum`, `is_admin`, `address`, `city`, `country`, `is_approved`, `latitude`, `longitude`, `bidder_ratings`, `seller_ratings`) VALUES (1,'admin','$2a$10$1M30GotwFVFuP84M7mK9/OA9.8Wj.Op7oZHVfHIZgS4aX5Xd7O/du','Administrator','Administrator','admin@admin.com','6999999999999999','23425446532323453',0,0,'Y',NULL,NULL,NULL,'Y',40.28371600,-2.33457300,0,0),(2,'kostis','$2a$10$wV590SRkSAv/MjhotOpKg.bsWI9lTAlKxgsQvgH4wLY5MnldzNCPS','Konstantinos','Mich','osdjf@fsds.gr','32434343534','23436254243243',0,6.5,'N',NULL,NULL,NULL,'Y',38.92950200,-96.86246200,0,2),(3,'user24','$2a$10$XrgoyJXnDjqjPccxSnIJROZyBzBwpdaqZ5HiPZfYouD64LdFneloC','Giorgos','Georgiou','Gdfsfds@GDFd.sg','2435456856',NULL,0,0,'N',NULL,NULL,NULL,'Y',42.91218300,20.15666600,0,0),(5,'user234224','$2a$10$XrgoyJXnDjqjPccxSnIJROZyBzBwpdaqZ5HiPZfYouD64LdFneloC','Akis','Losad','asda@GDFd.sg','234245',NULL,0,0,'N',NULL,NULL,NULL,'Y',15.75524900,28.23799200,0,0),(6,'postman','$2a$10$WLi7nxENCxqcuSc80y5ErecO69ay7o0I384MIDHoTOcMUbrGZMdYW',NULL,NULL,'post@sdflsdjfsl.fd',NULL,'213235433',0,0,'N',NULL,NULL,NULL,'N',15.75524900,28.23799200,0,0),(7,'alekos','$2a$10$z6pjQew.MndZWTEHB2Qff.PRPw96GtQa6GsDF1b66Yl8rX02S8w8q',NULL,'resto','hre@fdd.sd',NULL,'sdfsgdsfsdsfs',0,0,'N',NULL,NULL,NULL,'Y',40.55137400,-60.31702400,0,0),(16,'john','$2a$10$6YlrxQKqLJ..ZLmyppsxr.mzowJMRGVyw5PVjyzr9Ov9MaT.m3.Iq','john','dim','myEmail@test.com','123456','12345',0,0,'N','myadd','ath','123456','Y',40.28371600,-2.33457300,0,0),(17,'tasos','$2a$10$zY5Qxjx1jZ4qoQOv9Tlw5.QaWxWkv9x/8vQVpav.AfZRQ5X28xHjS',NULL,NULL,'ASd',NULL,NULL,0,0,'N',NULL,NULL,NULL,'Y',38.92950200,-96.86246200,0,0),(18,'lampros','$2a$10$QSn3oV8N2SRl.y9EJymwbujQT.osh1U8v8MWIbI/Ogbp3XcmxZOE.',NULL,NULL,'asdadasd',NULL,NULL,0,0,'N',NULL,NULL,NULL,'Y',42.91218300,20.15666600,0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users_visit_items`
+--
+
+DROP TABLE IF EXISTS `users_visit_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users_visit_items` (
+  `user_id` int(10) unsigned NOT NULL,
+  `item_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`,`item_id`),
+  KEY `visits_fk1_idx` (`user_id`),
+  KEY `visits_fk2_idx` (`item_id`),
+  CONSTRAINT `visits_fk1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `visits_fk2` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_visit_items`
+--
+
+LOCK TABLES `users_visit_items` WRITE;
+/*!40000 ALTER TABLE `users_visit_items` DISABLE KEYS */;
+INSERT INTO `users_visit_items` (`user_id`, `item_id`) VALUES (2,1),(2,15),(17,1),(17,5),(17,6);
+/*!40000 ALTER TABLE `users_visit_items` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -284,4 +312,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-23 23:02:52
+-- Dump completed on 2019-09-25 18:45:40
