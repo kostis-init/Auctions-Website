@@ -4,6 +4,13 @@
     <div class="col-12">
       <button class="btn btn-block btn-primary" (click)="AdminLogout()">Logout</button>
     </div>
+
+    <div class="col-md-12 mt-1">
+      <button class="btn btn-block btn-primary" (click)="OpenModal(Export)">Get all auctions</button>
+    </div>
+
+
+
   </div>
 
   <div class="row">
@@ -13,10 +20,32 @@
     <div class="col-md-7">
       <router-outlet></router-outlet>
     </div>
-
-
   </div>
 
 
+  <ng-template #Export>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Choose Type of file to be exported</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12">
+          Choose path
+        </div>
+
+        <div class="col-md-6">
+          <button class="btn btn-block btn-primary" type="button" (click)="getXml()">Export XML</button>
+        </div>
+
+        <div class="col-md-6">
+          <button class="btn btn-block btn-primary" type="button" (click)="getJson()">Export JSON</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
 </div>

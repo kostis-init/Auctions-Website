@@ -26,6 +26,12 @@ export class ConversationsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.MessagingState.subscribe((state:MessagingState)=>{
+      console.log(state.Conversations);
+      if(state.Conversations.length===0){
+        this.Error.emit('No Conversations Available');
+      }
+    })
   }
 
 

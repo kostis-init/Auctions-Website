@@ -9,8 +9,9 @@ import {AdminEffect} from "./store/admin.effect";
 import { UserListComponent } from './user-list/user-list.component';
 import { UserItemComponent } from './user-list/user-item/user-item.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import {RatingModule} from "ngx-bootstrap";
+import {ModalModule, RatingModule} from "ngx-bootstrap";
 import {FormsModule} from "@angular/forms";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -22,6 +23,8 @@ import {FormsModule} from "@angular/forms";
     StoreModule.forFeature('users', AdminReducer),
     EffectsModule.forFeature([AdminEffect]),
     FormsModule,
+    ModalModule.forRoot(),
+    NgbModule
   ]
 })
 export class AdminModule { }

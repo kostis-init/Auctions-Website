@@ -33,7 +33,8 @@ export class ConversationDetailsComponent implements OnInit {
         this.store.select('messaging').subscribe(
           (Conversations)=>{
             this.Conversation = Conversations.Conversations[this.index];
-            this.OpenConversation(this.Conversation,this.index);
+            if(this.Conversation!=null)
+              this.OpenConversation(this.Conversation,this.index);
           }
         )
       }
