@@ -199,7 +199,14 @@ public class ItemBean {
     }
 
     public List<Item> getVisitedItems(User currentUser) {
-        //TODO
-        return null;
+        return currentUser.getVisitedItems();
+    }
+
+    public void visit(User currentUser, Item item) {
+        if(item == null){
+            return;
+        }
+        item.getVisitors().add(currentUser);
+        itemDAO.update(item);
     }
 }

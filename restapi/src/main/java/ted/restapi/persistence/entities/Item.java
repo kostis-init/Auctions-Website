@@ -4,7 +4,6 @@ import ted.restapi.util.Constants;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +32,7 @@ public class Item  implements Serializable {
     private List<Bid> bids;
     private User seller;
     private User buyer;
+    private List<User> visitors;
     private List<Category> categories;
     private List<ItemImage> images;
 
@@ -116,6 +116,13 @@ public class Item  implements Serializable {
     @JoinColumn(name = "buyer_id", referencedColumnName = "user_id")
     public User getBuyer() { return buyer; }
     public void setBuyer(User buyer) { this.buyer = buyer; }
+
+    @ManyToMany
+    @JoinTable(name = "users_visit_items",
+            joinColumns = @JoinColumn(name = "item_id", referencedColumnName = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"))
+    public List<User> getVisitors() { return visitors; }
+    public void setVisitors(List<User> visitors) { this.visitors = visitors; }
 
     @ManyToMany
     @JoinTable(name = "item_category",

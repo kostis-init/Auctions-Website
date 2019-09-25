@@ -38,6 +38,7 @@ public class User implements Serializable {
     private List<Bid> bids;
     private List<Item> items;
     private List<Item> boughtItems;
+    private List<Item> visitedItems;
     private List<Message> sentMessages;
     private List<Message> receivedMessages;
 
@@ -235,6 +236,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "buyer")
     public List<Item> getBoughtItems() { return boughtItems; }
     public void setBoughtItems(List<Item> boughtItems) { this.boughtItems = boughtItems; }
+
+    @ManyToMany(mappedBy = "visitors")
+    public List<Item> getVisitedItems() { return visitedItems; }
+    public void setVisitedItems(List<Item> visitedItems) { this.visitedItems = visitedItems; }
 
     @OneToMany(mappedBy = "sender")
     public List<Message> getSentMessages() { return sentMessages; }

@@ -211,4 +211,12 @@ public class ItemResource {
         return Response.ok().build();
     }
 
+    @POST
+    @Path("{id}/visit")
+    public Response visit(@PathParam("id") int id){
+        User currentUser = sessionBean.getCurrentUser();
+        Item item = itemBean.getItemById(id);
+        itemBean.visit(currentUser, item);
+        return Response.ok().build();
+    }
 }
