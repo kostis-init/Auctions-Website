@@ -209,4 +209,11 @@ public class ItemBean {
         item.getVisitors().add(currentUser);
         itemDAO.update(item);
     }
+
+    public List<Item> getTopItems(List<Item> excludedItems, int number) {
+        List<Item> items = itemDAO.getActiveItems();
+        items.removeAll(excludedItems);
+        Collections.sort(items, (i1, i2) -> i1.getBids().size() < i2.getBids().size() ? 1 : -1);
+        return new ArrayList<>(items.subList(0, number + 1));
+    }
 }
