@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {ItemModel} from "../browsing/item.model";
 import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Observable} from "rxjs";
 import {NgForm} from "@angular/forms";
@@ -42,7 +42,9 @@ export class ItemPageComponent implements OnInit {
     this.auth$ = this.store.select('auth');
 
     this.router.events.subscribe((event) => {
-      this.getItem();
+      if (event instanceof NavigationEnd) {
+        this.getItem();
+      }
     });
     this.getItem();
   }

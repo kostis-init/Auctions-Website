@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {ItemModel} from "./item.model";
 import {NgForm} from "@angular/forms";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {ActivatedRoute, Params, Router, NavigationEnd} from "@angular/router";
 import {Observable} from "rxjs";
 import {PageChangedEvent} from "ngx-bootstrap";
 import {first, take} from "rxjs/operators";
@@ -33,8 +33,10 @@ export class BrowsingComponent implements OnInit {
 
   ngOnInit() {
     this.filter_args = {city: '', country: '', minprice: -1};
-    this.router.events.pipe().subscribe((event) => {
-      this.getItems();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.getItems();
+      }
     });
     this.getItems();
   }
