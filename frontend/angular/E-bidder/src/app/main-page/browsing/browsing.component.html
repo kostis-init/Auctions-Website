@@ -38,7 +38,7 @@
 
     <div class="col-md-9">
       <div class="list-group">
-        <div *ngIf="(ItemsObservable | async) == false">
+        <div *ngIf="FilteredItems == false">
           <h5 class="row offset-2">We are terribly sorry... no results found for your search!</h5>
           <img class="row offset-3" src="../../../assets/logos/sorry_face.jpg" alt="sorry">
         </div>
