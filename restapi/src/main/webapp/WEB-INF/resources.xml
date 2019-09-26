@@ -3,7 +3,7 @@
     <Resource id="java:/MySqlDS" type="javax.sql.DataSource">
         JdbcDriver com.mysql.jdbc.Driver
         JtaManaged true
-        JdbcUrl jdbc:mysql://localhost:3306/ted_db
+        JdbcUrl jdbc:mysql://localhost:3306/ted_db?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Athens
         UserName root
         Password root
 <!--        JdbcUrl jdbc:mysql://db4free.net:3306/ted_db?useSSL=false-->
