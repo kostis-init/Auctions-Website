@@ -91,21 +91,11 @@
                     <tomeeHttpPort>8080</tomeeHttpPort>
                     <tomeeShutdownPort>8005</tomeeShutdownPort>
                     <useBinaries>true</useBinaries>
+<!--                    <forceHttps>true</forceHttps>-->
+<!--                    <tomeeHttpsPort>8443</tomeeHttpsPort>-->
+
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.tomee.maven</groupId>
-                <artifactId>tomee-embedded-maven-plugin</artifactId>
-                <version>7.0.0-M1</version>
-                <configuration>
-                    <context>restapi</context>
-                    <keystoreFile>C:\Users\usw031\IdeaProjects\ted\restapi\localhost-rsa.jks</keystoreFile>
-                    <keystorePass>123456</keystorePass>
-                    <keystoreType>PKCS12</keystoreType>
-                </configuration>
-            </plugin>
-
         </plugins>
 
     </build>

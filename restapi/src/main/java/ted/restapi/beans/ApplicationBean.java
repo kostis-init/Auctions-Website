@@ -11,11 +11,11 @@ import java.util.Date;
 @Startup
 public class ApplicationBean {
 
-    @Schedule(hour = "*", minute = "*/5", persistent = false)
+    @Schedule(hour = "*", minute = "*/1", persistent = false)
     private void info(){
         System.out.println("------------------------------------------------");
         System.out.println("API is running: " + new Date());
-        System.out.println("------------------------------------------------\n");
+        System.out.println("------------------------------------------------");
     }
 
     @Inject private UserBean userBean;

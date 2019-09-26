@@ -170,9 +170,7 @@ public class UserDTO implements Serializable {
         this.longitude = longitude;
     }
 
-    public String getCity() {
-        return city;
-    }
+    public String getCity() { return city; }
 
     public void setCity(String city) {
         this.city = city;

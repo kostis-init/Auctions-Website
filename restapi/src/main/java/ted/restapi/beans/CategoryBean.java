@@ -1,6 +1,7 @@
 package ted.restapi.beans;
 
 import ted.restapi.persistence.dao.CategoryDAO;
+import ted.restapi.persistence.entities.Bid;
 import ted.restapi.persistence.entities.Category;
 import ted.restapi.persistence.entities.GeneralCategory;
 import ted.restapi.persistence.entities.Item;
