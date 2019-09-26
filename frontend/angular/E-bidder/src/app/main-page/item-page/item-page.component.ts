@@ -60,7 +60,9 @@ export class ItemPageComponent implements OnInit {
     i = 0;
     for (let image of this.Item.images) {
       let uints = new Uint8Array(image);
-      let stringchar = String.fromCharCode.apply(null, uints);
+      let stringchar = uints.reduce((data, byte) => {
+                                              return data + String.fromCharCode(byte);
+                                                     }, '');
       let base64 = btoa(stringchar);
       this.imagesUrl[i] = base64;
       i++;

@@ -29,7 +29,9 @@ export class HomeRecomendationsComponent implements OnInit {
 
   setUpImageUrl(item:ItemModel){
     let uints = new Uint8Array(item.images[0]);
-    let stringchar = String.fromCharCode.apply(null, uints);
+    let stringchar = uints.reduce((data, byte) => {
+      return data + String.fromCharCode(byte);
+    }, '');
     let base64 = btoa(stringchar);
     item.imageUrl = base64;
   }
