@@ -1,11 +1,13 @@
-##Auctions Application
+## Auctions Application
+
 Web Applications course of DI @ UoA 2019
 
 Frontend: Angular
 
 Backend REST API: Java EE
 
-####Collaborators
+#### Collaborators
+
 [Γιάννης Δημόπουλος](https://github.com/SuperGohan362)
 
 [Φάνης Ασλανίδης](https://github.com/Fanarosss)
