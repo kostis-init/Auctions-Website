@@ -5,6 +5,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {PageChangedEvent} from "ngx-bootstrap";
+import {filter} from "rxjs/operators";
+import {query} from "@angular/animations";
 
 @Component({
   selector: 'app-browsing',
@@ -54,7 +56,6 @@ export class BrowsingComponent implements OnInit {
       this.ItemsObservable.subscribe((items: ItemModel[])=>{
         this.Items = items;
         this.returnedArray = this.Items.slice(0,10);
-
       });
       return;
     }
@@ -73,33 +74,49 @@ export class BrowsingComponent implements OnInit {
     this.apply_filters_from_url();
   }
 
-  apply_filters(filters: NgForm){
-
-    let city = filters.value.city;
-    let country = filters.value.country;
-    let price_bottom = filters.value.MinPrice;
-    let price_top = filters.value.MaxPrice;
-
-
-    if (city == null){
-      city = '';
-    }
-    if (country == null){
-      country = '';
-    }
-    if (price_bottom == null){
-      price_bottom = -1;
-    }
-    if (price_top == null || price_top == ''){
-      this.filter_args = {city: city, country: country, minprice: price_bottom};
-    }else{
-      this.filter_args = {city: city, country: country, minprice: price_bottom, maxprice: price_top};
-    }
-
-  }
-
   apply_filters_from_url() {
 
+    let city: string;
+    let country: string;
+    let price_bottom: number;
+    let price_top: number;
+    let query_Params : any;
+    this.route.queryParams.subscribe(queryParams => { query_Params = queryParams});
+
+    if(query_Params['country'] != null){
+      country = query_Params['country'];
+    }else{
+      country = '';
+    }
+
+    if(query_Params['city'] != null){
+      city = query_Params['city'];
+    }else{
+      city ='';
+    }
+
+    if(query_Params['minprice'] != null){
+      price_bottom = query_Params['minprice'];
+    }else{
+      price_bottom = -1;
+    }
+
+    if(query_Params['maxprice'] != null){
+      price_top = query_Params['maxprice'];
+      this.filter_args = {city: city, country: country, minprice: price_bottom, maxprice: price_top};
+
+      this.Items = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
+        && item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase()) !== -1)
+        && (item.currentBid >= this.filter_args.minprice)
+        && (item.currentBid <= this.filter_args.maxprice));
+    }else{
+      this.filter_args = {city: city, country: country, minprice: price_bottom};
+
+      this.Items = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
+        && item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase()) !== -1)
+        && (item.currentBid >= this.filter_args.minprice));
+    }
+    this.returnedArray = this.Items.slice(0,10);
   }
 
   set_filters(filters: NgForm) {
@@ -108,23 +125,41 @@ export class BrowsingComponent implements OnInit {
     let country = filters.value.country;
     let price_bottom = filters.value.MinPrice;
     let price_top = filters.value.MaxPrice;
+    let urlParams: any;
+    this.route.queryParams.subscribe(queryParams => {urlParams = queryParams});
 
-    let new_url: string;
-
-    if (city == null){
+    if (city != null && city != ''){
       //add city on url
-    }
-    if (country == null){
-      //add country on url
-    }
-    if (price_bottom == null){
-      //add minprice on url
-    }
-    if (price_top == null || price_top == ''){
-      //add maxprice on url
+      urlParams = urlParams + ['city', city];
+    } else if (urlParams['city'] != null) {
+      city = urlParams['city'];
+      urlParams = urlParams + ['city', city];
     }
 
-    this.apply_filters(filters);
+    if (country != null && country != '') {
+      //add country on url
+      urlParams = urlParams + ['country', country];
+    } else if (urlParams['country'] != null) {
+      country = urlParams['country'];
+      urlParams = urlParams + ['country', country];
+    }
+
+    if (price_bottom != null && price_bottom != ''){
+      //add minprice on url
+    } else if (urlParams['minprice'] != null) {
+      price_bottom = urlParams['minprice'];
+    }
+
+    if (price_top != null && price_top != ''){
+      //add maxprice on url
+    } else if (urlParams['maxprice'] != null) {
+      price_top = urlParams['maxprice'];
+    }
+
+
+    //trick the router into that navigating has ended
+    this.router.navigated = false;
+    this.router.navigate(['.'], {relativeTo: this.route, queryParams: {urlParams}, queryParamsHandling: 'merge'});
   }
 
   pageChanged(event: PageChangedEvent) {
