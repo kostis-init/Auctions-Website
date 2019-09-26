@@ -5,14 +5,14 @@
 </div>
 
 <div *ngIf="!isLoading">
-  <carousel>
-    <slide *ngFor="let item of RecommendedItems">
+  <carousel [itemsPerSlide]="1" [pauseOnFocus]="true" [showIndicators]="true">
+    <slide *ngFor="let item of RecommendedItems; let i = index;" class="carousel-item offset-2 col-9">
       <div class="row">
         <div class="col-md-4 offset-md-0  offset-sm-3">
-            <div class="container text-center">
+            <div class="container text-center" style="max-height: 300px;">
               <img
                 [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + item.imageUrl)"
-                alt="image" style="display: block" class="img-fluid mx-auto d-block shadow h-50 w-50 rounded border border-secondary">
+                alt="image" class="img img-fluid mx-auto d-block shadow rounded border border-secondary h-200 w-80" style="max-height: 295px; width:100%;">
             </div>
         </div>
 

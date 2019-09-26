@@ -95,9 +95,8 @@
 }
 
 .thumbs {
-  width: 100%;
   margin-top: 3%;
-  max-height: 64px;
+  max-height: 100px;
 }
 
 .thumbs a {
@@ -127,11 +126,12 @@
   border-color: #b5b6bd;
 }
 
-.thumbs img {
+.thumb_img_container {
   display: block;
   width: 100%;
   max-height: 100px;
   max-width: 100px;
+  margin-top: 10px;
 }
 
 .big {
@@ -139,6 +139,20 @@
   float: right;
   margin-right: 0;
   max-height: 400px;
+}
+
+.thumb_img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.thumb_img:hover {
+  opacity: 0.7;
 }
 
 .img {
@@ -186,6 +200,10 @@
   margin-left: 10%;
 }
 
-.bids {
+h4 {
+  font: "Bookman";
+  color: #070412;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
 }
+
 

@@ -5,6 +5,7 @@ import {BrowsingComponent} from "./browsing.component";
 import {ItemComponent} from "./item/item.component";
 import {FormsModule} from "@angular/forms";
 import {BrowsingFilterPipe} from "./browsing-filter.pipe";
+import {PaginationModule} from "ngx-bootstrap";
 
 const routes:Routes = [
   {path: '', component:BrowsingComponent}
@@ -20,7 +21,8 @@ const routes:Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PaginationModule.forRoot()
   ]
 })
 export class BrowsingModule { }

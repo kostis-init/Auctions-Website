@@ -14,8 +14,8 @@
       </div>
 
       <div class="thumbs row justify-content-center">
-        <a *ngFor="let image of imagesUrl" class="thumb-image col make_pointer" data-index="0" (click)="setBigImage(image)">
-          <span><img [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + image)" alt=""></span>
+        <a *ngFor="let image of imagesUrl" class="thumb_img_container make_pointer" data-index="0" (click)="setBigImage(image)">
+          <span><img class="thumb_img" [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + image)" alt=""></span>
         </a>
       </div>
 
@@ -110,8 +110,8 @@
         <div class="card-body">
           <h5>Auction by: {{Item.seller.username}}</h5>
           <small>User Rating: </small>
-          <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-          4.0 stars
+          <ngb-rating [max]="5" [rate]="Item.seller.sellerRating" [readonly]="true"></ngb-rating>
+          {{Item.seller.sellerRating}} stars
         </div>
       </div>
       <!-- /.card -->

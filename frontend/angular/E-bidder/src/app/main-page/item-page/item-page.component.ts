@@ -40,6 +40,7 @@ export class ItemPageComponent implements OnInit {
   ngOnInit() {
     this.low_bid = false;
     this.auth$ = this.store.select('auth');
+
     this.router.events.subscribe((event) => {
       this.getItem();
     });
@@ -49,8 +50,8 @@ export class ItemPageComponent implements OnInit {
   getItem() {
     const Item_id = this.route.snapshot.paramMap.get('id');
     this.ItemObservable = this.httpClient.get<ItemModel>(this.ROOT_URL + '/freeitems/' + Item_id);
-    this.ItemObservable.subscribe(item => {this.Item = item;
-    this.load_images();});
+    this.ItemObservable.subscribe(item => {this.Item = item; this.load_images();});
+    this.httpClient.post(this.ROOT_URL + '/items/' + Item_id + '/visit', {}).toPromise();
   }
 
   load_images() {

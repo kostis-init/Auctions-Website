@@ -38,13 +38,17 @@
 
     <div class="col-md-9">
       <div class="list-group">
-        <app-item class="col p-3" style="padding-left: 0px !important" *ngFor="let item of (ItemsObservable | async) | BrowsingFilter: filter_args" [Item]="item"></app-item>
+        <app-item class="col p-3" style="padding-left: 0 !important" *ngFor="let item of returnedArray | BrowsingFilter: filter_args" [Item]="item"></app-item>
         <div *ngIf="((ItemsObservable | async) | BrowsingFilter: filter_args) == false">
           <h5 class="row offset-2">We are terribly sorry... no results found for your search!</h5>
           <img class="row offset-3" src="../../../assets/logos/sorry_face.jpg" alt="sorry">
         </div>
       </div>
     </div>
+
+    <pagination class="offset-md-4"
+      [totalItems]="Items.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+    </pagination>
 
   </div>
 </div>
