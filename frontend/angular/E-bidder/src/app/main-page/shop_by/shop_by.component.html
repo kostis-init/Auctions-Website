@@ -3,14 +3,14 @@
   <div class="card-body">
     <div class="container-fluid pr-5 pl-5">
       <div class="d-flex justify-content-center" *ngIf="(state$ | async).loadingCategories">
-        <div  class="spinner-border" role="status" style="width: 8rem; height: 8rem">
+        <div  class="spinner-grow" role="status" style="width: 8rem; height: 8rem">
           <span class="sr-only">Loading..</span>
         </div>
       </div>
 
         <div class="row card-columns" *ngIf="!(state$ |async).loadingCategories ">
           <app-shop_by-category-item class="col-md-3 p-3" *ngFor="let category of (Category$| async).SubCategories"
-                                     [Item]="category">
+                                     [Item]="category" [GeneralCategoryId]="id">
           </app-shop_by-category-item>
         </div>
     </div>

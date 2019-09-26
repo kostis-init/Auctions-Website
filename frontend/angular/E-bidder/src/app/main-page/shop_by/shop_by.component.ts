@@ -6,8 +6,8 @@ import {ActivatedRoute} from "@angular/router";
 import {CategoryModel} from "../../shared/Models/category.model";
 import {MainPageState} from "../store/main-page.reducer";
 import {select, Store} from "@ngrx/store";
-import {map, take, takeUntil} from "rxjs/operators";
-import {FetchSubCategoriesImages} from "../store/main-page.action";
+import {map} from "rxjs/operators";
+import {subCategoryImages} from "../../shared/server-endpoints";
 
 
 @Component({
@@ -17,8 +17,8 @@ import {FetchSubCategoriesImages} from "../store/main-page.action";
 })
 export class Shop_byComponent implements OnInit {
   Category$:Observable<CategoryModel>;
-  categories: CategoryModel;
   state$:Observable<MainPageState>;
+  id:number;
 
   constructor(private router : Router,
               private route: ActivatedRoute,
@@ -26,9 +26,8 @@ export class Shop_byComponent implements OnInit {
               private store: Store<MainPageState>) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
+    this.id = +this.route.snapshot.paramMap.get('id');
     this.state$=this.store.select('mainPage');
-
     this.router.events.subscribe((event) => {
       return this.getSubcategories();
     });
@@ -36,26 +35,19 @@ export class Shop_byComponent implements OnInit {
   }
 
   getSubcategories() {
-    const id = this.route.snapshot.paramMap.get('id');
+    this.id = +this.route.snapshot.paramMap.get('id');
 
     this.Category$ = this.store.pipe(select('mainPage'),
       map((state:MainPageState) => {
         return state.Categories
       }),
       map((categories:CategoryModel[]) =>{
-        let category = categories.find((category:CategoryModel)=> category.id === +id);
+        let category = categories.find((category:CategoryModel)=> category.id === this.id);
         if(category!=null){
-          // this.store.dispatch(new FetchSubCategoriesImages({GeneralCategoryId: category.id}));
           return category;
         }
-      }));
-
-    // this.Category$.subscribe((category)=>{
-    //   if(category!=null){
-    //     this.store.dispatch(new FetchSubCategoriesImages({GeneralCategoryId: category.id}))
-    //   }
-    // })
-
+      })
+    );
 
 
 
