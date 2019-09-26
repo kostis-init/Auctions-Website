@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {ItemModel} from "./item.model";
 import {NgForm} from "@angular/forms";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {PageChangedEvent} from "ngx-bootstrap";
 import {filter} from "rxjs/operators";
@@ -21,6 +21,7 @@ export class BrowsingComponent implements OnInit {
   ItemsObservable : Observable<ItemModel[]>;
   filter_args: any;
   Items: ItemModel[]=[];
+  FilteredItems: ItemModel[]=[];
   returnedArray: ItemModel[]=[];
 
   constructor(private router: Router,
@@ -105,18 +106,19 @@ export class BrowsingComponent implements OnInit {
       price_top = query_Params['maxprice'];
       this.filter_args = {city: city, country: country, minprice: price_bottom, maxprice: price_top};
 
-      this.Items = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
+      this.FilteredItems = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
         && item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase()) !== -1)
         && (item.currentBid >= this.filter_args.minprice)
         && (item.currentBid <= this.filter_args.maxprice));
     }else{
       this.filter_args = {city: city, country: country, minprice: price_bottom};
 
-      this.Items = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
+      this.FilteredItems = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
         && item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase()) !== -1)
         && (item.currentBid >= this.filter_args.minprice));
     }
-    this.returnedArray = this.Items.slice(0,10);
+    this.returnedArray = this.FilteredItems.slice(0,10);
+    console.log(this.returnedArray);
   }
 
   set_filters(filters: NgForm) {
@@ -125,41 +127,33 @@ export class BrowsingComponent implements OnInit {
     let country = filters.value.country;
     let price_bottom = filters.value.MinPrice;
     let price_top = filters.value.MaxPrice;
-    let urlParams: any;
-    this.route.queryParams.subscribe(queryParams => {urlParams = queryParams});
+    let urlParams: Params;
+    urlParams = {};
+    //this.route.queryParams.subscribe(queryParams => {urlParams = queryParams});
 
     if (city != null && city != ''){
       //add city on url
-      urlParams = urlParams + ['city', city];
-    } else if (urlParams['city'] != null) {
-      city = urlParams['city'];
-      urlParams = urlParams + ['city', city];
+      urlParams['city'] = city;
     }
 
     if (country != null && country != '') {
       //add country on url
-      urlParams = urlParams + ['country', country];
-    } else if (urlParams['country'] != null) {
-      country = urlParams['country'];
-      urlParams = urlParams + ['country', country];
+      urlParams['country'] = country;
     }
 
     if (price_bottom != null && price_bottom != ''){
       //add minprice on url
-    } else if (urlParams['minprice'] != null) {
-      price_bottom = urlParams['minprice'];
+      urlParams['minprice'] = price_bottom;
     }
 
     if (price_top != null && price_top != ''){
       //add maxprice on url
-    } else if (urlParams['maxprice'] != null) {
-      price_top = urlParams['maxprice'];
+      urlParams['maxprice'] = price_top;
     }
-
 
     //trick the router into that navigating has ended
     this.router.navigated = false;
-    this.router.navigate(['.'], {relativeTo: this.route, queryParams: {urlParams}, queryParamsHandling: 'merge'});
+    this.router.navigate(['.'], {relativeTo: this.route, queryParams: {...urlParams}, queryParamsHandling: 'merge'});
   }
 
   pageChanged(event: PageChangedEvent) {
