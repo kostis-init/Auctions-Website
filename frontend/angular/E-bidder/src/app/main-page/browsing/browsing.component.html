@@ -36,7 +36,13 @@
       </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="offset-4 d-flex justify-content-center" *ngIf="!(ItemsObservable|async)">
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading</span>
+      </div>
+    </div>
+
+    <div class="col-md-9" *ngIf="(ItemsObservable|async)">
       <div class="list-group">
         <div *ngIf="FilteredItems == false">
           <h5 class="row offset-2">We are terribly sorry... no results found for your search!</h5>
@@ -46,7 +52,7 @@
       </div>
     </div>
 
-    <pagination class="offset-md-4"
+    <pagination class="offset-md-4" *ngIf="(ItemsObservable|async)"
       [totalItems]="FilteredItems.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
     </pagination>
 
