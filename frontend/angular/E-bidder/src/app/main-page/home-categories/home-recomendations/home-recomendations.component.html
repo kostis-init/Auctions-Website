@@ -22,11 +22,12 @@
               <h2 class="text-center text-primary">{{item.name}}</h2>
             </div>
 
-            <div class="col-md-5  text-center border border-secondary rounded">
+            <div class="text-center border border-secondary rounded"
+                  [ngClass]="{'col-md-5':item.buyPrice, 'col-md-12':!item.buyPrice}">
               <h5>Current-Bid: <small>{{item.currentBid}}</small> </h5>
             </div>
 
-            <div class="col-md-5 offset-md-2  text-center border border-secondary rounded">
+            <div class="col-md-5 offset-md-2  text-center border border-secondary rounded" *ngIf="item.buyPrice">
               <h5>Buy Price: <small>{{item.buyPrice}}</small></h5>
             </div>
 
