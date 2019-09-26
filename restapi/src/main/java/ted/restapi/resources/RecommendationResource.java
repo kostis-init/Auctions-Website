@@ -34,7 +34,6 @@ public class RecommendationResource {
     @GET
     public Response getRecommendations(){
         User currentUser = sessionBean.getCurrentUser();
-        List<ItemDTO> recommendedItemsDTO = new ArrayList<>();
 
         List<Item> biddenItems = itemBean.getBiddenItems(currentUser);
         if(biddenItems.isEmpty()){
@@ -82,6 +81,7 @@ public class RecommendationResource {
             recommendedItems.addAll(itemBean.getTopItems(excludedItems, remaining));
         }
 
+        List<ItemDTO> recommendedItemsDTO = new ArrayList<>();
         for (Item recommendedItem : recommendedItems) {
             recommendedItemsDTO.add(Mapper.toDTO(recommendedItem));
         }
@@ -99,5 +99,27 @@ public class RecommendationResource {
         return Response.ok(recommendedItemsDTO).build();
     }
 
+
+    @GET
+    @Path("top")
+    public Response getTopRec(){
+        List<Item> recommendedItems = itemBean.getTopItems(new ArrayList<>(), MAX_RECOMMENDED_ITEMS);
+        List<ItemDTO> recommendedItemsDTO = new ArrayList<>();
+        for (Item recommendedItem : recommendedItems) {
+            recommendedItemsDTO.add(Mapper.toDTO(recommendedItem));
+        }
+        //only 1 image
+        for (ItemDTO itemDTO : recommendedItemsDTO) {
+            List<byte[]> images = itemDTO.getImages();
+            if(!images.isEmpty()){
+                byte[] image = images.get(0);
+                images.clear();
+                images.add(image);
+            }
+            itemDTO.setImages(images);
+        }
+
+        return Response.ok(recommendedItemsDTO).build();
+    }
 
 }
