@@ -1,8 +1,14 @@
 <div class="card shopbycard">
   <a style="cursor: pointer;" (click)="searchCat()">
     <div class="image_container make_pointer">
-      <img class="card-img-top img-fluid category_image"
-           [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + Item.imageUrl)">
+
+      <div *ngIf="isLoading">
+        <div  class="spinner-grow" role="status" style="width: 8rem; height: 8rem">
+          <span class="sr-only">Loading..</span>
+        </div>
+      </div>
+      <img class="card-img-top img-fluid category_image" *ngIf="!isLoading"
+           [src]="this.dom.bypassSecurityTrustUrl('data:image/jpg;base64,' + this.ImageUrl)">
       <div class="text_overlay">
         <div class="category_text">See All >></div>
       </div>
