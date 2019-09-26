@@ -17,14 +17,27 @@ export class HomeRecomendationsComponent implements OnInit {
   isLoading= true;
 
   ngOnInit() {
-    this.http.get<ItemModel[]>(recommendations).subscribe((result:ItemModel[])=>{
-      this.RecommendedItems = result;
-      console.log(this.RecommendedItems);
-      for(let item of this.RecommendedItems){
+    if(localStorage.getItem('token')){
+      this.http.get<ItemModel[]>(recommendations).subscribe((result:ItemModel[])=>{
+        this.RecommendedItems = result;
+        console.log(this.RecommendedItems);
+        for(let item of this.RecommendedItems){
           this.setUpImageUrl(item);
-      }
-      this.isLoading=false;
-    })
+        }
+        this.isLoading=false;
+      })
+    }
+    else{
+      this.http.get<ItemModel[]>(recommendations+'top').subscribe((result:ItemModel[])=>{
+        this.RecommendedItems = result;
+        console.log(this.RecommendedItems);
+        for(let item of this.RecommendedItems){
+          this.setUpImageUrl(item);
+        }
+        this.isLoading=false;
+      })
+    }
+
   }
 
   setUpImageUrl(item:ItemModel){

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryModel} from "../../shared/Models/category.model";
 import {MainPageState} from "../store/main-page.reducer";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
