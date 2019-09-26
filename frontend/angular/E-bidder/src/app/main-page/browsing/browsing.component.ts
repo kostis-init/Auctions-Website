@@ -5,6 +5,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {PageChangedEvent} from "ngx-bootstrap";
+import {first, take} from "rxjs/operators";
 import {filter} from "rxjs/operators";
 import {query} from "@angular/animations";
 
@@ -32,7 +33,7 @@ export class BrowsingComponent implements OnInit {
 
   ngOnInit() {
     this.filter_args = {city: '', country: '', minprice: -1};
-    this.router.events.subscribe((event) => {
+    this.router.events.pipe().subscribe((event) => {
       this.getItems();
     });
     this.getItems();
@@ -56,7 +57,7 @@ export class BrowsingComponent implements OnInit {
       this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/categories/items/' + subcategory_id);
       this.ItemsObservable.subscribe((items: ItemModel[])=>{
         this.Items = items;
-        this.returnedArray = this.Items.slice(0,10);
+        this.apply_filters_from_url();
       });
       return;
     }
@@ -68,11 +69,10 @@ export class BrowsingComponent implements OnInit {
     this.ItemsObservable = this.httpClient.get<ItemModel[]>(this.ROOT_URL + '/freeitems/search', {params});
     this.ItemsObservable.subscribe((items: ItemModel[])=>{
       this.Items = items;
-      this.returnedArray = this.Items.slice(0,10);
-
+      this.apply_filters_from_url();
     });
 
-    this.apply_filters_from_url();
+
   }
 
   apply_filters_from_url() {
@@ -93,7 +93,7 @@ export class BrowsingComponent implements OnInit {
     if(query_Params['city'] != null){
       city = query_Params['city'];
     }else{
-      city ='';
+      city = '';
     }
 
     if(query_Params['minprice'] != null){
@@ -102,21 +102,25 @@ export class BrowsingComponent implements OnInit {
       price_bottom = -1;
     }
 
-    if(query_Params['maxprice'] != null){
+    if(query_Params['maxprice'] != null && query_Params['maxprice'] != ''){
       price_top = query_Params['maxprice'];
       this.filter_args = {city: city, country: country, minprice: price_bottom, maxprice: price_top};
 
-      this.FilteredItems = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
-        && item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase()) !== -1)
+      this.FilteredItems = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase())) !== -1
+        && (item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase())) !== -1
         && (item.currentBid >= this.filter_args.minprice)
         && (item.currentBid <= this.filter_args.maxprice));
     }else{
       this.filter_args = {city: city, country: country, minprice: price_bottom};
 
-      this.FilteredItems = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase()) !== -1
-        && item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase()) !== -1)
-        && (item.currentBid >= this.filter_args.minprice));
+      this.FilteredItems = this.Items.filter(item => (item.seller.country.toLocaleLowerCase().indexOf(this.filter_args.country.toLocaleLowerCase())) !== -1
+        && (item.seller.city.toLocaleLowerCase().indexOf(this.filter_args.city.toLocaleLowerCase())) !== -1
+        && (item.currentBid > this.filter_args.minprice));
     }
+
+
+    console.log(this.filter_args.city);
+    console.log(this.filter_args.country);
     this.returnedArray = this.FilteredItems.slice(0,10);
     console.log(this.returnedArray);
   }
@@ -159,7 +163,7 @@ export class BrowsingComponent implements OnInit {
   pageChanged(event: PageChangedEvent) {
     const start = (event.page - 1) * event.itemsPerPage;
     const end = event.page * event.itemsPerPage;
-    this.returnedArray = this.Items.slice(start, end);
+    this.returnedArray = this.FilteredItems.slice(start, end);
 
     window.scroll(0,0);
   }
