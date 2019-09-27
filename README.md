@@ -3,7 +3,7 @@
 #### Web Applications course of DI @ UoA 2019
 
 * [Frontend](frontend): Angular 8 
-    * [Documentation]()
+    * [Documentation](frontend-readme.pdf)
 * [Backend](restapi): Java EE REST API
     * [Documentation](restapi/README.md)
 
