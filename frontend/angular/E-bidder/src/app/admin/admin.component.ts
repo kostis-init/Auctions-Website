@@ -42,7 +42,7 @@ export class AdminComponent implements OnInit {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href=url;
-        link.download="items.json";
+        link.download="items.xml";
         link.click();
       }
     );
