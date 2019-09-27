@@ -2,34 +2,51 @@
 
 ## Deployment
 
-#### TomEE (Maven plugin)
+#### TomEE Maven Plugin 7.0.5 (SSL unavailable)
 
-Ensure that SSL is disabled in <b>WEB-INF/web.xml</b>
+* Ensure that SSL is disabled on endpoints: [web.xml](src/main/webapp/WEB-INF/web.xml).
+* Datasource Configuration: [resources.xml](src/main/webapp/WEB-INF/resources.xml)
+1. $ mvn clean install
+2. $ mvn package
+3. $ mvn tomee:run
 
-1) $ mvn clean install
-2) $ mvn package
-3) $ mvn tomee:run
+#### [TomEE Plus 8.0.0](https://tomee.apache.org/download-ng.html) (SSL available)
 
-Database connection: <b>WEB-INF/resources.xml</b>
-
-#### SSL (Tested on Apache Tomcat (TomEE)/9.0.22 (8.0.0))
-
-Configure an application server with SSL
-
-Uncomment the lines in <b>WEB-INF/web.xml</b> 
-
-Deploy the war file into the server
+* Configure Datasource: **conf/tomee.xml**.
+* Enable SSL on server: **conf/server.xml**.
+    * A keystore file must be available for the server.
+* Enable SSL on endpoints: [web.xml](src/main/webapp/WEB-INF/web.xml).
+* Deploy the war file into the server.
 
 ## Specs
 
-External libraries used: <b>pom.xml</b>
+* Implementation
+    * Java EE
+    * JPA with EclipseLink provider
+    * Database: MySQL
+* Maven used for project build and management: [pom.xml](pom.xml).
+* Persistence Layer configuration: [persistence.xml](src/main/resources/META-INF/persistence.xml)
+* Web Filters & SSL enable/disable: [web.xml](src/main/webapp/WEB-INF/web.xml)
+    * [CORS Filter](src/main/java/ted/restapi/filters/CORSFilter.java) used for all endpoints.
+    * [Auth Filter](src/main/java/ted/restapi/filters/CORSFilter.java) used for all endpoints that require a session.
+* Recommendation Algorithm: Nearest Neighbor Collaborative Filtering
+    * The current user gets recommendations based on the preferences of his neighbors, who are users that have similar preferences with current user.
+    * The guest user gets recommendations based on the most popular items, which are the active items with the most bids.
+* [jBCrypt](https://www.mindrot.org/projects/jBCrypt/) used  for hashing user passwords in database.
+* [JWT](https://jwt.io/) used for user session management. The token also stores the current user's data for access control.
 
-Web Filters & SSL configuration: <b>WEB-INF/web.xml</b>
+## Endpoints
 
-Recommendation Algorithm used: Nearest Neighbor Collaborative Filtering, based on users' preferences
+[TomEE Plus 8.0.0](https://tomee.apache.org/download-ng.html) deployment
 
-A sample mysql database script is provided
+![](endpoints.jpg)
 
-##### Author
+## Database (MySQL)
+
+A sample database script is provided [here](db_script.sql)
+
+![](database.jpg)
+
+#### Author
 
 [Kostis Michailidis](https://github.com/kostismich7)
